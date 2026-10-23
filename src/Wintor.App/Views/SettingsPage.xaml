@@ -195,6 +195,11 @@
                         AutomationProperties.AutomationId="GitHubLink"
                         NavigateUri="{x:Bind GitHubUri, Mode=OneTime}"
                         ToolTipService.ToolTip="{x:Bind GitHubUri, Mode=OneTime}" />
+                    <HyperlinkButton
+                        x:Uid="PrivacyLink"
+                        AutomationProperties.AutomationId="PrivacyLink"
+                        NavigateUri="{x:Bind PrivacyUri, Mode=OneTime}"
+                        ToolTipService.ToolTip="{x:Bind PrivacyUri, Mode=OneTime}" />
                     <!--  Shown once the app has a Store listing (SettingsViewModel.StoreProductId).  -->
                     <HyperlinkButton
                         x:Uid="StoreLink"

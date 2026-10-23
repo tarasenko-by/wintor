@@ -305,4 +305,5 @@
   <data name="WhatsNew_020_Limits" xml:space="preserve"><value>可为每个种子单独限速，同时保留“设置”中的总体限速。</value></data>
   <data name="WhatsNew_020_Problems" xml:space="preserve"><value>文件被删除、磁盘已满或网络中断，都会用通俗的语言说明，点击“继续”即可修复。</value></data>
   <data name="WhatsNew_020_Languages" xml:space="preserve"><value>提供十二种界面语言，并可在“设置”中选择语言。</value></data>
+  <data name="PrivacyLink.Content" xml:space="preserve"><value>隐私</value></data>
 </root>

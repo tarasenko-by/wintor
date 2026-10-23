@@ -91,6 +91,9 @@ public partial class SettingsViewModel : ObservableObject
 
     public const string GitHubUrl = "https://github.com/tarasenko-by/wintor";
 
+    /// <summary>Required by the Microsoft Store for apps that use the network; also linked from About.</summary>
+    public const string PrivacyUrl = "https://github.com/tarasenko-by/wintor/blob/main/docs/PRIVACY.md";
+
     /// <summary>The Microsoft Store product ID (Partner Center); empty until the app is listed, which hides the link.</summary>
     public const string StoreProductId = "";
 

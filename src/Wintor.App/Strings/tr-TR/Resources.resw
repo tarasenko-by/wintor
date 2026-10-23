@@ -305,4 +305,5 @@
   <data name="WhatsNew_020_Limits" xml:space="preserve"><value>Ayarlar’daki genel sınırlara ek olarak her torrent için hız sınırı.</value></data>
   <data name="WhatsNew_020_Problems" xml:space="preserve"><value>Silinen dosyalar, dolu disk veya kopan ağ sade bir dille açıklanır ve “Sürdür” hepsini düzeltir.</value></data>
   <data name="WhatsNew_020_Languages" xml:space="preserve"><value>On iki arayüz dili ve Ayarlar’da dil seçici.</value></data>
+  <data name="PrivacyLink.Content" xml:space="preserve"><value>Gizlilik</value></data>
 </root>

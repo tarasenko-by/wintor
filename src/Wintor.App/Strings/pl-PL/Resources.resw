@@ -305,4 +305,5 @@
   <data name="WhatsNew_020_Limits" xml:space="preserve"><value>Limity prędkości dla każdego torrenta, oprócz ogólnych w Ustawieniach.</value></data>
   <data name="WhatsNew_020_Problems" xml:space="preserve"><value>Usunięte pliki, pełny dysk czy utrata sieci są wyjaśniane prostymi słowami, a „Wznów” je naprawia.</value></data>
   <data name="WhatsNew_020_Languages" xml:space="preserve"><value>Dwanaście języków interfejsu i wybór języka w Ustawieniach.</value></data>
+  <data name="PrivacyLink.Content" xml:space="preserve"><value>Prywatność</value></data>
 </root>

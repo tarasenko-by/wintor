@@ -305,4 +305,5 @@
   <data name="WhatsNew_020_Limits" xml:space="preserve"><value>Limites de vitesse pour chaque torrent, en plus des limites globales des Paramètres.</value></data>
   <data name="WhatsNew_020_Problems" xml:space="preserve"><value>Fichiers supprimés, disque plein ou réseau perdu sont expliqués en termes simples, et « Reprendre » règle le problème.</value></data>
   <data name="WhatsNew_020_Languages" xml:space="preserve"><value>Douze langues d’interface, avec un sélecteur de langue dans les Paramètres.</value></data>
+  <data name="PrivacyLink.Content" xml:space="preserve"><value>Confidentialité</value></data>
 </root>

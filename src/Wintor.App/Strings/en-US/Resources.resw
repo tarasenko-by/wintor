@@ -305,4 +305,5 @@
   <data name="WhatsNew_020_Limits" xml:space="preserve"><value>Speed limits for each torrent, on top of the overall ones in Settings.</value></data>
   <data name="WhatsNew_020_Problems" xml:space="preserve"><value>Deleted files, a full disk or a lost network are explained in plain words, and Resume fixes them.</value></data>
   <data name="WhatsNew_020_Languages" xml:space="preserve"><value>Twelve interface languages, with a language picker in Settings.</value></data>
+  <data name="PrivacyLink.Content" xml:space="preserve"><value>Privacy</value></data>
 </root>

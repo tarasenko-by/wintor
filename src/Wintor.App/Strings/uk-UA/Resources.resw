@@ -305,4 +305,5 @@
   <data name="WhatsNew_020_Limits" xml:space="preserve"><value>Обмеження швидкості для кожного торента на додачу до загальних у параметрах.</value></data>
   <data name="WhatsNew_020_Problems" xml:space="preserve"><value>Видалені файли, повний диск або зникла мережа пояснюються простими словами, а «Відновити» все виправляє.</value></data>
   <data name="WhatsNew_020_Languages" xml:space="preserve"><value>Дванадцять мов інтерфейсу та вибір мови в параметрах.</value></data>
+  <data name="PrivacyLink.Content" xml:space="preserve"><value>Конфіденційність</value></data>
 </root>

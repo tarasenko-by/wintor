@@ -305,4 +305,5 @@
   <data name="WhatsNew_020_Limits" xml:space="preserve"><value>Limiti di velocità per ogni torrent, oltre a quelli generali in Impostazioni.</value></data>
   <data name="WhatsNew_020_Problems" xml:space="preserve"><value>File eliminati, disco pieno o rete assente vengono spiegati con parole semplici, e «Riprendi» risolve tutto.</value></data>
   <data name="WhatsNew_020_Languages" xml:space="preserve"><value>Dodici lingue dell’interfaccia, con un selettore della lingua in Impostazioni.</value></data>
+  <data name="PrivacyLink.Content" xml:space="preserve"><value>Privacy</value></data>
 </root>

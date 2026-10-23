@@ -86,6 +86,8 @@ public sealed partial class SettingsPage : Page, ISearchablePage
 
     public Uri GitHubUri { get; } = new(SettingsViewModel.GitHubUrl);
 
+    public Uri PrivacyUri { get; } = new(SettingsViewModel.PrivacyUrl);
+
     public Uri StoreUri { get; } = new($"ms-windows-store://pdp/?ProductId={SettingsViewModel.StoreProductId}");
 
     private void WhatsNew_Click(object sender, RoutedEventArgs e) => _ = WhatsNewDialog.ShowAsync(XamlRoot);
