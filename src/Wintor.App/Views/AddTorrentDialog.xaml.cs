@@ -84,6 +84,35 @@ public sealed partial class AddTorrentDialog : ContentDialog
             Folder = picked;
             FolderText.Text = picked;
             ToolTipService.SetToolTip(FolderText, picked);
+            UpdateSpaceWarning();
+        }
+    }
+
+    /// <summary>Warns before adding, not halfway through the download, when the files will not fit on the drive.</summary>
+    private void UpdateSpaceWarning()
+    {
+        long needed = FilesList.SelectedItems.OfType<AddDialogFile>().Sum(f => f.Size);
+        long? free = null;
+        try
+        {
+            if (Path.GetPathRoot(Path.GetFullPath(Folder)) is { Length: > 0 } root)
+            {
+                free = new DriveInfo(root).AvailableFreeSpace;
+            }
+        }
+        catch (Exception e) when (e is IOException or ArgumentException or UnauthorizedAccessException)
+        {
+            // Unknown drive (e.g. a disconnected network share): nothing to warn about yet.
+        }
+
+        if (free is { } available && needed > available)
+        {
+            SpaceWarning.Text = Strings.Format("AddDialog_NotEnoughSpace", Formatting.Bytes(available), Formatting.Bytes(needed));
+            SpaceWarning.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            SpaceWarning.Visibility = Visibility.Collapsed;
         }
     }
 
@@ -118,5 +147,6 @@ public sealed partial class AddTorrentDialog : ContentDialog
         SelectionSummary.Text = Strings.Format("AddDialog_Selection", selected, _files.Count, Formatting.Bytes(size));
         SelectAllBox.IsChecked = selected == _files.Count ? true : selected == 0 ? false : null;
         IsPrimaryButtonEnabled = selected > 0;
+        UpdateSpaceWarning();
     }
 }

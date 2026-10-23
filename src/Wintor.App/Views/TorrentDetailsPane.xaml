@@ -215,7 +215,7 @@
                 SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="vm:FileItemViewModel">
-                        <Grid ColumnSpacing="12">
+                        <Grid AutomationProperties.Name="{x:Bind Path, Mode=OneWay}" ColumnSpacing="12">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="84" />
@@ -283,7 +283,7 @@
                 SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="vm:PeerRow">
-                        <Grid ColumnSpacing="12">
+                        <Grid AutomationProperties.Name="{x:Bind AccessibleName, Mode=OneTime}" ColumnSpacing="12">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="200" />
                                 <ColumnDefinition Width="*" />
@@ -352,7 +352,7 @@
                 SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="vm:TrackerRow">
-                        <Grid ColumnSpacing="12">
+                        <Grid AutomationProperties.Name="{x:Bind AccessibleName, Mode=OneTime}" ColumnSpacing="12">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="140" />

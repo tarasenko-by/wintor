@@ -15,3 +15,4 @@
 - [ ] Icons only from the Hugeicons **free** set (no Pro icons, no Segoe glyphs)
 - [ ] Colors only via `ThemeResource`; checked light, dark and high-contrast themes
 - [ ] New dependencies are GPL-compatible, pinned, and listed in `THIRD-PARTY-NOTICES.md`
+- [ ] Every commit is signed off (`git commit -s`, [DCO](../CONTRIBUTING.md#sign-off-dco))

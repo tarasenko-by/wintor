@@ -282,4 +282,11 @@
   <data name="Info_DownloadLimit" xml:space="preserve"><value>Огранич. загрузки</value></data>
   <data name="Info_UploadLimit" xml:space="preserve"><value>Огранич. отдачи</value></data>
   <data name="Info_NoLimit" xml:space="preserve"><value>Нет</value></data>
+  <data name="Problem_FilesMissing" xml:space="preserve"><value>Файлы не найдены — возобновите, чтобы скачать заново</value></data>
+  <data name="Problem_DiskFull" xml:space="preserve"><value>Не хватает места на диске — освободите и возобновите</value></data>
+  <data name="Problem_NoAccess" xml:space="preserve"><value>Нет доступа к папке загрузки</value></data>
+  <data name="OfflineInfoBar.Title" xml:space="preserve"><value>Нет подключения к сети</value></data>
+  <data name="OfflineInfoBar.Message" xml:space="preserve"><value>Торренты продолжат загрузку, когда сеть появится.</value></data>
+  <data name="AddDialog_NotEnoughSpace" xml:space="preserve"><value>Не хватает места на диске: свободно {0}, нужно {1}.</value></data>
+  <data name="A11y_CurrentLabel" xml:space="preserve"><value>Текущая метка</value></data>
 </root>

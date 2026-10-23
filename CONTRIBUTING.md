@@ -26,6 +26,18 @@ Copy `src/Wintor.App/Strings/en-US/Resources.resw` to a new folder named after y
 3. For UI changes, attach screenshots in light and dark theme.
 4. Fill in the PR checklist.
 
+## Sign-off (DCO)
+
+Every commit carries a `Signed-off-by` line — `git commit -s` adds it. With it you certify the
+[Developer Certificate of Origin 1.1](https://developercertificate.org/): you wrote the change, or otherwise
+have the right to submit it under the project's license. Use your real name or a name you are known by.
+Forgot? `git commit --amend -s` for the last commit, `git rebase --signoff main` for a whole branch.
+
 ## License
 
-By contributing you agree that your contribution is licensed under GPL-3.0-or-later, the project's license.
+By contributing you agree that your contribution is licensed under GPL-3.0-or-later together with the
+additional permission for app stores in [LICENSE-STORE-EXCEPTION.md](LICENSE-STORE-EXCEPTION.md).
+The name and logo are not part of the license: see [TRADEMARKS.md](TRADEMARKS.md).
+
+Everyone taking part follows the [code of conduct](CODE_OF_CONDUCT.md). Security problems:
+[SECURITY.md](SECURITY.md), not public issues.

@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Net.NetworkInformation;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Dispatching;
@@ -33,7 +34,15 @@ public partial class TorrentsViewModel : ObservableObject
         _timer = DispatcherQueue.GetForCurrentThread().CreateTimer();
         _timer.Interval = TimeSpan.FromSeconds(1);
         _timer.Tick += (_, _) => Refresh();
+
+        // Without a network torrents just sit at 0 B/s; say why instead of leaving the user to guess.
+        DispatcherQueue queue = DispatcherQueue.GetForCurrentThread();
+        IsOffline = !NetworkInterface.GetIsNetworkAvailable();
+        NetworkChange.NetworkAvailabilityChanged += (_, e) => queue.TryEnqueue(() => IsOffline = !e.IsAvailable);
     }
+
+    [ObservableProperty]
+    public partial bool IsOffline { get; set; }
 
     /// <summary>A torrent finished downloading while Wintor was running.</summary>
     public event Action<TorrentSnapshot>? Completed;

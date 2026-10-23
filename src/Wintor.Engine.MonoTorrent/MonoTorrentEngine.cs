@@ -22,11 +22,23 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
     // messages), so a finished torrent would show traffic. We measure payload bytes only.
     private readonly Dictionary<string, (RateMeter Down, RateMeter Up)> _rates = [];
 
+    // Torrents whose downloaded files vanished (folder deleted or moved). MonoTorrent would quietly start over from
+    // zero, so they are held back and shown as a problem; resuming one rechecks and downloads what is gone.
+    private readonly HashSet<string> _missingIds = [];
+
+    // MonoTorrent loads a torrent's piece map only when it starts, so we remember which torrents had data.
+    private HashSet<string> _hadDataIds = [];
+
+    // Torrents started this session: their piece map is loaded and tells whether they have data.
+    private readonly HashSet<string> _startedIds = [];
+
     private static readonly TimeSpan RateWindow = TimeSpan.FromSeconds(5);
 
     private string StatePath => Path.Combine(_options.DataDirectory, "engine.state");
 
     private string PausedPath => Path.Combine(_options.DataDirectory, "paused.txt");
+
+    private string HadDataPath => Path.Combine(_options.DataDirectory, "had-data.txt");
 
     private ClientEngine Engine =>
         _engine ?? throw new InvalidOperationException("Call InitializeAsync first.");
@@ -63,13 +75,20 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
 
         cancellationToken.ThrowIfCancellationRequested();
         _engine = engine;
-        _pausedIds = await LoadPausedIdsAsync();
+        _pausedIds = await LoadIdsAsync(PausedPath);
+        _hadDataIds = await LoadIdsAsync(HadDataPath);
 
         foreach (TorrentManager manager in engine.Torrents)
         {
-            if (manager.State == TorrentState.Stopped && !_pausedIds.Contains(IdOf(manager)))
+            string id = IdOf(manager);
+            if (FilesMissing(manager))
+            {
+                _missingIds.Add(id);
+            }
+            else if (manager.State == TorrentState.Stopped && !_pausedIds.Contains(id))
             {
                 await manager.StartAsync();
+                _startedIds.Add(id);
             }
         }
     }
@@ -267,7 +286,24 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
         TorrentManager manager = Get(id);
         if (manager.State is TorrentState.Paused or TorrentState.Stopped or TorrentState.Error or TorrentState.HashingPaused)
         {
-            await manager.StartAsync();
+            if (manager.State == TorrentState.Error)
+            {
+                // Clears the error so the manager can start again (e.g. after the user freed disk space).
+                await manager.StopAsync();
+            }
+
+            // The folder may have been deleted while the torrent was stopped.
+            Directory.CreateDirectory(manager.SavePath);
+            if (_missingIds.Remove(id) || FilesMissing(manager))
+            {
+                await manager.HashCheckAsync(autoStart: true);
+            }
+            else
+            {
+                await manager.StartAsync();
+            }
+
+            _startedIds.Add(id);
         }
 
         if (_pausedIds.Remove(id))
@@ -299,6 +335,7 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
         }
 
         await Engine.RemoveAsync(manager, deleteFiles ? RemoveMode.CacheDataAndDownloadedData : RemoveMode.CacheDataOnly);
+        _missingIds.Remove(id);
         if (_pausedIds.Remove(id))
         {
             await SavePausedIdsAsync();
@@ -328,6 +365,17 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
         if (_engine is not null)
         {
             await _engine.SaveStateAsync(StatePath);
+
+            // Torrents not started this session keep what we knew about them.
+            var hadData = _engine.Torrents
+                .Where(t => t.Bitfield.TrueCount > 0 || (!_startedIds.Contains(IdOf(t)) && _hadDataIds.Contains(IdOf(t))))
+                .Select(IdOf)
+                .ToHashSet();
+            if (!hadData.SetEquals(_hadDataIds))
+            {
+                _hadDataIds = hadData;
+                await File.WriteAllLinesAsync(HadDataPath, _hadDataIds);
+            }
         }
     }
 
@@ -366,16 +414,16 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
     private TorrentManager? Find(InfoHashes infoHashes) =>
         Engine.Torrents.FirstOrDefault(t => t.InfoHashes.V1OrV2.Equals(infoHashes.V1OrV2));
 
-    private async Task<HashSet<string>> LoadPausedIdsAsync()
+    private static async Task<HashSet<string>> LoadIdsAsync(string path)
     {
-        if (!File.Exists(PausedPath))
+        if (!File.Exists(path))
         {
             return [];
         }
 
         try
         {
-            return (await File.ReadAllLinesAsync(PausedPath)).Where(l => l.Length > 0).ToHashSet();
+            return (await File.ReadAllLinesAsync(path)).Where(l => l.Length > 0).ToHashSet();
         }
         catch (IOException)
         {
@@ -384,6 +432,12 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
     }
 
     private Task SavePausedIdsAsync() => File.WriteAllLinesAsync(PausedPath, _pausedIds);
+
+    /// <summary>True when the torrent had downloaded data but none of its files are on disk any more.</summary>
+    private bool FilesMissing(TorrentManager manager) =>
+        manager.HasMetadata
+        && (manager.Bitfield.TrueCount > 0 || _hadDataIds.Contains(IdOf(manager)))
+        && !manager.Files.Any(f => File.Exists(f.DownloadCompleteFullPath) || File.Exists(f.DownloadIncompleteFullPath));
 
     private TorrentManager Get(string id) =>
         Engine.Torrents.FirstOrDefault(t => IdOf(t) == id)
@@ -404,10 +458,11 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
         }
 
         var now = TimeSpan.FromMilliseconds(Environment.TickCount64);
+        bool missing = _missingIds.Contains(id);
         return new(
             Id: id,
             Name: manager.Name,
-            Status: ToStatus(manager.State),
+            Status: missing ? TorrentStatus.Error : ToStatus(manager.State),
             Progress: manager.Progress / 100.0,
             TotalSize: manager.Torrent is { } torrent ? ContentSize(torrent) : manager.MagnetLink?.Size ?? 0,
             DownloadRate: rate.Down.Sample(manager.Monitor.DataBytesReceived, now),
@@ -420,6 +475,9 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
             ContentPath = manager.ContainingDirectory,
             DownloadLimit = manager.Settings.MaximumDownloadRate,
             UploadLimit = manager.Settings.MaximumUploadRate,
+            Problem = missing ? TorrentProblem.FilesMissing
+                : manager.State == TorrentState.Error ? TorrentProblems.Classify(manager.Error?.Exception)
+                : TorrentProblem.None,
         };
     }
 

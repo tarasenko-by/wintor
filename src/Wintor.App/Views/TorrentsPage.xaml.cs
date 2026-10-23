@@ -684,6 +684,13 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
                 Icon = MainWindow.Swatch(label.Brush),
                 KeyboardAcceleratorTextOverride = label.Name == current ? "✓" : "",
             };
+            AutomationProperties.SetAutomationId(entry, "LabelEntry_" + label.Name);
+            if (label.Name == current)
+            {
+                // The check mark is only drawn; screen readers get it as the item's status.
+                AutomationProperties.SetItemStatus(entry, Strings.Get("A11y_CurrentLabel"));
+            }
+
             entry.Click += (_, _) => ViewModel.SetLabel(targets, label.Name);
             menu.Items.Add(entry);
         }
@@ -721,6 +728,7 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
     private static MenuFlyoutItem Entry(string key, HugeIconKind icon, Action action, string? shortcut = null)
     {
         var entry = new MenuFlyoutItem { Text = Strings.Get(key), Icon = HugeIcons.Create(icon) };
+        AutomationProperties.SetAutomationId(entry, key);
         if (shortcut is not null)
         {
             entry.KeyboardAcceleratorTextOverride = shortcut;

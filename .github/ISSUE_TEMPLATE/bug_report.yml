@@ -1,0 +1,45 @@
+name: Bug report
+description: Something does not work or looks wrong.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! Security problems go to the **Security** tab instead, not here.
+        Please do not attach torrents of copyrighted material; a public torrent (e.g. a Linux ISO) is best.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: And what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Add the torrent …
+        2. Pause it …
+        3. …
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: For visual problems, please add one (light or dark theme, what window size).
+  - type: input
+    id: version
+    attributes:
+      label: Wintor version
+      description: Settings → About.
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      placeholder: Windows 11 24H2, x64
+    validations:
+      required: true

@@ -43,6 +43,9 @@ They are binding for all UI changes (see [AGENTS.md](../AGENTS.md)).
     Right-click menu acts on the whole selection when the row is part of it. № order: Alt+↑/↓, or the "Order" menu.
     "Speed limit…" sets per-torrent download/upload limits in KB/s (0 = none); the global limit from Settings still
     applies. The Transfer section shows them.
+  - Problems are said in plain words with the way out, not as exception text: "Files not found — resume to
+    download them again", "Not enough disk space — free some and resume" (`TorrentProblem`). Resume fixes each
+    of them. No network shows one warning `InfoBar` above the table instead of every row looking stuck.
   - The pane (resizable with the splitter, double-click resets) has tabs in a `SelectorBar`: General (piece bars
     "Downloaded" and "Availability", Transfer, General info), Files, Peers, Trackers, Speed (graph).
   - When `Microsoft.UI.Xaml.Controls.Tabular.TableView` ships in a stable Windows App SDK (it is experimental-only

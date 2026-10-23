@@ -52,11 +52,20 @@ public partial class FileItemViewModel(TorrentDetailsViewModel owner, int index)
     }
 }
 
-public sealed record PeerRow(string Address, string Client, string ProgressText, string DownloadText, string UploadText, string Flags);
+public sealed record PeerRow(string Address, string Client, string ProgressText, string DownloadText, string UploadText, string Flags)
+{
+    /// <summary>For screen readers: the whole row in one line.</summary>
+    public string AccessibleName => Join(Address, Client, ProgressText, DownloadText, UploadText);
+
+    internal static string Join(params string?[] parts) => string.Join(", ", parts.Where(p => !string.IsNullOrEmpty(p)));
+}
 
 public sealed record TrackerRow(string Url, string StatusText, string? Message, bool IsProblem)
 {
     public bool HasMessage => !string.IsNullOrEmpty(Message);
+
+    /// <summary>For screen readers: the whole row in one line.</summary>
+    public string AccessibleName => PeerRow.Join(Url, StatusText, Message);
 }
 
 /// <summary>One "label: value" pair in the General tab.</summary>

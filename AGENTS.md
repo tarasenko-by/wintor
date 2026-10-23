@@ -101,5 +101,8 @@ winapp run src\Wintor.App
 ## Pull requests
 
 - One logical change per PR, with a short description of what and why, and screenshots for UI changes.
+- Every commit is signed off (`git commit -s`, the DCO — see CONTRIBUTING.md); contributions are GPL-3.0-or-later
+  with the app store permission in `LICENSE-STORE-EXCEPTION.md`.
+- Where things live and how data flows: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 - Fill in the checklist from the PR template.
 - No CI yet: run the build and tests locally before opening a PR.

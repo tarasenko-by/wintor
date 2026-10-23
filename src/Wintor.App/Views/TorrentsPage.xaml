@@ -150,6 +150,15 @@
             Message="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
             Severity="Error" />
 
+        <InfoBar
+            x:Uid="OfflineInfoBar"
+            Grid.Row="1"
+            Margin="0,0,0,8"
+            AutomationProperties.AutomationId="OfflineInfoBar"
+            IsClosable="False"
+            IsOpen="{x:Bind ViewModel.IsOffline, Mode=OneWay}"
+            Severity="Warning" />
+
         <!--  The table  -->
         <Grid
             Grid.Row="2"

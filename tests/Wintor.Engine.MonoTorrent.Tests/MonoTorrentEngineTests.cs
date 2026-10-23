@@ -158,6 +158,35 @@ public sealed class MonoTorrentEngineTests : IDisposable
     }
 
     [Fact]
+    public async Task DeletedFiles_AreReportedAfterRestart_AndResumeRechecks()
+    {
+        int port = GetFreePort();
+        string torrentPath = await CreateTorrentFileAsync();
+        string seedDir = Path.Combine(_root, "source");
+        string id;
+        await using (var engine = await CreateEngineAsync(port))
+        {
+            // Saved where the files already are, so the hash check finds them all.
+            id = await engine.AddTorrentFileAsync(torrentPath, seedDir);
+            await WaitUntilAsync(() => engine.GetSnapshots().Single().IsComplete);
+        }
+
+        Directory.Delete(Path.Combine(seedDir, "payload"), recursive: true);
+        await using var restarted = await CreateEngineAsync(port);
+
+        TorrentSnapshot missing = restarted.GetSnapshots().Single();
+        Assert.Equal(TorrentStatus.Error, missing.Status);
+        Assert.Equal(TorrentProblem.FilesMissing, missing.Problem);
+
+        await restarted.StartAsync(id);
+        await WaitUntilAsync(() => restarted.GetSnapshots().Single().Status != TorrentStatus.Checking);
+
+        TorrentSnapshot resumed = restarted.GetSnapshots().Single();
+        Assert.Equal(TorrentProblem.None, resumed.Problem);
+        Assert.Equal(0, resumed.Progress);
+    }
+
+    [Fact]
     public async Task ApplyOptions_WhileRunning_KeepsTorrents()
     {
         await using var engine = await CreateEngineAsync();
@@ -210,6 +239,16 @@ public sealed class MonoTorrentEngineTests : IDisposable
         string path = Path.Combine(_root, "payload.torrent");
         await File.WriteAllBytesAsync(path, torrent.Encode());
         return path;
+    }
+
+    private static async Task WaitUntilAsync(Func<bool> condition)
+    {
+        var deadline = DateTime.UtcNow.AddSeconds(15);
+        while (!condition())
+        {
+            Assert.True(DateTime.UtcNow < deadline, "Timed out waiting for the engine.");
+            await Task.Delay(50);
+        }
     }
 
     private static int GetFreePort()

@@ -1,0 +1,27 @@
+name: Idea
+description: Suggest a feature or a change to the design.
+labels: [idea]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Wintor tries to stay simple: a few good defaults, advanced options hidden but reachable.
+        Built-in torrent search and content catalogs are out of scope.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do
+      description: The situation, not the solution — "I want to limit one torrent while I'm on a call" rather than "add a field".
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: How it could work
+      description: Sketches, screenshots of other apps or a short description are all welcome.
+  - type: checkboxes
+    id: help
+    attributes:
+      label: Contributing
+      options:
+        - label: I'd like to implement this myself.

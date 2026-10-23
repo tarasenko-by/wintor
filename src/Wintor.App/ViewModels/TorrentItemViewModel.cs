@@ -115,6 +115,7 @@ public partial class TorrentItemViewModel(string id) : ObservableObject
 
         StatusText = s.Status switch
         {
+            TorrentStatus.Error when s.Problem is not (TorrentProblem.None or TorrentProblem.Other) => Strings.Get("Problem_" + s.Problem),
             TorrentStatus.Error when s.ErrorMessage is not null => Strings.Format("Status_ErrorDetails", s.ErrorMessage),
             TorrentStatus.Stopped or TorrentStatus.Paused when s.IsComplete => Strings.Get("Status_Done"),
             _ => Strings.Get("Status_" + s.Status),

@@ -45,6 +45,9 @@ public sealed record TorrentSnapshot(
 
     public bool HasSpeedLimit => DownloadLimit > 0 || UploadLimit > 0;
 
+    /// <summary>Why the torrent cannot run, in terms the UI can explain; <see cref="TorrentProblem.None"/> otherwise.</summary>
+    public TorrentProblem Problem { get; init; }
+
     public bool IsComplete => Progress >= 1 && TotalSize > 0;
 
     public long DownloadedBytes => (long)(TotalSize * Progress);

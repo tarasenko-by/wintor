@@ -54,6 +54,13 @@
                     AutomationProperties.AutomationId="AddDialogChangeFolder"
                     Click="ChangeFolder_Click" />
             </Grid>
+            <TextBlock
+                x:Name="SpaceWarning"
+                AutomationProperties.AutomationId="AddDialogSpaceWarning"
+                Foreground="{ThemeResource SystemFillColorCautionBrush}"
+                Style="{StaticResource CaptionTextBlockStyle}"
+                TextWrapping="Wrap"
+                Visibility="Collapsed" />
         </StackPanel>
 
         <!--  .torrent: which files  -->

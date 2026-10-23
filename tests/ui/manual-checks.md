@@ -52,6 +52,14 @@ while testing; tick them off after a look by hand. Newest on top.
 - [ ] **Icon-only Resume / Pause / Remove** — hover each: the tooltip shows its name.
 - [ ] **Speed limit dialog** — right-click a torrent → "Speed limit…": the fields show its current limits; set
       e.g. 100 / 20 KB/s → General → Transfer shows them and the download rate stays under the limit; 0 clears.
+- [ ] **Deleted files** — finish a small legal torrent, quit (`wintor --quit`), delete its folder, start Wintor:
+      the row says "Files not found — resume…", grey bar; Resume rechecks and downloads it again.
+- [ ] **No network** — turn Wi-Fi/Ethernet off: the "No network connection" bar appears above the table and
+      goes away when the network is back.
+- [ ] **Not enough space** — add a .torrent bigger than the free space of the chosen drive (or pick a small USB
+      stick as the folder): a caution line under the folder names free vs. needed space; unticking files updates it.
+- [ ] **Narrator** — Files, Peers and Trackers rows read as one line each (not a class name); the current label
+      in the Label submenu is announced as "Current label".
 
 ## Done
 
