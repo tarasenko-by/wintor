@@ -5,7 +5,7 @@ Keep the wording about legal use: torrent clients get a closer look in certifica
 
 ## Product name
 
-Wintor
+Wintor - Torrent Client (reserved in Partner Center; Start and the title bar say "Wintor")
 
 ## Short description (up to 100 characters, shown on some surfaces)
 

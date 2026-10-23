@@ -5,6 +5,10 @@ the account owner can do them.
 
 ## Once, before the first release
 
+Done on 2026-10-24: the name "Wintor - Torrent Client" is reserved (Store ID `9P7P2DH9P4XN`,
+<https://apps.microsoft.com/detail/9P7P2DH9P4XN>), the manifest carries its identity and version 0.2.0.0, and
+About links to the Store. Kept here for a future fork or a second app.
+
 1. **Register as an individual developer** at <https://partner.microsoft.com/dashboard> (free for individuals).
 2. **Reserve the name**: Apps and games → New product → MSIX or PWA app → "Wintor". If it is taken, pick the new
    name everywhere (manifest, strings `AppDisplayName`, README, TRADEMARKS.md) before going further.

@@ -55,3 +55,6 @@ Generated\ Files/
 
 # UI test runs (tests/ui/ui-tests.ps1)
 tests/ui/artifacts/
+
+# Store packages built by winapp package (docs/store/release.md)
+artifacts/

@@ -11,16 +11,18 @@
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
   IgnorableNamespaces="uap uap5 uap10 com desktop rescap">
 
+  <!--  The Microsoft Store identity from Partner Center (Product identity); the Store re-signs the package.  -->
   <Identity
-    Name="F28EBC3D-BBCD-4C21-9760-297D0F2BBA80"
-    Publisher="CN=AppPublisher"
-    Version="1.0.0.0" />
+    Name="SiarheiTarasenka.Wintor-TorrentClient"
+    Publisher="CN=80472E69-09D4-42FB-AC2D-A07586A834F7"
+    Version="0.2.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="F28EBC3D-BBCD-4C21-9760-297D0F2BBA80" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>Wintor</DisplayName>
-    <PublisherDisplayName>Wintor contributors</PublisherDisplayName>
+    <!--  The Store name reserved in Partner Center; Start, the taskbar and the title bar say just "Wintor".  -->
+    <DisplayName>Wintor - Torrent Client</DisplayName>
+    <PublisherDisplayName>Siarhei Tarasenka</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
     <uap10:PackageIntegrity>
       <uap10:Content Enforcement="on"/>

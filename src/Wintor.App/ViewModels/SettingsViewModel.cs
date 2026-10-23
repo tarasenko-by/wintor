@@ -95,7 +95,7 @@ public partial class SettingsViewModel : ObservableObject
     public const string PrivacyUrl = "https://github.com/tarasenko-by/wintor/blob/main/docs/PRIVACY.md";
 
     /// <summary>The Microsoft Store product ID (Partner Center); empty until the app is listed, which hides the link.</summary>
-    public const string StoreProductId = "";
+    public const string StoreProductId = "9P7P2DH9P4XN";
 
     public bool HasStoreListing => StoreProductId.Length > 0;
 
