@@ -29,11 +29,14 @@
   <data name="AddMagnetButton.Label" xml:space="preserve"><value>Add magnet</value></data>
   <data name="OpenFileButton.Label" xml:space="preserve"><value>Open .torrent</value></data>
   <data name="ResumeButton.Label" xml:space="preserve"><value>Resume</value></data>
+  <data name="ResumeButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Resume</value></data>
   <data name="PauseButton.Label" xml:space="preserve"><value>Pause</value></data>
+  <data name="PauseButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Pause</value></data>
   <data name="RemoveButton.Label" xml:space="preserve"><value>Remove</value></data>
+  <data name="RemoveButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Remove</value></data>
   <data name="EmptyTitle.Text" xml:space="preserve"><value>No torrents yet</value></data>
   <data name="EmptyHint.Text" xml:space="preserve"><value>Add a magnet link, open a .torrent file or drop it onto this window.</value></data>
-  <data name="EmptyAddButton.Content" xml:space="preserve"><value>Add magnet link</value></data>
+  <data name="EmptyAddButton.Content" xml:space="preserve"><value>Open .torrent file</value></data>
   <data name="TorrentList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Torrents</value></data>
   <data name="SettingsTitle.Text" xml:space="preserve"><value>Settings</value></data>
   <data name="SettingsDownloadsHeader.Text" xml:space="preserve"><value>Downloads</value></data>
@@ -67,4 +70,190 @@
   <data name="RemoveDialog_DeleteFiles" xml:space="preserve"><value>Also delete downloaded files</value></data>
   <data name="RemoveDialog_Remove" xml:space="preserve"><value>Remove</value></data>
   <data name="Drop_Caption" xml:space="preserve"><value>Add to Wintor</value></data>
+  <data name="SearchBox.PlaceholderText" xml:space="preserve"><value>Search torrents</value></data>
+  <data name="SearchBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Search torrents</value></data>
+  <data name="OpenFolderButton.Label" xml:space="preserve"><value>Open folder</value></data>
+  <data name="DetailsButton.Label" xml:space="preserve"><value>Details</value></data>
+  <data name="ResumeAllButton.Label" xml:space="preserve"><value>Resume all</value></data>
+  <data name="PauseAllButton.Label" xml:space="preserve"><value>Pause all</value></data>
+  <data name="SelectAllButton.Label" xml:space="preserve"><value>Select all</value></data>
+  <data name="Filter_All" xml:space="preserve"><value>All</value></data>
+  <data name="Filter_Downloading" xml:space="preserve"><value>Downloading</value></data>
+  <data name="Filter_Completed" xml:space="preserve"><value>Completed</value></data>
+  <data name="Filter_Paused" xml:space="preserve"><value>Paused</value></data>
+  <data name="NothingFound.Text" xml:space="preserve"><value>No torrents match the filter or search.</value></data>
+  <data name="Summary_OneTorrent" xml:space="preserve"><value>{0} torrent</value></data>
+  <data name="Summary_Torrents" xml:space="preserve"><value>{0} torrents</value></data>
+  <data name="Status_Done" xml:space="preserve"><value>Done</value></data>
+  <data name="Error_BadTorrentFile" xml:space="preserve"><value>“{0}” is not a valid .torrent file.</value></data>
+  <data name="Menu_Resume" xml:space="preserve"><value>Resume</value></data>
+  <data name="Menu_Pause" xml:space="preserve"><value>Pause</value></data>
+  <data name="Menu_OpenFolder" xml:space="preserve"><value>Open folder</value></data>
+  <data name="Menu_Details" xml:space="preserve"><value>Details</value></data>
+  <data name="Menu_CopyMagnet" xml:space="preserve"><value>Copy magnet link</value></data>
+  <data name="Menu_Remove" xml:space="preserve"><value>Remove…</value></data>
+  <data name="RemoveDialog_TitleSeveral" xml:space="preserve"><value>Remove torrents?</value></data>
+  <data name="RemoveDialog_Several" xml:space="preserve"><value>{0} torrents</value></data>
+  <data name="AddDialog.PrimaryButtonText" xml:space="preserve"><value>Add</value></data>
+  <data name="AddDialog.CloseButtonText" xml:space="preserve"><value>Cancel</value></data>
+  <data name="AddDialog_MagnetTitle" xml:space="preserve"><value>Add magnet link</value></data>
+  <data name="AddDialog_FileTitle" xml:space="preserve"><value>Add torrent</value></data>
+  <data name="AddDialogMagnet.Header" xml:space="preserve"><value>Magnet link</value></data>
+  <data name="AddDialogFolderHeader.Text" xml:space="preserve"><value>Save to</value></data>
+  <data name="AddDialogChangeFolder.Content" xml:space="preserve"><value>Change…</value></data>
+  <data name="AddDialogSelectAll.Content" xml:space="preserve"><value>All files</value></data>
+  <data name="AddDialogFiles.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Files to download</value></data>
+  <data name="AddDialog_OneFile" xml:space="preserve"><value>1 file · {1}</value></data>
+  <data name="AddDialog_Files" xml:space="preserve"><value>{0} files · {1}</value></data>
+  <data name="AddDialog_Selection" xml:space="preserve"><value>{0} of {1} selected · {2}</value></data>
+  <data name="CopyMagnetButton.Label" xml:space="preserve"><value>Copy magnet link</value></data>
+  <data name="DetailsGone.Title" xml:space="preserve"><value>This torrent was removed.</value></data>
+  <data name="TabFiles.Text" xml:space="preserve"><value>Files</value></data>
+  <data name="TabPeers.Text" xml:space="preserve"><value>Peers</value></data>
+  <data name="TabTrackers.Text" xml:space="preserve"><value>Trackers</value></data>
+  <data name="TabInfo.Text" xml:space="preserve"><value>Info</value></data>
+  <data name="NoFilesYet.Text" xml:space="preserve"><value>The file list appears once Wintor gets it from peers.</value></data>
+  <data name="NoPeers.Text" xml:space="preserve"><value>Not connected to anyone right now.</value></data>
+  <data name="NoTrackers.Text" xml:space="preserve"><value>This torrent has no trackers; peers are found through DHT.</value></data>
+  <data name="FilesList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Files</value></data>
+  <data name="PeersList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Peers</value></data>
+  <data name="TrackersList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Trackers</value></data>
+  <data name="InfoList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Info</value></data>
+  <data name="PrioritySkip.Content" xml:space="preserve"><value>Don’t download</value></data>
+  <data name="PriorityLow.Content" xml:space="preserve"><value>Low priority</value></data>
+  <data name="PriorityNormal.Content" xml:space="preserve"><value>Normal</value></data>
+  <data name="PriorityHigh.Content" xml:space="preserve"><value>High priority</value></data>
+  <data name="Peer_Seed" xml:space="preserve"><value>seed</value></data>
+  <data name="Peer_Incoming" xml:space="preserve"><value>incoming</value></data>
+  <data name="Peer_Encrypted" xml:space="preserve"><value>encrypted</value></data>
+  <data name="Tracker_Unknown" xml:space="preserve"><value>Not contacted yet</value></data>
+  <data name="Tracker_Connecting" xml:space="preserve"><value>Connecting…</value></data>
+  <data name="Tracker_Working" xml:space="preserve"><value>Working</value></data>
+  <data name="Tracker_Offline" xml:space="preserve"><value>Not responding</value></data>
+  <data name="Tracker_Error" xml:space="preserve"><value>Error</value></data>
+  <data name="Info_SavedTo" xml:space="preserve"><value>Saved to</value></data>
+  <data name="Info_Size" xml:space="preserve"><value>Size</value></data>
+  <data name="Info_Hash" xml:space="preserve"><value>Info hash</value></data>
+  <data name="Info_Created" xml:space="preserve"><value>Created</value></data>
+  <data name="Info_Comment" xml:space="preserve"><value>Comment</value></data>
+  <data name="Info_Private" xml:space="preserve"><value>Private torrent</value></data>
+  <data name="Yes" xml:space="preserve"><value>Yes</value></data>
+  <data name="No" xml:space="preserve"><value>No</value></data>
+  <data name="SettingsAppearanceHeader.Text" xml:space="preserve"><value>Appearance</value></data>
+  <data name="ThemeCard.Header" xml:space="preserve"><value>Theme</value></data>
+  <data name="ThemeCard.Description" xml:space="preserve"><value>Light, dark or as in Windows.</value></data>
+  <data name="ThemeBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Theme</value></data>
+  <data name="ThemeSystem.Content" xml:space="preserve"><value>As in Windows</value></data>
+  <data name="ThemeLight.Content" xml:space="preserve"><value>Light</value></data>
+  <data name="ThemeDark.Content" xml:space="preserve"><value>Dark</value></data>
+  <data name="BackdropCard.Header" xml:space="preserve"><value>Window background</value></data>
+  <data name="BackdropCard.Description" xml:space="preserve"><value>Solid colors, or Mica or Acrylic from Windows behind the title bar and the side pane. Transparency needs Windows transparency effects to be on.</value></data>
+  <data name="BackdropBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Window background</value></data>
+  <data name="BackdropSolid.Content" xml:space="preserve"><value>Solid</value></data>
+  <data name="NotifyCard.Header" xml:space="preserve"><value>Notify when a download finishes</value></data>
+  <data name="NotifyCard.Description" xml:space="preserve"><value>A Windows notification with a button that opens the folder.</value></data>
+  <data name="NotifySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Notify when a download finishes</value></data>
+  <data name="SettingsSpeedHeader.Text" xml:space="preserve"><value>Speed</value></data>
+  <data name="DownloadLimitCard.Header" xml:space="preserve"><value>Download limit</value></data>
+  <data name="DownloadLimitCard.Description" xml:space="preserve"><value>KB/s; 0 means no limit.</value></data>
+  <data name="DownloadLimitBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Download limit, KB/s</value></data>
+  <data name="UploadLimitCard.Header" xml:space="preserve"><value>Upload limit</value></data>
+  <data name="UploadLimitCard.Description" xml:space="preserve"><value>KB/s; 0 means no limit.</value></data>
+  <data name="UploadLimitBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Upload limit, KB/s</value></data>
+  <data name="SettingsConnectionHeader.Text" xml:space="preserve"><value>Connection</value></data>
+  <data name="PortCard.Header" xml:space="preserve"><value>Listening port</value></data>
+  <data name="PortCard.Description" xml:space="preserve"><value>Other peers connect to you on this port. Wintor asks your router to open it (UPnP).</value></data>
+  <data name="PortBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Listening port</value></data>
+  <data name="SettingsWindowsHeader.Text" xml:space="preserve"><value>Windows</value></data>
+  <data name="StartupCard.Header" xml:space="preserve"><value>Start with Windows</value></data>
+  <data name="StartupCard.Description" xml:space="preserve"><value>Starts in the notification area when you sign in.</value></data>
+  <data name="StartupSwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Start with Windows</value></data>
+  <data name="Settings_StartupDisabledByUser" xml:space="preserve"><value>Turned off in Windows Settings → Apps → Startup. Turn it on there first.</value></data>
+  <data name="Settings_StartupByPolicy" xml:space="preserve"><value>Managed by your organization.</value></data>
+  <data name="TrayCard.Header" xml:space="preserve"><value>Keep running when the window is closed</value></data>
+  <data name="TrayCard.Description" xml:space="preserve"><value>Wintor keeps seeding from the notification area. Quit from the icon’s menu there.</value></data>
+  <data name="TraySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Keep running when the window is closed</value></data>
+  <data name="IconsCard.Header" xml:space="preserve"><value>Icons</value></data>
+  <data name="IconsCard.Description" xml:space="preserve"><value>Hugeicons free set (MIT)</value></data>
+  <data name="Tray_Open" xml:space="preserve"><value>Open Wintor</value></data>
+  <data name="Tray_ResumeAll" xml:space="preserve"><value>Resume all</value></data>
+  <data name="Tray_PauseAll" xml:space="preserve"><value>Pause all</value></data>
+  <data name="Tray_Exit" xml:space="preserve"><value>Exit</value></data>
+  <data name="Notification_Completed" xml:space="preserve"><value>Download finished</value></data>
+  <data name="Notification_OpenFolder" xml:space="preserve"><value>Open folder</value></data>
+  <data name="Notification_StillRunningTitle" xml:space="preserve"><value>Wintor is still running</value></data>
+  <data name="Notification_StillRunning" xml:space="preserve"><value>Torrents keep seeding in the background. Quit from the icon in the notification area.</value></data>
+  <data name="CardDetailsButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Details</value></data>
+  <data name="CardDetailsButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Details</value></data>
+  <data name="OpenFileButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Open .torrent file (Ctrl+O)</value></data>
+  <data name="AddMagnetButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Add magnet link (Ctrl+N)</value></data>
+  <data name="SortButton.Label" xml:space="preserve"><value>Sort</value></data>
+  <data name="SortButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Sort</value></data>
+  <data name="OpenFolderButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Open folder</value></data>
+  <data name="View_All" xml:space="preserve"><value>All torrents</value></data>
+  <data name="View_Downloading" xml:space="preserve"><value>Downloading</value></data>
+  <data name="View_Completed" xml:space="preserve"><value>Completed</value></data>
+  <data name="View_Paused" xml:space="preserve"><value>Paused</value></data>
+  <data name="NavAllText.Text" xml:space="preserve"><value>All torrents</value></data>
+  <data name="NavDownloadingText.Text" xml:space="preserve"><value>Downloading</value></data>
+  <data name="NavCompletedText.Text" xml:space="preserve"><value>Completed</value></data>
+  <data name="NavPausedText.Text" xml:space="preserve"><value>Paused</value></data>
+  <data name="NavLabelsHeader.Content" xml:space="preserve"><value>Labels</value></data>
+  <data name="NavNoLabels" xml:space="preserve"><value>Right-click a torrent → Label to add one.</value></data>
+  <data name="Column_Queue" xml:space="preserve"><value>#</value></data>
+  <data name="Column_Name" xml:space="preserve"><value>Name</value></data>
+  <data name="Column_Size" xml:space="preserve"><value>Size</value></data>
+  <data name="Column_Progress" xml:space="preserve"><value>Progress</value></data>
+  <data name="Column_Status" xml:space="preserve"><value>Status</value></data>
+  <data name="Column_DownloadSpeed" xml:space="preserve"><value>Down</value></data>
+  <data name="Column_UploadSpeed" xml:space="preserve"><value>Up</value></data>
+  <data name="Column_TimeLeft" xml:space="preserve"><value>Time left</value></data>
+  <data name="Column_Seeds" xml:space="preserve"><value>Seeds</value></data>
+  <data name="Column_Peers" xml:space="preserve"><value>Peers</value></data>
+  <data name="Column_SortBy" xml:space="preserve"><value>Sort by {0}</value></data>
+  <data name="Column_SortedAscending" xml:space="preserve"><value>{0}, sorted ascending</value></data>
+  <data name="Column_SortedDescending" xml:space="preserve"><value>{0}, sorted descending</value></data>
+  <data name="Sort_Ascending" xml:space="preserve"><value>Ascending</value></data>
+  <data name="Sort_Descending" xml:space="preserve"><value>Descending</value></data>
+  <data name="Menu_Label" xml:space="preserve"><value>Label</value></data>
+  <data name="Menu_NewLabel" xml:space="preserve"><value>New label…</value></data>
+  <data name="Menu_NoLabel" xml:space="preserve"><value>Remove label</value></data>
+  <data name="Menu_Order" xml:space="preserve"><value>Order</value></data>
+  <data name="Menu_MoveTop" xml:space="preserve"><value>Move to top</value></data>
+  <data name="Menu_MoveUp" xml:space="preserve"><value>Move up</value></data>
+  <data name="Menu_MoveDown" xml:space="preserve"><value>Move down</value></data>
+  <data name="Menu_MoveBottom" xml:space="preserve"><value>Move to bottom</value></data>
+  <data name="Menu_DeleteLabel" xml:space="preserve"><value>Delete label</value></data>
+  <data name="LabelDialog_Title" xml:space="preserve"><value>New label</value></data>
+  <data name="LabelDialog_Header" xml:space="preserve"><value>Name</value></data>
+  <data name="LabelDialog_Create" xml:space="preserve"><value>Create</value></data>
+  <data name="Splitter_Tooltip" xml:space="preserve"><value>Drag to resize; double-click to reset</value></data>
+  <data name="DetailsNothingSelected.Text" xml:space="preserve"><value>Select a torrent to see its details.</value></data>
+  <data name="TabGeneral.Text" xml:space="preserve"><value>General</value></data>
+  <data name="TabSpeed.Text" xml:space="preserve"><value>Speed</value></data>
+  <data name="BarDownloaded.Text" xml:space="preserve"><value>Downloaded</value></data>
+  <data name="BarAvailability.Text" xml:space="preserve"><value>Availability</value></data>
+  <data name="SectionTransfer.Text" xml:space="preserve"><value>Transfer</value></data>
+  <data name="SectionGeneral.Text" xml:space="preserve"><value>General</value></data>
+  <data name="Info_TimeActive" xml:space="preserve"><value>Time active</value></data>
+  <data name="Info_TimeLeft" xml:space="preserve"><value>Time left</value></data>
+  <data name="Info_Downloaded" xml:space="preserve"><value>Downloaded</value></data>
+  <data name="Info_Uploaded" xml:space="preserve"><value>Uploaded</value></data>
+  <data name="Info_Remaining" xml:space="preserve"><value>Remaining</value></data>
+  <data name="Info_Ratio" xml:space="preserve"><value>Share ratio</value></data>
+  <data name="Info_DownloadSpeed" xml:space="preserve"><value>Download speed</value></data>
+  <data name="Info_UploadSpeed" xml:space="preserve"><value>Upload speed</value></data>
+  <data name="Info_Seeds" xml:space="preserve"><value>Seeds</value></data>
+  <data name="Info_Peers" xml:space="preserve"><value>Peers</value></data>
+  <data name="Info_Connected" xml:space="preserve"><value>{0} connected</value></data>
+  <data name="Info_Wasted" xml:space="preserve"><value>Wasted</value></data>
+  <data name="Info_Pieces" xml:space="preserve"><value>Pieces</value></data>
+  <data name="Info_PiecesValue" xml:space="preserve"><value>{0} × {1}</value></data>
+  <data name="LegendDownload.Text" xml:space="preserve"><value>Download</value></data>
+  <data name="LegendUpload.Text" xml:space="preserve"><value>Upload</value></data>
+  <data name="SpeedGraphControl.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Speed over the last five minutes</value></data>
+  <data name="NavAllItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>All torrents</value></data>
+  <data name="NavDownloadingItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Downloading</value></data>
+  <data name="NavCompletedItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Completed</value></data>
+  <data name="NavPausedItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Paused</value></data>
 </root>

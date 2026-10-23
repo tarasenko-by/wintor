@@ -3,31 +3,66 @@
     x:Class="Wintor.App.Views.TorrentsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Wintor.App.Controls"
+    xmlns:icons="using:Wintor.App.Icons"
     xmlns:local="using:Wintor.App.Views"
     xmlns:vm="using:Wintor.App.ViewModels"
     AllowDrop="True"
+    Background="{ThemeResource ContentLayerBrush}"
     DragOver="Page_DragOver"
     Drop="Page_Drop">
 
-    <Grid Padding="24,12,24,0" RowSpacing="12">
+    <Page.Resources>
+        <!--  Column header: the whole cell is a quiet button that sorts by the column.  -->
+        <Style x:Key="ColumnHeaderButtonStyle" BasedOn="{StaticResource SubtleButtonStyle}" TargetType="Button">
+            <Setter Property="Padding" Value="2,0" />
+            <Setter Property="MinHeight" Value="32" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+        <Style x:Key="ColumnHeaderButtonRightStyle" BasedOn="{StaticResource ColumnHeaderButtonStyle}" TargetType="Button">
+            <Setter Property="HorizontalContentAlignment" Value="Right" />
+        </Style>
+        <Style x:Key="CellStyle" BasedOn="{StaticResource BodyTextBlockStyle}" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+            <Setter Property="TextWrapping" Value="NoWrap" />
+        </Style>
+        <Style x:Key="NumberCellStyle" BasedOn="{StaticResource CellStyle}" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
+        </Style>
+    </Page.Resources>
+
+    <Grid
+        x:Name="LayoutRoot"
+        Padding="24,12,24,16"
+        SizeChanged="LayoutRoot_SizeChanged">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="*" MinHeight="160" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition x:Name="PaneRow" Height="300" />
         </Grid.RowDefinitions>
 
-        <!--  Header: title, total speed, commands  -->
-        <Grid ColumnSpacing="16">
+        <!--  Header: view title and summary, commands  -->
+        <Grid Margin="0,0,0,8" ColumnSpacing="16">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <StackPanel VerticalAlignment="Center">
-                <TextBlock x:Uid="TorrentsTitle" Style="{StaticResource TitleTextBlockStyle}" />
                 <TextBlock
-                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                    Style="{StaticResource CaptionTextBlockStyle}"
-                    Text="{x:Bind ViewModel.TotalSpeedText, Mode=OneWay}"
+                    AutomationProperties.AutomationId="ViewTitle"
+                    Style="{StaticResource PageTitleStyle}"
+                    Text="{x:Bind ViewModel.ViewTitle, Mode=OneWay}" />
+                <TextBlock
+                    AutomationProperties.AutomationId="TorrentsSummary"
+                    Style="{StaticResource SecondaryCaptionStyle}"
+                    Text="{x:Bind ViewModel.SummaryText, Mode=OneWay}"
                     TextWrapping="NoWrap" />
             </StackPanel>
             <!--  Takes the remaining width so commands move into the "…" overflow on narrow windows.  -->
@@ -36,169 +71,390 @@
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
                 Background="Transparent"
-                DefaultLabelPosition="Right"
+                DefaultLabelPosition="Collapsed"
                 IsDynamicOverflowEnabled="True">
-                <AppBarButton x:Uid="AddMagnetButton" Click="AddMagnet_Click">
-                    <AppBarButton.Icon>
-                        <FontIcon Glyph="&#xE71B;" />
-                    </AppBarButton.Icon>
-                    <AppBarButton.KeyboardAccelerators>
-                        <KeyboardAccelerator Key="N" Modifiers="Control" />
-                    </AppBarButton.KeyboardAccelerators>
-                </AppBarButton>
-                <AppBarButton x:Uid="OpenFileButton" Click="OpenFile_Click">
-                    <AppBarButton.Icon>
-                        <FontIcon Glyph="&#xE8E5;" />
-                    </AppBarButton.Icon>
+                <AppBarButton
+                    x:Uid="OpenFileButton"
+                    AutomationProperties.AutomationId="OpenFileButton"
+                    Click="OpenFile_Click"
+                    Icon="{icons:Huge Kind=AddSquare}">
                     <AppBarButton.KeyboardAccelerators>
                         <KeyboardAccelerator Key="O" Modifiers="Control" />
                     </AppBarButton.KeyboardAccelerators>
                 </AppBarButton>
+                <AppBarButton
+                    x:Uid="AddMagnetButton"
+                    AutomationProperties.AutomationId="AddMagnetButton"
+                    Click="AddMagnet_Click"
+                    Icon="{icons:Huge Kind=Link01}">
+                    <AppBarButton.KeyboardAccelerators>
+                        <KeyboardAccelerator Key="N" Modifiers="Control" />
+                    </AppBarButton.KeyboardAccelerators>
+                </AppBarButton>
                 <AppBarSeparator />
-                <AppBarButton x:Uid="ResumeButton" Command="{x:Bind ViewModel.ResumeCommand}">
-                    <AppBarButton.Icon>
-                        <FontIcon Glyph="&#xE768;" />
-                    </AppBarButton.Icon>
-                </AppBarButton>
-                <AppBarButton x:Uid="PauseButton" Command="{x:Bind ViewModel.PauseCommand}">
-                    <AppBarButton.Icon>
-                        <FontIcon Glyph="&#xE769;" />
-                    </AppBarButton.Icon>
-                </AppBarButton>
+                <AppBarButton
+                    x:Uid="ResumeButton"
+                    AutomationProperties.AutomationId="ResumeButton"
+                    Command="{x:Bind ViewModel.ResumeCommand}"
+                    Icon="{icons:Huge Kind=Play}" />
+                <AppBarButton
+                    x:Uid="PauseButton"
+                    AutomationProperties.AutomationId="PauseButton"
+                    Command="{x:Bind ViewModel.PauseCommand}"
+                    Icon="{icons:Huge Kind=Pause}" />
                 <AppBarButton
                     x:Uid="RemoveButton"
+                    AutomationProperties.AutomationId="RemoveButton"
                     Click="Remove_Click"
+                    Icon="{icons:Huge Kind=Delete02}"
                     IsEnabled="{x:Bind ViewModel.HasSelection, Mode=OneWay}">
-                    <AppBarButton.Icon>
-                        <FontIcon Glyph="&#xE74D;" />
-                    </AppBarButton.Icon>
                     <AppBarButton.KeyboardAccelerators>
                         <KeyboardAccelerator Key="Delete" />
                     </AppBarButton.KeyboardAccelerators>
                 </AppBarButton>
+                <AppBarSeparator />
+                <AppBarButton
+                    x:Uid="SortButton"
+                    AutomationProperties.AutomationId="SortButton"
+                    Icon="{icons:Huge Kind=Sorting01}">
+                    <AppBarButton.Flyout>
+                        <MenuFlyout x:Name="SortMenu" Opening="SortMenu_Opening" Placement="BottomEdgeAlignedRight" />
+                    </AppBarButton.Flyout>
+                </AppBarButton>
+                <CommandBar.SecondaryCommands>
+                    <AppBarButton
+                        x:Uid="OpenFolderButton"
+                        AutomationProperties.AutomationId="OpenFolderButton"
+                        Click="OpenFolder_Click"
+                        Icon="{icons:Huge Kind=FolderOpen}"
+                        IsEnabled="{x:Bind ViewModel.HasSelection, Mode=OneWay}" />
+                    <AppBarButton
+                        x:Uid="CopyMagnetButton"
+                        AutomationProperties.AutomationId="CopyMagnetButton"
+                        Click="CopyMagnet_Click"
+                        Icon="{icons:Huge Kind=Copy01}"
+                        IsEnabled="{x:Bind ViewModel.HasSelection, Mode=OneWay}" />
+                    <AppBarSeparator />
+                    <AppBarButton
+                        x:Uid="ResumeAllButton"
+                        AutomationProperties.AutomationId="ResumeAllButton"
+                        Click="ResumeAll_Click"
+                        Icon="{icons:Huge Kind=Play}" />
+                    <AppBarButton
+                        x:Uid="PauseAllButton"
+                        AutomationProperties.AutomationId="PauseAllButton"
+                        Click="PauseAll_Click"
+                        Icon="{icons:Huge Kind=Pause}" />
+                    <AppBarButton
+                        x:Uid="SelectAllButton"
+                        AutomationProperties.AutomationId="SelectAllButton"
+                        Click="SelectAll_Click"
+                        Icon="{icons:Huge Kind=CheckmarkCircle01}" />
+                </CommandBar.SecondaryCommands>
             </CommandBar>
         </Grid>
 
         <InfoBar
             Grid.Row="1"
+            Margin="0,0,0,8"
             IsOpen="{x:Bind local:TorrentsPage.HasText(ViewModel.ErrorMessage), Mode=OneWay}"
             Message="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
             Severity="Error" />
 
-        <ProgressRing
+        <!--  The table  -->
+        <Grid
             Grid.Row="2"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" />
+            Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+            BorderThickness="1"
+            CornerRadius="{StaticResource OverlayCornerRadius}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        <!--  Empty state  -->
-        <StackPanel
-            Grid.Row="2"
-            MaxWidth="360"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Spacing="12"
-            Visibility="{x:Bind ViewModel.IsEmpty, Mode=OneWay}">
-            <FontIcon
-                FontSize="48"
-                Foreground="{ThemeResource TextFillColorTertiaryBrush}"
-                Glyph="&#xE896;" />
-            <TextBlock
-                x:Uid="EmptyTitle"
+            <!--  Column headers: click to sort, again to flip  -->
+            <Grid
+                Padding="12,0,12,0"
+                AutomationProperties.AutomationId="TableHeader"
+                BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
+                BorderThickness="0,0,0,1"
+                ColumnSpacing="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Queue, Mode=OneWay, FallbackValue=0}" />
+                    <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Name, Mode=OneWay, FallbackValue=0}" />
+                    <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Size, Mode=OneWay, FallbackValue=0}" />
+                    <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Progress, Mode=OneWay, FallbackValue=0}" />
+                    <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Status, Mode=OneWay, FallbackValue=0}" />
+                    <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Down, Mode=OneWay, FallbackValue=0}" />
+                    <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Up, Mode=OneWay, FallbackValue=0}" />
+                    <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.TimeLeft, Mode=OneWay, FallbackValue=0}" />
+                    <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Seeds, Mode=OneWay, FallbackValue=0}" />
+                    <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Peers, Mode=OneWay, FallbackValue=0}" />
+                </Grid.ColumnDefinitions>
+                <Button
+                    x:Name="HeaderQueue"
+                    AutomationProperties.AutomationId="HeaderQueue"
+                    Click="Header_Click"
+                    Style="{StaticResource ColumnHeaderButtonRightStyle}"
+                    Tag="Queue" />
+                <Button
+                    x:Name="HeaderName"
+                    Grid.Column="1"
+                    AutomationProperties.AutomationId="HeaderName"
+                    Click="Header_Click"
+                    Style="{StaticResource ColumnHeaderButtonStyle}"
+                    Tag="Name" />
+                <Button
+                    x:Name="HeaderSize"
+                    Grid.Column="2"
+                    AutomationProperties.AutomationId="HeaderSize"
+                    Click="Header_Click"
+                    Style="{StaticResource ColumnHeaderButtonRightStyle}"
+                    Tag="Size" />
+                <Button
+                    x:Name="HeaderProgress"
+                    Grid.Column="3"
+                    AutomationProperties.AutomationId="HeaderProgress"
+                    Click="Header_Click"
+                    Style="{StaticResource ColumnHeaderButtonStyle}"
+                    Tag="Progress" />
+                <Button
+                    x:Name="HeaderStatus"
+                    Grid.Column="4"
+                    AutomationProperties.AutomationId="HeaderStatus"
+                    Click="Header_Click"
+                    Style="{StaticResource ColumnHeaderButtonStyle}"
+                    Tag="Status" />
+                <Button
+                    x:Name="HeaderDownloadSpeed"
+                    Grid.Column="5"
+                    AutomationProperties.AutomationId="HeaderDownloadSpeed"
+                    Click="Header_Click"
+                    Style="{StaticResource ColumnHeaderButtonRightStyle}"
+                    Tag="DownloadSpeed" />
+                <Button
+                    x:Name="HeaderUploadSpeed"
+                    Grid.Column="6"
+                    AutomationProperties.AutomationId="HeaderUploadSpeed"
+                    Click="Header_Click"
+                    Style="{StaticResource ColumnHeaderButtonRightStyle}"
+                    Tag="UploadSpeed" />
+                <Button
+                    x:Name="HeaderTimeLeft"
+                    Grid.Column="7"
+                    AutomationProperties.AutomationId="HeaderTimeLeft"
+                    Click="Header_Click"
+                    Style="{StaticResource ColumnHeaderButtonRightStyle}"
+                    Tag="TimeLeft" />
+                <Button
+                    x:Name="HeaderSeeds"
+                    Grid.Column="8"
+                    AutomationProperties.AutomationId="HeaderSeeds"
+                    Click="Header_Click"
+                    Style="{StaticResource ColumnHeaderButtonRightStyle}"
+                    Tag="Seeds" />
+                <Button
+                    x:Name="HeaderPeers"
+                    Grid.Column="9"
+                    AutomationProperties.AutomationId="HeaderPeers"
+                    Click="Header_Click"
+                    Style="{StaticResource ColumnHeaderButtonRightStyle}"
+                    Tag="Peers" />
+            </Grid>
+
+            <ProgressRing
+                Grid.Row="1"
                 HorizontalAlignment="Center"
-                Style="{StaticResource SubtitleTextBlockStyle}" />
-            <TextBlock
-                x:Uid="EmptyHint"
+                VerticalAlignment="Center"
+                IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" />
+
+            <!--  Empty state: no torrents at all  -->
+            <StackPanel
+                Grid.Row="1"
+                MaxWidth="360"
                 HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Spacing="12"
+                Visibility="{x:Bind ViewModel.IsEmpty, Mode=OneWay}">
+                <ContentPresenter
+                    HorizontalAlignment="Center"
+                    Content="{icons:Huge Kind=Download01, Size=40}"
+                    Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
+                <TextBlock
+                    x:Uid="EmptyTitle"
+                    HorizontalAlignment="Center"
+                    AutomationProperties.AutomationId="EmptyTitle"
+                    Style="{StaticResource SubtitleTextBlockStyle}" />
+                <TextBlock
+                    x:Uid="EmptyHint"
+                    HorizontalAlignment="Center"
+                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+                <Button
+                    x:Uid="EmptyAddButton"
+                    HorizontalAlignment="Center"
+                    AutomationProperties.AutomationId="EmptyAddButton"
+                    Click="OpenFile_Click"
+                    Style="{StaticResource AccentButtonStyle}" />
+            </StackPanel>
+
+            <!--  Empty state: view or search hides everything  -->
+            <TextBlock
+                x:Uid="NothingFound"
+                Grid.Row="1"
+                MaxWidth="360"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                AutomationProperties.AutomationId="NothingFound"
+                AutomationProperties.LiveSetting="Polite"
                 Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                 TextAlignment="Center"
-                TextWrapping="Wrap" />
-            <Button
-                x:Uid="EmptyAddButton"
-                HorizontalAlignment="Center"
-                Click="AddMagnet_Click"
-                Style="{StaticResource AccentButtonStyle}" />
-        </StackPanel>
+                TextWrapping="Wrap"
+                Visibility="{x:Bind ViewModel.IsNothingFound, Mode=OneWay}" />
 
-        <ListView
-            x:Uid="TorrentList"
-            Grid.Row="2"
-            Padding="0,0,0,24"
-            ItemsSource="{x:Bind ViewModel.Torrents, Mode=OneTime}"
-            SelectedItem="{x:Bind ViewModel.SelectedTorrent, Mode=TwoWay}"
-            SelectionMode="Single"
-            Visibility="{x:Bind ViewModel.HasTorrents, Mode=OneWay}">
-            <ListView.ItemContainerStyle>
-                <Style BasedOn="{StaticResource DefaultListViewItemStyle}" TargetType="ListViewItem">
-                    <Setter Property="Margin" Value="0,0,0,4" />
-                    <Setter Property="Padding" Value="0" />
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                </Style>
-            </ListView.ItemContainerStyle>
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="vm:TorrentItemViewModel">
-                    <Border
-                        Padding="16,12"
-                        AutomationProperties.Name="{x:Bind Name, Mode=OneWay}"
-                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                        BorderThickness="1"
-                        CornerRadius="{StaticResource OverlayCornerRadius}">
-                        <Grid ColumnSpacing="16" RowSpacing="6">
+            <ListView
+                x:Name="TorrentList"
+                x:Uid="TorrentList"
+                Grid.Row="1"
+                Padding="0,2,0,2"
+                AutomationProperties.AutomationId="TorrentList"
+                ContainerContentChanging="TorrentList_ContainerContentChanging"
+                ItemsSource="{x:Bind ViewModel.Torrents, Mode=OneTime}"
+                KeyDown="TorrentList_KeyDown"
+                SelectionChanged="TorrentList_SelectionChanged"
+                SelectionMode="Extended"
+                Visibility="{x:Bind ViewModel.HasVisibleTorrents, Mode=OneWay}">
+                <ListView.ItemContainerTransitions>
+                    <TransitionCollection>
+                        <AddDeleteThemeTransition />
+                        <RepositionThemeTransition />
+                    </TransitionCollection>
+                </ListView.ItemContainerTransitions>
+                <ListView.ItemContainerStyle>
+                    <Style BasedOn="{StaticResource DefaultListViewItemStyle}" TargetType="ListViewItem">
+                        <Setter Property="MinHeight" Value="40" />
+                        <Setter Property="Padding" Value="12,0" />
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:TorrentItemViewModel">
+                        <Grid AutomationProperties.Name="{x:Bind AccessibleName, Mode=OneWay}" ColumnSpacing="8">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Queue, Mode=OneWay, FallbackValue=0}" />
+                                <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Name, Mode=OneWay, FallbackValue=0}" />
+                                <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Size, Mode=OneWay, FallbackValue=0}" />
+                                <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Progress, Mode=OneWay, FallbackValue=0}" />
+                                <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Status, Mode=OneWay, FallbackValue=0}" />
+                                <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Down, Mode=OneWay, FallbackValue=0}" />
+                                <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Up, Mode=OneWay, FallbackValue=0}" />
+                                <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.TimeLeft, Mode=OneWay, FallbackValue=0}" />
+                                <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Seeds, Mode=OneWay, FallbackValue=0}" />
+                                <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Peers, Mode=OneWay, FallbackValue=0}" />
                             </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
+
+                            <TextBlock Style="{StaticResource NumberCellStyle}" Text="{x:Bind QueueNumber, Mode=OneWay}" />
+
+                            <Grid Grid.Column="1" ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                    Style="{StaticResource CellStyle}"
+                                    Text="{x:Bind Name, Mode=OneWay}"
+                                    ToolTipService.ToolTip="{x:Bind Name, Mode=OneWay}" />
+                                <!--  Label pill  -->
+                                <Border
+                                    Grid.Column="1"
+                                    Padding="6,0"
+                                    VerticalAlignment="Center"
+                                    Background="{ThemeResource ControlAltFillColorTertiaryBrush}"
+                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="9"
+                                    Visibility="{x:Bind HasLabel, Mode=OneWay}">
+                                    <TextBlock
+                                        FontSize="11"
+                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                        Text="{x:Bind Label, Mode=OneWay}" />
+                                </Border>
+                            </Grid>
 
                             <TextBlock
-                                Style="{StaticResource BodyStrongTextBlockStyle}"
-                                Text="{x:Bind Name, Mode=OneWay}"
-                                TextTrimming="CharacterEllipsis"
-                                ToolTipService.ToolTip="{x:Bind Name, Mode=OneWay}" />
+                                Grid.Column="2"
+                                Style="{StaticResource NumberCellStyle}"
+                                Text="{x:Bind SizeText, Mode=OneWay}" />
+
+                            <!--  Progress: green downloading, blue seeding, grey when nothing moves  -->
+                            <Grid Grid.Column="3" ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="40" />
+                                </Grid.ColumnDefinitions>
+                                <ProgressBar
+                                    VerticalAlignment="Center"
+                                    Foreground="{ThemeResource TorrentDownloadingBrush}"
+                                    IsIndeterminate="{x:Bind IsIndeterminate, Mode=OneWay}"
+                                    Value="{x:Bind ProgressPercent, Mode=OneWay}"
+                                    Visibility="{x:Bind ShowDownloadingBar, Mode=OneWay}" />
+                                <ProgressBar
+                                    VerticalAlignment="Center"
+                                    Foreground="{ThemeResource TorrentSeedingBrush}"
+                                    Value="{x:Bind ProgressPercent, Mode=OneWay}"
+                                    Visibility="{x:Bind ShowSeedingBar, Mode=OneWay}" />
+                                <ProgressBar
+                                    VerticalAlignment="Center"
+                                    Foreground="{ThemeResource TorrentInactiveBrush}"
+                                    ShowError="{x:Bind IsError, Mode=OneWay}"
+                                    Value="{x:Bind ProgressPercent, Mode=OneWay}"
+                                    Visibility="{x:Bind ShowInactiveBar, Mode=OneWay}" />
+                                <TextBlock
+                                    Grid.Column="1"
+                                    FontSize="12"
+                                    Style="{StaticResource NumberCellStyle}"
+                                    Text="{x:Bind ProgressText, Mode=OneWay}" />
+                            </Grid>
+
                             <TextBlock
-                                Grid.Column="1"
-                                HorizontalAlignment="Right"
+                                Grid.Column="4"
                                 Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                Style="{StaticResource CaptionTextBlockStyle}"
-                                Text="{x:Bind SpeedText, Mode=OneWay}" />
-
-                            <ProgressBar
-                                Grid.Row="1"
-                                Grid.ColumnSpan="2"
-                                IsIndeterminate="{x:Bind IsIndeterminate, Mode=OneWay}"
-                                ShowError="{x:Bind IsError, Mode=OneWay}"
-                                ShowPaused="{x:Bind IsPaused, Mode=OneWay}"
-                                Value="{x:Bind ProgressPercent, Mode=OneWay}" />
-
-                            <StackPanel
-                                Grid.Row="2"
-                                Orientation="Horizontal"
-                                Spacing="16">
-                                <TextBlock
-                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                    Style="{StaticResource CaptionTextBlockStyle}"
-                                    Text="{x:Bind StatusText, Mode=OneWay}" />
-                                <TextBlock
-                                    Foreground="{ThemeResource TextFillColorTertiaryBrush}"
-                                    Style="{StaticResource CaptionTextBlockStyle}"
-                                    Text="{x:Bind SizeText, Mode=OneWay}" />
-                            </StackPanel>
+                                Style="{StaticResource CellStyle}"
+                                Text="{x:Bind StatusText, Mode=OneWay}"
+                                ToolTipService.ToolTip="{x:Bind StatusText, Mode=OneWay}" />
                             <TextBlock
-                                Grid.Row="2"
-                                Grid.Column="1"
-                                HorizontalAlignment="Right"
-                                Foreground="{ThemeResource TextFillColorTertiaryBrush}"
-                                Style="{StaticResource CaptionTextBlockStyle}"
+                                Grid.Column="5"
+                                Style="{StaticResource NumberCellStyle}"
+                                Text="{x:Bind DownText, Mode=OneWay}" />
+                            <TextBlock
+                                Grid.Column="6"
+                                Style="{StaticResource NumberCellStyle}"
+                                Text="{x:Bind UpText, Mode=OneWay}" />
+                            <TextBlock
+                                Grid.Column="7"
+                                Style="{StaticResource NumberCellStyle}"
+                                Text="{x:Bind TimeLeftText, Mode=OneWay}" />
+                            <TextBlock
+                                Grid.Column="8"
+                                Style="{StaticResource NumberCellStyle}"
+                                Text="{x:Bind SeedsText, Mode=OneWay}" />
+                            <TextBlock
+                                Grid.Column="9"
+                                Style="{StaticResource NumberCellStyle}"
                                 Text="{x:Bind PeersText, Mode=OneWay}" />
                         </Grid>
-                    </Border>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <controls:PaneSplitter
+            x:Name="Splitter"
+            Grid.Row="3"
+            AutomationProperties.AutomationId="PaneSplitter" />
+
+        <local:TorrentDetailsPane x:Name="DetailsPane" Grid.Row="4" />
     </Grid>
 </Page>

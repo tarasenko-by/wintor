@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<UserControl
+    x:Class="Wintor.App.Views.TorrentDetailsPane"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Wintor.App.Controls"
+    xmlns:local="using:Wintor.App.Views"
+    xmlns:vm="using:Wintor.App.ViewModels">
+
+    <UserControl.Resources>
+        <Style x:Key="PaneListItemStyle" BasedOn="{StaticResource DefaultListViewItemStyle}" TargetType="ListViewItem">
+            <Setter Property="MinHeight" Value="36" />
+            <Setter Property="Padding" Value="12,0" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid
+        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+        BorderThickness="1"
+        CornerRadius="{StaticResource OverlayCornerRadius}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--  Nothing selected  -->
+        <TextBlock
+            x:Uid="DetailsNothingSelected"
+            Grid.RowSpan="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            AutomationProperties.AutomationId="DetailsNothingSelected"
+            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+            Visibility="{x:Bind ViewModel.IsEmpty, Mode=OneWay}" />
+
+        <!--  Tabs and the torrent's name  -->
+        <Grid
+            Padding="4,0,16,0"
+            BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
+            BorderThickness="0,0,0,1"
+            ColumnSpacing="16"
+            Visibility="{x:Bind ViewModel.HasTorrent, Mode=OneWay}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <SelectorBar
+                x:Name="Tabs"
+                AutomationProperties.AutomationId="DetailsTabs"
+                SelectionChanged="Tabs_SelectionChanged">
+                <SelectorBarItem
+                    x:Uid="TabGeneral"
+                    AutomationProperties.AutomationId="TabGeneral"
+                    IsSelected="True"
+                    Tag="General" />
+                <SelectorBarItem
+                    x:Uid="TabFiles"
+                    AutomationProperties.AutomationId="TabFiles"
+                    Tag="Files" />
+                <SelectorBarItem
+                    x:Uid="TabPeers"
+                    AutomationProperties.AutomationId="TabPeers"
+                    Tag="Peers" />
+                <SelectorBarItem
+                    x:Uid="TabTrackers"
+                    AutomationProperties.AutomationId="TabTrackers"
+                    Tag="Trackers" />
+                <SelectorBarItem
+                    x:Uid="TabSpeed"
+                    AutomationProperties.AutomationId="TabSpeed"
+                    Tag="Speed" />
+            </SelectorBar>
+            <TextBlock
+                Grid.Column="1"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                AutomationProperties.AutomationId="DetailsTitle"
+                Style="{StaticResource BodyStrongTextBlockStyle}"
+                Text="{x:Bind ViewModel.Name, Mode=OneWay}"
+                TextTrimming="CharacterEllipsis"
+                TextWrapping="NoWrap"
+                ToolTipService.ToolTip="{x:Bind ViewModel.Name, Mode=OneWay}" />
+        </Grid>
+
+        <!--  General: piece bars, transfer, info  -->
+        <ScrollViewer
+            x:Name="GeneralView"
+            Grid.Row="1"
+            Visibility="Collapsed">
+            <StackPanel Padding="16,12,16,16" Spacing="12">
+                <Grid ColumnSpacing="12" RowSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="110" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="64" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="DownloadedLabel" x:Uid="BarDownloaded" AutomationProperties.AutomationId="DownloadedLabel" Style="{StaticResource SecondaryCaptionStyle}" VerticalAlignment="Center" />
+                    <controls:PieceBar
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        AutomationProperties.AutomationId="DownloadedBar"
+                        AutomationProperties.LabeledBy="{x:Bind DownloadedLabel, Mode=OneTime}"
+                        Background="{ThemeResource ControlAltFillColorTertiaryBrush}"
+                        Fill="{ThemeResource TorrentDownloadingBrush}"
+                        Values="{x:Bind ViewModel.Downloaded, Mode=OneWay}" />
+                    <TextBlock
+                        Grid.Column="2"
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource CaptionTextBlockStyle}"
+                        Text="{x:Bind ViewModel.DownloadedText, Mode=OneWay}" />
+                    <TextBlock
+                        x:Name="AvailabilityLabel"
+                        x:Uid="BarAvailability"
+                        Grid.Row="1"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource SecondaryCaptionStyle}" />
+                    <controls:PieceBar
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        AutomationProperties.AutomationId="AvailabilityBar"
+                        AutomationProperties.LabeledBy="{x:Bind AvailabilityLabel, Mode=OneTime}"
+                        Background="{ThemeResource ControlAltFillColorTertiaryBrush}"
+                        Fill="{ThemeResource TorrentDownloadingBrush}"
+                        Values="{x:Bind ViewModel.Available, Mode=OneWay}" />
+                    <TextBlock
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource CaptionTextBlockStyle}"
+                        Text="{x:Bind ViewModel.AvailabilityText, Mode=OneWay}" />
+                </Grid>
+
+                <TextBlock x:Uid="SectionTransfer" AutomationProperties.AutomationId="SectionTransfer" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                <ItemsRepeater ItemsSource="{x:Bind ViewModel.Transfer, Mode=OneTime}">
+                    <ItemsRepeater.Layout>
+                        <UniformGridLayout
+                            ItemsStretch="Fill"
+                            MinColumnSpacing="24"
+                            MinItemWidth="240"
+                            MinRowSpacing="6" />
+                    </ItemsRepeater.Layout>
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate x:DataType="vm:InfoRow">
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="110" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Style="{StaticResource SecondaryCaptionStyle}" Text="{x:Bind Label, Mode=OneTime}" />
+                                <TextBlock
+                                    Grid.Column="1"
+                                    Style="{StaticResource CaptionTextBlockStyle}"
+                                    Text="{x:Bind Value, Mode=OneTime}"
+                                    TextTrimming="CharacterEllipsis" />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+
+                <TextBlock x:Uid="SectionGeneral" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                <ItemsRepeater ItemsSource="{x:Bind ViewModel.General, Mode=OneTime}">
+                    <ItemsRepeater.Layout>
+                        <StackLayout Spacing="6" />
+                    </ItemsRepeater.Layout>
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate x:DataType="vm:InfoRow">
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="110" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Style="{StaticResource SecondaryCaptionStyle}" Text="{x:Bind Label, Mode=OneTime}" />
+                                <TextBlock
+                                    Grid.Column="1"
+                                    IsTextSelectionEnabled="True"
+                                    Style="{StaticResource CaptionTextBlockStyle}"
+                                    Text="{x:Bind Value, Mode=OneTime}"
+                                    TextWrapping="Wrap" />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!--  Files  -->
+        <Grid
+            x:Name="FilesView"
+            Grid.Row="1"
+            Visibility="Collapsed">
+            <TextBlock
+                x:Uid="NoFilesYet"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                Visibility="{x:Bind ViewModel.NoFiles, Mode=OneWay}" />
+            <ListView
+                x:Uid="FilesList"
+                AutomationProperties.AutomationId="FilesList"
+                ItemContainerStyle="{StaticResource PaneListItemStyle}"
+                ItemsSource="{x:Bind ViewModel.Files, Mode=OneTime}"
+                SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:FileItemViewModel">
+                        <Grid ColumnSpacing="12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="84" />
+                                <ColumnDefinition Width="140" />
+                                <ColumnDefinition Width="48" />
+                                <ColumnDefinition Width="170" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                Text="{x:Bind Path, Mode=OneWay}"
+                                TextTrimming="CharacterEllipsis"
+                                TextWrapping="NoWrap"
+                                ToolTipService.ToolTip="{x:Bind Path, Mode=OneWay}" />
+                            <TextBlock
+                                Grid.Column="1"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource SecondaryCaptionStyle}"
+                                Text="{x:Bind SizeText, Mode=OneWay}" />
+                            <ProgressBar
+                                Grid.Column="2"
+                                VerticalAlignment="Center"
+                                Foreground="{ThemeResource TorrentDownloadingBrush}"
+                                ShowPaused="{x:Bind IsSkipped, Mode=OneWay}"
+                                Value="{x:Bind ProgressPercent, Mode=OneWay}" />
+                            <TextBlock
+                                Grid.Column="3"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource SecondaryCaptionStyle}"
+                                Text="{x:Bind ProgressText, Mode=OneWay}" />
+                            <ComboBox
+                                Grid.Column="4"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center"
+                                AutomationProperties.Name="{x:Bind Path, Mode=OneWay}"
+                                SelectedIndex="{x:Bind PriorityIndex, Mode=TwoWay}">
+                                <ComboBoxItem x:Uid="PrioritySkip" />
+                                <ComboBoxItem x:Uid="PriorityLow" />
+                                <ComboBoxItem x:Uid="PriorityNormal" />
+                                <ComboBoxItem x:Uid="PriorityHigh" />
+                            </ComboBox>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <!--  Peers  -->
+        <Grid
+            x:Name="PeersView"
+            Grid.Row="1"
+            Visibility="Collapsed">
+            <TextBlock
+                x:Uid="NoPeers"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                Visibility="{x:Bind ViewModel.NoPeers, Mode=OneWay}" />
+            <ListView
+                x:Uid="PeersList"
+                AutomationProperties.AutomationId="PeersList"
+                ItemContainerStyle="{StaticResource PaneListItemStyle}"
+                ItemsSource="{x:Bind ViewModel.Peers, Mode=OneTime}"
+                SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:PeerRow">
+                        <Grid ColumnSpacing="12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="56" />
+                                <ColumnDefinition Width="96" />
+                                <ColumnDefinition Width="96" />
+                                <ColumnDefinition Width="170" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                IsTextSelectionEnabled="True"
+                                Text="{x:Bind Address, Mode=OneTime}"
+                                TextTrimming="CharacterEllipsis" />
+                            <TextBlock
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource SecondaryCaptionStyle}"
+                                Text="{x:Bind Client, Mode=OneTime}"
+                                TextTrimming="CharacterEllipsis" />
+                            <TextBlock
+                                Grid.Column="2"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource SecondaryCaptionStyle}"
+                                Text="{x:Bind ProgressText, Mode=OneTime}" />
+                            <TextBlock
+                                Grid.Column="3"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource CaptionTextBlockStyle}"
+                                Text="{x:Bind DownloadText, Mode=OneTime}" />
+                            <TextBlock
+                                Grid.Column="4"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource CaptionTextBlockStyle}"
+                                Text="{x:Bind UploadText, Mode=OneTime}" />
+                            <TextBlock
+                                Grid.Column="5"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource TertiaryCaptionStyle}"
+                                Text="{x:Bind Flags, Mode=OneTime}"
+                                TextTrimming="CharacterEllipsis" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <!--  Trackers  -->
+        <Grid
+            x:Name="TrackersView"
+            Grid.Row="1"
+            Visibility="Collapsed">
+            <TextBlock
+                x:Uid="NoTrackers"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                Visibility="{x:Bind ViewModel.NoTrackers, Mode=OneWay}" />
+            <ListView
+                x:Uid="TrackersList"
+                AutomationProperties.AutomationId="TrackersList"
+                ItemContainerStyle="{StaticResource PaneListItemStyle}"
+                ItemsSource="{x:Bind ViewModel.Trackers, Mode=OneTime}"
+                SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:TrackerRow">
+                        <Grid ColumnSpacing="12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="140" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                IsTextSelectionEnabled="True"
+                                Text="{x:Bind Url, Mode=OneTime}"
+                                TextTrimming="CharacterEllipsis" />
+                            <TextBlock
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource SecondaryCaptionStyle}"
+                                Text="{x:Bind StatusText, Mode=OneTime}" />
+                            <TextBlock
+                                Grid.Column="2"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource TertiaryCaptionStyle}"
+                                Text="{x:Bind Message, Mode=OneTime}"
+                                TextTrimming="CharacterEllipsis" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <!--  Speed  -->
+        <Grid
+            x:Name="SpeedView"
+            Grid.Row="1"
+            Padding="16,12,16,16"
+            RowSpacing="8"
+            Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Spacing="16">
+                <TextBlock Style="{StaticResource CaptionTextBlockStyle}" Text="{x:Bind ViewModel.SpeedNowText, Mode=OneWay}" />
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                    <Rectangle
+                        Width="12"
+                        Height="3"
+                        VerticalAlignment="Center"
+                        Fill="{ThemeResource TorrentDownloadingBrush}" />
+                    <TextBlock x:Uid="LegendDownload" AutomationProperties.AutomationId="SpeedLegend" Style="{StaticResource SecondaryCaptionStyle}" />
+                    <Rectangle
+                        Width="12"
+                        Height="3"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        Fill="{ThemeResource TorrentSeedingBrush}" />
+                    <TextBlock x:Uid="LegendUpload" Style="{StaticResource SecondaryCaptionStyle}" />
+                </StackPanel>
+            </StackPanel>
+            <Border
+                Grid.Row="1"
+                BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
+                BorderThickness="0,0,0,1">
+                <controls:SpeedGraph
+                    x:Uid="SpeedGraphControl"
+                    AutomationProperties.AutomationId="SpeedGraph"
+                    Download="{x:Bind ViewModel.DownloadHistory, Mode=OneWay}"
+                    DownloadBrush="{ThemeResource TorrentDownloadingBrush}"
+                    Upload="{x:Bind ViewModel.UploadHistory, Mode=OneWay}"
+                    UploadBrush="{ThemeResource TorrentSeedingBrush}" />
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

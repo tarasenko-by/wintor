@@ -22,7 +22,11 @@ that works but makes the app feel like a 2010 torrent client is not done.
 - Dependency injection via `Microsoft.Extensions.DependencyInjection`, registered in `App.ConfigureServices`.
 - Dialogs and pickers live in page code-behind; state and logic live in view models.
 - The app is **single-instance** (`Program.cs`). Two instances would overwrite each other's
-  torrent state — do not remove this.
+  torrent state — do not remove this. A second launch (a `.torrent` double-click, a `magnet:` link,
+  the Start menu) is redirected to the running instance and routed in `App.Route`.
+- Closing the window keeps Wintor running in the notification area by default. To quit from a
+  terminal or a script — saving the torrent state — run `wintor --quit` (the app execution alias).
+  Do not kill the process: resume data is written on a graceful stop.
 
 ## UI
 
@@ -40,10 +44,18 @@ Read [docs/DESIGN.md](docs/DESIGN.md) before changing any XAML. The short versio
 - **Never add Hugeicons Pro icons** — their license forbids redistribution, and this repository is public.
 - Do not use Segoe Fluent Icons glyphs (`FontIcon Glyph="&#x…;"`) or other icon sets. Exception: glyphs that
   built-in controls draw themselves (window buttons, overflow "…", chevrons).
-- Store each icon as the original SVG in `src/Wintor.App/Assets/Icons/<hugeicons-name>.svg` and render it
-  through the shared icon mechanism so it follows `Foreground` and the theme. Do not paste path data inline.
-- Keep `THIRD-PARTY-NOTICES.md` up to date when adding the first icons from a set.
-- Segoe Fluent glyphs currently in the app are temporary and are being replaced.
+- Each icon is the original SVG in `src/Wintor.App/Assets/Icons/<hugeicons-name>.svg`. Hugeicons are stroke
+  drawings and `PathIcon` only fills, so `tools/Wintor.IconTool` outlines them into
+  `src/Wintor.App/Icons/HugeIcons.g.cs` (generated — never edit by hand, never paste path data inline):
+  ```powershell
+  # extract the npm package @hugeicons/core-free-icons somewhere first (npm pack + tar)
+  dotnet run --project tools/Wintor.IconTool -- import <package-dir> search-01 folder-open
+  dotnet run --project tools/Wintor.IconTool -- preview icons.png   # eyeball the outlines
+  ```
+- Use icons as `Icon="{icons:Huge Kind=FolderOpen}"` (optional `Size`, default 16) in XAML, or
+  `HugeIcons.Create(HugeIconKind.FolderOpen)` in code. They follow `Foreground` and the theme.
+- The app logo and every MSIX tile/`.ico` are rendered by `dotnet run --project tools/Wintor.IconTool -- logo`;
+  change the logo there, not in an image editor.
 
 ## Localization
 
@@ -73,6 +85,11 @@ winapp run src\Wintor.App
   never the user's Downloads folder.
 - For UI changes, run the app and look at it (light and dark theme, narrow and wide window) —
   a green build is not proof that the UI works.
+- AI agents verify UI in the background (UI Automation, logs, tests) and never take over the
+  developer's mouse and keyboard. `tests/ui/ui-tests.ps1` does that (`-Target local -AppPid <pid>
+  -AppScope local -NoBuild -ArtifactDirectory <dir>` against a running app, or `-Target sandbox`);
+  what UIA cannot judge goes to `tests/ui/manual-checks.md`.
+- Give every interactive element an `AutomationProperties.AutomationId`; the UI tests rely on them.
 
 ## Code style
 

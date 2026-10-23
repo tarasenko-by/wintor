@@ -34,6 +34,11 @@ public sealed record TorrentSnapshot(
     string SavePath,
     string? ErrorMessage)
 {
+    /// <summary>Folder that holds the torrent's files (its own folder for multi-file torrents).</summary>
+    public string ContentPath { get; init; } = SavePath;
+
+    public bool IsComplete => Progress >= 1 && TotalSize > 0;
+
     public long DownloadedBytes => (long)(TotalSize * Progress);
 
     /// <summary>Estimated time left, or null when it cannot be estimated.</summary>

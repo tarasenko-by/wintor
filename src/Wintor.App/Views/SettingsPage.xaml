@@ -3,40 +3,165 @@
     x:Class="Wintor.App.Views.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:toolkit="using:CommunityToolkit.WinUI.Controls">
+    xmlns:icons="using:Wintor.App.Icons"
+    xmlns:local="using:Wintor.App.Views"
+    xmlns:toolkit="using:CommunityToolkit.WinUI.Controls"
+    Background="{ThemeResource ContentLayerBrush}">
 
     <ScrollViewer>
         <StackPanel
             MaxWidth="1000"
-            Padding="24,12,24,24"
+            Padding="24,12,24,32"
             Spacing="4">
             <TextBlock
                 x:Uid="SettingsTitle"
-                Margin="0,0,0,16"
-                Style="{StaticResource TitleTextBlockStyle}" />
+                Margin="0,0,0,8"
+                AutomationProperties.AutomationId="SettingsTitle"
+                Style="{StaticResource PageTitleStyle}" />
 
-            <TextBlock
-                x:Uid="SettingsDownloadsHeader"
-                Margin="0,8,0,4"
-                Style="{StaticResource BodyStrongTextBlockStyle}" />
-            <toolkit:SettingsCard x:Uid="DownloadFolderCard" Description="{x:Bind ViewModel.DownloadDirectory, Mode=OneWay}">
-                <toolkit:SettingsCard.HeaderIcon>
-                    <FontIcon Glyph="&#xE8B7;" />
-                </toolkit:SettingsCard.HeaderIcon>
-                <Button x:Uid="ChangeFolderButton" Click="ChangeFolder_Click" />
+            <!--  Appearance  -->
+            <TextBlock x:Uid="SettingsAppearanceHeader" Style="{StaticResource SectionHeaderStyle}" />
+            <toolkit:SettingsCard
+                x:Uid="ThemeCard"
+                AutomationProperties.AutomationId="ThemeCard"
+                HeaderIcon="{icons:Huge Kind=SunMoon, Size=20}">
+                <ComboBox
+                    x:Uid="ThemeBox"
+                    MinWidth="200"
+                    AutomationProperties.AutomationId="ThemeBox"
+                    SelectedIndex="{x:Bind ViewModel.ThemeIndex, Mode=TwoWay}">
+                    <ComboBoxItem x:Uid="ThemeSystem" />
+                    <ComboBoxItem x:Uid="ThemeLight" />
+                    <ComboBoxItem x:Uid="ThemeDark" />
+                </ComboBox>
+            </toolkit:SettingsCard>
+            <toolkit:SettingsCard
+                x:Uid="BackdropCard"
+                AutomationProperties.AutomationId="BackdropCard"
+                HeaderIcon="{icons:Huge Kind=Layers01, Size=20}">
+                <ComboBox
+                    x:Uid="BackdropBox"
+                    MinWidth="200"
+                    AutomationProperties.AutomationId="BackdropBox"
+                    SelectedIndex="{x:Bind ViewModel.BackdropIndex, Mode=TwoWay}">
+                    <ComboBoxItem x:Uid="BackdropSolid" />
+                    <!--  Material names stay untranslated, as in Windows.  -->
+                    <ComboBoxItem Content="Mica" />
+                    <ComboBoxItem Content="Mica Alt" />
+                    <ComboBoxItem Content="Acrylic" />
+                    <ComboBoxItem Content="Acrylic Thin" />
+                </ComboBox>
             </toolkit:SettingsCard>
 
-            <TextBlock
-                x:Uid="SettingsAboutHeader"
-                Margin="0,24,0,4"
-                Style="{StaticResource BodyStrongTextBlockStyle}" />
-            <toolkit:SettingsExpander x:Uid="AboutCard" Description="{x:Bind ViewModel.Version, Mode=OneTime}">
+            <!--  Downloads  -->
+            <TextBlock x:Uid="SettingsDownloadsHeader" Style="{StaticResource SectionHeaderStyle}" />
+            <toolkit:SettingsCard
+                x:Uid="DownloadFolderCard"
+                AutomationProperties.AutomationId="DownloadFolderCard"
+                Description="{x:Bind ViewModel.DownloadDirectory, Mode=OneWay}"
+                HeaderIcon="{icons:Huge Kind=Folder01, Size=20}">
+                <Button
+                    x:Uid="ChangeFolderButton"
+                    AutomationProperties.AutomationId="ChangeFolderButton"
+                    Click="ChangeFolder_Click" />
+            </toolkit:SettingsCard>
+            <toolkit:SettingsCard
+                x:Uid="NotifyCard"
+                AutomationProperties.AutomationId="NotifyCard"
+                HeaderIcon="{icons:Huge Kind=Notification01, Size=20}">
+                <ToggleSwitch
+                    x:Uid="NotifySwitch"
+                    AutomationProperties.AutomationId="NotifySwitch"
+                    IsOn="{x:Bind ViewModel.NotifyWhenComplete, Mode=TwoWay}" />
+            </toolkit:SettingsCard>
+
+            <!--  Speed  -->
+            <TextBlock x:Uid="SettingsSpeedHeader" Style="{StaticResource SectionHeaderStyle}" />
+            <toolkit:SettingsCard
+                x:Uid="DownloadLimitCard"
+                AutomationProperties.AutomationId="DownloadLimitCard"
+                HeaderIcon="{icons:Huge Kind=Download01, Size=20}">
+                <NumberBox
+                    x:Uid="DownloadLimitBox"
+                    MinWidth="200"
+                    AutomationProperties.AutomationId="DownloadLimitBox"
+                    LargeChange="1024"
+                    Minimum="0"
+                    SmallChange="128"
+                    SpinButtonPlacementMode="Compact"
+                    Value="{x:Bind ViewModel.MaxDownloadKiB, Mode=TwoWay}" />
+            </toolkit:SettingsCard>
+            <toolkit:SettingsCard
+                x:Uid="UploadLimitCard"
+                AutomationProperties.AutomationId="UploadLimitCard"
+                HeaderIcon="{icons:Huge Kind=Upload01, Size=20}">
+                <NumberBox
+                    x:Uid="UploadLimitBox"
+                    MinWidth="200"
+                    AutomationProperties.AutomationId="UploadLimitBox"
+                    LargeChange="1024"
+                    Minimum="0"
+                    SmallChange="128"
+                    SpinButtonPlacementMode="Compact"
+                    Value="{x:Bind ViewModel.MaxUploadKiB, Mode=TwoWay}" />
+            </toolkit:SettingsCard>
+
+            <!--  Connection  -->
+            <TextBlock x:Uid="SettingsConnectionHeader" Style="{StaticResource SectionHeaderStyle}" />
+            <toolkit:SettingsCard
+                x:Uid="PortCard"
+                AutomationProperties.AutomationId="PortCard"
+                HeaderIcon="{icons:Huge Kind=PlugSocket, Size=20}">
+                <NumberBox
+                    x:Uid="PortBox"
+                    MinWidth="200"
+                    AutomationProperties.AutomationId="PortBox"
+                    Maximum="65535"
+                    Minimum="1024"
+                    SpinButtonPlacementMode="Compact"
+                    Value="{x:Bind ViewModel.ListenPort, Mode=TwoWay}" />
+            </toolkit:SettingsCard>
+
+            <!--  Windows integration  -->
+            <TextBlock x:Uid="SettingsWindowsHeader" Style="{StaticResource SectionHeaderStyle}" />
+            <toolkit:SettingsCard
+                x:Uid="StartupCard"
+                AutomationProperties.AutomationId="StartupCard"
+                HeaderIcon="{icons:Huge Kind=Rocket01, Size=20}"
+                IsEnabled="{x:Bind ViewModel.CanChangeStartup, Mode=OneWay}">
+                <ToggleSwitch
+                    x:Uid="StartupSwitch"
+                    AutomationProperties.AutomationId="StartupSwitch"
+                    IsOn="{x:Bind ViewModel.StartWithWindows, Mode=TwoWay}" />
+            </toolkit:SettingsCard>
+            <InfoBar
+                IsClosable="False"
+                IsOpen="{x:Bind local:SettingsPage.HasText(ViewModel.StartupNote), Mode=OneWay}"
+                Message="{x:Bind ViewModel.StartupNote, Mode=OneWay}"
+                Severity="Informational" />
+            <toolkit:SettingsCard
+                x:Uid="TrayCard"
+                AutomationProperties.AutomationId="TrayCard"
+                HeaderIcon="{icons:Huge Kind=AppWindow, Size=20}">
+                <ToggleSwitch
+                    x:Uid="TraySwitch"
+                    AutomationProperties.AutomationId="TraySwitch"
+                    IsOn="{x:Bind ViewModel.CloseToTray, Mode=TwoWay}" />
+            </toolkit:SettingsCard>
+
+            <!--  About  -->
+            <TextBlock x:Uid="SettingsAboutHeader" Style="{StaticResource SectionHeaderStyle}" />
+            <toolkit:SettingsExpander
+                x:Uid="AboutCard"
+                AutomationProperties.AutomationId="AboutCard"
+                Description="{x:Bind ViewModel.Version, Mode=OneTime}">
                 <toolkit:SettingsExpander.HeaderIcon>
                     <BitmapIcon ShowAsMonochrome="False" UriSource="ms-appx:///Assets/StoreLogo.png" />
                 </toolkit:SettingsExpander.HeaderIcon>
                 <toolkit:SettingsExpander.Items>
                     <toolkit:SettingsCard x:Uid="LicenseCard" />
                     <toolkit:SettingsCard x:Uid="EngineCard" />
+                    <toolkit:SettingsCard x:Uid="IconsCard" />
                 </toolkit:SettingsExpander.Items>
             </toolkit:SettingsExpander>
         </StackPanel>

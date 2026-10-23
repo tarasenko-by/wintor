@@ -72,6 +72,80 @@ public sealed class MonoTorrentEngineTests : IDisposable
         Assert.Equal(TorrentStatus.Stopped, snapshot.Status);
     }
 
+    [Fact]
+    public async Task ReadTorrentFile_ListsFilesWithoutAdding()
+    {
+        string torrentPath = await CreateTorrentFileAsync();
+        await using var engine = await CreateEngineAsync();
+
+        TorrentMetadata metadata = await engine.ReadTorrentFileAsync(torrentPath);
+
+        Assert.Equal("payload", metadata.Name);
+        Assert.Equal(["a.txt", "b.txt"], metadata.Files.Select(f => f.Path).Order());
+        Assert.Equal(metadata.Files.Sum(f => f.Size), metadata.TotalSize);
+        Assert.Empty(engine.GetSnapshots());
+    }
+
+    [Fact]
+    public async Task AddTorrentFile_SkipsChosenFiles()
+    {
+        string torrentPath = await CreateTorrentFileAsync();
+        await using var engine = await CreateEngineAsync();
+        TorrentMetadata metadata = await engine.ReadTorrentFileAsync(torrentPath);
+        int skipped = metadata.Files.Single(f => f.Path == "b.txt").Index;
+
+        string id = await engine.AddTorrentFileAsync(torrentPath, DownloadDir, new HashSet<int> { skipped });
+
+        TorrentDetails details = (await engine.GetDetailsAsync(id))!;
+        Assert.Equal(FilePriority.Skip, details.Files.Single(f => f.Path == "b.txt").Priority);
+        Assert.Equal(FilePriority.Normal, details.Files.Single(f => f.Path == "a.txt").Priority);
+    }
+
+    [Fact]
+    public async Task SetFilePriority_ChangesOneFile()
+    {
+        string torrentPath = await CreateTorrentFileAsync();
+        await using var engine = await CreateEngineAsync();
+        string id = await engine.AddTorrentFileAsync(torrentPath, DownloadDir);
+        int index = (await engine.GetDetailsAsync(id))!.Files.Single(f => f.Path == "a.txt").Index;
+
+        await engine.SetFilePriorityAsync(id, index, FilePriority.High);
+
+        TorrentDetails details = (await engine.GetDetailsAsync(id))!;
+        Assert.Equal(FilePriority.High, details.Files.Single(f => f.Path == "a.txt").Priority);
+        Assert.Equal(FilePriority.Normal, details.Files.Single(f => f.Path == "b.txt").Priority);
+    }
+
+    [Fact]
+    public async Task Details_OfMagnet_HaveMagnetLinkAndNoFilesYet()
+    {
+        await using var engine = await CreateEngineAsync();
+        string id = await engine.AddMagnetAsync(Magnet, DownloadDir);
+
+        TorrentDetails details = (await engine.GetDetailsAsync(id))!;
+
+        Assert.Equal(id, details.InfoHash);
+        Assert.Contains("dd8255ecdc7ca55fb0bbf81323d87062db1f6d1c", details.MagnetLink, StringComparison.OrdinalIgnoreCase);
+        Assert.Null(await engine.GetDetailsAsync("0000000000000000000000000000000000000000"));
+    }
+
+    [Fact]
+    public async Task ApplyOptions_WhileRunning_KeepsTorrents()
+    {
+        await using var engine = await CreateEngineAsync();
+        await engine.AddMagnetAsync(Magnet, DownloadDir);
+
+        await engine.ApplyOptionsAsync(new EngineOptions
+        {
+            DataDirectory = Path.Combine(_root, "data"),
+            ListenPort = GetFreePort(),
+            MaxDownloadRate = 100 * 1024,
+            MaxUploadRate = 50 * 1024,
+        });
+
+        Assert.Single(engine.GetSnapshots());
+    }
+
     public void Dispose()
     {
         try
@@ -93,6 +167,21 @@ public sealed class MonoTorrentEngineTests : IDisposable
         });
         await engine.InitializeAsync();
         return engine;
+    }
+
+    /// <summary>A two-file torrent made from our own temporary files, so no network or third-party content is needed.</summary>
+    private async Task<string> CreateTorrentFileAsync()
+    {
+        string source = Path.Combine(_root, "source", "payload");
+        Directory.CreateDirectory(source);
+        await File.WriteAllTextAsync(Path.Combine(source, "a.txt"), new string('a', 40_000));
+        await File.WriteAllTextAsync(Path.Combine(source, "b.txt"), new string('b', 70_000));
+
+        var creator = new global::MonoTorrent.TorrentCreator();
+        var torrent = await creator.CreateAsync(new global::MonoTorrent.TorrentFileSource(source));
+        string path = Path.Combine(_root, "payload.torrent");
+        await File.WriteAllBytesAsync(path, torrent.Encode());
+        return path;
     }
 
     private static int GetFreePort()

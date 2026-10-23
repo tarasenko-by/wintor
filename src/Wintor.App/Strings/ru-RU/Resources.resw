@@ -29,13 +29,16 @@
   <data name="AddMagnetButton.Label" xml:space="preserve"><value>Magnet-ссылка</value></data>
   <data name="OpenFileButton.Label" xml:space="preserve"><value>Открыть .torrent</value></data>
   <data name="ResumeButton.Label" xml:space="preserve"><value>Продолжить</value></data>
+  <data name="ResumeButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Продолжить</value></data>
   <data name="PauseButton.Label" xml:space="preserve"><value>Пауза</value></data>
+  <data name="PauseButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Пауза</value></data>
   <data name="RemoveButton.Label" xml:space="preserve"><value>Удалить</value></data>
+  <data name="RemoveButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Удалить</value></data>
   <data name="EmptyTitle.Text" xml:space="preserve"><value>Торрентов пока нет</value></data>
   <data name="EmptyHint.Text" xml:space="preserve"><value>Добавьте magnet-ссылку, откройте .torrent-файл или перетащите его в это окно.</value></data>
-  <data name="EmptyAddButton.Content" xml:space="preserve"><value>Добавить magnet-ссылку</value></data>
+  <data name="EmptyAddButton.Content" xml:space="preserve"><value>Открыть .torrent-файл</value></data>
   <data name="TorrentList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Торренты</value></data>
-  <data name="SettingsTitle.Text" xml:space="preserve"><value>Настройки</value></data>
+  <data name="SettingsTitle.Text" xml:space="preserve"><value>Параметры</value></data>
   <data name="SettingsDownloadsHeader.Text" xml:space="preserve"><value>Загрузки</value></data>
   <data name="DownloadFolderCard.Header" xml:space="preserve"><value>Папка для загрузок</value></data>
   <data name="ChangeFolderButton.Content" xml:space="preserve"><value>Изменить…</value></data>
@@ -67,4 +70,190 @@
   <data name="RemoveDialog_DeleteFiles" xml:space="preserve"><value>Удалить также скачанные файлы</value></data>
   <data name="RemoveDialog_Remove" xml:space="preserve"><value>Удалить</value></data>
   <data name="Drop_Caption" xml:space="preserve"><value>Добавить в Wintor</value></data>
+  <data name="SearchBox.PlaceholderText" xml:space="preserve"><value>Поиск торрентов</value></data>
+  <data name="SearchBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Поиск торрентов</value></data>
+  <data name="OpenFolderButton.Label" xml:space="preserve"><value>Открыть папку</value></data>
+  <data name="DetailsButton.Label" xml:space="preserve"><value>Подробности</value></data>
+  <data name="ResumeAllButton.Label" xml:space="preserve"><value>Продолжить все</value></data>
+  <data name="PauseAllButton.Label" xml:space="preserve"><value>Приостановить все</value></data>
+  <data name="SelectAllButton.Label" xml:space="preserve"><value>Выбрать все</value></data>
+  <data name="Filter_All" xml:space="preserve"><value>Все</value></data>
+  <data name="Filter_Downloading" xml:space="preserve"><value>Загружаются</value></data>
+  <data name="Filter_Completed" xml:space="preserve"><value>Готово</value></data>
+  <data name="Filter_Paused" xml:space="preserve"><value>На паузе</value></data>
+  <data name="NothingFound.Text" xml:space="preserve"><value>Нет торрентов, подходящих под фильтр или поиск.</value></data>
+  <data name="Summary_OneTorrent" xml:space="preserve"><value>Торрентов: {0}</value></data>
+  <data name="Summary_Torrents" xml:space="preserve"><value>Торрентов: {0}</value></data>
+  <data name="Status_Done" xml:space="preserve"><value>Готово</value></data>
+  <data name="Error_BadTorrentFile" xml:space="preserve"><value>«{0}» — не .torrent-файл или он повреждён.</value></data>
+  <data name="Menu_Resume" xml:space="preserve"><value>Продолжить</value></data>
+  <data name="Menu_Pause" xml:space="preserve"><value>Пауза</value></data>
+  <data name="Menu_OpenFolder" xml:space="preserve"><value>Открыть папку</value></data>
+  <data name="Menu_Details" xml:space="preserve"><value>Подробности</value></data>
+  <data name="Menu_CopyMagnet" xml:space="preserve"><value>Копировать magnet-ссылку</value></data>
+  <data name="Menu_Remove" xml:space="preserve"><value>Удалить…</value></data>
+  <data name="RemoveDialog_TitleSeveral" xml:space="preserve"><value>Удалить торренты?</value></data>
+  <data name="RemoveDialog_Several" xml:space="preserve"><value>Торрентов: {0}</value></data>
+  <data name="AddDialog.PrimaryButtonText" xml:space="preserve"><value>Добавить</value></data>
+  <data name="AddDialog.CloseButtonText" xml:space="preserve"><value>Отмена</value></data>
+  <data name="AddDialog_MagnetTitle" xml:space="preserve"><value>Добавить magnet-ссылку</value></data>
+  <data name="AddDialog_FileTitle" xml:space="preserve"><value>Добавить торрент</value></data>
+  <data name="AddDialogMagnet.Header" xml:space="preserve"><value>Magnet-ссылка</value></data>
+  <data name="AddDialogFolderHeader.Text" xml:space="preserve"><value>Сохранить в</value></data>
+  <data name="AddDialogChangeFolder.Content" xml:space="preserve"><value>Изменить…</value></data>
+  <data name="AddDialogSelectAll.Content" xml:space="preserve"><value>Все файлы</value></data>
+  <data name="AddDialogFiles.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Файлы для загрузки</value></data>
+  <data name="AddDialog_OneFile" xml:space="preserve"><value>1 файл · {1}</value></data>
+  <data name="AddDialog_Files" xml:space="preserve"><value>Файлов: {0} · {1}</value></data>
+  <data name="AddDialog_Selection" xml:space="preserve"><value>Выбрано {0} из {1} · {2}</value></data>
+  <data name="CopyMagnetButton.Label" xml:space="preserve"><value>Копировать magnet-ссылку</value></data>
+  <data name="DetailsGone.Title" xml:space="preserve"><value>Этот торрент удалён.</value></data>
+  <data name="TabFiles.Text" xml:space="preserve"><value>Файлы</value></data>
+  <data name="TabPeers.Text" xml:space="preserve"><value>Пиры</value></data>
+  <data name="TabTrackers.Text" xml:space="preserve"><value>Трекеры</value></data>
+  <data name="TabInfo.Text" xml:space="preserve"><value>Сведения</value></data>
+  <data name="NoFilesYet.Text" xml:space="preserve"><value>Список файлов появится, когда Wintor получит его от пиров.</value></data>
+  <data name="NoPeers.Text" xml:space="preserve"><value>Сейчас ни с кем нет соединения.</value></data>
+  <data name="NoTrackers.Text" xml:space="preserve"><value>У этого торрента нет трекеров — пиры ищутся через DHT.</value></data>
+  <data name="FilesList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Файлы</value></data>
+  <data name="PeersList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Пиры</value></data>
+  <data name="TrackersList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Трекеры</value></data>
+  <data name="InfoList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Сведения</value></data>
+  <data name="PrioritySkip.Content" xml:space="preserve"><value>Не загружать</value></data>
+  <data name="PriorityLow.Content" xml:space="preserve"><value>Низкий приоритет</value></data>
+  <data name="PriorityNormal.Content" xml:space="preserve"><value>Обычный</value></data>
+  <data name="PriorityHigh.Content" xml:space="preserve"><value>Высокий приоритет</value></data>
+  <data name="Peer_Seed" xml:space="preserve"><value>сид</value></data>
+  <data name="Peer_Incoming" xml:space="preserve"><value>входящий</value></data>
+  <data name="Peer_Encrypted" xml:space="preserve"><value>шифрование</value></data>
+  <data name="Tracker_Unknown" xml:space="preserve"><value>Ещё не опрошен</value></data>
+  <data name="Tracker_Connecting" xml:space="preserve"><value>Подключение…</value></data>
+  <data name="Tracker_Working" xml:space="preserve"><value>Работает</value></data>
+  <data name="Tracker_Offline" xml:space="preserve"><value>Не отвечает</value></data>
+  <data name="Tracker_Error" xml:space="preserve"><value>Ошибка</value></data>
+  <data name="Info_SavedTo" xml:space="preserve"><value>Папка</value></data>
+  <data name="Info_Size" xml:space="preserve"><value>Размер</value></data>
+  <data name="Info_Hash" xml:space="preserve"><value>Хеш</value></data>
+  <data name="Info_Created" xml:space="preserve"><value>Создан</value></data>
+  <data name="Info_Comment" xml:space="preserve"><value>Комментарий</value></data>
+  <data name="Info_Private" xml:space="preserve"><value>Приватный торрент</value></data>
+  <data name="Yes" xml:space="preserve"><value>Да</value></data>
+  <data name="No" xml:space="preserve"><value>Нет</value></data>
+  <data name="SettingsAppearanceHeader.Text" xml:space="preserve"><value>Оформление</value></data>
+  <data name="ThemeCard.Header" xml:space="preserve"><value>Тема</value></data>
+  <data name="ThemeCard.Description" xml:space="preserve"><value>Светлая, тёмная или как в Windows.</value></data>
+  <data name="ThemeBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Тема</value></data>
+  <data name="ThemeSystem.Content" xml:space="preserve"><value>Как в Windows</value></data>
+  <data name="ThemeLight.Content" xml:space="preserve"><value>Светлая</value></data>
+  <data name="ThemeDark.Content" xml:space="preserve"><value>Тёмная</value></data>
+  <data name="BackdropCard.Header" xml:space="preserve"><value>Фон окна</value></data>
+  <data name="BackdropCard.Description" xml:space="preserve"><value>Сплошной цвет или Mica / Acrylic из Windows за заголовком и боковой панелью. Прозрачность работает, если в Windows включены эффекты прозрачности.</value></data>
+  <data name="BackdropBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Фон окна</value></data>
+  <data name="BackdropSolid.Content" xml:space="preserve"><value>Сплошной</value></data>
+  <data name="NotifyCard.Header" xml:space="preserve"><value>Уведомлять о завершении загрузки</value></data>
+  <data name="NotifyCard.Description" xml:space="preserve"><value>Уведомление Windows с кнопкой «Открыть папку».</value></data>
+  <data name="NotifySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Уведомлять о завершении загрузки</value></data>
+  <data name="SettingsSpeedHeader.Text" xml:space="preserve"><value>Скорость</value></data>
+  <data name="DownloadLimitCard.Header" xml:space="preserve"><value>Ограничение загрузки</value></data>
+  <data name="DownloadLimitCard.Description" xml:space="preserve"><value>КБ/с; 0 — без ограничения.</value></data>
+  <data name="DownloadLimitBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Ограничение загрузки, КБ/с</value></data>
+  <data name="UploadLimitCard.Header" xml:space="preserve"><value>Ограничение отдачи</value></data>
+  <data name="UploadLimitCard.Description" xml:space="preserve"><value>КБ/с; 0 — без ограничения.</value></data>
+  <data name="UploadLimitBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Ограничение отдачи, КБ/с</value></data>
+  <data name="SettingsConnectionHeader.Text" xml:space="preserve"><value>Подключение</value></data>
+  <data name="PortCard.Header" xml:space="preserve"><value>Порт для входящих соединений</value></data>
+  <data name="PortCard.Description" xml:space="preserve"><value>Через этот порт к вам подключаются другие пиры. Wintor сам просит роутер открыть его (UPnP).</value></data>
+  <data name="PortBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Порт для входящих соединений</value></data>
+  <data name="SettingsWindowsHeader.Text" xml:space="preserve"><value>Windows</value></data>
+  <data name="StartupCard.Header" xml:space="preserve"><value>Запускать вместе с Windows</value></data>
+  <data name="StartupCard.Description" xml:space="preserve"><value>При входе в систему Wintor запускается в области уведомлений.</value></data>
+  <data name="StartupSwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Запускать вместе с Windows</value></data>
+  <data name="Settings_StartupDisabledByUser" xml:space="preserve"><value>Отключено в Параметрах Windows → Приложения → Автозагрузка. Сначала включите там.</value></data>
+  <data name="Settings_StartupByPolicy" xml:space="preserve"><value>Управляется вашей организацией.</value></data>
+  <data name="TrayCard.Header" xml:space="preserve"><value>Не закрываться вместе с окном</value></data>
+  <data name="TrayCard.Description" xml:space="preserve"><value>Wintor продолжает раздавать из области уведомлений. Выйти можно из меню значка.</value></data>
+  <data name="TraySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Не закрываться вместе с окном</value></data>
+  <data name="IconsCard.Header" xml:space="preserve"><value>Иконки</value></data>
+  <data name="IconsCard.Description" xml:space="preserve"><value>Бесплатный набор Hugeicons (MIT)</value></data>
+  <data name="Tray_Open" xml:space="preserve"><value>Открыть Wintor</value></data>
+  <data name="Tray_ResumeAll" xml:space="preserve"><value>Продолжить все</value></data>
+  <data name="Tray_PauseAll" xml:space="preserve"><value>Приостановить все</value></data>
+  <data name="Tray_Exit" xml:space="preserve"><value>Выход</value></data>
+  <data name="Notification_Completed" xml:space="preserve"><value>Загрузка завершена</value></data>
+  <data name="Notification_OpenFolder" xml:space="preserve"><value>Открыть папку</value></data>
+  <data name="Notification_StillRunningTitle" xml:space="preserve"><value>Wintor продолжает работать</value></data>
+  <data name="Notification_StillRunning" xml:space="preserve"><value>Торренты раздаются в фоне. Выйти можно через значок в области уведомлений.</value></data>
+  <data name="CardDetailsButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Подробности</value></data>
+  <data name="CardDetailsButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Подробности</value></data>
+  <data name="OpenFileButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Открыть .torrent-файл (Ctrl+O)</value></data>
+  <data name="AddMagnetButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Добавить magnet-ссылку (Ctrl+N)</value></data>
+  <data name="SortButton.Label" xml:space="preserve"><value>Сортировка</value></data>
+  <data name="SortButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Сортировка</value></data>
+  <data name="OpenFolderButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Открыть папку</value></data>
+  <data name="View_All" xml:space="preserve"><value>Все торренты</value></data>
+  <data name="View_Downloading" xml:space="preserve"><value>Загружаются</value></data>
+  <data name="View_Completed" xml:space="preserve"><value>Готовые</value></data>
+  <data name="View_Paused" xml:space="preserve"><value>На паузе</value></data>
+  <data name="NavAllText.Text" xml:space="preserve"><value>Все торренты</value></data>
+  <data name="NavDownloadingText.Text" xml:space="preserve"><value>Загружаются</value></data>
+  <data name="NavCompletedText.Text" xml:space="preserve"><value>Готовые</value></data>
+  <data name="NavPausedText.Text" xml:space="preserve"><value>На паузе</value></data>
+  <data name="NavLabelsHeader.Content" xml:space="preserve"><value>Метки</value></data>
+  <data name="NavNoLabels" xml:space="preserve"><value>Метку можно назначить через правый клик по торренту.</value></data>
+  <data name="Column_Queue" xml:space="preserve"><value>№</value></data>
+  <data name="Column_Name" xml:space="preserve"><value>Имя</value></data>
+  <data name="Column_Size" xml:space="preserve"><value>Размер</value></data>
+  <data name="Column_Progress" xml:space="preserve"><value>Прогресс</value></data>
+  <data name="Column_Status" xml:space="preserve"><value>Статус</value></data>
+  <data name="Column_DownloadSpeed" xml:space="preserve"><value>Загрузка</value></data>
+  <data name="Column_UploadSpeed" xml:space="preserve"><value>Отдача</value></data>
+  <data name="Column_TimeLeft" xml:space="preserve"><value>Осталось</value></data>
+  <data name="Column_Seeds" xml:space="preserve"><value>Сиды</value></data>
+  <data name="Column_Peers" xml:space="preserve"><value>Пиры</value></data>
+  <data name="Column_SortBy" xml:space="preserve"><value>Сортировать по столбцу «{0}»</value></data>
+  <data name="Column_SortedAscending" xml:space="preserve"><value>{0}, по возрастанию</value></data>
+  <data name="Column_SortedDescending" xml:space="preserve"><value>{0}, по убыванию</value></data>
+  <data name="Sort_Ascending" xml:space="preserve"><value>По возрастанию</value></data>
+  <data name="Sort_Descending" xml:space="preserve"><value>По убыванию</value></data>
+  <data name="Menu_Label" xml:space="preserve"><value>Метка</value></data>
+  <data name="Menu_NewLabel" xml:space="preserve"><value>Новая метка…</value></data>
+  <data name="Menu_NoLabel" xml:space="preserve"><value>Убрать метку</value></data>
+  <data name="Menu_Order" xml:space="preserve"><value>Порядок</value></data>
+  <data name="Menu_MoveTop" xml:space="preserve"><value>В начало</value></data>
+  <data name="Menu_MoveUp" xml:space="preserve"><value>Выше</value></data>
+  <data name="Menu_MoveDown" xml:space="preserve"><value>Ниже</value></data>
+  <data name="Menu_MoveBottom" xml:space="preserve"><value>В конец</value></data>
+  <data name="Menu_DeleteLabel" xml:space="preserve"><value>Удалить метку</value></data>
+  <data name="LabelDialog_Title" xml:space="preserve"><value>Новая метка</value></data>
+  <data name="LabelDialog_Header" xml:space="preserve"><value>Название</value></data>
+  <data name="LabelDialog_Create" xml:space="preserve"><value>Создать</value></data>
+  <data name="Splitter_Tooltip" xml:space="preserve"><value>Потяните, чтобы изменить высоту; двойной щелчок — как было</value></data>
+  <data name="DetailsNothingSelected.Text" xml:space="preserve"><value>Выберите торрент, чтобы увидеть подробности.</value></data>
+  <data name="TabGeneral.Text" xml:space="preserve"><value>Общие</value></data>
+  <data name="TabSpeed.Text" xml:space="preserve"><value>Скорость</value></data>
+  <data name="BarDownloaded.Text" xml:space="preserve"><value>Загружено</value></data>
+  <data name="BarAvailability.Text" xml:space="preserve"><value>Доступность</value></data>
+  <data name="SectionTransfer.Text" xml:space="preserve"><value>Передача</value></data>
+  <data name="SectionGeneral.Text" xml:space="preserve"><value>Общие сведения</value></data>
+  <data name="Info_TimeActive" xml:space="preserve"><value>Время работы</value></data>
+  <data name="Info_TimeLeft" xml:space="preserve"><value>Осталось времени</value></data>
+  <data name="Info_Downloaded" xml:space="preserve"><value>Скачано</value></data>
+  <data name="Info_Uploaded" xml:space="preserve"><value>Отдано</value></data>
+  <data name="Info_Remaining" xml:space="preserve"><value>Осталось скачать</value></data>
+  <data name="Info_Ratio" xml:space="preserve"><value>Рейтинг</value></data>
+  <data name="Info_DownloadSpeed" xml:space="preserve"><value>Скорость загрузки</value></data>
+  <data name="Info_UploadSpeed" xml:space="preserve"><value>Скорость отдачи</value></data>
+  <data name="Info_Seeds" xml:space="preserve"><value>Сиды</value></data>
+  <data name="Info_Peers" xml:space="preserve"><value>Пиры</value></data>
+  <data name="Info_Connected" xml:space="preserve"><value>подключено: {0}</value></data>
+  <data name="Info_Wasted" xml:space="preserve"><value>Потеряно</value></data>
+  <data name="Info_Pieces" xml:space="preserve"><value>Части</value></data>
+  <data name="Info_PiecesValue" xml:space="preserve"><value>{0} × {1}</value></data>
+  <data name="LegendDownload.Text" xml:space="preserve"><value>Загрузка</value></data>
+  <data name="LegendUpload.Text" xml:space="preserve"><value>Отдача</value></data>
+  <data name="SpeedGraphControl.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Скорость за последние пять минут</value></data>
+  <data name="NavAllItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Все торренты</value></data>
+  <data name="NavDownloadingItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Загружаются</value></data>
+  <data name="NavCompletedItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Готовые</value></data>
+  <data name="NavPausedItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>На паузе</value></data>
 </root>

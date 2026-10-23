@@ -7,7 +7,45 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <!--  After the Fluent resources so its brushes win. Services/Appearance finds it by file name.  -->
+                <ResourceDictionary Source="ms-appx:///Themes/Palette.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <!--  Window roots: solid palette background, cleared to transparent while a backdrop is on.  -->
+            <Style x:Key="WindowBackgroundStyle" TargetType="Grid">
+                <Setter Property="Background" Value="{ThemeResource AppWindowBackgroundBrush}" />
+            </Style>
+
+            <!--  Content dialogs pick up the default style (WinUI otherwise keeps the old one for dialogs made in code).  -->
+            <Style BasedOn="{StaticResource DefaultContentDialogStyle}" TargetType="ContentDialog" />
+
+            <!--  Torrent and detail cards  -->
+            <Style x:Key="CardStyle" TargetType="Border">
+                <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
+                <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="CornerRadius" Value="{StaticResource OverlayCornerRadius}" />
+                <Setter Property="Padding" Value="16,12" />
+            </Style>
+
+<Style x:Key="SectionHeaderStyle" BasedOn="{StaticResource BodyStrongTextBlockStyle}" TargetType="TextBlock">
+                <Setter Property="Margin" Value="2,24,0,6" />
+                <Setter Property="AutomationProperties.HeadingLevel" Value="Level2" />
+            </Style>
+
+            <Style x:Key="PageTitleStyle" BasedOn="{StaticResource TitleTextBlockStyle}" TargetType="TextBlock">
+                <Setter Property="AutomationProperties.HeadingLevel" Value="Level1" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="TextWrapping" Value="NoWrap" />
+            </Style>
+
+            <Style x:Key="SecondaryCaptionStyle" BasedOn="{StaticResource CaptionTextBlockStyle}" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
+            </Style>
+
+            <Style x:Key="TertiaryCaptionStyle" BasedOn="{StaticResource CaptionTextBlockStyle}" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="{ThemeResource TextFillColorTertiaryBrush}" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentDialog
+    x:Class="Wintor.App.Views.AddTorrentDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Wintor.App.Views"
+    x:Uid="AddDialog"
+    DefaultButton="Primary">
+
+    <StackPanel MinWidth="440" Spacing="16">
+        <!--  Magnet link  -->
+        <TextBox
+            x:Name="MagnetBox"
+            x:Uid="AddDialogMagnet"
+            AutomationProperties.AutomationId="MagnetInput"
+            PlaceholderText="magnet:?xt=urn:btih:…"
+            TextChanged="MagnetBox_TextChanged"
+            TextWrapping="Wrap"
+            Visibility="Collapsed" />
+
+        <!--  .torrent: what it is  -->
+        <StackPanel x:Name="TorrentHeader" Spacing="2" Visibility="Collapsed">
+            <TextBlock
+                x:Name="TorrentName"
+                Style="{StaticResource BodyStrongTextBlockStyle}"
+                TextTrimming="CharacterEllipsis" />
+            <TextBlock x:Name="TorrentSize" Style="{StaticResource SecondaryCaptionStyle}" />
+        </StackPanel>
+
+        <!--  Where to save  -->
+        <StackPanel Spacing="6">
+            <TextBlock x:Uid="AddDialogFolderHeader" Style="{StaticResource BodyTextBlockStyle}" />
+            <Grid ColumnSpacing="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Border
+                    Padding="10,6"
+                    Background="{ThemeResource ControlAltFillColorTertiaryBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{StaticResource ControlCornerRadius}">
+                    <TextBlock
+                        x:Name="FolderText"
+                        VerticalAlignment="Center"
+                        TextTrimming="CharacterEllipsis" />
+                </Border>
+                <Button
+                    x:Name="ChangeFolderButton"
+                    x:Uid="AddDialogChangeFolder"
+                    Grid.Column="1"
+                    AutomationProperties.AutomationId="AddDialogChangeFolder"
+                    Click="ChangeFolder_Click" />
+            </Grid>
+        </StackPanel>
+
+        <!--  .torrent: which files  -->
+        <StackPanel x:Name="FilesPanel" Spacing="6" Visibility="Collapsed">
+            <Grid>
+                <CheckBox
+                    x:Name="SelectAllBox"
+                    x:Uid="AddDialogSelectAll"
+                    AutomationProperties.AutomationId="AddDialogSelectAll"
+                    Click="SelectAll_Click"
+                    IsThreeState="False" />
+                <TextBlock
+                    x:Name="SelectionSummary"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource SecondaryCaptionStyle}" />
+            </Grid>
+            <ListView
+                x:Name="FilesList"
+                x:Uid="AddDialogFiles"
+                MaxHeight="280"
+                AutomationProperties.AutomationId="AddDialogFiles"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="{StaticResource ControlCornerRadius}"
+                SelectionChanged="FilesList_SelectionChanged"
+                SelectionMode="Multiple">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:AddDialogFile">
+                        <Grid
+                            Padding="0,6"
+                            AutomationProperties.Name="{x:Bind Path, Mode=OneTime}"
+                            ColumnSpacing="12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Text="{x:Bind Path, Mode=OneTime}"
+                                TextTrimming="CharacterEllipsis"
+                                ToolTipService.ToolTip="{x:Bind Path, Mode=OneTime}" />
+                            <TextBlock
+                                Grid.Column="1"
+                                Style="{StaticResource TertiaryCaptionStyle}"
+                                Text="{x:Bind SizeText, Mode=OneTime}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </StackPanel>
+</ContentDialog>

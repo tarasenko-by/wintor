@@ -4,13 +4,25 @@ using Wintor.Core;
 
 namespace Wintor.App.ViewModels;
 
-/// <summary>One row in the torrent list. Updated in place from engine snapshots so the list does not flicker.</summary>
+/// <summary>One row of the torrent table. Updated in place from engine snapshots so the list does not flicker.</summary>
 public partial class TorrentItemViewModel(string id) : ObservableObject
 {
     public string Id { get; } = id;
 
+    /// <summary>The latest engine state behind this row.</summary>
+    public TorrentSnapshot? Snapshot { get; private set; }
+
+    [ObservableProperty]
+    public partial int QueueNumber { get; set; }
+
     [ObservableProperty]
     public partial string Name { get; set; } = "";
+
+    [ObservableProperty]
+    public partial string? Label { get; set; }
+
+    [ObservableProperty]
+    public partial bool HasLabel { get; set; }
 
     [ObservableProperty]
     public partial TorrentStatus Status { get; set; }
@@ -20,13 +32,24 @@ public partial class TorrentItemViewModel(string id) : ObservableObject
     public partial double ProgressPercent { get; set; }
 
     [ObservableProperty]
+    public partial string ProgressText { get; set; } = "";
+
+    [ObservableProperty]
     public partial bool IsIndeterminate { get; set; }
 
     [ObservableProperty]
-    public partial bool IsPaused { get; set; }
+    public partial bool IsError { get; set; }
+
+    // The progress bar's color tells the state at a glance: green downloading, blue seeding,
+    // grey when nothing moves (paused, stopped, error). One of the three is shown.
+    [ObservableProperty]
+    public partial bool ShowDownloadingBar { get; set; }
 
     [ObservableProperty]
-    public partial bool IsError { get; set; }
+    public partial bool ShowSeedingBar { get; set; }
+
+    [ObservableProperty]
+    public partial bool ShowInactiveBar { get; set; }
 
     [ObservableProperty]
     public partial string StatusText { get; set; } = "";
@@ -35,43 +58,66 @@ public partial class TorrentItemViewModel(string id) : ObservableObject
     public partial string SizeText { get; set; } = "";
 
     [ObservableProperty]
-    public partial string SpeedText { get; set; } = "";
+    public partial string DownText { get; set; } = "";
+
+    [ObservableProperty]
+    public partial string UpText { get; set; } = "";
+
+    [ObservableProperty]
+    public partial string TimeLeftText { get; set; } = "";
+
+    [ObservableProperty]
+    public partial string SeedsText { get; set; } = "";
 
     [ObservableProperty]
     public partial string PeersText { get; set; } = "";
 
+    /// <summary>For screen readers: the whole row in one line.</summary>
+    [ObservableProperty]
+    public partial string AccessibleName { get; set; } = "";
+
     public bool CanPause => Status is not (TorrentStatus.Paused or TorrentStatus.Stopped or TorrentStatus.Stopping);
 
-    public void Update(TorrentSnapshot s)
+    public bool IsComplete => Snapshot?.IsComplete == true;
+
+    public string ContentPath => Snapshot?.ContentPath ?? "";
+
+    public void Update(TorrentSnapshot s, int queueNumber, string? label)
     {
+        Snapshot = s;
+        QueueNumber = queueNumber;
         Name = s.Name;
+        Label = label;
+        HasLabel = !string.IsNullOrEmpty(label);
         Status = s.Status;
         ProgressPercent = s.Progress * 100;
+        ProgressText = s.TotalSize > 0 ? $"{s.Progress * 100:0.#}%" : "";
         IsIndeterminate = s.Status is TorrentStatus.FetchingMetadata or TorrentStatus.Starting;
-        IsPaused = s.Status is TorrentStatus.Paused or TorrentStatus.Stopped;
         IsError = s.Status == TorrentStatus.Error;
+
+        bool moving = s.Status is TorrentStatus.Downloading or TorrentStatus.Seeding or TorrentStatus.FetchingMetadata
+            or TorrentStatus.Starting or TorrentStatus.Checking;
+        ShowSeedingBar = moving && s.IsComplete;
+        ShowDownloadingBar = moving && !s.IsComplete;
+        ShowInactiveBar = !moving;
 
         StatusText = s.Status switch
         {
-            TorrentStatus.Downloading when s.EstimatedTimeLeft is { } eta =>
-                Strings.Format("Status_DownloadingEta", Formatting.Duration(eta)),
-            TorrentStatus.Error when s.ErrorMessage is not null =>
-                Strings.Format("Status_ErrorDetails", s.ErrorMessage),
+            TorrentStatus.Error when s.ErrorMessage is not null => Strings.Format("Status_ErrorDetails", s.ErrorMessage),
+            TorrentStatus.Stopped or TorrentStatus.Paused when s.IsComplete => Strings.Get("Status_Done"),
             _ => Strings.Get("Status_" + s.Status),
         };
 
-        SizeText = s.TotalSize > 0
-            ? Strings.Format("Size_Progress", Formatting.Bytes(s.DownloadedBytes), Formatting.Bytes(s.TotalSize), (int)(s.Progress * 100))
-            : "";
+        SizeText = s.TotalSize > 0 ? Formatting.Bytes(s.TotalSize) : "";
+        bool transferring = s.Status is TorrentStatus.Downloading or TorrentStatus.Seeding;
+        DownText = transferring && s.DownloadRate > 0 ? Formatting.Rate(s.DownloadRate) : "";
+        UpText = transferring && s.UploadRate > 0 ? Formatting.Rate(s.UploadRate) : "";
+        TimeLeftText = s.EstimatedTimeLeft is { } eta ? Formatting.Duration(eta) : s.IsComplete ? "" : s.Status == TorrentStatus.Downloading ? "∞" : "";
+        SeedsText = transferring || s.Status == TorrentStatus.FetchingMetadata ? s.Seeds.ToString() : "";
+        PeersText = transferring || s.Status == TorrentStatus.FetchingMetadata ? s.Leechers.ToString() : "";
 
-        SpeedText = s.Status is TorrentStatus.Downloading or TorrentStatus.Seeding
-            ? $"↓ {Formatting.Rate(s.DownloadRate)}   ↑ {Formatting.Rate(s.UploadRate)}"
-            : "";
-
-        PeersText = s.Status is TorrentStatus.Downloading or TorrentStatus.Seeding or TorrentStatus.FetchingMetadata
-            ? Strings.Format("Peers", s.Seeds, s.Leechers)
-            : "";
-
+        AccessibleName = string.Join(", ", new[] { Name, Label, StatusText, ProgressText, SizeText, DownText, UpText }
+            .Where(p => !string.IsNullOrEmpty(p)));
         OnPropertyChanged(nameof(CanPause));
     }
 }

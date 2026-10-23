@@ -4,9 +4,12 @@
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5"
   xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
+  xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
+  xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
-  IgnorableNamespaces="uap uap10 rescap">
+  IgnorableNamespaces="uap uap5 uap10 com desktop rescap">
 
   <Identity
     Name="F28EBC3D-BBCD-4C21-9760-297D0F2BBA80"
@@ -46,6 +49,44 @@
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" />
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
+      <Extensions>
+        <!--  Double-clicking a .torrent file opens it in Wintor (once chosen as the default app).  -->
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name="torrent">
+            <uap:DisplayName>BitTorrent file</uap:DisplayName>
+            <uap:SupportedFileTypes>
+              <uap:FileType ContentType="application/x-bittorrent">.torrent</uap:FileType>
+            </uap:SupportedFileTypes>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+        <!--  magnet: links in a browser open the add dialog.  -->
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="magnet">
+            <uap:DisplayName>Magnet link</uap:DisplayName>
+          </uap:Protocol>
+        </uap:Extension>
+        <!--  "wintor" in a terminal: opens the app; "wintor - -quit" (two dashes) quits a running Wintor gracefully.  -->
+        <uap5:Extension Category="windows.appExecutionAlias" Executable="Wintor.exe" EntryPoint="Windows.FullTrustApplication">
+          <uap5:AppExecutionAlias>
+            <uap5:ExecutionAlias Alias="wintor.exe" />
+          </uap5:AppExecutionAlias>
+        </uap5:Extension>
+        <!--  Optional start at sign-in, turned on in Settings; starts in the notification area.  -->
+        <uap5:Extension Category="windows.startupTask">
+          <uap5:StartupTask TaskId="WintorStartup" Enabled="false" DisplayName="Wintor" />
+        </uap5:Extension>
+        <!--  Clicking a notification (or its button) activates Wintor through this COM class.  -->
+        <com:Extension Category="windows.comServer">
+          <com:ComServer>
+            <com:ExeServer Executable="Wintor.exe" Arguments="----AppNotificationActivated:" DisplayName="Wintor">
+              <com:Class Id="8D21B584-E7ED-4E5C-AC4E-EF84F6188B26" DisplayName="Wintor notifications" />
+            </com:ExeServer>
+          </com:ComServer>
+        </com:Extension>
+        <desktop:Extension Category="windows.toastNotificationActivation">
+          <desktop:ToastNotificationActivation ToastActivatorCLSID="8D21B584-E7ED-4E5C-AC4E-EF84F6188B26" />
+        </desktop:Extension>
+      </Extensions>
     </Application>
   </Applications>
 
