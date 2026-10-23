@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="NavTorrents.Content" xml:space="preserve"><value>Торренты</value></data>
+  <data name="TorrentsTitle.Text" xml:space="preserve"><value>Торренты</value></data>
+  <data name="AddMagnetButton.Label" xml:space="preserve"><value>Magnet-ссылка</value></data>
+  <data name="OpenFileButton.Label" xml:space="preserve"><value>Открыть .torrent</value></data>
+  <data name="ResumeButton.Label" xml:space="preserve"><value>Продолжить</value></data>
+  <data name="PauseButton.Label" xml:space="preserve"><value>Пауза</value></data>
+  <data name="RemoveButton.Label" xml:space="preserve"><value>Удалить</value></data>
+  <data name="EmptyTitle.Text" xml:space="preserve"><value>Торрентов пока нет</value></data>
+  <data name="EmptyHint.Text" xml:space="preserve"><value>Добавьте magnet-ссылку, откройте .torrent-файл или перетащите его в это окно.</value></data>
+  <data name="EmptyAddButton.Content" xml:space="preserve"><value>Добавить magnet-ссылку</value></data>
+  <data name="TorrentList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Торренты</value></data>
+  <data name="SettingsTitle.Text" xml:space="preserve"><value>Настройки</value></data>
+  <data name="SettingsDownloadsHeader.Text" xml:space="preserve"><value>Загрузки</value></data>
+  <data name="DownloadFolderCard.Header" xml:space="preserve"><value>Папка для загрузок</value></data>
+  <data name="ChangeFolderButton.Content" xml:space="preserve"><value>Изменить…</value></data>
+  <data name="SettingsAboutHeader.Text" xml:space="preserve"><value>О программе</value></data>
+  <data name="AboutCard.Header" xml:space="preserve"><value>Wintor</value></data>
+  <data name="LicenseCard.Header" xml:space="preserve"><value>Лицензия</value></data>
+  <data name="LicenseCard.Description" xml:space="preserve"><value>Свободное ПО с открытым кодом, GPL-3.0-or-later.</value></data>
+  <data name="EngineCard.Header" xml:space="preserve"><value>Торрент-движок</value></data>
+  <data name="EngineCard.Description" xml:space="preserve"><value>MonoTorrent (MIT)</value></data>
+  <data name="Status_Stopped" xml:space="preserve"><value>Остановлен</value></data>
+  <data name="Status_Paused" xml:space="preserve"><value>На паузе</value></data>
+  <data name="Status_Starting" xml:space="preserve"><value>Запуск…</value></data>
+  <data name="Status_FetchingMetadata" xml:space="preserve"><value>Получение метаданных…</value></data>
+  <data name="Status_Checking" xml:space="preserve"><value>Проверка файлов…</value></data>
+  <data name="Status_Downloading" xml:space="preserve"><value>Загрузка</value></data>
+  <data name="Status_DownloadingEta" xml:space="preserve"><value>Загрузка · осталось {0}</value></data>
+  <data name="Status_Seeding" xml:space="preserve"><value>Раздача</value></data>
+  <data name="Status_Stopping" xml:space="preserve"><value>Остановка…</value></data>
+  <data name="Status_Error" xml:space="preserve"><value>Ошибка</value></data>
+  <data name="Status_ErrorDetails" xml:space="preserve"><value>Ошибка: {0}</value></data>
+  <data name="Size_Progress" xml:space="preserve"><value>{0} из {1} · {2}%</value></data>
+  <data name="Peers" xml:space="preserve"><value>Сиды {0} · Пиры {1}</value></data>
+  <data name="Error_EngineStart" xml:space="preserve"><value>Не удалось запустить торрент-движок: {0}</value></data>
+  <data name="MagnetDialog_Title" xml:space="preserve"><value>Добавить magnet-ссылку</value></data>
+  <data name="MagnetDialog_Header" xml:space="preserve"><value>Magnet-ссылка</value></data>
+  <data name="MagnetDialog_Add" xml:space="preserve"><value>Добавить</value></data>
+  <data name="Cancel" xml:space="preserve"><value>Отмена</value></data>
+  <data name="RemoveDialog_Title" xml:space="preserve"><value>Удалить торрент?</value></data>
+  <data name="RemoveDialog_DeleteFiles" xml:space="preserve"><value>Удалить также скачанные файлы</value></data>
+  <data name="RemoveDialog_Remove" xml:space="preserve"><value>Удалить</value></data>
+  <data name="Drop_Caption" xml:space="preserve"><value>Добавить в Wintor</value></data>
+</root>
