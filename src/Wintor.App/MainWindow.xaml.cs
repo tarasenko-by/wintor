@@ -20,6 +20,9 @@ namespace Wintor.App;
 /// <summary>Implemented by pages that use the search box in the title bar.</summary>
 public interface ISearchablePage
 {
+    /// <summary>What the search box says while empty ("Search torrents", "Search settings").</summary>
+    string SearchPlaceholder { get; }
+
     void ApplySearch(string text);
 }
 
@@ -65,6 +68,7 @@ public sealed partial class MainWindow : Window
 
         SyncLabelItems();
         _torrents.Labels.CollectionChanged += (_, _) => SyncLabelItems();
+        NavView.RegisterPropertyChangedCallback(NavigationView.IsPaneOpenProperty, (_, _) => UpdateLabelsHeader());
         NavView.SelectedItem = NavAll;
     }
 
@@ -144,8 +148,18 @@ public sealed partial class MainWindow : Window
         }
     }
 
-    private void ContentFrame_Navigated(object sender, NavigationEventArgs e) =>
-        SearchBox.Visibility = e.Content is ISearchablePage ? Visibility.Visible : Visibility.Collapsed;
+    /// <summary>Each page searches its own content: the box takes the page's placeholder and starts empty.</summary>
+    private void ContentFrame_Navigated(object sender, NavigationEventArgs e)
+    {
+        SearchHost.Visibility = e.Content is ISearchablePage ? Visibility.Visible : Visibility.Collapsed;
+        if (e.Content is ISearchablePage page)
+        {
+            SearchBox.Text = "";
+            SearchBox.PlaceholderText = page.SearchPlaceholder;
+            Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(SearchBox, page.SearchPlaceholder);
+            page.ApplySearch("");
+        }
+    }
 
     /// <summary>Keeps one side-pane item per label, in the labels' order, after the "Labels" header.</summary>
     private void SyncLabelItems()
@@ -174,6 +188,7 @@ public sealed partial class MainWindow : Window
                 IsTabStop = false,
                 Tag = "hint",
             });
+            UpdateLabelsHeader();
             return;
         }
 
@@ -195,6 +210,8 @@ public sealed partial class MainWindow : Window
                 NavView.MenuItems.Insert(Math.Min(index, NavView.MenuItems.Count), item);
             }
         }
+
+        UpdateLabelsHeader();
     }
 
     private NavigationViewItem CreateLabelItem(LabelItem label)
@@ -208,16 +225,61 @@ public sealed partial class MainWindow : Window
         Grid.SetColumn(count, 1);
         content.Children.Add(count);
 
-        var item = new NavigationViewItem { Content = content, Icon = Icons.HugeIcons.Create(Icons.HugeIconKind.Tag01), Tag = "label:" + label.Name };
+        // The tag icon wears the label's color.
+        PathIcon icon = Icons.HugeIcons.Create(Icons.HugeIconKind.Tag01);
+        icon.SetBinding(IconElement.ForegroundProperty, new Microsoft.UI.Xaml.Data.Binding { Source = label, Path = new PropertyPath(nameof(LabelItem.Brush)) });
+
+        var item = new NavigationViewItem { Content = content, Icon = icon, Tag = "label:" + label.Name };
         Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(item, label.Name);
         Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(item, "NavLabel_" + label.Name);
 
-        var delete = new MenuFlyoutItem { Text = Strings.Get("Menu_DeleteLabel"), Icon = Icons.HugeIcons.Create(Icons.HugeIconKind.Delete02) };
-        delete.Click += (_, _) => _torrents.DeleteLabel(label.Name);
         var menu = new MenuFlyout();
-        menu.Items.Add(delete);
+        menu.Opening += (_, _) =>
+        {
+            menu.Items.Clear();
+            var colors = new MenuFlyoutSubItem { Text = Strings.Get("Menu_LabelColor"), Icon = Swatch(label.Brush) };
+            foreach (var (key, _) in LabelColors.All)
+            {
+                // A check mark as accelerator text: ToggleMenuFlyoutItem would add a gutter to every entry.
+                var color = new MenuFlyoutItem
+                {
+                    Text = Strings.Get("LabelColor_" + key),
+                    Icon = Swatch(LabelColors.BrushOf(key)),
+                    KeyboardAcceleratorTextOverride = key == label.Color ? "✓" : "",
+                };
+                Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(color, "LabelColor_" + key);
+                color.Click += (_, _) => _torrents.SetLabelColor(label.Name, key);
+                colors.Items.Add(color);
+            }
+
+            var delete = new MenuFlyoutItem { Text = Strings.Get("Menu_DeleteLabel"), Icon = Icons.HugeIcons.Create(Icons.HugeIconKind.Delete02) };
+            delete.Click += (_, _) => _torrents.DeleteLabel(label.Name);
+            menu.Items.Add(colors);
+            menu.Items.Add(new MenuFlyoutSeparator());
+            menu.Items.Add(delete);
+        };
         item.ContextFlyout = menu;
         return item;
+    }
+
+    /// <summary>A filled circle in a label's color, for menus.</summary>
+    public static PathIcon Swatch(Microsoft.UI.Xaml.Media.Brush brush) => new()
+    {
+        Data = new Microsoft.UI.Xaml.Media.EllipseGeometry { Center = new Windows.Foundation.Point(8, 8), RadiusX = 6, RadiusY = 6 },
+        Foreground = brush,
+        Width = 16,
+        Height = 16,
+    };
+
+    /// <summary>The "Labels" header and its hint need the open pane; the label icons alone fit the compact one.</summary>
+    private void UpdateLabelsHeader()
+    {
+        Visibility open = NavView.IsPaneOpen ? Visibility.Visible : Visibility.Collapsed;
+        LabelsHeader.Visibility = open;
+        foreach (NavigationViewItem hint in NavView.MenuItems.OfType<NavigationViewItem>().Where(i => (i.Tag as string) == "hint"))
+        {
+            hint.Visibility = open;
+        }
     }
 
     /// <summary>The search box is as wide as Mail's (440), shrinking in narrow windows so the title stays.</summary>
@@ -248,7 +310,7 @@ public sealed partial class MainWindow : Window
 
     private void FocusSearch_Invoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
     {
-        if (SearchBox.Visibility == Visibility.Visible)
+        if (SearchHost.Visibility == Visibility.Visible)
         {
             SearchBox.Focus(FocusState.Keyboard);
             args.Handled = true;

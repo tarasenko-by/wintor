@@ -26,7 +26,7 @@ public partial class TorrentsViewModel : ObservableObject
         SortDescending = settings.SortDescending;
         foreach (string label in settings.Labels)
         {
-            Labels.Add(new LabelItem(label));
+            Labels.Add(new LabelItem(label, ColorOf(label)));
         }
 
         // Created on the UI thread, so the timer ticks there too.
@@ -264,7 +264,7 @@ public partial class TorrentsViewModel : ObservableObject
         if (label is not null && !_settings.Labels.Contains(label, StringComparer.CurrentCultureIgnoreCase))
         {
             _settings.Labels.Add(label);
-            Labels.Add(new LabelItem(label));
+            Labels.Add(new LabelItem(label, ColorOf(label)));
         }
 
         foreach (TorrentItemViewModel item in items)
@@ -283,9 +283,35 @@ public partial class TorrentsViewModel : ObservableObject
         Refresh();
     }
 
+    public void SetLabelColor(string label, string color)
+    {
+        _settings.LabelColors[label] = color;
+        _settings.Save();
+        if (Labels.FirstOrDefault(l => l.Name == label) is { } item)
+        {
+            item.Color = color;
+        }
+
+        Refresh();
+    }
+
+    /// <summary>A label's color; a label without one (new, or from before colors) gets the least used color.</summary>
+    private string ColorOf(string label)
+    {
+        if (!_settings.LabelColors.TryGetValue(label, out string? color))
+        {
+            color = LabelColors.Next(_settings.LabelColors.Values);
+            _settings.LabelColors[label] = color;
+            _settings.Save();
+        }
+
+        return color;
+    }
+
     public void DeleteLabel(string label)
     {
         _settings.Labels.Remove(label);
+        _settings.LabelColors.Remove(label);
         foreach (string id in _settings.TorrentLabels.Where(p => p.Value == label).Select(p => p.Key).ToList())
         {
             _settings.TorrentLabels.Remove(id);
@@ -390,7 +416,8 @@ public partial class TorrentsViewModel : ObservableObject
             }
 
             _settings.TorrentLabels.TryGetValue(snapshot.Id, out string? label);
-            item.Update(snapshot, _settings.Queue.IndexOf(snapshot.Id) + 1, label);
+            string? color = label is not null && _settings.LabelColors.TryGetValue(label, out string? c) ? c : null;
+            item.Update(snapshot, _settings.Queue.IndexOf(snapshot.Id) + 1, label, color);
         }
 
         foreach (string gone in _items.Keys.Where(id => !seen.Contains(id)).ToList())

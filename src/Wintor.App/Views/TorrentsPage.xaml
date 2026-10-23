@@ -15,17 +15,21 @@
     <Page.Resources>
         <!--  Column header: the whole cell is a quiet button that sorts by the column.  -->
         <Style x:Key="ColumnHeaderButtonStyle" BasedOn="{StaticResource SubtleButtonStyle}" TargetType="Button">
-            <Setter Property="Padding" Value="2,0" />
+            <Setter Property="Padding" Value="6,0" />
             <Setter Property="MinHeight" Value="32" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="HorizontalContentAlignment" Value="Left" />
             <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
             <Setter Property="FontSize" Value="12" />
+            <!--  Square hover, as in a table header: rounded pills would float between the dividers.  -->
+            <Setter Property="CornerRadius" Value="0" />
         </Style>
         <Style x:Key="ColumnHeaderButtonRightStyle" BasedOn="{StaticResource ColumnHeaderButtonStyle}" TargetType="Button">
             <Setter Property="HorizontalContentAlignment" Value="Right" />
         </Style>
+        <!--  The grids have no column spacing (a hidden column would still keep its gap): each cell pads itself.  -->
         <Style x:Key="CellStyle" BasedOn="{StaticResource BodyTextBlockStyle}" TargetType="TextBlock">
+            <Setter Property="Margin" Value="6,0" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="TextTrimming" Value="CharacterEllipsis" />
             <Setter Property="TextWrapping" Value="NoWrap" />
@@ -48,27 +52,12 @@
             <RowDefinition x:Name="PaneRow" Height="300" />
         </Grid.RowDefinitions>
 
-        <!--  Header: view title and summary, commands  -->
-        <Grid Margin="0,0,0,8" ColumnSpacing="16">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <StackPanel VerticalAlignment="Center">
-                <TextBlock
-                    AutomationProperties.AutomationId="ViewTitle"
-                    Style="{StaticResource PageTitleStyle}"
-                    Text="{x:Bind ViewModel.ViewTitle, Mode=OneWay}" />
-                <TextBlock
-                    AutomationProperties.AutomationId="TorrentsSummary"
-                    Style="{StaticResource SecondaryCaptionStyle}"
-                    Text="{x:Bind ViewModel.SummaryText, Mode=OneWay}"
-                    TextWrapping="NoWrap" />
-            </StackPanel>
-            <!--  Takes the remaining width so commands move into the "…" overflow on narrow windows.  -->
+        <!--  Commands, left-aligned; the view's name is the selected item in the side pane.  -->
+        <Grid Margin="-4,0,0,4">
+            <!--  Takes the whole width so commands move into the "…" overflow on narrow windows.  -->
             <CommandBar
-                Grid.Column="1"
-                HorizontalAlignment="Right"
+                x:Uid="TorrentCommands"
+                HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Background="Transparent"
                 DefaultLabelPosition="Collapsed"
@@ -175,11 +164,12 @@
 
             <!--  Column headers: click to sort, again to flip  -->
             <Grid
+                x:Name="HeaderGrid"
                 Padding="12,0,12,0"
                 AutomationProperties.AutomationId="TableHeader"
                 BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
                 BorderThickness="0,0,0,1"
-                ColumnSpacing="8">
+                ColumnSpacing="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Queue, Mode=OneWay, FallbackValue=0}" />
                     <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Name, Mode=OneWay, FallbackValue=0}" />
@@ -191,76 +181,20 @@
                     <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.TimeLeft, Mode=OneWay, FallbackValue=0}" />
                     <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Seeds, Mode=OneWay, FallbackValue=0}" />
                     <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Peers, Mode=OneWay, FallbackValue=0}" />
+                    <ColumnDefinition Width="32" />
                 </Grid.ColumnDefinitions>
+                <!--  Header cells (sort button + width handle) are built in code: TorrentsPage.BuildHeaders.  -->
                 <Button
-                    x:Name="HeaderQueue"
-                    AutomationProperties.AutomationId="HeaderQueue"
-                    Click="Header_Click"
-                    Style="{StaticResource ColumnHeaderButtonRightStyle}"
-                    Tag="Queue" />
-                <Button
-                    x:Name="HeaderName"
-                    Grid.Column="1"
-                    AutomationProperties.AutomationId="HeaderName"
-                    Click="Header_Click"
-                    Style="{StaticResource ColumnHeaderButtonStyle}"
-                    Tag="Name" />
-                <Button
-                    x:Name="HeaderSize"
-                    Grid.Column="2"
-                    AutomationProperties.AutomationId="HeaderSize"
-                    Click="Header_Click"
-                    Style="{StaticResource ColumnHeaderButtonRightStyle}"
-                    Tag="Size" />
-                <Button
-                    x:Name="HeaderProgress"
-                    Grid.Column="3"
-                    AutomationProperties.AutomationId="HeaderProgress"
-                    Click="Header_Click"
-                    Style="{StaticResource ColumnHeaderButtonStyle}"
-                    Tag="Progress" />
-                <Button
-                    x:Name="HeaderStatus"
-                    Grid.Column="4"
-                    AutomationProperties.AutomationId="HeaderStatus"
-                    Click="Header_Click"
-                    Style="{StaticResource ColumnHeaderButtonStyle}"
-                    Tag="Status" />
-                <Button
-                    x:Name="HeaderDownloadSpeed"
-                    Grid.Column="5"
-                    AutomationProperties.AutomationId="HeaderDownloadSpeed"
-                    Click="Header_Click"
-                    Style="{StaticResource ColumnHeaderButtonRightStyle}"
-                    Tag="DownloadSpeed" />
-                <Button
-                    x:Name="HeaderUploadSpeed"
-                    Grid.Column="6"
-                    AutomationProperties.AutomationId="HeaderUploadSpeed"
-                    Click="Header_Click"
-                    Style="{StaticResource ColumnHeaderButtonRightStyle}"
-                    Tag="UploadSpeed" />
-                <Button
-                    x:Name="HeaderTimeLeft"
-                    Grid.Column="7"
-                    AutomationProperties.AutomationId="HeaderTimeLeft"
-                    Click="Header_Click"
-                    Style="{StaticResource ColumnHeaderButtonRightStyle}"
-                    Tag="TimeLeft" />
-                <Button
-                    x:Name="HeaderSeeds"
-                    Grid.Column="8"
-                    AutomationProperties.AutomationId="HeaderSeeds"
-                    Click="Header_Click"
-                    Style="{StaticResource ColumnHeaderButtonRightStyle}"
-                    Tag="Seeds" />
-                <Button
-                    x:Name="HeaderPeers"
-                    Grid.Column="9"
-                    AutomationProperties.AutomationId="HeaderPeers"
-                    Click="Header_Click"
-                    Style="{StaticResource ColumnHeaderButtonRightStyle}"
-                    Tag="Peers" />
+                    x:Name="ColumnsButton"
+                    x:Uid="ColumnsButton"
+                    Grid.Column="10"
+                    Width="32"
+                    Height="32"
+                    Padding="0"
+                    HorizontalAlignment="Right"
+                    AutomationProperties.AutomationId="ColumnsButton"
+                    Content="{icons:Huge Kind=Columns3Cog}"
+                    Style="{StaticResource SubtleButtonStyle}" />
             </Grid>
 
             <ProgressRing
@@ -341,7 +275,7 @@
                 </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="vm:TorrentItemViewModel">
-                        <Grid AutomationProperties.Name="{x:Bind AccessibleName, Mode=OneWay}" ColumnSpacing="8">
+                        <Grid AutomationProperties.Name="{x:Bind AccessibleName, Mode=OneWay}" ColumnSpacing="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Queue, Mode=OneWay, FallbackValue=0}" />
                                 <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Name, Mode=OneWay, FallbackValue=0}" />
@@ -353,11 +287,12 @@
                                 <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.TimeLeft, Mode=OneWay, FallbackValue=0}" />
                                 <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Seeds, Mode=OneWay, FallbackValue=0}" />
                                 <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Peers, Mode=OneWay, FallbackValue=0}" />
+                                <ColumnDefinition Width="32" />
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Style="{StaticResource NumberCellStyle}" Text="{x:Bind QueueNumber, Mode=OneWay}" />
 
-                            <Grid Grid.Column="1" ColumnSpacing="8">
+                            <Grid Grid.Column="1" Margin="0,0,6,0" ColumnSpacing="8">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
@@ -376,10 +311,17 @@
                                     BorderThickness="1"
                                     CornerRadius="9"
                                     Visibility="{x:Bind HasLabel, Mode=OneWay}">
-                                    <TextBlock
-                                        FontSize="11"
-                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                        Text="{x:Bind Label, Mode=OneWay}" />
+                                    <StackPanel Orientation="Horizontal" Spacing="5">
+                                        <Ellipse
+                                            Width="7"
+                                            Height="7"
+                                            VerticalAlignment="Center"
+                                            Fill="{x:Bind LabelBrush, Mode=OneWay}" />
+                                        <TextBlock
+                                            FontSize="11"
+                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                            Text="{x:Bind Label, Mode=OneWay}" />
+                                    </StackPanel>
                                 </Border>
                             </Grid>
 
@@ -389,7 +331,7 @@
                                 Text="{x:Bind SizeText, Mode=OneWay}" />
 
                             <!--  Progress: green downloading, blue seeding, grey when nothing moves  -->
-                            <Grid Grid.Column="3" ColumnSpacing="8">
+                            <Grid Grid.Column="3" Margin="6,0" ColumnSpacing="8">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="40" />
@@ -413,6 +355,7 @@
                                     Visibility="{x:Bind ShowInactiveBar, Mode=OneWay}" />
                                 <TextBlock
                                     Grid.Column="1"
+                                    Margin="0"
                                     FontSize="12"
                                     Style="{StaticResource NumberCellStyle}"
                                     Text="{x:Bind ProgressText, Mode=OneWay}" />

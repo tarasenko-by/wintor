@@ -35,7 +35,8 @@ Read [docs/DESIGN.md](docs/DESIGN.md) before changing any XAML. The short versio
 - Native Windows 11 / Fluent look; cards over dense tables; sensible defaults; advanced options hidden but reachable.
 - Colors only via `{ThemeResource ...}`; no hard-coded colors. Works in light, dark and high-contrast themes.
 - `x:Bind` with an explicit `Mode` for changing data. The build must have **zero** WinUI analyzer warnings.
-- Destructive actions require a `ContentDialog` confirmation that names what will be removed.
+- Dialogs: `Dialogs.Prepare` + `ShowQueuedAsync()`, primary button on the right in the footer band, destructive ones
+  `MakeDestructive()` and naming what will be removed. Full rules: docs/DESIGN.md, "Dialogs".
 - Every interactive element has visible text or `AutomationProperties.Name` and is keyboard-reachable.
 
 ## Icons

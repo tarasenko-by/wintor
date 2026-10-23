@@ -24,6 +24,12 @@ public partial class TorrentItemViewModel(string id) : ObservableObject
     [ObservableProperty]
     public partial bool HasLabel { get; set; }
 
+    /// <summary>The label's color for the dot on its pill.</summary>
+    [ObservableProperty]
+    public partial Microsoft.UI.Xaml.Media.Brush? LabelBrush { get; set; }
+
+    private string? _labelColor;
+
     [ObservableProperty]
     public partial TorrentStatus Status { get; set; }
 
@@ -82,13 +88,19 @@ public partial class TorrentItemViewModel(string id) : ObservableObject
 
     public string ContentPath => Snapshot?.ContentPath ?? "";
 
-    public void Update(TorrentSnapshot s, int queueNumber, string? label)
+    public void Update(TorrentSnapshot s, int queueNumber, string? label, string? labelColor)
     {
         Snapshot = s;
         QueueNumber = queueNumber;
         Name = s.Name;
         Label = label;
         HasLabel = !string.IsNullOrEmpty(label);
+        // A new brush only when the color changes, not on every refresh.
+        if (labelColor != _labelColor || LabelBrush is null)
+        {
+            _labelColor = labelColor;
+            LabelBrush = LabelColors.BrushOf(labelColor);
+        }
         Status = s.Status;
         ProgressPercent = s.Progress * 100;
         ProgressText = s.TotalSize > 0 ? $"{s.Progress * 100:0.#}%" : "";

@@ -147,16 +147,50 @@ try {
         Start-Sleep -Milliseconds 400
         Save-Screenshot '01c-completed-view.png'
         Invoke-Ui @('invoke', 'NavTorrents') -Window $hwnd | Out-Null
-        Invoke-Ui @('wait-for', 'TorrentsSummary', '-t', '2000') -Window $hwnd | Out-Null
+        Invoke-Ui @('wait-for', 'AddMagnetButton', '-t', '2000') -Window $hwnd | Out-Null
     }
     Test-UI 'Column headers sort the table' {
-        foreach ($id in 'HeaderName', 'HeaderSize', 'HeaderProgress', 'HeaderDownloadSpeed') {
+        # Name, Progress and Status are always shown; the others depend on the user's columns and window width.
+        foreach ($id in 'HeaderName', 'HeaderProgress', 'HeaderStatus') {
             Invoke-Ui @('wait-for', $id, '-t', '2000') -Window $hwnd | Out-Null
         }
-        Invoke-Ui @('invoke', 'HeaderSize') -Window $hwnd | Out-Null
-        Start-Sleep -Milliseconds 300
-        # Back to the user's own order (№, ascending), which the app remembers.
-        Invoke-Ui @('invoke', 'HeaderQueue') -Window $hwnd | Out-Null
+        $queueShown = $true
+        try { Invoke-Ui @('wait-for', 'HeaderQueue', '-t', '300') -Window $hwnd | Out-Null } catch { $queueShown = $false }
+        # Sorting only when the № header is there to put the user's order back afterwards (the app remembers the sort).
+        if ($queueShown) {
+            Invoke-Ui @('invoke', 'HeaderStatus') -Window $hwnd | Out-Null
+            Start-Sleep -Milliseconds 300
+            Invoke-Ui @('invoke', 'HeaderQueue') -Window $hwnd | Out-Null
+        }
+    }
+    Test-UI 'Columns menu turns a column on and off; locked ones cannot be turned off' {
+        function Open-ColumnsMenu {
+            Invoke-Ui @('invoke', 'ColumnsButton') -Window $hwnd | Out-Null
+            Start-Sleep -Milliseconds 400
+            # The menu is its own popup window owned by the main one.
+            $popup = @(Invoke-Ui @('list-windows', '--json') | ConvertFrom-Json | ForEach-Object { $_ } |
+                Where-Object { $_.title -eq 'PopupHost' -and $_.height -gt 150 }) | Select-Object -Last 1
+            if (-not $popup) { throw 'Columns menu did not open.' }
+            [string]$popup.hwnd
+        }
+        $menu = Open-ColumnsMenu
+        Invoke-Ui @('wait-for', 'ColumnToggleProgress', '-p', 'IsEnabled', '--value', 'False', '-t', '2000') -Window $menu | Out-Null
+        Invoke-Ui @('wait-for', 'ColumnToggleStatus', '-p', 'IsEnabled', '--value', 'False', '-t', '1000') -Window $menu | Out-Null
+        Save-Screenshot '01d-columns.png'
+        if ($Target -ne 'sandbox') {
+            # Turning a column on gives back room from widened columns, which would undo the user's own widths here.
+            Invoke-Ui @('send-keys', 'escape') -Window $menu | Out-Null
+            return
+        }
+        $seedsShown = $true
+        try { Invoke-Ui @('wait-for', 'HeaderSeeds', '-t', '300') -Window $hwnd | Out-Null } catch { $seedsShown = $false }
+        Invoke-Ui @('invoke', 'ColumnToggleSeeds') -Window $menu | Out-Null
+        Start-Sleep -Milliseconds 400
+        $nowShown = $true
+        try { Invoke-Ui @('wait-for', 'HeaderSeeds', '-t', '500') -Window $hwnd | Out-Null } catch { $nowShown = $false }
+        if ($nowShown -eq $seedsShown) { throw "Toggling Seeds did not change the table (shown before: $seedsShown)." }
+        $menu = Open-ColumnsMenu
+        Invoke-Ui @('invoke', 'ColumnToggleSeeds') -Window $menu | Out-Null
     }
     Test-UI 'Search box is in the title bar' { Invoke-Ui @('wait-for', 'SearchBox', '-t', '2000') }
     if ($hasTorrents) {
@@ -235,6 +269,12 @@ try {
         Invoke-Ui @('invoke', 'SettingsItem')
         Invoke-Ui @('wait-for', 'SettingsTitle', '-t', '3000')
         Invoke-Ui @('wait-for', 'ChangeFolderButton', '-t', '2000')
+    }
+    Test-UI 'Search box searches settings too' {
+        Invoke-Ui @('set-value', 'TextBox', 'zz-no-such-setting-zz') -Window $hwnd | Out-Null
+        Invoke-Ui @('wait-for', 'SettingsNothingFound', '-t', '3000') -Window $hwnd | Out-Null
+        Invoke-Ui @('set-value', 'TextBox', ' ') -Window $hwnd | Out-Null
+        Invoke-Ui @('wait-for', 'SettingsNothingFound', '--gone', '-t', '3000') -Window $hwnd | Out-Null
     }
     Test-UI 'Settings has appearance, speed, connection and Windows sections' {
         foreach ($id in 'ThemeBox', 'BackdropBox', 'NotifySwitch', 'DownloadLimitBox', 'UploadLimitBox', 'PortBox', 'StartupSwitch', 'TraySwitch') {

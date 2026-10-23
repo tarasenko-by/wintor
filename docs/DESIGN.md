@@ -18,17 +18,25 @@ They are binding for all UI changes (see [AGENTS.md](../AGENTS.md)).
 
 - Shell: `NavigationView` (Left) with the custom `TitleBar`. Content pages use `Padding="24,12,24,0"` and
   `Background="{ThemeResource ContentLayerBrush}"` (clear on the solid palette, translucent over a backdrop).
-- Search lives in the title bar (`AutoSuggestBox`, Ctrl+F, Esc clears), shown only on pages that implement
-  `ISearchablePage`. Matching: every word, any order, ignoring case and accents (`TorrentQuery`).
-- Page header: title (`PageTitleStyle`) with a one-line summary caption under it, `CommandBar` on the right with
-  `IsDynamicOverflowEnabled="True"` so commands move to "…" on narrow windows. Rare commands go to the overflow.
+- Search lives in the title bar (`AutoSuggestBox`, Ctrl+F, Esc clears): magnifier on the left, the clear button (×)
+  on the right only while there is text. Every page that implements `ISearchablePage` searches its own content with
+  its own placeholder (torrents; settings cards). Matching: every word, any order, ignoring case and accents.
+- The torrent page has no title: the selected side-pane item names the view. Its `CommandBar` is left-aligned,
+  icon-only with tooltips, `IsDynamicOverflowEnabled="True"`; rare commands go to the overflow. Settings keep a title.
 - Side pane: status views (All / Downloading / Completed / Paused) and the user's **labels**, each with a count on
-  the right in `TertiaryCaptionStyle`. Settings in the footer. Everything else stays out of the pane.
+  the right in `TertiaryCaptionStyle`. Labels have a color (Services/LabelColors: 8 mid-tones that read on both
+  themes) shown on their tag icon, the row's pill and menus. The "Labels" header and hint hide in the compact pane.
 - **Torrent list = table + details pane, no drill-in** (as in µTorrent / BitTorrent, Windows 11 look):
   - The table sits in a card. Column headers are quiet buttons: click sorts, again flips, the active one shows an
     arrow. Numbers are right-aligned, text left-aligned, one line per row (40 px), names trimmed with a tooltip.
-  - Columns: №, Name (+ label pill), Size, Progress, Status, Down, Up, Time left, Seeds, Peers. `TableColumns.Fit`
-    hides the less important ones, in that order from the right, until the name has 220 px.
+  - Columns: №, Name (+ label pill), Size, Progress, Status, Down, Up, Time left, Seeds, Peers. By default the
+    first seven show. Right-click the header (or its ⚙ button) to pick columns; **Name, Progress and Status are
+    locked on**. Dividers between headers are always drawn (stronger on hover). Dragging one trades width between
+    the two columns next to it only, so it follows the pointer and nothing else moves; each column stops at its
+    minimum (the name at 200 px). No divider after the last column. Double-click resets. Turning a column on gives
+    back room from widened columns. Header hover is square, no rounding.
+    Choices and widths are remembered. A window too narrow for the chosen columns hides optional ones for the
+    moment, right to left, until the name has 200 px.
   - Progress color says the state: **green** downloading, **blue** seeding, **grey** paused / stopped (red on error).
     Use the `Torrent*Brush` palette keys, never ad-hoc colors.
   - Click selects (Ctrl/Shift for several, Ctrl+A, Esc clears); the selected torrent shows in the pane below.
@@ -82,8 +90,23 @@ Long names are trimmed with `TextTrimming="CharacterEllipsis"` and show the full
 | Background event (download finished) | Windows app notification |
 | Hint or onboarding | `TeachingTip` |
 | Long operation | `ProgressRing` / indeterminate `ProgressBar` with text |
+| Progress of a torrent or file | 16 px `ProgressBar` with 4 px corners on the grey `ProgressTrackBrush` track (App.xaml) |
 
-Destructive dialogs default to **Cancel** and name the item being affected.
+### Dialogs (ContentDialog) — the same rules as the author's Mail app
+
+Helpers: `src/Wintor.App/Services/Dialogs.cs`. Every dialog, new or changed:
+
+- **Fluent style with a footer band.** The body is the card color (white in light theme) with rounded corners; the
+  buttons sit in the dialog's own footer band (its background and the divider above it), never inside the content.
+  `Dialogs.Prepare(dialog, XamlRoot)` sets it, plus the window's theme and XamlRoot. A `ContentDialog` **subclass**
+  (like `AddTorrentDialog`) does not get the app's implicit style: set `Style="{StaticResource DefaultContentDialogStyle}"`.
+- **Shown with `dialog.ShowQueuedAsync()`**, never `ShowAsync()`: WinUI keeps one dialog per window, the rest wait.
+- **The primary (accent) button is on the right, Cancel on the left** (`ShowQueuedAsync` mirrors the footer).
+  The primary button says what happens: "Add", "Remove", "Create" — never "OK".
+- **Destructive actions:** `dialog.MakeDestructive()` — a red primary button with the focus, so Enter confirms.
+  The dialog names what is affected (the torrent's name, or "3 torrents").
+- **Long content scrolls edge to edge:** a `ScrollViewer` as the content scrolls right up to the footer band.
+- Esc and the mouse's Back button close the dialog.
 
 ## Motion
 

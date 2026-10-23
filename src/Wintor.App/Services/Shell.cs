@@ -57,19 +57,4 @@ public static class Shell
         package.SetText(text);
         Clipboard.SetContent(package);
     }
-
-    /// <summary>
-    /// Readies a dialog for the main window: its XamlRoot and the window's theme (dialogs live in a popup layer
-    /// that does not inherit the root element's RequestedTheme).
-    /// </summary>
-    public static T Prepare<T>(T dialog, XamlRoot root) where T : ContentDialog
-    {
-        dialog.XamlRoot = root;
-        if (root.Content is FrameworkElement content)
-        {
-            dialog.RequestedTheme = content.ActualTheme;
-        }
-
-        return dialog;
-    }
 }

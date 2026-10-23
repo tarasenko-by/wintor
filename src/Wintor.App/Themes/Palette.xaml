@@ -68,6 +68,8 @@
             <SolidColorBrush x:Key="TorrentDownloadingBrush" Color="#16A34A" />
             <SolidColorBrush x:Key="TorrentSeedingBrush" Color="#2563EB" />
             <SolidColorBrush x:Key="TorrentInactiveBrush" Color="{StaticResource Zinc400}" />
+            <!--  The empty part of progress and piece bars  -->
+            <SolidColorBrush x:Key="ProgressTrackBrush" Color="{StaticResource Zinc200}" />
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="Dark">
@@ -105,6 +107,7 @@
             <SolidColorBrush x:Key="TorrentDownloadingBrush" Color="#22C55E" />
             <SolidColorBrush x:Key="TorrentSeedingBrush" Color="#3B82F6" />
             <SolidColorBrush x:Key="TorrentInactiveBrush" Color="{StaticResource Zinc500}" />
+            <SolidColorBrush x:Key="ProgressTrackBrush" Color="{StaticResource Zinc700}" />
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="HighContrast">
@@ -112,6 +115,7 @@
             <SolidColorBrush x:Key="TorrentDownloadingBrush" Color="{ThemeResource SystemColorHighlightColor}" />
             <SolidColorBrush x:Key="TorrentSeedingBrush" Color="{ThemeResource SystemColorHighlightColor}" />
             <SolidColorBrush x:Key="TorrentInactiveBrush" Color="{ThemeResource SystemColorGrayTextColor}" />
+            <SolidColorBrush x:Key="ProgressTrackBrush" Color="{ThemeResource SystemColorGrayTextColor}" />
             <!--  No transparency in high contrast: pages lie on the system window color.  -->
             <SolidColorBrush x:Key="ContentLayerBrush" Color="Transparent" />
         </ResourceDictionary>

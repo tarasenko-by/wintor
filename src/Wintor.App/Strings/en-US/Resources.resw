@@ -256,4 +256,21 @@
   <data name="NavDownloadingItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Downloading</value></data>
   <data name="NavCompletedItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Completed</value></data>
   <data name="NavPausedItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Paused</value></data>
+  <data name="ColumnsButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Columns</value></data>
+  <data name="ColumnsButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Columns</value></data>
+  <data name="Columns_Reset" xml:space="preserve"><value>Reset columns</value></data>
+  <data name="ColumnResizer_Tooltip" xml:space="preserve"><value>Drag to change the width; double-click to reset</value></data>
+  <data name="Menu_LabelColor" xml:space="preserve"><value>Color</value></data>
+  <data name="LabelColor_Red" xml:space="preserve"><value>Red</value></data>
+  <data name="LabelColor_Orange" xml:space="preserve"><value>Orange</value></data>
+  <data name="LabelColor_Yellow" xml:space="preserve"><value>Yellow</value></data>
+  <data name="LabelColor_Green" xml:space="preserve"><value>Green</value></data>
+  <data name="LabelColor_Teal" xml:space="preserve"><value>Teal</value></data>
+  <data name="LabelColor_Blue" xml:space="preserve"><value>Blue</value></data>
+  <data name="LabelColor_Purple" xml:space="preserve"><value>Purple</value></data>
+  <data name="LabelColor_Pink" xml:space="preserve"><value>Pink</value></data>
+  <data name="TorrentCommands.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Torrent commands</value></data>
+  <data name="Search_Torrents" xml:space="preserve"><value>Search torrents</value></data>
+  <data name="Search_Settings" xml:space="preserve"><value>Search settings</value></data>
+  <data name="SettingsNothingFound.Text" xml:space="preserve"><value>No settings match your search.</value></data>
 </root>

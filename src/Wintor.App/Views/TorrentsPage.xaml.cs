@@ -44,12 +44,40 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
             SavePaneHeight();
         };
 
+        TableColumns.Current.Attach(_settings);
+        // Measured on the header row itself (minus its 12 px padding each side), the same width the rows lay out in.
+        HeaderGrid.SizeChanged += (_, e) => TableColumns.Current.Fit(e.NewSize.Width - 24);
+        BuildHeaders();
+        TableColumns.Current.PropertyChanged += (_, _) => UpdateHeaderVisibility();
+        ColumnsButton.Flyout = CreateColumnsMenu();
+        HeaderGrid.ContextFlyout = CreateColumnsMenu();
         UpdateHeaders();
     }
+
+    /// <summary>Header cells in table order: column key (as in <see cref="TableColumns"/>) and what it sorts by.</summary>
+    private static readonly (string Column, TorrentSort Sort, bool RightAligned)[] HeaderColumns =
+    [
+        ("Queue", TorrentSort.Queue, true),
+        ("Name", TorrentSort.Name, false),
+        ("Size", TorrentSort.Size, true),
+        ("Progress", TorrentSort.Progress, false),
+        ("Status", TorrentSort.Status, false),
+        ("Down", TorrentSort.DownloadSpeed, true),
+        ("Up", TorrentSort.UploadSpeed, true),
+        ("TimeLeft", TorrentSort.TimeLeft, true),
+        ("Seeds", TorrentSort.Seeds, true),
+        ("Peers", TorrentSort.Peers, true),
+    ];
+
+    private readonly Dictionary<TorrentSort, Button> _headerButtons = [];
+    private readonly Dictionary<string, FrameworkElement> _headerCells = [];
+    private readonly Dictionary<string, Controls.ColumnResizer> _resizers = [];
 
     public TorrentsViewModel ViewModel { get; } = App.Services.GetRequiredService<TorrentsViewModel>();
 
     public static bool HasText(string? text) => !string.IsNullOrEmpty(text);
+
+    public string SearchPlaceholder => Strings.Get("Search_Torrents");
 
     public void ApplySearch(string text) => ViewModel.Search = text.Trim();
 
@@ -72,8 +100,6 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
 
     private void LayoutRoot_SizeChanged(object sender, SizeChangedEventArgs e)
     {
-        // Page padding (48), the table's border (2) and the rows' own padding (24).
-        TableColumns.Current.Fit(e.NewSize.Width - 74);
         // Keep the table usable when the window gets shorter; grow back to the saved height when it gets taller.
         SetPaneHeight(_settings.DetailsPaneHeight, e.NewSize.Height);
     }
@@ -97,16 +123,115 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
         _settings.Save();
     }
 
+    /// <summary>One cell per column: a quiet button that sorts, and (except for the name) a width handle.</summary>
+    private void BuildHeaders()
+    {
+        for (int i = 0; i < HeaderColumns.Length; i++)
+        {
+            var (column, sort, right) = HeaderColumns[i];
+            var button = new Button
+            {
+                Style = (Style)Resources[right ? "ColumnHeaderButtonRightStyle" : "ColumnHeaderButtonStyle"],
+                Tag = sort.ToString(),
+            };
+            AutomationProperties.SetAutomationId(button, "Header" + sort);
+            button.Click += Header_Click;
+            _headerButtons[sort] = button;
+
+            var cell = new Grid();
+            cell.Children.Add(button);
+
+            // The divider on this cell's right edge sits between this column and the next one shown: dragging it
+            // trades width between just those two, so it follows the pointer and nothing else moves.
+            var resizer = new Controls.ColumnResizer();
+            AutomationProperties.SetAutomationId(resizer, "Resize" + column);
+            string? neighbour = null;
+            double leftStart = 0, rightStart = 0;
+            resizer.DragStarted += (_, _) =>
+            {
+                neighbour = TableColumns.Current.NextShown(column);
+                leftStart = TableColumns.Current.CurrentWidth(column);
+                rightStart = neighbour is null ? 0 : TableColumns.Current.CurrentWidth(neighbour);
+            };
+            resizer.DragDelta += (_, offset) =>
+            {
+                if (neighbour is not null)
+                {
+                    TableColumns.Current.ResizeBetween(column, neighbour, leftStart, rightStart, offset);
+                }
+            };
+            resizer.DragCompleted += (_, _) => TableColumns.Current.SaveWidths();
+            resizer.ResetRequested += (_, _) =>
+            {
+                TableColumns.Current.ResetWidth(column);
+                if (TableColumns.Current.NextShown(column) is { } next)
+                {
+                    TableColumns.Current.ResetWidth(next);
+                }
+            };
+            cell.Children.Add(resizer);
+            _resizers[column] = resizer;
+
+            Grid.SetColumn(cell, i);
+            HeaderGrid.Children.Add(cell);
+            _headerCells[column] = cell;
+        }
+
+        UpdateHeaderVisibility();
+    }
+
+    /// <summary>A column at width 0 (turned off or squeezed out) must not leave its handle in the gap.</summary>
+    private void UpdateHeaderVisibility()
+    {
+        foreach (var (column, cell) in _headerCells)
+        {
+            cell.Visibility = TableColumns.Current.IsShownNow(column) ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        // The last column has nobody to trade width with, so no divider after it.
+        foreach (var (column, resizer) in _resizers)
+        {
+            resizer.Visibility = TableColumns.Current.NextShown(column) is null ? Visibility.Collapsed : Visibility.Visible;
+        }
+    }
+
+    /// <summary>Which columns show: right-click on the header or the button at its end. Locked ones stay ticked.</summary>
+    private MenuFlyout CreateColumnsMenu()
+    {
+        var menu = new MenuFlyout { Placement = Microsoft.UI.Xaml.Controls.Primitives.FlyoutPlacementMode.BottomEdgeAlignedRight };
+        menu.Opening += (_, _) =>
+        {
+            menu.Items.Clear();
+            var name = new ToggleMenuFlyoutItem { Text = Strings.Get("Column_Name"), IsChecked = true, IsEnabled = false };
+            menu.Items.Add(name);
+            foreach (ColumnInfo column in TableColumns.All)
+            {
+                TorrentSort sort = HeaderColumns.First(h => h.Column == column.Key).Sort;
+                var item = new ToggleMenuFlyoutItem
+                {
+                    Text = Strings.Get("Column_" + sort),
+                    IsChecked = TableColumns.Current.IsChosen(column.Key),
+                    IsEnabled = !column.Locked,
+                };
+                AutomationProperties.SetAutomationId(item, "ColumnToggle" + column.Key);
+                item.Click += (_, _) => TableColumns.Current.SetChosen(column.Key, item.IsChecked);
+                menu.Items.Add(item);
+            }
+
+            menu.Items.Add(new MenuFlyoutSeparator());
+            var reset = new MenuFlyoutItem { Text = Strings.Get("Columns_Reset") };
+            AutomationProperties.SetAutomationId(reset, "ColumnsReset");
+            reset.Click += (_, _) => TableColumns.Current.Reset();
+            menu.Items.Add(reset);
+        };
+        return menu;
+    }
+
     /// <summary>Column titles, with an arrow on the column the table is sorted by.</summary>
     private void UpdateHeaders()
     {
-        foreach (Button header in new[]
+        foreach (var (column, header) in _headerButtons)
         {
-            HeaderQueue, HeaderName, HeaderSize, HeaderProgress, HeaderStatus,
-            HeaderDownloadSpeed, HeaderUploadSpeed, HeaderTimeLeft, HeaderSeeds, HeaderPeers,
-        })
-        {
-            var column = Enum.Parse<TorrentSort>((string)header.Tag);
             string title = Strings.Get("Column_" + column);
             bool active = ViewModel.Sort == column;
             var content = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 4 };
@@ -213,8 +338,8 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
         _showingDialog = true;
         try
         {
-            AddTorrentDialog dialog = Shell.Prepare(AddTorrentDialog.ForMagnet(ViewModel.DownloadDirectory, magnetLink), XamlRoot);
-            if (await dialog.ShowAsync() == ContentDialogResult.Primary)
+            AddTorrentDialog dialog = Dialogs.Prepare(AddTorrentDialog.ForMagnet(ViewModel.DownloadDirectory, magnetLink), XamlRoot);
+            if (await dialog.ShowQueuedAsync() == ContentDialogResult.Primary)
             {
                 await ViewModel.AddMagnetAsync(dialog.MagnetLink, dialog.Folder);
             }
@@ -246,8 +371,8 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
         _showingDialog = true;
         try
         {
-            AddTorrentDialog dialog = Shell.Prepare(AddTorrentDialog.ForTorrentFile(ViewModel.DownloadDirectory, metadata), XamlRoot);
-            if (await dialog.ShowAsync() == ContentDialogResult.Primary)
+            AddTorrentDialog dialog = Dialogs.Prepare(AddTorrentDialog.ForTorrentFile(ViewModel.DownloadDirectory, metadata), XamlRoot);
+            if (await dialog.ShowQueuedAsync() == ContentDialogResult.Primary)
             {
                 await ViewModel.AddTorrentFileAsync(path, dialog.Folder, dialog.SkippedFiles);
             }
@@ -367,7 +492,7 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
         var deleteFiles = new CheckBox { Content = Strings.Get("RemoveDialog_DeleteFiles") };
         AutomationProperties.SetAutomationId(deleteFiles, "DeleteFilesCheckBox");
         string what = items.Count == 1 ? items[0].Name : Strings.Format("RemoveDialog_Several", items.Count);
-        var dialog = Shell.Prepare(new ContentDialog
+        var dialog = Dialogs.Prepare(new ContentDialog
         {
             Title = Strings.Get(items.Count == 1 ? "RemoveDialog_Title" : "RemoveDialog_TitleSeveral"),
             Content = new StackPanel
@@ -381,13 +506,13 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
             },
             PrimaryButtonText = Strings.Get("RemoveDialog_Remove"),
             CloseButtonText = Strings.Get("Cancel"),
-            DefaultButton = ContentDialogButton.Close,
         }, XamlRoot);
+        dialog.MakeDestructive();
 
         _showingDialog = true;
         try
         {
-            if (await dialog.ShowAsync() == ContentDialogResult.Primary)
+            if (await dialog.ShowQueuedAsync() == ContentDialogResult.Primary)
             {
                 await ViewModel.RemoveAsync(items, deleteFiles.IsChecked == true);
             }
@@ -407,7 +532,7 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
 
         var input = new TextBox { Header = Strings.Get("LabelDialog_Header"), MaxLength = 40 };
         AutomationProperties.SetAutomationId(input, "LabelNameInput");
-        var dialog = Shell.Prepare(new ContentDialog
+        var dialog = Dialogs.Prepare(new ContentDialog
         {
             Title = Strings.Get("LabelDialog_Title"),
             Content = input,
@@ -421,7 +546,7 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
         _showingDialog = true;
         try
         {
-            return await dialog.ShowAsync() == ContentDialogResult.Primary ? input.Text.Trim() : null;
+            return await dialog.ShowQueuedAsync() == ContentDialogResult.Primary ? input.Text.Trim() : null;
         }
         finally
         {
@@ -472,7 +597,12 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
         foreach (LabelItem label in ViewModel.Labels)
         {
             // A check mark as accelerator text, as Mail does: ToggleMenuFlyoutItem would add a gutter to every entry.
-            var entry = new MenuFlyoutItem { Text = label.Name, KeyboardAcceleratorTextOverride = label.Name == current ? "✓" : "" };
+            var entry = new MenuFlyoutItem
+            {
+                Text = label.Name,
+                Icon = MainWindow.Swatch(label.Brush),
+                KeyboardAcceleratorTextOverride = label.Name == current ? "✓" : "",
+            };
             entry.Click += (_, _) => ViewModel.SetLabel(targets, label.Name);
             menu.Items.Add(entry);
         }

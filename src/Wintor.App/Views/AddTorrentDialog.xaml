@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Wintor.App.Views"
     x:Uid="AddDialog"
-    DefaultButton="Primary">
+    DefaultButton="Primary"
+    Style="{StaticResource DefaultContentDialogStyle}">
 
     <StackPanel MinWidth="440" Spacing="16">
         <!--  Magnet link  -->

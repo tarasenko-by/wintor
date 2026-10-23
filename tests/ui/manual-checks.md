@@ -5,6 +5,11 @@ while testing; tick them off after a look by hand. Newest on top.
 
 ## Open
 
+- [ ] **Column widths** — hover a header's right edge: the resize cursor and a thin line appear; dragging changes
+      the width (the name column gives way), double-click resets; widths are back after a restart.
+- [ ] **Columns menu** — right-click the header and the ⚙ button at its end both open it; Name, Progress and Status
+      are ticked and greyed; "Reset columns" brings back №, Name, Size, Progress, Status, Down, Up.
+
 - [ ] **Table** — hover highlights a row; click selects and fills the pane below; Ctrl/Shift-click selects several;
       column headers sort (arrow shows the direction, click again flips); narrow the window — Seeds/Peers, Time left,
       Up, Status, Size, № disappear in that order and come back.

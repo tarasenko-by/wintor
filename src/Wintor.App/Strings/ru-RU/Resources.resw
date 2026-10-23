@@ -256,4 +256,21 @@
   <data name="NavDownloadingItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Загружаются</value></data>
   <data name="NavCompletedItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Готовые</value></data>
   <data name="NavPausedItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>На паузе</value></data>
+  <data name="ColumnsButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Столбцы</value></data>
+  <data name="ColumnsButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Столбцы</value></data>
+  <data name="Columns_Reset" xml:space="preserve"><value>Сбросить столбцы</value></data>
+  <data name="ColumnResizer_Tooltip" xml:space="preserve"><value>Потяните, чтобы изменить ширину; двойной щелчок — как было</value></data>
+  <data name="Menu_LabelColor" xml:space="preserve"><value>Цвет</value></data>
+  <data name="LabelColor_Red" xml:space="preserve"><value>Красный</value></data>
+  <data name="LabelColor_Orange" xml:space="preserve"><value>Оранжевый</value></data>
+  <data name="LabelColor_Yellow" xml:space="preserve"><value>Жёлтый</value></data>
+  <data name="LabelColor_Green" xml:space="preserve"><value>Зелёный</value></data>
+  <data name="LabelColor_Teal" xml:space="preserve"><value>Бирюзовый</value></data>
+  <data name="LabelColor_Blue" xml:space="preserve"><value>Синий</value></data>
+  <data name="LabelColor_Purple" xml:space="preserve"><value>Фиолетовый</value></data>
+  <data name="LabelColor_Pink" xml:space="preserve"><value>Розовый</value></data>
+  <data name="TorrentCommands.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Действия с торрентами</value></data>
+  <data name="Search_Torrents" xml:space="preserve"><value>Поиск торрентов</value></data>
+  <data name="Search_Settings" xml:space="preserve"><value>Поиск в параметрах</value></data>
+  <data name="SettingsNothingFound.Text" xml:space="preserve"><value>Ничего не найдено.</value></data>
 </root>

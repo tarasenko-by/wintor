@@ -106,7 +106,7 @@
                         VerticalAlignment="Center"
                         AutomationProperties.AutomationId="DownloadedBar"
                         AutomationProperties.LabeledBy="{x:Bind DownloadedLabel, Mode=OneTime}"
-                        Background="{ThemeResource ControlAltFillColorTertiaryBrush}"
+                        Background="{ThemeResource ProgressTrackBrush}"
                         Fill="{ThemeResource TorrentDownloadingBrush}"
                         Values="{x:Bind ViewModel.Downloaded, Mode=OneWay}" />
                     <TextBlock
@@ -126,7 +126,7 @@
                         VerticalAlignment="Center"
                         AutomationProperties.AutomationId="AvailabilityBar"
                         AutomationProperties.LabeledBy="{x:Bind AvailabilityLabel, Mode=OneTime}"
-                        Background="{ThemeResource ControlAltFillColorTertiaryBrush}"
+                        Background="{ThemeResource ProgressTrackBrush}"
                         Fill="{ThemeResource TorrentDownloadingBrush}"
                         Values="{x:Bind ViewModel.Available, Mode=OneWay}" />
                     <TextBlock

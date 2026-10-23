@@ -28,7 +28,21 @@
                 <Setter Property="Padding" Value="16,12" />
             </Style>
 
-<Style x:Key="SectionHeaderStyle" BasedOn="{StaticResource BodyStrongTextBlockStyle}" TargetType="TextBlock">
+            <!--
+                Progress bars: a 16 px bar with 4 px corners on a grey track that fills with color, instead of Fluent's 1 px line
+                with a 3 px indicator (too thin to read in a table). Lightweight resources, so every ProgressBar in the
+                app follows; the track color comes from the Background below.
+            -->
+            <x:Double x:Key="ProgressBarTrackHeight">16</x:Double>
+            <x:Double x:Key="ProgressBarMinHeight">16</x:Double>
+            <CornerRadius x:Key="ProgressBarCornerRadius">4</CornerRadius>
+            <CornerRadius x:Key="ProgressBarTrackCornerRadius">4</CornerRadius>
+            <Style BasedOn="{StaticResource DefaultProgressBarStyle}" TargetType="ProgressBar">
+                <Setter Property="Background" Value="{ThemeResource ProgressTrackBrush}" />
+                <Setter Property="MinHeight" Value="16" />
+            </Style>
+
+            <Style x:Key="SectionHeaderStyle" BasedOn="{StaticResource BodyStrongTextBlockStyle}" TargetType="TextBlock">
                 <Setter Property="Margin" Value="2,24,0,6" />
                 <Setter Property="AutomationProperties.HeadingLevel" Value="Level2" />
             </Style>

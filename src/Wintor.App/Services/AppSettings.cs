@@ -55,8 +55,17 @@ public sealed class AppSettings
     /// <summary>Label names, including ones no torrent has right now.</summary>
     public List<string> Labels { get; set; } = [];
 
+    /// <summary>Label name → color key (Services/LabelColors).</summary>
+    public Dictionary<string, string> LabelColors { get; set; } = [];
+
     /// <summary>Torrent id → label name.</summary>
     public Dictionary<string, string> TorrentLabels { get; set; } = [];
+
+    /// <summary>Table columns the user turned off (see ViewModels/TableColumns for the keys).</summary>
+    public List<string> HiddenColumns { get; set; } = ["TimeLeft", "Seeds", "Peers"];
+
+    /// <summary>Column widths the user dragged, in DIPs, by column key.</summary>
+    public Dictionary<string, double> ColumnWidths { get; set; } = [];
 
     /// <summary>Height of the details pane under the torrent table, in DIPs.</summary>
     public double DetailsPaneHeight { get; set; } = 300;

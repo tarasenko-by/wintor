@@ -31,15 +31,31 @@
             </TitleBar.IconSource>
             <TitleBar.Content>
                 <!--  As wide as the Mail app's search; narrower windows shrink it (AppTitleBar_SizeChanged).  -->
-                <AutoSuggestBox
-                    x:Name="SearchBox"
-                    x:Uid="SearchBox"
-                    Width="440"
-                    VerticalAlignment="Center"
-                    AutomationProperties.AutomationId="SearchBox"
-                    PreviewKeyDown="SearchBox_PreviewKeyDown"
-                    QueryIcon="{icons:Huge Kind=Search01}"
-                    TextChanged="SearchBox_TextChanged" />
+                <!--
+                    The magnifier sits on the left, in front of the text; the box's own clear button (×) appears on
+                    the right only while there is text, so there are never two icons on one side.
+                -->
+                <Grid x:Name="SearchHost" VerticalAlignment="Center">
+                    <AutoSuggestBox
+                        x:Name="SearchBox"
+                        Width="440"
+                        AutomationProperties.AutomationId="SearchBox"
+                        PreviewKeyDown="SearchBox_PreviewKeyDown"
+                        TextChanged="SearchBox_TextChanged">
+                        <AutoSuggestBox.TextBoxStyle>
+                            <Style BasedOn="{StaticResource AutoSuggestBoxTextBoxStyle}" TargetType="TextBox">
+                                <Setter Property="Padding" Value="36,5,6,6" />
+                            </Style>
+                        </AutoSuggestBox.TextBoxStyle>
+                    </AutoSuggestBox>
+                    <ContentPresenter
+                        Margin="12,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Content="{icons:Huge Kind=Search01}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        IsHitTestVisible="False" />
+                </Grid>
             </TitleBar.Content>
         </TitleBar>
 

@@ -20,12 +20,12 @@ public sealed partial class PieceBar : Grid
     public static readonly DependencyProperty FillProperty = DependencyProperty.Register(
         nameof(Fill), typeof(Brush), typeof(PieceBar), new PropertyMetadata(null, (d, _) => ((PieceBar)d).Redraw()));
 
-    private readonly Border _bar = new() { CornerRadius = new CornerRadius(2) };
+    private readonly Border _bar = new() { CornerRadius = new CornerRadius(4) };
 
     public PieceBar()
     {
-        Height = 8;
-        CornerRadius = new CornerRadius(2);
+        Height = 16;
+        CornerRadius = new CornerRadius(4);
         Children.Add(_bar);
     }
 
@@ -56,8 +56,11 @@ public sealed partial class PieceBar : Grid
         var brush = new LinearGradientBrush { StartPoint = new Point(0, 0), EndPoint = new Point(1, 0) };
         for (int i = 0; i < values.Count; i++)
         {
-            // Hard edges: each bucket gets a stop at its start and one at its end.
-            var c = Color.FromArgb((byte)(color.A * Math.Clamp(values[i], 0, 1)), color.R, color.G, color.B);
+            // Hard edges: each bucket gets a stop at its start and one at its end. A started bucket is drawn at least
+            // at 45 % strength: a few pieces of a big bucket would otherwise be an invisible tint.
+            double value = Math.Clamp(values[i], 0, 1);
+            double strength = value <= 0 ? 0 : 0.45 + 0.55 * value;
+            var c = Color.FromArgb((byte)(color.A * strength), color.R, color.G, color.B);
             brush.GradientStops.Add(new GradientStop { Color = c, Offset = (double)i / values.Count });
             brush.GradientStops.Add(new GradientStop { Color = c, Offset = (double)(i + 1) / values.Count });
         }
