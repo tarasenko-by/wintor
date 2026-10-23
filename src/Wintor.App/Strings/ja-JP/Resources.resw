@@ -186,8 +186,6 @@
   <data name="CardDetailsButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>詳細</value></data>
   <data name="OpenFileButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>.torrent ファイルを開く (Ctrl+O)</value></data>
   <data name="AddMagnetButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>マグネットリンクを追加 (Ctrl+N)</value></data>
-  <data name="SortButton.Label" xml:space="preserve"><value>並べ替え</value></data>
-  <data name="SortButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>並べ替え</value></data>
   <data name="OpenFolderButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>フォルダーを開く</value></data>
   <data name="View_All" xml:space="preserve"><value>すべてのトレント</value></data>
   <data name="View_Downloading" xml:space="preserve"><value>ダウンロード中</value></data>
@@ -212,8 +210,6 @@
   <data name="Column_SortBy" xml:space="preserve"><value>「{0}」で並べ替え</value></data>
   <data name="Column_SortedAscending" xml:space="preserve"><value>{0}、昇順</value></data>
   <data name="Column_SortedDescending" xml:space="preserve"><value>{0}、降順</value></data>
-  <data name="Sort_Ascending" xml:space="preserve"><value>昇順</value></data>
-  <data name="Sort_Descending" xml:space="preserve"><value>降順</value></data>
   <data name="Menu_Label" xml:space="preserve"><value>ラベル</value></data>
   <data name="Menu_NewLabel" xml:space="preserve"><value>新しいラベル…</value></data>
   <data name="Menu_NoLabel" xml:space="preserve"><value>ラベルを外す</value></data>

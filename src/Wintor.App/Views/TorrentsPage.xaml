@@ -103,6 +103,12 @@
                     Icon="{icons:Huge Kind=Pause, Size=20}"
                     Visibility="{x:Bind ViewModel.ShowPauseButton, Mode=OneWay}" />
                 <AppBarButton
+                    x:Uid="OpenFolderButton"
+                    AutomationProperties.AutomationId="OpenFolderButton"
+                    Click="OpenFolder_Click"
+                    Icon="{icons:Huge Kind=FolderOpen, Size=20}"
+                    IsEnabled="{x:Bind ViewModel.HasSelection, Mode=OneWay}" />
+                <AppBarButton
                     x:Uid="RemoveButton"
                     AutomationProperties.AutomationId="RemoveButton"
                     Click="Remove_Click"
@@ -112,22 +118,8 @@
                         <KeyboardAccelerator Key="Delete" />
                     </AppBarButton.KeyboardAccelerators>
                 </AppBarButton>
-                <AppBarSeparator />
-                <AppBarButton
-                    x:Uid="SortButton"
-                    AutomationProperties.AutomationId="SortButton"
-                    Icon="{icons:Huge Kind=Sorting01, Size=20}">
-                    <AppBarButton.Flyout>
-                        <MenuFlyout x:Name="SortMenu" Opening="SortMenu_Opening" Placement="BottomEdgeAlignedRight" />
-                    </AppBarButton.Flyout>
-                </AppBarButton>
+                <!--  Sorting is done from the column headers.  -->
                 <CommandBar.SecondaryCommands>
-                    <AppBarButton
-                        x:Uid="OpenFolderButton"
-                        AutomationProperties.AutomationId="OpenFolderButton"
-                        Click="OpenFolder_Click"
-                        Icon="{icons:Huge Kind=FolderOpen}"
-                        IsEnabled="{x:Bind ViewModel.HasSelection, Mode=OneWay}" />
                     <AppBarButton
                         x:Uid="CopyMagnetButton"
                         AutomationProperties.AutomationId="CopyMagnetButton"

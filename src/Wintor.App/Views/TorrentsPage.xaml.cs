@@ -279,35 +279,6 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
         }
     }
 
-    private void SortMenu_Opening(object? sender, object e)
-    {
-        SortMenu.Items.Clear();
-        foreach (TorrentSort column in Enum.GetValues<TorrentSort>())
-        {
-            var item = new RadioMenuFlyoutItem
-            {
-                Text = Strings.Get("Column_" + column),
-                GroupName = "column",
-                IsChecked = ViewModel.Sort == column,
-            };
-            item.Click += (_, _) => ViewModel.Sort = column;
-            SortMenu.Items.Add(item);
-        }
-
-        SortMenu.Items.Add(new MenuFlyoutSeparator());
-        foreach (bool descending in new[] { false, true })
-        {
-            var item = new RadioMenuFlyoutItem
-            {
-                Text = Strings.Get(descending ? "Sort_Descending" : "Sort_Ascending"),
-                GroupName = "direction",
-                IsChecked = ViewModel.SortDescending == descending,
-            };
-            item.Click += (_, _) => ViewModel.SortDescending = descending;
-            SortMenu.Items.Add(item);
-        }
-    }
-
     // --- Adding ---
 
     private async void AddMagnet_Click(object sender, RoutedEventArgs e)

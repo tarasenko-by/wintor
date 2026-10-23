@@ -186,8 +186,6 @@
   <data name="CardDetailsButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Ayrıntılar</value></data>
   <data name="OpenFileButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>.torrent dosyası aç (Ctrl+O)</value></data>
   <data name="AddMagnetButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Magnet bağlantısı ekle (Ctrl+N)</value></data>
-  <data name="SortButton.Label" xml:space="preserve"><value>Sırala</value></data>
-  <data name="SortButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Sırala</value></data>
   <data name="OpenFolderButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Klasörü aç</value></data>
   <data name="View_All" xml:space="preserve"><value>Tüm torrent’ler</value></data>
   <data name="View_Downloading" xml:space="preserve"><value>İndiriliyor</value></data>
@@ -212,8 +210,6 @@
   <data name="Column_SortBy" xml:space="preserve"><value>Şuna göre sırala: {0}</value></data>
   <data name="Column_SortedAscending" xml:space="preserve"><value>{0}, artan sırada</value></data>
   <data name="Column_SortedDescending" xml:space="preserve"><value>{0}, azalan sırada</value></data>
-  <data name="Sort_Ascending" xml:space="preserve"><value>Artan</value></data>
-  <data name="Sort_Descending" xml:space="preserve"><value>Azalan</value></data>
   <data name="Menu_Label" xml:space="preserve"><value>Etiket</value></data>
   <data name="Menu_NewLabel" xml:space="preserve"><value>Yeni etiket…</value></data>
   <data name="Menu_NoLabel" xml:space="preserve"><value>Etiketi kaldır</value></data>

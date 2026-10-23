@@ -186,8 +186,6 @@
   <data name="CardDetailsButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Détails</value></data>
   <data name="OpenFileButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Ouvrir un fichier .torrent (Ctrl+O)</value></data>
   <data name="AddMagnetButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Ajouter un lien magnet (Ctrl+N)</value></data>
-  <data name="SortButton.Label" xml:space="preserve"><value>Trier</value></data>
-  <data name="SortButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Trier</value></data>
   <data name="OpenFolderButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Ouvrir le dossier</value></data>
   <data name="View_All" xml:space="preserve"><value>Tous les torrents</value></data>
   <data name="View_Downloading" xml:space="preserve"><value>En cours</value></data>
@@ -212,8 +210,6 @@
   <data name="Column_SortBy" xml:space="preserve"><value>Trier par {0}</value></data>
   <data name="Column_SortedAscending" xml:space="preserve"><value>{0}, tri croissant</value></data>
   <data name="Column_SortedDescending" xml:space="preserve"><value>{0}, tri décroissant</value></data>
-  <data name="Sort_Ascending" xml:space="preserve"><value>Croissant</value></data>
-  <data name="Sort_Descending" xml:space="preserve"><value>Décroissant</value></data>
   <data name="Menu_Label" xml:space="preserve"><value>Étiquette</value></data>
   <data name="Menu_NewLabel" xml:space="preserve"><value>Nouvelle étiquette…</value></data>
   <data name="Menu_NoLabel" xml:space="preserve"><value>Retirer l’étiquette</value></data>
