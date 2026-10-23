@@ -50,6 +50,8 @@ while testing; tick them off after a look by hand. Newest on top.
 - [ ] **Narrow window** — commands move into the "…" overflow; nothing is clipped.
 - [ ] **High contrast** — switch Windows to a contrast theme with the app open: readable, no backdrop.
 - [ ] **Icon-only Resume / Pause / Remove** — hover each: the tooltip shows its name.
+- [ ] **Speed limit dialog** — right-click a torrent → "Speed limit…": the fields show its current limits; set
+      e.g. 100 / 20 KB/s → General → Transfer shows them and the download rate stays under the limit; 0 clears.
 
 ## Done
 

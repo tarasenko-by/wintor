@@ -326,6 +326,8 @@ public partial class TorrentDetailsViewModel : ObservableObject
             new(Strings.Get("Info_Ratio"), t.Ratio.ToString("0.000")),
             new(Strings.Get("Info_DownloadSpeed"), Formatting.Rate(s.DownloadRate)),
             new(Strings.Get("Info_UploadSpeed"), Formatting.Rate(s.UploadRate)),
+            new(Strings.Get("Info_DownloadLimit"), s.DownloadLimit > 0 ? Formatting.Rate(s.DownloadLimit) : Strings.Get("Info_NoLimit")),
+            new(Strings.Get("Info_UploadLimit"), s.UploadLimit > 0 ? Formatting.Rate(s.UploadLimit) : Strings.Get("Info_NoLimit")),
             new(Strings.Get("Info_Seeds"), Strings.Format("Info_Connected", t.ConnectedSeeds)),
             new(Strings.Get("Info_Peers"), Strings.Format("Info_Connected", t.ConnectedLeechers)),
             new(Strings.Get("Info_Wasted"), Formatting.Bytes(t.Wasted)),

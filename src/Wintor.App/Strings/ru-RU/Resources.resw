@@ -273,4 +273,13 @@
   <data name="Search_Torrents" xml:space="preserve"><value>Поиск торрентов</value></data>
   <data name="Search_Settings" xml:space="preserve"><value>Поиск в параметрах</value></data>
   <data name="SettingsNothingFound.Text" xml:space="preserve"><value>Ничего не найдено.</value></data>
+  <data name="Menu_SpeedLimit" xml:space="preserve"><value>Ограничение скорости…</value></data>
+  <data name="SpeedDialog_Title" xml:space="preserve"><value>Ограничение скорости</value></data>
+  <data name="SpeedDialog_Download" xml:space="preserve"><value>Загрузка, КБ/с</value></data>
+  <data name="SpeedDialog_Upload" xml:space="preserve"><value>Отдача, КБ/с</value></data>
+  <data name="SpeedDialog_Hint" xml:space="preserve"><value>0 — без своего ограничения. Общее ограничение из параметров действует всегда.</value></data>
+  <data name="SpeedDialog_Apply" xml:space="preserve"><value>Применить</value></data>
+  <data name="Info_DownloadLimit" xml:space="preserve"><value>Огранич. загрузки</value></data>
+  <data name="Info_UploadLimit" xml:space="preserve"><value>Огранич. отдачи</value></data>
+  <data name="Info_NoLimit" xml:space="preserve"><value>Нет</value></data>
 </root>

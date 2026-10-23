@@ -273,4 +273,13 @@
   <data name="Search_Torrents" xml:space="preserve"><value>Search torrents</value></data>
   <data name="Search_Settings" xml:space="preserve"><value>Search settings</value></data>
   <data name="SettingsNothingFound.Text" xml:space="preserve"><value>No settings match your search.</value></data>
+  <data name="Menu_SpeedLimit" xml:space="preserve"><value>Speed limit…</value></data>
+  <data name="SpeedDialog_Title" xml:space="preserve"><value>Speed limit</value></data>
+  <data name="SpeedDialog_Download" xml:space="preserve"><value>Download, KB/s</value></data>
+  <data name="SpeedDialog_Upload" xml:space="preserve"><value>Upload, KB/s</value></data>
+  <data name="SpeedDialog_Hint" xml:space="preserve"><value>0 means no limit of its own. The overall limit from Settings always applies too.</value></data>
+  <data name="SpeedDialog_Apply" xml:space="preserve"><value>Apply</value></data>
+  <data name="Info_DownloadLimit" xml:space="preserve"><value>Download limit</value></data>
+  <data name="Info_UploadLimit" xml:space="preserve"><value>Upload limit</value></data>
+  <data name="Info_NoLimit" xml:space="preserve"><value>None</value></data>
 </root>

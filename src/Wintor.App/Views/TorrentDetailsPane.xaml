@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:Wintor.App.Controls"
+    xmlns:icons="using:Wintor.App.Icons"
     xmlns:local="using:Wintor.App.Views"
     xmlns:vm="using:Wintor.App.ViewModels">
 
@@ -53,23 +54,28 @@
                 <SelectorBarItem
                     x:Uid="TabGeneral"
                     AutomationProperties.AutomationId="TabGeneral"
+                    Icon="{icons:Huge Kind=InformationCircle}"
                     IsSelected="True"
                     Tag="General" />
                 <SelectorBarItem
                     x:Uid="TabFiles"
                     AutomationProperties.AutomationId="TabFiles"
+                    Icon="{icons:Huge Kind=File01}"
                     Tag="Files" />
                 <SelectorBarItem
                     x:Uid="TabPeers"
                     AutomationProperties.AutomationId="TabPeers"
+                    Icon="{icons:Huge Kind=UserGroup}"
                     Tag="Peers" />
                 <SelectorBarItem
                     x:Uid="TabTrackers"
                     AutomationProperties.AutomationId="TabTrackers"
+                    Icon="{icons:Huge Kind=Server}"
                     Tag="Trackers" />
                 <SelectorBarItem
                     x:Uid="TabSpeed"
                     AutomationProperties.AutomationId="TabSpeed"
+                    Icon="{icons:Huge Kind=DashboardSpeed01}"
                     Tag="Speed" />
             </SelectorBar>
             <TextBlock
@@ -107,7 +113,7 @@
                         AutomationProperties.AutomationId="DownloadedBar"
                         AutomationProperties.LabeledBy="{x:Bind DownloadedLabel, Mode=OneTime}"
                         Background="{ThemeResource ProgressTrackBrush}"
-                        Fill="{ThemeResource TorrentDownloadingBrush}"
+                        Fill="{ThemeResource PieceBarBrush}"
                         Values="{x:Bind ViewModel.Downloaded, Mode=OneWay}" />
                     <TextBlock
                         Grid.Column="2"
@@ -127,7 +133,7 @@
                         AutomationProperties.AutomationId="AvailabilityBar"
                         AutomationProperties.LabeledBy="{x:Bind AvailabilityLabel, Mode=OneTime}"
                         Background="{ThemeResource ProgressTrackBrush}"
-                        Fill="{ThemeResource TorrentDownloadingBrush}"
+                        Fill="{ThemeResource PieceBarBrush}"
                         Values="{x:Bind ViewModel.Available, Mode=OneWay}" />
                     <TextBlock
                         Grid.Row="1"

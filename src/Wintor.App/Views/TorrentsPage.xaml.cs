@@ -554,6 +554,86 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
         }
     }
 
+    /// <summary>
+    /// Download and upload limits for the chosen torrents, in KB/s (0 = none of their own). Prefilled with their
+    /// current limits when they all share them.
+    /// </summary>
+    private async Task AskSpeedLimitsAsync(IReadOnlyList<TorrentItemViewModel> targets)
+    {
+        if (targets.Count == 0 || _showingDialog)
+        {
+            return;
+        }
+
+        static double Shared(IEnumerable<int> limits)
+        {
+            var distinct = limits.Distinct().ToList();
+            return distinct.Count == 1 ? distinct[0] / 1024 : 0;
+        }
+
+        NumberBox Box(string header, string id, double value)
+        {
+            var box = new NumberBox
+            {
+                Header = Strings.Get(header),
+                Minimum = 0,
+                Value = value,
+                SmallChange = 128,
+                LargeChange = 1024,
+                SpinButtonPlacementMode = NumberBoxSpinButtonPlacementMode.Compact,
+            };
+            AutomationProperties.SetAutomationId(box, id);
+            return box;
+        }
+
+        NumberBox down = Box("SpeedDialog_Download", "SpeedLimitDownload", Shared(targets.Select(t => t.Snapshot?.DownloadLimit ?? 0)));
+        NumberBox up = Box("SpeedDialog_Upload", "SpeedLimitUpload", Shared(targets.Select(t => t.Snapshot?.UploadLimit ?? 0)));
+        var dialog = Dialogs.Prepare(new ContentDialog
+        {
+            Title = Strings.Get("SpeedDialog_Title"),
+            Content = new StackPanel
+            {
+                Spacing = 12,
+                MinWidth = 360,
+                Children =
+                {
+                    new TextBlock
+                    {
+                        Text = targets.Count == 1 ? targets[0].Name : Strings.Format("RemoveDialog_Several", targets.Count),
+                        Style = (Style)Application.Current.Resources["BodyStrongTextBlockStyle"],
+                        TextTrimming = TextTrimming.CharacterEllipsis,
+                    },
+                    down,
+                    up,
+                    new TextBlock
+                    {
+                        Text = Strings.Get("SpeedDialog_Hint"),
+                        Style = (Style)Application.Current.Resources["SecondaryCaptionStyle"],
+                        TextWrapping = TextWrapping.Wrap,
+                    },
+                },
+            },
+            PrimaryButtonText = Strings.Get("SpeedDialog_Apply"),
+            CloseButtonText = Strings.Get("Cancel"),
+            DefaultButton = ContentDialogButton.Primary,
+        }, XamlRoot);
+
+        _showingDialog = true;
+        try
+        {
+            if (await dialog.ShowQueuedAsync() == ContentDialogResult.Primary)
+            {
+                // An empty box (NaN) means no limit.
+                static int KiB(double value) => double.IsNaN(value) ? 0 : (int)Math.Clamp(value, 0, 10_000_000);
+                await ViewModel.SetSpeedLimitsAsync(targets, KiB(down.Value), KiB(up.Value));
+            }
+        }
+        finally
+        {
+            _showingDialog = false;
+        }
+    }
+
     // --- Context menu: one menu for every row, filled for the row it opens on ---
 
     private void ItemMenu_Opening(object? sender, object e)
@@ -583,6 +663,7 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
             _itemMenu.Items.Add(Entry("Menu_CopyMagnet", HugeIconKind.Link01, () => _ = CopyMagnetAsync(item.Id)));
         }
 
+        _itemMenu.Items.Add(Entry("Menu_SpeedLimit", HugeIconKind.DashboardSpeed01, () => _ = AskSpeedLimitsAsync(targets)));
         _itemMenu.Items.Add(new MenuFlyoutSeparator());
         _itemMenu.Items.Add(LabelMenu(targets));
         _itemMenu.Items.Add(OrderMenu(targets));

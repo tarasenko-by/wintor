@@ -130,6 +130,34 @@ public sealed class MonoTorrentEngineTests : IDisposable
     }
 
     [Fact]
+    public async Task SpeedLimits_ApplyToOneTorrentAndSurviveARestart()
+    {
+        int port = GetFreePort();
+        string torrentPath = await CreateTorrentFileAsync();
+        string limited, other;
+        await using (var engine = await CreateEngineAsync(port))
+        {
+            limited = await engine.AddMagnetAsync(Magnet, DownloadDir);
+            other = await engine.AddTorrentFileAsync(torrentPath, DownloadDir);
+
+            await engine.SetSpeedLimitsAsync(limited, 512 * 1024, 64 * 1024);
+
+            TorrentSnapshot snapshot = engine.GetSnapshots().Single(s => s.Id == limited);
+            Assert.Equal(512 * 1024, snapshot.DownloadLimit);
+            Assert.Equal(64 * 1024, snapshot.UploadLimit);
+            Assert.False(engine.GetSnapshots().Single(s => s.Id == other).HasSpeedLimit);
+        }
+
+        await using var restarted = await CreateEngineAsync(port);
+        TorrentSnapshot restored = restarted.GetSnapshots().Single(s => s.Id == limited);
+        Assert.Equal(512 * 1024, restored.DownloadLimit);
+        Assert.Equal(64 * 1024, restored.UploadLimit);
+
+        await restarted.SetSpeedLimitsAsync(limited, 0, 0);
+        Assert.False(restarted.GetSnapshots().Single(s => s.Id == limited).HasSpeedLimit);
+    }
+
+    [Fact]
     public async Task ApplyOptions_WhileRunning_KeepsTorrents()
     {
         await using var engine = await CreateEngineAsync();

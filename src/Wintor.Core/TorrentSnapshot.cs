@@ -37,6 +37,14 @@ public sealed record TorrentSnapshot(
     /// <summary>Folder that holds the torrent's files (its own folder for multi-file torrents).</summary>
     public string ContentPath { get; init; } = SavePath;
 
+    /// <summary>This torrent's own download limit in bytes per second; 0 = none.</summary>
+    public int DownloadLimit { get; init; }
+
+    /// <summary>This torrent's own upload limit in bytes per second; 0 = none.</summary>
+    public int UploadLimit { get; init; }
+
+    public bool HasSpeedLimit => DownloadLimit > 0 || UploadLimit > 0;
+
     public bool IsComplete => Progress >= 1 && TotalSize > 0;
 
     public long DownloadedBytes => (long)(TotalSize * Progress);

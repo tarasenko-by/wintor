@@ -33,6 +33,9 @@ public interface ITorrentEngine : IAsyncDisposable
 
     Task SetFilePriorityAsync(string id, int fileIndex, FilePriority priority);
 
+    /// <summary>Speed limits for one torrent, in bytes per second; 0 means no limit of its own (the global one still applies).</summary>
+    Task SetSpeedLimitsAsync(string id, int maxDownloadRate, int maxUploadRate);
+
     /// <summary>Current state of every torrent. Cheap enough to call once per second.</summary>
     IReadOnlyList<TorrentSnapshot> GetSnapshots();
 

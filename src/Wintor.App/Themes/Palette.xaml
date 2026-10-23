@@ -64,9 +64,11 @@
             <SolidColorBrush x:Key="SystemFillColorCautionBrush" Color="#D97706" />
             <SolidColorBrush x:Key="SystemFillColorSuccessBrush" Color="#16A34A" />
 
-            <!--  Torrent progress: downloading green-600, seeding blue-600, paused / stopped zinc-400  -->
-            <SolidColorBrush x:Key="TorrentDownloadingBrush" Color="#16A34A" />
-            <SolidColorBrush x:Key="TorrentSeedingBrush" Color="#2563EB" />
+            <!--  Torrent progress: downloading blue-600, finished and seeding green-600, paused / stopped zinc-400  -->
+            <SolidColorBrush x:Key="TorrentDownloadingBrush" Color="#2563EB" />
+            <SolidColorBrush x:Key="TorrentSeedingBrush" Color="#16A34A" />
+            <!--  Piece bars ("Downloaded", "Availability"): green-600  -->
+            <SolidColorBrush x:Key="PieceBarBrush" Color="#16A34A" />
             <SolidColorBrush x:Key="TorrentInactiveBrush" Color="{StaticResource Zinc400}" />
             <!--  The empty part of progress and piece bars  -->
             <SolidColorBrush x:Key="ProgressTrackBrush" Color="{StaticResource Zinc200}" />
@@ -103,9 +105,10 @@
             <SolidColorBrush x:Key="SystemFillColorCautionBrush" Color="#FBBF24" />
             <SolidColorBrush x:Key="SystemFillColorSuccessBrush" Color="#4ADE80" />
 
-            <!--  Torrent progress: green-500, blue-500, zinc-500  -->
-            <SolidColorBrush x:Key="TorrentDownloadingBrush" Color="#22C55E" />
-            <SolidColorBrush x:Key="TorrentSeedingBrush" Color="#3B82F6" />
+            <!--  Torrent progress: blue-500, green-500, zinc-500  -->
+            <SolidColorBrush x:Key="TorrentDownloadingBrush" Color="#3B82F6" />
+            <SolidColorBrush x:Key="TorrentSeedingBrush" Color="#22C55E" />
+            <SolidColorBrush x:Key="PieceBarBrush" Color="#22C55E" />
             <SolidColorBrush x:Key="TorrentInactiveBrush" Color="{StaticResource Zinc500}" />
             <SolidColorBrush x:Key="ProgressTrackBrush" Color="{StaticResource Zinc700}" />
         </ResourceDictionary>
@@ -114,6 +117,7 @@
             <SolidColorBrush x:Key="AppWindowBackgroundBrush" Color="{ThemeResource SystemColorWindowColor}" />
             <SolidColorBrush x:Key="TorrentDownloadingBrush" Color="{ThemeResource SystemColorHighlightColor}" />
             <SolidColorBrush x:Key="TorrentSeedingBrush" Color="{ThemeResource SystemColorHighlightColor}" />
+            <SolidColorBrush x:Key="PieceBarBrush" Color="{ThemeResource SystemColorHighlightColor}" />
             <SolidColorBrush x:Key="TorrentInactiveBrush" Color="{ThemeResource SystemColorGrayTextColor}" />
             <SolidColorBrush x:Key="ProgressTrackBrush" Color="{ThemeResource SystemColorGrayTextColor}" />
             <!--  No transparency in high contrast: pages lie on the system window color.  -->

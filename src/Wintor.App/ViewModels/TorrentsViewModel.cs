@@ -200,6 +200,16 @@ public partial class TorrentsViewModel : ObservableObject
             }
         });
 
+    /// <summary>Per-torrent limits in KiB/s; 0 = none of its own (the global limit from Settings still applies).</summary>
+    public Task SetSpeedLimitsAsync(IReadOnlyList<TorrentItemViewModel> items, int downloadKiB, int uploadKiB) =>
+        RunAsync(async () =>
+        {
+            foreach (TorrentItemViewModel item in items)
+            {
+                await _engine.SetSpeedLimitsAsync(item.Id, Math.Max(downloadKiB, 0) * 1024, Math.Max(uploadKiB, 0) * 1024);
+            }
+        });
+
     public Task PauseAllAsync() => PauseAsync(_items.Values);
 
     public Task ResumeAllAsync() => ResumeAsync(_items.Values);

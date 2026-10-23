@@ -46,7 +46,7 @@ public partial class TorrentItemViewModel(string id) : ObservableObject
     [ObservableProperty]
     public partial bool IsError { get; set; }
 
-    // The progress bar's color tells the state at a glance: green downloading, blue seeding,
+    // The progress bar's color tells the state at a glance: blue downloading, green finished and seeding,
     // grey when nothing moves (paused, stopped, error). One of the three is shown.
     [ObservableProperty]
     public partial bool ShowDownloadingBar { get; set; }

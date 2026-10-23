@@ -153,6 +153,19 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
         await SaveStateAsync();
     }
 
+    public async Task SetSpeedLimitsAsync(string id, int maxDownloadRate, int maxUploadRate)
+    {
+        TorrentManager manager = Get(id);
+        var settings = new TorrentSettingsBuilder(manager.Settings)
+        {
+            MaximumDownloadRate = Math.Max(maxDownloadRate, 0),
+            MaximumUploadRate = Math.Max(maxUploadRate, 0),
+        };
+        await manager.UpdateSettingsAsync(settings.ToSettings());
+        // Torrent settings are part of the engine state, so the limits come back after a restart.
+        await SaveStateAsync();
+    }
+
     public async Task<TorrentDetails?> GetDetailsAsync(string id)
     {
         TorrentManager? manager = _engine?.Torrents.FirstOrDefault(t => IdOf(t) == id);
@@ -405,6 +418,8 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
             ErrorMessage: manager.Error?.Exception?.Message)
         {
             ContentPath = manager.ContainingDirectory,
+            DownloadLimit = manager.Settings.MaximumDownloadRate,
+            UploadLimit = manager.Settings.MaximumUploadRate,
         };
     }
 

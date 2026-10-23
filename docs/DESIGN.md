@@ -37,10 +37,12 @@ They are binding for all UI changes (see [AGENTS.md](../AGENTS.md)).
     back room from widened columns. Header hover is square, no rounding.
     Choices and widths are remembered. A window too narrow for the chosen columns hides optional ones for the
     moment, right to left, until the name has 200 px.
-  - Progress color says the state: **green** downloading, **blue** seeding, **grey** paused / stopped (red on error).
+  - Progress color says the state: **blue** downloading, **green** finished and seeding, **grey** paused / stopped (red on error). Piece bars use `PieceBarBrush` (green).
     Use the `Torrent*Brush` palette keys, never ad-hoc colors.
   - Click selects (Ctrl/Shift for several, Ctrl+A, Esc clears); the selected torrent shows in the pane below.
     Right-click menu acts on the whole selection when the row is part of it. № order: Alt+↑/↓, or the "Order" menu.
+    "Speed limit…" sets per-torrent download/upload limits in KB/s (0 = none); the global limit from Settings still
+    applies. The Transfer section shows them.
   - The pane (resizable with the splitter, double-click resets) has tabs in a `SelectorBar`: General (piece bars
     "Downloaded" and "Availability", Transfer, General info), Files, Peers, Trackers, Speed (graph).
   - When `Microsoft.UI.Xaml.Controls.Tabular.TableView` ships in a stable Windows App SDK (it is experimental-only
