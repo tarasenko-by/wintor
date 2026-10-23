@@ -48,7 +48,7 @@
   <data name="Status_Stopped" xml:space="preserve"><value>Остановлен</value></data>
   <data name="Status_Paused" xml:space="preserve"><value>На паузе</value></data>
   <data name="Status_Starting" xml:space="preserve"><value>Запуск…</value></data>
-  <data name="Status_FetchingMetadata" xml:space="preserve"><value>Получение метаданных…</value></data>
+  <data name="Status_FetchingMetadata" xml:space="preserve"><value>Получение списка файлов…</value></data>
   <data name="Status_Checking" xml:space="preserve"><value>Проверка файлов…</value></data>
   <data name="Status_Downloading" xml:space="preserve"><value>Загрузка</value></data>
   <data name="Status_DownloadingEta" xml:space="preserve"><value>Загрузка · осталось {0}</value></data>

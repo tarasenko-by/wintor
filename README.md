@@ -57,6 +57,11 @@ without touching the app.
 UI strings live in `src/Wintor.App/Strings/<language>/Resources.resw`.
 To add a language, copy `en-US` to a new folder (e.g. `de-DE`) and translate the values.
 
+## Contributing
+
+Contributions are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). Project rules for people and
+AI coding agents are in [AGENTS.md](AGENTS.md); UI rules in [docs/DESIGN.md](docs/DESIGN.md).
+
 ## License
 
 Wintor is free software: you can redistribute it and/or modify it under the terms of the

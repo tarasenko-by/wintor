@@ -48,7 +48,7 @@
   <data name="Status_Stopped" xml:space="preserve"><value>Stopped</value></data>
   <data name="Status_Paused" xml:space="preserve"><value>Paused</value></data>
   <data name="Status_Starting" xml:space="preserve"><value>Starting…</value></data>
-  <data name="Status_FetchingMetadata" xml:space="preserve"><value>Getting metadata…</value></data>
+  <data name="Status_FetchingMetadata" xml:space="preserve"><value>Getting file list…</value></data>
   <data name="Status_Checking" xml:space="preserve"><value>Checking files…</value></data>
   <data name="Status_Downloading" xml:space="preserve"><value>Downloading</value></data>
   <data name="Status_DownloadingEta" xml:space="preserve"><value>Downloading · {0} left</value></data>
