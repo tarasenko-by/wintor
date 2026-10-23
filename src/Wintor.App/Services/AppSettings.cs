@@ -42,8 +42,6 @@ public sealed class AppSettings
 
     public bool NotifyWhenComplete { get; set; } = true;
 
-    /// <summary>The one-time "still running in the background" notification was shown.</summary>
-    public bool TrayHintShown { get; set; }
 
     /// <summary>The user's own order of torrents (the № column), by id.</summary>
     public List<string> Queue { get; set; } = [];

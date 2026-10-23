@@ -4,6 +4,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Shapes;
 using Windows.Foundation;
+using Wintor.Core;
 
 namespace Wintor.App.Controls;
 
@@ -51,7 +52,7 @@ public sealed partial class SpeedGraph : Grid
     }
 
     /// <summary>How many samples the width stands for.</summary>
-    public int Capacity { get; set; } = 300;
+    public int Capacity { get; set; } = SpeedHistory.DefaultLength;
 
     // Grid has no automation peer of its own; without one Narrator and UI tests cannot see the graph.
     protected override AutomationPeer OnCreateAutomationPeer() => new FrameworkElementAutomationPeer(this);

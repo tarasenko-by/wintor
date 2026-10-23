@@ -33,6 +33,9 @@ public sealed partial class MainWindow : Window
     private readonly NotificationService _notifications = App.Services.GetRequiredService<NotificationService>();
     private TrayIcon? _tray;
     private bool _exiting;
+    private bool _restartAfterExit;
+    private bool _shuttingDown;
+    private bool _trayHintShown;
     private bool _engineStopped;
 
     public MainWindow()
@@ -109,7 +112,33 @@ public sealed partial class MainWindow : Window
     public void Exit()
     {
         _exiting = true;
-        Close();
+        _ = ShutdownAsync();
+    }
+
+    /// <summary>Starts a fresh Wintor while this one is closing (the engine is already stopped).</summary>
+    private static async Task LaunchNewInstanceAsync()
+    {
+        try
+        {
+            // Give up the single-instance key first: otherwise the new process finds it still held, hands its
+            // launch to this one (already closing) and exits, and nothing comes back.
+            Microsoft.Windows.AppLifecycle.AppInstance.GetCurrent().UnregisterKey();
+            // AppInstance.Restart refuses when the window is not in the foreground, and ours is hidden by now;
+            // launching our own Start menu entry has no such condition.
+            var entries = await Windows.ApplicationModel.Package.Current.GetAppListEntriesAsync();
+            await entries[0].LaunchAsync();
+        }
+        catch (Exception)
+        {
+            // Could not relaunch: Wintor simply closes, and the user starts it again.
+        }
+    }
+
+    /// <summary>Quits gracefully like <see cref="Exit"/>, then starts again (e.g. to load another interface language).</summary>
+    public void Restart()
+    {
+        _restartAfterExit = true;
+        Exit();
     }
 
     [DllImport("user32.dll")]
@@ -386,18 +415,32 @@ public sealed partial class MainWindow : Window
         {
             args.Cancel = true;
             AppWindow.Hide();
-            if (!_settings.TrayHintShown)
+            // Once per launch: enough to explain why the window "closed" but the app did not, without nagging.
+            if (!_trayHintShown)
             {
-                _settings.TrayHintShown = true;
-                _settings.Save();
+                _trayHintShown = true;
                 _notifications.ShowStillRunning();
             }
 
             return;
         }
 
-        // Stop the engine gracefully so resume data is written, then close for real.
         args.Cancel = true;
+        await ShutdownAsync();
+    }
+
+    /// <summary>
+    /// Stops the engine gracefully so resume data is written, then closes for real. Window.Close() alone does not
+    /// raise AppWindow.Closing, so every way of quitting (×, the tray's Exit, "wintor --quit", restart) ends here.
+    /// </summary>
+    private async Task ShutdownAsync()
+    {
+        if (_shuttingDown)
+        {
+            return;
+        }
+
+        _shuttingDown = true;
         AppWindow.Hide();
         try
         {
@@ -408,6 +451,11 @@ public sealed partial class MainWindow : Window
             _engineStopped = true;
             _tray?.Dispose();
             _notifications.Unregister();
+            if (_restartAfterExit)
+            {
+                await LaunchNewInstanceAsync();
+            }
+
             Close();
         }
     }

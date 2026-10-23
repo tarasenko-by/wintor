@@ -288,4 +288,10 @@
   <data name="OfflineInfoBar.Message" xml:space="preserve"><value>Torrents will continue when you're back online.</value></data>
   <data name="AddDialog_NotEnoughSpace" xml:space="preserve"><value>Not enough space on this drive: {0} free, {1} needed.</value></data>
   <data name="A11y_CurrentLabel" xml:space="preserve"><value>Current label</value></data>
+  <data name="About_Description" xml:space="preserve"><value>Version {0} · © 2026 {1} and Wintor contributors</value></data>
+  <data name="LanguageCard.Header" xml:space="preserve"><value>Language</value></data>
+  <data name="LanguageCard.Description" xml:space="preserve"><value>Applies after Wintor restarts.</value></data>
+  <data name="LanguageBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Language</value></data>
+  <data name="LanguageSystem" xml:space="preserve"><value>As in Windows</value></data>
+  <data name="LanguageRestartButton.Content" xml:space="preserve"><value>Restart</value></data>
 </root>

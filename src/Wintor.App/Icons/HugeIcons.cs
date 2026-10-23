@@ -19,7 +19,11 @@ public static class HugeIcons
         // A Geometry can only belong to one element, so every icon gets its own parsed copy.
         var geometry = (Geometry)XamlBindingHelper.ConvertValue(typeof(Geometry), HugeIconData.Get(kind));
         double scale = size / SourceSize;
-        geometry.Transform = new ScaleTransform { ScaleX = scale, ScaleY = scale };
+        if (scale != 1)
+        {
+            // At exactly 1 a ScaleTransform made the icon disappear, so the native 24 px size gets none.
+            geometry.Transform = new ScaleTransform { ScaleX = scale, ScaleY = scale };
+        }
 
         // A fixed square keeps every icon aligned the same way regardless of its drawing bounds.
         return new PathIcon { Data = geometry, Width = size, Height = size };

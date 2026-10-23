@@ -58,6 +58,10 @@ while testing; tick them off after a look by hand. Newest on top.
       goes away when the network is back.
 - [ ] **Not enough space** — add a .torrent bigger than the free space of the chosen drive (or pick a small USB
       stick as the folder): a caution line under the folder names free vs. needed space; unticking files updates it.
+- [ ] **Close to tray** — close the window with ×: a "Wintor is still running" notification appears once per launch;
+      clicking it brings the window back.
+- [ ] **Language** — Settings → Language → pick another → Restart: Wintor closes and comes back in that language
+      with the same torrents; "As in Windows" + Restart returns to the system language.
 - [ ] **Long languages** — switch the Windows display language to German, then Polish (Settings → Time &
       language), restart Wintor: column headers, status cells, side pane, dialogs and Settings are not clipped.
       Also look at Japanese or Chinese once for font fallback.

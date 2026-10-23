@@ -74,19 +74,16 @@ public sealed record InfoRow(string Label, string Value);
 /// <summary>The details pane under the torrent table: whichever torrent is selected, refreshed every second.</summary>
 public partial class TorrentDetailsViewModel : ObservableObject
 {
-    /// <summary>Five minutes of one-second samples for the speed graph.</summary>
-    public const int SpeedHistoryLength = 300;
-
     private readonly ITorrentEngine _engine;
+    private readonly SpeedHistory _speedHistory;
     private readonly DispatcherQueueTimer _timer;
     private readonly Dictionary<int, FileItemViewModel> _files = [];
-    private readonly List<long> _down = [];
-    private readonly List<long> _up = [];
     private bool _refreshing;
 
-    public TorrentDetailsViewModel(ITorrentEngine engine)
+    public TorrentDetailsViewModel(ITorrentEngine engine, SpeedHistory speedHistory)
     {
         _engine = engine;
+        _speedHistory = speedHistory;
         _timer = DispatcherQueue.GetForCurrentThread().CreateTimer();
         _timer.Interval = TimeSpan.FromSeconds(1);
         _timer.Tick += async (_, _) => await RefreshAsync();
@@ -162,10 +159,9 @@ public partial class TorrentDetailsViewModel : ObservableObject
         Trackers.Clear();
         Transfer.Clear();
         General.Clear();
-        _down.Clear();
-        _up.Clear();
-        DownloadHistory = [];
-        UploadHistory = [];
+        // Recorded for every torrent all along, so the graph is full the moment it is shown.
+        DownloadHistory = id is null ? [] : _speedHistory.Downloads(id);
+        UploadHistory = id is null ? [] : _speedHistory.Uploads(id);
         Downloaded = [];
         Available = [];
         IsEmpty = id is null;
@@ -227,10 +223,8 @@ public partial class TorrentDetailsViewModel : ObservableObject
             // Copies among connected peers: without peers there is nothing to count.
             AvailabilityText = details.Peers.Count > 0 ? details.Availability.ToString("0.000") : "—";
 
-            AddSample(_down, s.DownloadRate);
-            AddSample(_up, s.UploadRate);
-            DownloadHistory = _down.ToArray();
-            UploadHistory = _up.ToArray();
+            DownloadHistory = _speedHistory.Downloads(id);
+            UploadHistory = _speedHistory.Uploads(id);
             SpeedNowText = $"↓ {Formatting.Rate(s.DownloadRate)}   ↑ {Formatting.Rate(s.UploadRate)}";
 
             UpdateFiles(details.Files);
@@ -249,15 +243,6 @@ public partial class TorrentDetailsViewModel : ObservableObject
         finally
         {
             _refreshing = false;
-        }
-    }
-
-    private static void AddSample(List<long> samples, long value)
-    {
-        samples.Add(value);
-        if (samples.Count > SpeedHistoryLength)
-        {
-            samples.RemoveAt(0);
         }
     }
 

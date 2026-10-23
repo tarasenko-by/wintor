@@ -126,6 +126,7 @@ public partial class App : Application
             .AddSingleton(settings)
             .AddSingleton<ITorrentEngine>(_ => new MonoTorrentEngine(settings.ToEngineOptions()))
             .AddSingleton<NotificationService>()
+            .AddSingleton<SpeedHistory>(_ => new SpeedHistory())
             .AddSingleton<TorrentsViewModel>()
             .AddTransient<TorrentDetailsViewModel>()
             .AddTransient<SettingsViewModel>()

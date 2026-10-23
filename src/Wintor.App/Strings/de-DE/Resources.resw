@@ -288,4 +288,10 @@
   <data name="OfflineInfoBar.Message" xml:space="preserve"><value>Torrents werden fortgesetzt, sobald Sie wieder online sind.</value></data>
   <data name="AddDialog_NotEnoughSpace" xml:space="preserve"><value>Nicht genügend Speicherplatz auf diesem Laufwerk: {0} frei, {1} erforderlich.</value></data>
   <data name="A11y_CurrentLabel" xml:space="preserve"><value>Aktuelles Label</value></data>
+  <data name="About_Description" xml:space="preserve"><value>Version {0} · © 2026 {1} und Wintor-Mitwirkende</value></data>
+  <data name="LanguageCard.Header" xml:space="preserve"><value>Sprache</value></data>
+  <data name="LanguageCard.Description" xml:space="preserve"><value>Wird nach einem Neustart von Wintor übernommen.</value></data>
+  <data name="LanguageBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Sprache</value></data>
+  <data name="LanguageSystem" xml:space="preserve"><value>Wie in Windows</value></data>
+  <data name="LanguageRestartButton.Content" xml:space="preserve"><value>Neu starten</value></data>
 </root>

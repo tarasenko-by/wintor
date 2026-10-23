@@ -62,11 +62,19 @@
                 Background="Transparent"
                 DefaultLabelPosition="Collapsed"
                 IsDynamicOverflowEnabled="True">
+                <!--
+                    20 px icons in the bar (the "…" menu keeps its 16 px; the template fixes that size), centered in
+                    the 48 px button: 14 + 20 + 14. The "…" button's width is set in App.xaml.
+                -->
+                <CommandBar.Resources>
+                    <x:Double x:Key="AppBarButtonContentHeight">20</x:Double>
+                    <Thickness x:Key="AppBarButtonContentViewboxCollapsedMargin">0,14,0,14</Thickness>
+                </CommandBar.Resources>
                 <AppBarButton
                     x:Uid="OpenFileButton"
                     AutomationProperties.AutomationId="OpenFileButton"
                     Click="OpenFile_Click"
-                    Icon="{icons:Huge Kind=AddSquare}">
+                    Icon="{icons:Huge Kind=AddSquare, Size=20}">
                     <AppBarButton.KeyboardAccelerators>
                         <KeyboardAccelerator Key="O" Modifiers="Control" />
                     </AppBarButton.KeyboardAccelerators>
@@ -75,7 +83,7 @@
                     x:Uid="AddMagnetButton"
                     AutomationProperties.AutomationId="AddMagnetButton"
                     Click="AddMagnet_Click"
-                    Icon="{icons:Huge Kind=Link01}">
+                    Icon="{icons:Huge Kind=Link01, Size=20}">
                     <AppBarButton.KeyboardAccelerators>
                         <KeyboardAccelerator Key="N" Modifiers="Control" />
                     </AppBarButton.KeyboardAccelerators>
@@ -85,17 +93,17 @@
                     x:Uid="ResumeButton"
                     AutomationProperties.AutomationId="ResumeButton"
                     Command="{x:Bind ViewModel.ResumeCommand}"
-                    Icon="{icons:Huge Kind=Play}" />
+                    Icon="{icons:Huge Kind=Play, Size=20}" />
                 <AppBarButton
                     x:Uid="PauseButton"
                     AutomationProperties.AutomationId="PauseButton"
                     Command="{x:Bind ViewModel.PauseCommand}"
-                    Icon="{icons:Huge Kind=Pause}" />
+                    Icon="{icons:Huge Kind=Pause, Size=20}" />
                 <AppBarButton
                     x:Uid="RemoveButton"
                     AutomationProperties.AutomationId="RemoveButton"
                     Click="Remove_Click"
-                    Icon="{icons:Huge Kind=Delete02}"
+                    Icon="{icons:Huge Kind=Delete02, Size=20}"
                     IsEnabled="{x:Bind ViewModel.HasSelection, Mode=OneWay}">
                     <AppBarButton.KeyboardAccelerators>
                         <KeyboardAccelerator Key="Delete" />
@@ -105,7 +113,7 @@
                 <AppBarButton
                     x:Uid="SortButton"
                     AutomationProperties.AutomationId="SortButton"
-                    Icon="{icons:Huge Kind=Sorting01}">
+                    Icon="{icons:Huge Kind=Sorting01, Size=20}">
                     <AppBarButton.Flyout>
                         <MenuFlyout x:Name="SortMenu" Opening="SortMenu_Opening" Placement="BottomEdgeAlignedRight" />
                     </AppBarButton.Flyout>

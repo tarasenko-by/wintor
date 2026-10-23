@@ -81,8 +81,9 @@ Long names are trimmed with `TextTrimming="CharacterEllipsis"` and show the full
 ## Icons
 
 - [Hugeicons](https://hugeicons.com) **free set (MIT), Stroke Rounded style only** — never Pro icons.
-- One style and stroke width across the whole app: 16 px in command bars, menus and navigation, 20 px for
-  card and settings header icons, 40–48 px in empty states.
+- One style and stroke width across the whole app: 20 px in the torrent command bar, 16 px on the details pane tabs,
+  16 px in menus (including the "…" overflow), navigation and small buttons, 20 px for card and settings header
+  icons, 40–48 px in empty states.
 - Icons follow `Foreground` so they adapt to the theme. How to add one: see [AGENTS.md](../AGENTS.md#icons).
 - Different settings get different icons; do not reuse one icon for two meanings.
 - Every icon in a button has a text label or a tooltip; icon-only buttons need `AutomationProperties.Name`.

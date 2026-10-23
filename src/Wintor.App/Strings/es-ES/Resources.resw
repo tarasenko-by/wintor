@@ -288,4 +288,10 @@
   <data name="OfflineInfoBar.Message" xml:space="preserve"><value>Los torrents continuarán cuando vuelvas a estar en línea.</value></data>
   <data name="AddDialog_NotEnoughSpace" xml:space="preserve"><value>No hay espacio suficiente en esta unidad: {0} libres, {1} necesarios.</value></data>
   <data name="A11y_CurrentLabel" xml:space="preserve"><value>Etiqueta actual</value></data>
+  <data name="About_Description" xml:space="preserve"><value>Versión {0} · © 2026 {1} y colaboradores de Wintor</value></data>
+  <data name="LanguageCard.Header" xml:space="preserve"><value>Idioma</value></data>
+  <data name="LanguageCard.Description" xml:space="preserve"><value>Se aplica al reiniciar Wintor.</value></data>
+  <data name="LanguageBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Idioma</value></data>
+  <data name="LanguageSystem" xml:space="preserve"><value>Como en Windows</value></data>
+  <data name="LanguageRestartButton.Content" xml:space="preserve"><value>Reiniciar</value></data>
 </root>

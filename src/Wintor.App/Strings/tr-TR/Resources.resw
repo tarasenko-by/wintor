@@ -288,4 +288,10 @@
   <data name="OfflineInfoBar.Message" xml:space="preserve"><value>Yeniden çevrimiçi olduğunuzda torrent’ler devam edecek.</value></data>
   <data name="AddDialog_NotEnoughSpace" xml:space="preserve"><value>Bu sürücüde yeterli alan yok: boş alan {0}, gereken {1}.</value></data>
   <data name="A11y_CurrentLabel" xml:space="preserve"><value>Geçerli etiket</value></data>
+  <data name="About_Description" xml:space="preserve"><value>Sürüm {0} · © 2026 {1} ve Wintor’a katkıda bulunanlar</value></data>
+  <data name="LanguageCard.Header" xml:space="preserve"><value>Dil</value></data>
+  <data name="LanguageCard.Description" xml:space="preserve"><value>Wintor yeniden başlatıldığında uygulanır.</value></data>
+  <data name="LanguageBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Dil</value></data>
+  <data name="LanguageSystem" xml:space="preserve"><value>Windows’taki gibi</value></data>
+  <data name="LanguageRestartButton.Content" xml:space="preserve"><value>Yeniden başlat</value></data>
 </root>

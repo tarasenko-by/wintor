@@ -288,4 +288,10 @@
   <data name="OfflineInfoBar.Message" xml:space="preserve"><value>Торенти продовжать завантаження, щойно з’явиться мережа.</value></data>
   <data name="AddDialog_NotEnoughSpace" xml:space="preserve"><value>Недостатньо місця на диску: вільно {0}, потрібно {1}.</value></data>
   <data name="A11y_CurrentLabel" xml:space="preserve"><value>Поточна мітка</value></data>
+  <data name="About_Description" xml:space="preserve"><value>Версія {0} · © 2026 {1} і учасники Wintor</value></data>
+  <data name="LanguageCard.Header" xml:space="preserve"><value>Мова</value></data>
+  <data name="LanguageCard.Description" xml:space="preserve"><value>Застосується після перезапуску Wintor.</value></data>
+  <data name="LanguageBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Мова</value></data>
+  <data name="LanguageSystem" xml:space="preserve"><value>Як у Windows</value></data>
+  <data name="LanguageRestartButton.Content" xml:space="preserve"><value>Перезапустити</value></data>
 </root>

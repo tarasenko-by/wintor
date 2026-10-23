@@ -12,6 +12,7 @@ public partial class TorrentsViewModel : ObservableObject
 {
     private readonly ITorrentEngine _engine;
     private readonly AppSettings _settings;
+    private readonly SpeedHistory _speedHistory;
     private readonly DispatcherQueueTimer _timer;
     private readonly Dictionary<string, TorrentItemViewModel> _items = [];
     private readonly Queue<AddRequest> _pendingAdds = [];
@@ -19,10 +20,11 @@ public partial class TorrentsViewModel : ObservableObject
     private Task? _initialization;
     private bool _refreshedOnce;
 
-    public TorrentsViewModel(ITorrentEngine engine, AppSettings settings)
+    public TorrentsViewModel(ITorrentEngine engine, AppSettings settings, SpeedHistory speedHistory)
     {
         _engine = engine;
         _settings = settings;
+        _speedHistory = speedHistory;
         Sort = settings.Sort;
         SortDescending = settings.SortDescending;
         foreach (string label in settings.Labels)
@@ -33,7 +35,12 @@ public partial class TorrentsViewModel : ObservableObject
         // Created on the UI thread, so the timer ticks there too.
         _timer = DispatcherQueue.GetForCurrentThread().CreateTimer();
         _timer.Interval = TimeSpan.FromSeconds(1);
-        _timer.Tick += (_, _) => Refresh();
+        _timer.Tick += (_, _) =>
+        {
+            Refresh();
+            // Only on the tick, not on every filter or search change: one sample per second.
+            _speedHistory.Record(_snapshots);
+        };
 
         // Without a network torrents just sit at 0 B/s; say why instead of leaving the user to guess.
         DispatcherQueue queue = DispatcherQueue.GetForCurrentThread();

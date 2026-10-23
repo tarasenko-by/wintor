@@ -288,4 +288,10 @@
   <data name="OfflineInfoBar.Message" xml:space="preserve"><value>Торренты продолжат загрузку, когда сеть появится.</value></data>
   <data name="AddDialog_NotEnoughSpace" xml:space="preserve"><value>Не хватает места на диске: свободно {0}, нужно {1}.</value></data>
   <data name="A11y_CurrentLabel" xml:space="preserve"><value>Текущая метка</value></data>
+  <data name="About_Description" xml:space="preserve"><value>Версия {0} · © 2026 {1} и участники Wintor</value></data>
+  <data name="LanguageCard.Header" xml:space="preserve"><value>Язык</value></data>
+  <data name="LanguageCard.Description" xml:space="preserve"><value>Применится после перезапуска Wintor.</value></data>
+  <data name="LanguageBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Язык</value></data>
+  <data name="LanguageSystem" xml:space="preserve"><value>Как в Windows</value></data>
+  <data name="LanguageRestartButton.Content" xml:space="preserve"><value>Перезапустить</value></data>
 </root>

@@ -26,9 +26,6 @@
             IsPaneToggleButtonVisible="True"
             PaneToggleRequested="AppTitleBar_PaneToggleRequested"
             SizeChanged="AppTitleBar_SizeChanged">
-            <TitleBar.IconSource>
-                <ImageIconSource ImageSource="Assets/AppIcon.ico" />
-            </TitleBar.IconSource>
             <TitleBar.Content>
                 <!--  As wide as the Mail app's search; narrower windows shrink it (AppTitleBar_SizeChanged).  -->
                 <!--

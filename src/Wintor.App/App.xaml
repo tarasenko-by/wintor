@@ -33,6 +33,13 @@
                 with a 3 px indicator (too thin to read in a table). Lightweight resources, so every ProgressBar in the
                 app follows; the track color comes from the Background below.
             -->
+            <!--
+                The command bar's "…" button as wide as its icon buttons (68), so all hover highlights match.
+                Its style reads these from the application, so they cannot live on the CommandBar.
+            -->
+            <x:Double x:Key="AppBarExpandButtonThemeWidth">68</x:Double>
+            <Thickness x:Key="AppBarEllipsisButtonInnerBorderMargin">2,6,2,6</Thickness>
+
             <x:Double x:Key="ProgressBarTrackHeight">16</x:Double>
             <x:Double x:Key="ProgressBarMinHeight">16</x:Double>
             <CornerRadius x:Key="ProgressBarCornerRadius">4</CornerRadius>

@@ -288,4 +288,10 @@
   <data name="OfflineInfoBar.Message" xml:space="preserve"><value>Torrenty będą kontynuowane po przywróceniu połączenia.</value></data>
   <data name="AddDialog_NotEnoughSpace" xml:space="preserve"><value>Za mało miejsca na tym dysku: wolne {0}, potrzeba {1}.</value></data>
   <data name="A11y_CurrentLabel" xml:space="preserve"><value>Bieżąca etykieta</value></data>
+  <data name="About_Description" xml:space="preserve"><value>Wersja {0} · © 2026 {1} i współtwórcy Wintor</value></data>
+  <data name="LanguageCard.Header" xml:space="preserve"><value>Język</value></data>
+  <data name="LanguageCard.Description" xml:space="preserve"><value>Zmiana zadziała po ponownym uruchomieniu Wintor.</value></data>
+  <data name="LanguageBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Język</value></data>
+  <data name="LanguageSystem" xml:space="preserve"><value>Jak w Windows</value></data>
+  <data name="LanguageRestartButton.Content" xml:space="preserve"><value>Uruchom ponownie</value></data>
 </root>

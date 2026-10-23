@@ -51,31 +51,38 @@
                 x:Name="Tabs"
                 AutomationProperties.AutomationId="DetailsTabs"
                 SelectionChanged="Tabs_SelectionChanged">
+                <!--
+                    The template shrinks the icon with a 0.8 render transform, which blurs our path icons.
+                    Draw them at their real size instead.
+                -->
+                <SelectorBar.Resources>
+                    <x:Double x:Key="SelectorBarItemIconScale">1</x:Double>
+                </SelectorBar.Resources>
                 <SelectorBarItem
                     x:Uid="TabGeneral"
                     AutomationProperties.AutomationId="TabGeneral"
-                    Icon="{icons:Huge Kind=InformationCircle}"
+                    Icon="{icons:Huge Kind=InformationCircle, Size=16}"
                     IsSelected="True"
                     Tag="General" />
                 <SelectorBarItem
                     x:Uid="TabFiles"
                     AutomationProperties.AutomationId="TabFiles"
-                    Icon="{icons:Huge Kind=File01}"
+                    Icon="{icons:Huge Kind=File01, Size=16}"
                     Tag="Files" />
                 <SelectorBarItem
                     x:Uid="TabPeers"
                     AutomationProperties.AutomationId="TabPeers"
-                    Icon="{icons:Huge Kind=UserGroup}"
+                    Icon="{icons:Huge Kind=UserGroup, Size=16}"
                     Tag="Peers" />
                 <SelectorBarItem
                     x:Uid="TabTrackers"
                     AutomationProperties.AutomationId="TabTrackers"
-                    Icon="{icons:Huge Kind=Server}"
+                    Icon="{icons:Huge Kind=Server, Size=16}"
                     Tag="Trackers" />
                 <SelectorBarItem
                     x:Uid="TabSpeed"
                     AutomationProperties.AutomationId="TabSpeed"
-                    Icon="{icons:Huge Kind=DashboardSpeed01}"
+                    Icon="{icons:Huge Kind=DashboardSpeed01, Size=16}"
                     Tag="Speed" />
             </SelectorBar>
             <TextBlock

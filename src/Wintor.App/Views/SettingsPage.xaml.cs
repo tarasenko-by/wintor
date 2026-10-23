@@ -82,6 +82,8 @@ public sealed partial class SettingsPage : Page, ISearchablePage
         return TorrentQuery.MatchesSearch(string.Join(" ", texts.Where(t => t is not null)), query);
     }
 
+    private void RestartForLanguage_Click(object sender, RoutedEventArgs e) => App.Window.Restart();
+
     private async void ChangeFolder_Click(object sender, RoutedEventArgs e)
     {
         if (await Shell.PickFolderAsync() is { } folder)

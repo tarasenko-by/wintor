@@ -288,4 +288,10 @@
   <data name="OfflineInfoBar.Message" xml:space="preserve"><value>オンラインに戻ると、トレントは再開されます。</value></data>
   <data name="AddDialog_NotEnoughSpace" xml:space="preserve"><value>このドライブの空き容量が不足しています: 空き {0}、必要 {1}。</value></data>
   <data name="A11y_CurrentLabel" xml:space="preserve"><value>現在のラベル</value></data>
+  <data name="About_Description" xml:space="preserve"><value>バージョン {0} · © 2026 {1} および Wintor の貢献者</value></data>
+  <data name="LanguageCard.Header" xml:space="preserve"><value>言語</value></data>
+  <data name="LanguageCard.Description" xml:space="preserve"><value>Wintor の再起動後に適用されます。</value></data>
+  <data name="LanguageBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>言語</value></data>
+  <data name="LanguageSystem" xml:space="preserve"><value>Windows の設定を使用</value></data>
+  <data name="LanguageRestartButton.Content" xml:space="preserve"><value>再起動</value></data>
 </root>

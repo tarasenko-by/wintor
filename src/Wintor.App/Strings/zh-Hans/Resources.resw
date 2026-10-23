@@ -288,4 +288,10 @@
   <data name="OfflineInfoBar.Message" xml:space="preserve"><value>重新联网后，Torrent 将继续。</value></data>
   <data name="AddDialog_NotEnoughSpace" xml:space="preserve"><value>此驱动器空间不足：可用 {0}，需要 {1}。</value></data>
   <data name="A11y_CurrentLabel" xml:space="preserve"><value>当前标签</value></data>
+  <data name="About_Description" xml:space="preserve"><value>版本 {0} · © 2026 {1} 及 Wintor 贡献者</value></data>
+  <data name="LanguageCard.Header" xml:space="preserve"><value>语言</value></data>
+  <data name="LanguageCard.Description" xml:space="preserve"><value>重启 Wintor 后生效。</value></data>
+  <data name="LanguageBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>语言</value></data>
+  <data name="LanguageSystem" xml:space="preserve"><value>跟随 Windows</value></data>
+  <data name="LanguageRestartButton.Content" xml:space="preserve"><value>重新启动</value></data>
 </root>
