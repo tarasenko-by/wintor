@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="NavTorrents.Content" xml:space="preserve"><value>トレント</value></data>
+  <data name="TorrentsTitle.Text" xml:space="preserve"><value>トレント</value></data>
+  <data name="AddMagnetButton.Label" xml:space="preserve"><value>マグネットを追加</value></data>
+  <data name="OpenFileButton.Label" xml:space="preserve"><value>開く (.torrent)</value></data>
+  <data name="ResumeButton.Label" xml:space="preserve"><value>再開</value></data>
+  <data name="ResumeButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>再開</value></data>
+  <data name="PauseButton.Label" xml:space="preserve"><value>一時停止</value></data>
+  <data name="PauseButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>一時停止</value></data>
+  <data name="RemoveButton.Label" xml:space="preserve"><value>削除</value></data>
+  <data name="RemoveButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>削除</value></data>
+  <data name="EmptyTitle.Text" xml:space="preserve"><value>トレントがありません</value></data>
+  <data name="EmptyHint.Text" xml:space="preserve"><value>マグネットリンクを追加するか、.torrent ファイルを開くか、このウィンドウにドロップしてください。</value></data>
+  <data name="EmptyAddButton.Content" xml:space="preserve"><value>「.torrent」ファイルを開く</value></data>
+  <data name="TorrentList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>トレント</value></data>
+  <data name="SettingsDownloadsHeader.Text" xml:space="preserve"><value>ダウンロード</value></data>
+  <data name="DownloadFolderCard.Header" xml:space="preserve"><value>ダウンロード フォルダー</value></data>
+  <data name="ChangeFolderButton.Content" xml:space="preserve"><value>変更…</value></data>
+  <data name="SettingsAboutHeader.Text" xml:space="preserve"><value>バージョン情報</value></data>
+  <data name="AboutCard.Header" xml:space="preserve"><value>Wintor</value></data>
+  <data name="LicenseCard.Header" xml:space="preserve"><value>ライセンス</value></data>
+  <data name="LicenseCard.Description" xml:space="preserve"><value>GPL-3.0-or-later のもとで公開されている無料のオープンソース ソフトウェアです。</value></data>
+  <data name="EngineCard.Header" xml:space="preserve"><value>BitTorrent エンジン</value></data>
+  <data name="EngineCard.Description" xml:space="preserve"><value>MonoTorrent (MIT)</value></data>
+  <data name="Status_Stopped" xml:space="preserve"><value>停止済み</value></data>
+  <data name="Status_Paused" xml:space="preserve"><value>一時停止中</value></data>
+  <data name="Status_Starting" xml:space="preserve"><value>開始中…</value></data>
+  <data name="Status_FetchingMetadata" xml:space="preserve"><value>ファイル一覧を取得中…</value></data>
+  <data name="Status_Checking" xml:space="preserve"><value>ファイルを確認中…</value></data>
+  <data name="Status_Downloading" xml:space="preserve"><value>ダウンロード中</value></data>
+  <data name="Status_DownloadingEta" xml:space="preserve"><value>ダウンロード中 · 残り {0}</value></data>
+  <data name="Status_Seeding" xml:space="preserve"><value>シード中</value></data>
+  <data name="Status_Stopping" xml:space="preserve"><value>停止中…</value></data>
+  <data name="Status_Error" xml:space="preserve"><value>エラー</value></data>
+  <data name="Status_ErrorDetails" xml:space="preserve"><value>エラー: {0}</value></data>
+  <data name="Size_Progress" xml:space="preserve"><value>{0} / {1} · {2}%</value></data>
+  <data name="Peers" xml:space="preserve"><value>シード {0} · ピア {1}</value></data>
+  <data name="Error_EngineStart" xml:space="preserve"><value>トレント エンジンを開始できませんでした: {0}</value></data>
+  <data name="MagnetDialog_Title" xml:space="preserve"><value>マグネットリンクの追加</value></data>
+  <data name="MagnetDialog_Header" xml:space="preserve"><value>マグネットリンク</value></data>
+  <data name="MagnetDialog_Add" xml:space="preserve"><value>追加</value></data>
+  <data name="Cancel" xml:space="preserve"><value>キャンセル</value></data>
+  <data name="RemoveDialog_Title" xml:space="preserve"><value>このトレントを削除しますか？</value></data>
+  <data name="RemoveDialog_DeleteFiles" xml:space="preserve"><value>ダウンロード済みのファイルも削除する</value></data>
+  <data name="RemoveDialog_Remove" xml:space="preserve"><value>削除</value></data>
+  <data name="Drop_Caption" xml:space="preserve"><value>Wintor に追加</value></data>
+  <data name="SearchBox.PlaceholderText" xml:space="preserve"><value>トレントを検索</value></data>
+  <data name="SearchBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>トレントを検索</value></data>
+  <data name="OpenFolderButton.Label" xml:space="preserve"><value>フォルダーを開く</value></data>
+  <data name="DetailsButton.Label" xml:space="preserve"><value>詳細</value></data>
+  <data name="ResumeAllButton.Label" xml:space="preserve"><value>すべて再開</value></data>
+  <data name="PauseAllButton.Label" xml:space="preserve"><value>すべて一時停止</value></data>
+  <data name="SelectAllButton.Label" xml:space="preserve"><value>すべて選択</value></data>
+  <data name="Filter_All" xml:space="preserve"><value>すべて</value></data>
+  <data name="Filter_Downloading" xml:space="preserve"><value>ダウンロード中</value></data>
+  <data name="Filter_Completed" xml:space="preserve"><value>完了</value></data>
+  <data name="Filter_Paused" xml:space="preserve"><value>一時停止中</value></data>
+  <data name="NothingFound.Text" xml:space="preserve"><value>フィルターまたは検索に一致するトレントはありません。</value></data>
+  <data name="Summary_OneTorrent" xml:space="preserve"><value>{0} 件のトレント</value></data>
+  <data name="Summary_Torrents" xml:space="preserve"><value>{0} 件のトレント</value></data>
+  <data name="Status_Done" xml:space="preserve"><value>完了</value></data>
+  <data name="Error_BadTorrentFile" xml:space="preserve"><value>「{0}」は有効な .torrent ファイルではありません。</value></data>
+  <data name="Menu_Resume" xml:space="preserve"><value>再開</value></data>
+  <data name="Menu_Pause" xml:space="preserve"><value>一時停止</value></data>
+  <data name="Menu_OpenFolder" xml:space="preserve"><value>フォルダーを開く</value></data>
+  <data name="Menu_Details" xml:space="preserve"><value>詳細</value></data>
+  <data name="Menu_CopyMagnet" xml:space="preserve"><value>マグネットリンクをコピー</value></data>
+  <data name="Menu_Remove" xml:space="preserve"><value>削除…</value></data>
+  <data name="RemoveDialog_TitleSeveral" xml:space="preserve"><value>これらのトレントを削除しますか？</value></data>
+  <data name="RemoveDialog_Several" xml:space="preserve"><value>{0} 件のトレント</value></data>
+  <data name="AddDialog.PrimaryButtonText" xml:space="preserve"><value>追加</value></data>
+  <data name="AddDialog.CloseButtonText" xml:space="preserve"><value>キャンセル</value></data>
+  <data name="AddDialog_MagnetTitle" xml:space="preserve"><value>マグネットリンクの追加</value></data>
+  <data name="AddDialog_FileTitle" xml:space="preserve"><value>トレントの追加</value></data>
+  <data name="AddDialogMagnet.Header" xml:space="preserve"><value>マグネットリンク</value></data>
+  <data name="AddDialogFolderHeader.Text" xml:space="preserve"><value>保存先</value></data>
+  <data name="AddDialogChangeFolder.Content" xml:space="preserve"><value>変更…</value></data>
+  <data name="AddDialogSelectAll.Content" xml:space="preserve"><value>すべてのファイル</value></data>
+  <data name="AddDialogFiles.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>ダウンロードするファイル</value></data>
+  <data name="AddDialog_OneFile" xml:space="preserve"><value>1 個のファイル · {1}</value></data>
+  <data name="AddDialog_Files" xml:space="preserve"><value>{0} 個のファイル · {1}</value></data>
+  <data name="AddDialog_Selection" xml:space="preserve"><value>{1} 個中 {0} 個を選択 · {2}</value></data>
+  <data name="CopyMagnetButton.Label" xml:space="preserve"><value>マグネットリンクをコピー</value></data>
+  <data name="DetailsGone.Title" xml:space="preserve"><value>このトレントは削除されました。</value></data>
+  <data name="TabFiles.Text" xml:space="preserve"><value>ファイル</value></data>
+  <data name="TabPeers.Text" xml:space="preserve"><value>ピア</value></data>
+  <data name="TabTrackers.Text" xml:space="preserve"><value>トラッカー</value></data>
+  <data name="TabInfo.Text" xml:space="preserve"><value>情報</value></data>
+  <data name="NoFilesYet.Text" xml:space="preserve"><value>Wintor がピアからファイル一覧を取得すると、ここに表示されます。</value></data>
+  <data name="NoPeers.Text" xml:space="preserve"><value>現在、どのピアにも接続されていません。</value></data>
+  <data name="NoTrackers.Text" xml:space="preserve"><value>このトレントにはトラッカーがないため、DHT でピアを探します。</value></data>
+  <data name="FilesList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>ファイル</value></data>
+  <data name="PeersList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>ピア</value></data>
+  <data name="TrackersList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>トラッカー</value></data>
+  <data name="InfoList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>情報</value></data>
+  <data name="PrioritySkip.Content" xml:space="preserve"><value>ダウンロードしない</value></data>
+  <data name="PriorityLow.Content" xml:space="preserve"><value>低優先度</value></data>
+  <data name="PriorityNormal.Content" xml:space="preserve"><value>標準</value></data>
+  <data name="PriorityHigh.Content" xml:space="preserve"><value>高優先度</value></data>
+  <data name="Peer_Seed" xml:space="preserve"><value>シード</value></data>
+  <data name="Peer_Incoming" xml:space="preserve"><value>受信</value></data>
+  <data name="Peer_Encrypted" xml:space="preserve"><value>暗号化</value></data>
+  <data name="Tracker_Unknown" xml:space="preserve"><value>未接続</value></data>
+  <data name="Tracker_Connecting" xml:space="preserve"><value>接続中…</value></data>
+  <data name="Tracker_Working" xml:space="preserve"><value>動作中</value></data>
+  <data name="Tracker_Offline" xml:space="preserve"><value>応答なし</value></data>
+  <data name="Tracker_Error" xml:space="preserve"><value>エラー</value></data>
+  <data name="Info_SavedTo" xml:space="preserve"><value>保存先</value></data>
+  <data name="Info_Size" xml:space="preserve"><value>サイズ</value></data>
+  <data name="Info_Hash" xml:space="preserve"><value>インフォハッシュ</value></data>
+  <data name="Info_Created" xml:space="preserve"><value>作成日時</value></data>
+  <data name="Info_Comment" xml:space="preserve"><value>コメント</value></data>
+  <data name="Info_Private" xml:space="preserve"><value>プライベート トレント</value></data>
+  <data name="Yes" xml:space="preserve"><value>はい</value></data>
+  <data name="No" xml:space="preserve"><value>いいえ</value></data>
+  <data name="SettingsAppearanceHeader.Text" xml:space="preserve"><value>外観</value></data>
+  <data name="ThemeCard.Header" xml:space="preserve"><value>テーマ</value></data>
+  <data name="ThemeCard.Description" xml:space="preserve"><value>ライト、ダーク、または Windows の設定に合わせます。</value></data>
+  <data name="ThemeBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>テーマ</value></data>
+  <data name="ThemeSystem.Content" xml:space="preserve"><value>Windows の設定を使用</value></data>
+  <data name="ThemeLight.Content" xml:space="preserve"><value>ライト</value></data>
+  <data name="ThemeDark.Content" xml:space="preserve"><value>ダーク</value></data>
+  <data name="BackdropCard.Header" xml:space="preserve"><value>ウィンドウの背景</value></data>
+  <data name="BackdropCard.Description" xml:space="preserve"><value>単色、またはタイトル バーとサイド パネルの背後に Windows の Mica や Acrylic を表示します。透明効果を使うには、Windows の透明効果をオンにする必要があります。</value></data>
+  <data name="BackdropBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>ウィンドウの背景</value></data>
+  <data name="BackdropSolid.Content" xml:space="preserve"><value>単色</value></data>
+  <data name="NotifyCard.Header" xml:space="preserve"><value>ダウンロード完了時に通知</value></data>
+  <data name="NotifyCard.Description" xml:space="preserve"><value>フォルダーを開くボタン付きの Windows 通知を表示します。</value></data>
+  <data name="NotifySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>ダウンロード完了時に通知</value></data>
+  <data name="SettingsSpeedHeader.Text" xml:space="preserve"><value>速度</value></data>
+  <data name="DownloadLimitCard.Header" xml:space="preserve"><value>ダウンロード速度の制限</value></data>
+  <data name="DownloadLimitCard.Description" xml:space="preserve"><value>単位は KB/s です。0 は無制限です。</value></data>
+  <data name="DownloadLimitBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>ダウンロード速度の制限 (KB/s)</value></data>
+  <data name="UploadLimitCard.Header" xml:space="preserve"><value>アップロード速度の制限</value></data>
+  <data name="UploadLimitCard.Description" xml:space="preserve"><value>単位は KB/s です。0 は無制限です。</value></data>
+  <data name="UploadLimitBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>アップロード速度の制限 (KB/s)</value></data>
+  <data name="SettingsConnectionHeader.Text" xml:space="preserve"><value>接続</value></data>
+  <data name="PortCard.Header" xml:space="preserve"><value>受信ポート</value></data>
+  <data name="PortCard.Description" xml:space="preserve"><value>他のピアはこのポートであなたに接続します。Wintor はルーターにこのポートを開くよう要求します (UPnP)。</value></data>
+  <data name="PortBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>受信ポート</value></data>
+  <data name="SettingsWindowsHeader.Text" xml:space="preserve"><value>Windows</value></data>
+  <data name="StartupCard.Header" xml:space="preserve"><value>Windows の起動時に開始</value></data>
+  <data name="StartupCard.Description" xml:space="preserve"><value>サインイン時に通知領域で起動します。</value></data>
+  <data name="StartupSwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Windows の起動時に開始</value></data>
+  <data name="Settings_StartupDisabledByUser" xml:space="preserve"><value>Windows の設定 → アプリ → スタートアップ でオフになっています。先にそこでオンにしてください。</value></data>
+  <data name="Settings_StartupByPolicy" xml:space="preserve"><value>組織によって管理されています。</value></data>
+  <data name="TrayCard.Header" xml:space="preserve"><value>ウィンドウを閉じても実行を続ける</value></data>
+  <data name="TrayCard.Description" xml:space="preserve"><value>Wintor は通知領域でシードを続けます。終了するには、そこにあるアイコンのメニューを使用してください。</value></data>
+  <data name="TraySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>ウィンドウを閉じても実行を続ける</value></data>
+  <data name="IconsCard.Header" xml:space="preserve"><value>アイコン</value></data>
+  <data name="IconsCard.Description" xml:space="preserve"><value>Hugeicons 無料セット (MIT)</value></data>
+  <data name="Tray_Open" xml:space="preserve"><value>Wintor を開く</value></data>
+  <data name="Tray_ResumeAll" xml:space="preserve"><value>すべて再開</value></data>
+  <data name="Tray_PauseAll" xml:space="preserve"><value>すべて一時停止</value></data>
+  <data name="Tray_Exit" xml:space="preserve"><value>終了</value></data>
+  <data name="Notification_Completed" xml:space="preserve"><value>ダウンロードが完了しました</value></data>
+  <data name="Notification_OpenFolder" xml:space="preserve"><value>フォルダーを開く</value></data>
+  <data name="Notification_StillRunningTitle" xml:space="preserve"><value>Wintor は実行中です</value></data>
+  <data name="Notification_StillRunning" xml:space="preserve"><value>トレントはバックグラウンドでシードを続けます。終了するには、通知領域のアイコンを使用してください。</value></data>
+  <data name="CardDetailsButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>詳細</value></data>
+  <data name="CardDetailsButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>詳細</value></data>
+  <data name="OpenFileButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>.torrent ファイルを開く (Ctrl+O)</value></data>
+  <data name="AddMagnetButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>マグネットリンクを追加 (Ctrl+N)</value></data>
+  <data name="SortButton.Label" xml:space="preserve"><value>並べ替え</value></data>
+  <data name="SortButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>並べ替え</value></data>
+  <data name="OpenFolderButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>フォルダーを開く</value></data>
+  <data name="View_All" xml:space="preserve"><value>すべてのトレント</value></data>
+  <data name="View_Downloading" xml:space="preserve"><value>ダウンロード中</value></data>
+  <data name="View_Completed" xml:space="preserve"><value>完了</value></data>
+  <data name="View_Paused" xml:space="preserve"><value>一時停止中</value></data>
+  <data name="NavAllText.Text" xml:space="preserve"><value>すべてのトレント</value></data>
+  <data name="NavDownloadingText.Text" xml:space="preserve"><value>ダウンロード中</value></data>
+  <data name="NavCompletedText.Text" xml:space="preserve"><value>完了</value></data>
+  <data name="NavPausedText.Text" xml:space="preserve"><value>一時停止中</value></data>
+  <data name="NavLabelsHeader.Content" xml:space="preserve"><value>ラベル</value></data>
+  <data name="NavNoLabels" xml:space="preserve"><value>トレントを右クリック → ラベル で追加できます。</value></data>
+  <data name="Column_Queue" xml:space="preserve"><value>#</value></data>
+  <data name="Column_Name" xml:space="preserve"><value>名前</value></data>
+  <data name="Column_Size" xml:space="preserve"><value>サイズ</value></data>
+  <data name="Column_Progress" xml:space="preserve"><value>進行状況</value></data>
+  <data name="Column_Status" xml:space="preserve"><value>状態</value></data>
+  <data name="Column_DownloadSpeed" xml:space="preserve"><value>下り</value></data>
+  <data name="Column_UploadSpeed" xml:space="preserve"><value>上り</value></data>
+  <data name="Column_TimeLeft" xml:space="preserve"><value>残り時間</value></data>
+  <data name="Column_Seeds" xml:space="preserve"><value>シード</value></data>
+  <data name="Column_Peers" xml:space="preserve"><value>ピア</value></data>
+  <data name="Column_SortBy" xml:space="preserve"><value>「{0}」で並べ替え</value></data>
+  <data name="Column_SortedAscending" xml:space="preserve"><value>{0}、昇順</value></data>
+  <data name="Column_SortedDescending" xml:space="preserve"><value>{0}、降順</value></data>
+  <data name="Sort_Ascending" xml:space="preserve"><value>昇順</value></data>
+  <data name="Sort_Descending" xml:space="preserve"><value>降順</value></data>
+  <data name="Menu_Label" xml:space="preserve"><value>ラベル</value></data>
+  <data name="Menu_NewLabel" xml:space="preserve"><value>新しいラベル…</value></data>
+  <data name="Menu_NoLabel" xml:space="preserve"><value>ラベルを外す</value></data>
+  <data name="Menu_Order" xml:space="preserve"><value>順序</value></data>
+  <data name="Menu_MoveTop" xml:space="preserve"><value>先頭へ移動</value></data>
+  <data name="Menu_MoveUp" xml:space="preserve"><value>上へ移動</value></data>
+  <data name="Menu_MoveDown" xml:space="preserve"><value>下へ移動</value></data>
+  <data name="Menu_MoveBottom" xml:space="preserve"><value>末尾へ移動</value></data>
+  <data name="Menu_DeleteLabel" xml:space="preserve"><value>ラベルを削除</value></data>
+  <data name="LabelDialog_Title" xml:space="preserve"><value>新しいラベル</value></data>
+  <data name="LabelDialog_Header" xml:space="preserve"><value>名前</value></data>
+  <data name="LabelDialog_Create" xml:space="preserve"><value>作成</value></data>
+  <data name="Splitter_Tooltip" xml:space="preserve"><value>ドラッグしてサイズを変更、ダブルクリックでリセット</value></data>
+  <data name="DetailsNothingSelected.Text" xml:space="preserve"><value>トレントを選択すると詳細が表示されます。</value></data>
+  <data name="TabGeneral.Text" xml:space="preserve"><value>全般</value></data>
+  <data name="TabSpeed.Text" xml:space="preserve"><value>速度</value></data>
+  <data name="BarDownloaded.Text" xml:space="preserve"><value>ダウンロード済み</value></data>
+  <data name="BarAvailability.Text" xml:space="preserve"><value>可用性</value></data>
+  <data name="SectionTransfer.Text" xml:space="preserve"><value>転送</value></data>
+  <data name="SectionGeneral.Text" xml:space="preserve"><value>全般</value></data>
+  <data name="Info_TimeActive" xml:space="preserve"><value>稼働時間</value></data>
+  <data name="Info_TimeLeft" xml:space="preserve"><value>残り時間</value></data>
+  <data name="Info_Downloaded" xml:space="preserve"><value>ダウンロード済み</value></data>
+  <data name="Info_Uploaded" xml:space="preserve"><value>アップロード済み</value></data>
+  <data name="Info_Remaining" xml:space="preserve"><value>残り</value></data>
+  <data name="Info_Ratio" xml:space="preserve"><value>共有比率</value></data>
+  <data name="Info_DownloadSpeed" xml:space="preserve"><value>ダウンロード速度</value></data>
+  <data name="Info_UploadSpeed" xml:space="preserve"><value>アップロード速度</value></data>
+  <data name="Info_Seeds" xml:space="preserve"><value>シード</value></data>
+  <data name="Info_Peers" xml:space="preserve"><value>ピア</value></data>
+  <data name="Info_Connected" xml:space="preserve"><value>{0} 接続中</value></data>
+  <data name="Info_Wasted" xml:space="preserve"><value>破棄済み</value></data>
+  <data name="Info_Pieces" xml:space="preserve"><value>ピース</value></data>
+  <data name="Info_PiecesValue" xml:space="preserve"><value>{0} × {1}</value></data>
+  <data name="LegendDownload.Text" xml:space="preserve"><value>ダウンロード</value></data>
+  <data name="LegendUpload.Text" xml:space="preserve"><value>アップロード</value></data>
+  <data name="SpeedGraphControl.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>過去 5 分間の速度</value></data>
+  <data name="NavAllItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>すべてのトレント</value></data>
+  <data name="NavDownloadingItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>ダウンロード中</value></data>
+  <data name="NavCompletedItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>完了</value></data>
+  <data name="NavPausedItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>一時停止中</value></data>
+  <data name="ColumnsButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>列</value></data>
+  <data name="ColumnsButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>列</value></data>
+  <data name="Columns_Reset" xml:space="preserve"><value>列をリセット</value></data>
+  <data name="ColumnResizer_Tooltip" xml:space="preserve"><value>ドラッグして幅を変更、ダブルクリックでリセット</value></data>
+  <data name="Menu_LabelColor" xml:space="preserve"><value>色</value></data>
+  <data name="LabelColor_Red" xml:space="preserve"><value>赤</value></data>
+  <data name="LabelColor_Orange" xml:space="preserve"><value>オレンジ</value></data>
+  <data name="LabelColor_Yellow" xml:space="preserve"><value>黄</value></data>
+  <data name="LabelColor_Green" xml:space="preserve"><value>緑</value></data>
+  <data name="LabelColor_Teal" xml:space="preserve"><value>ティール</value></data>
+  <data name="LabelColor_Blue" xml:space="preserve"><value>青</value></data>
+  <data name="LabelColor_Purple" xml:space="preserve"><value>紫</value></data>
+  <data name="LabelColor_Pink" xml:space="preserve"><value>ピンク</value></data>
+  <data name="TorrentCommands.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>トレント コマンド</value></data>
+  <data name="Search_Torrents" xml:space="preserve"><value>トレントを検索</value></data>
+  <data name="Search_Settings" xml:space="preserve"><value>設定を検索</value></data>
+  <data name="SettingsNothingFound.Text" xml:space="preserve"><value>検索に一致する設定はありません。</value></data>
+  <data name="Menu_SpeedLimit" xml:space="preserve"><value>速度制限…</value></data>
+  <data name="SpeedDialog_Title" xml:space="preserve"><value>速度制限</value></data>
+  <data name="SpeedDialog_Download" xml:space="preserve"><value>ダウンロード (KB/s)</value></data>
+  <data name="SpeedDialog_Upload" xml:space="preserve"><value>アップロード (KB/s)</value></data>
+  <data name="SpeedDialog_Hint" xml:space="preserve"><value>0 は個別の制限なしを意味します。設定の全体制限は常に適用されます。</value></data>
+  <data name="SpeedDialog_Apply" xml:space="preserve"><value>適用</value></data>
+  <data name="Info_DownloadLimit" xml:space="preserve"><value>ダウンロード制限</value></data>
+  <data name="Info_UploadLimit" xml:space="preserve"><value>アップロード制限</value></data>
+  <data name="Info_NoLimit" xml:space="preserve"><value>なし</value></data>
+  <data name="Problem_FilesMissing" xml:space="preserve"><value>ファイルが見つかりません — 再開すると再ダウンロードします</value></data>
+  <data name="Problem_DiskFull" xml:space="preserve"><value>ディスクの空き容量が不足しています — 空きを作ってから再開してください</value></data>
+  <data name="Problem_NoAccess" xml:space="preserve"><value>ダウンロード フォルダーにアクセスできません</value></data>
+  <data name="OfflineInfoBar.Title" xml:space="preserve"><value>ネットワークに接続されていません</value></data>
+  <data name="OfflineInfoBar.Message" xml:space="preserve"><value>オンラインに戻ると、トレントは再開されます。</value></data>
+  <data name="AddDialog_NotEnoughSpace" xml:space="preserve"><value>このドライブの空き容量が不足しています: 空き {0}、必要 {1}。</value></data>
+  <data name="A11y_CurrentLabel" xml:space="preserve"><value>現在のラベル</value></data>
+</root>

@@ -15,11 +15,6 @@
             Padding="24,12,24,32"
             Spacing="4">
             <TextBlock
-                x:Uid="SettingsTitle"
-                Margin="0,0,0,8"
-                AutomationProperties.AutomationId="SettingsTitle"
-                Style="{StaticResource PageTitleStyle}" />
-            <TextBlock
                 x:Name="SettingsNothingFound"
                 x:Uid="SettingsNothingFound"
                 Margin="0,24,0,0"
@@ -29,7 +24,10 @@
                 Visibility="Collapsed" />
 
             <!--  Appearance  -->
-            <TextBlock x:Uid="SettingsAppearanceHeader" Style="{StaticResource SectionHeaderStyle}" />
+            <TextBlock
+                x:Uid="SettingsAppearanceHeader"
+                Margin="2,8,0,6"
+                Style="{StaticResource SectionHeaderStyle}" />
             <toolkit:SettingsCard
                 x:Uid="ThemeCard"
                 AutomationProperties.AutomationId="ThemeCard"

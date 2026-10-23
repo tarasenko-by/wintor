@@ -267,7 +267,7 @@ try {
     # --- Settings ------------------------------------------------------------------------
     Test-UI 'Settings page opens' {
         Invoke-Ui @('invoke', 'SettingsItem')
-        Invoke-Ui @('wait-for', 'SettingsTitle', '-t', '3000')
+        Invoke-Ui @('wait-for', 'ThemeCard', '-t', '3000')
         Invoke-Ui @('wait-for', 'ChangeFolderButton', '-t', '2000')
     }
     Test-UI 'Search box searches settings too' {

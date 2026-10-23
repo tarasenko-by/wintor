@@ -24,7 +24,9 @@ Mica, Fluent design, sensible defaults — with no ads and no telemetry.
 - Speed limits for everything and for each torrent; listening port, start with Windows
 - Keeps seeding in the notification area when the window is closed; "download finished" notifications
 - Explains problems in plain words — files deleted, disk full, no network — and resumes when you fix them
-- Solid light/dark look by default, Mica or Acrylic if you like; high contrast; English and Russian UI
+- Solid light/dark look by default, Mica or Acrylic if you like; high contrast
+- English and Russian UI, plus ten more languages machine-translated and waiting for native speakers to review
+  (see [Translations](CONTRIBUTING.md#translations))
 - Torrents survive restarts; paused ones stay paused
 
 ## Building
@@ -74,8 +76,9 @@ without touching the app. More in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## Translations
 
-UI strings live in `src/Wintor.App/Strings/<language>/Resources.resw`.
-To add a language, copy `en-US` to a new folder (e.g. `de-DE`) and translate the values.
+UI strings live in `src/Wintor.App/Strings/<language>/Resources.resw`. Twelve languages so far; ten of them
+are machine-translated and need a native speaker's review — see [CONTRIBUTING.md](CONTRIBUTING.md#translations)
+for the list and how to help.
 
 ## Contributing
 

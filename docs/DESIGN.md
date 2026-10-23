@@ -21,8 +21,9 @@ They are binding for all UI changes (see [AGENTS.md](../AGENTS.md)).
 - Search lives in the title bar (`AutoSuggestBox`, Ctrl+F, Esc clears): magnifier on the left, the clear button (×)
   on the right only while there is text. Every page that implements `ISearchablePage` searches its own content with
   its own placeholder (torrents; settings cards). Matching: every word, any order, ignoring case and accents.
-- The torrent page has no title: the selected side-pane item names the view. Its `CommandBar` is left-aligned,
-  icon-only with tooltips, `IsDynamicOverflowEnabled="True"`; rare commands go to the overflow. Settings keep a title.
+- Pages have no title: the selected side-pane item names the view. The torrent page's `CommandBar` is
+  left-aligned, icon-only with tooltips, `IsDynamicOverflowEnabled="True"`; rare commands go to the overflow.
+  Settings start straight with the first section.
 - Side pane: status views (All / Downloading / Completed / Paused) and the user's **labels**, each with a count on
   the right in `TertiaryCaptionStyle`. Labels have a color (Services/LabelColors: 8 mid-tones that read on both
   themes) shown on their tag icon, the row's pill and menus. The "Labels" header and hint hide in the compact pane.

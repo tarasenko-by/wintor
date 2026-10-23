@@ -58,6 +58,9 @@ while testing; tick them off after a look by hand. Newest on top.
       goes away when the network is back.
 - [ ] **Not enough space** — add a .torrent bigger than the free space of the chosen drive (or pick a small USB
       stick as the folder): a caution line under the folder names free vs. needed space; unticking files updates it.
+- [ ] **Long languages** — switch the Windows display language to German, then Polish (Settings → Time &
+      language), restart Wintor: column headers, status cells, side pane, dialogs and Settings are not clipped.
+      Also look at Japanese or Chinese once for font fallback.
 - [ ] **Narrator** — Files, Peers and Trackers rows read as one line each (not a class name); the current label
       in the Label submenu is announced as "Current label".
 

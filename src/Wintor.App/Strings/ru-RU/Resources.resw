@@ -38,7 +38,6 @@
   <data name="EmptyHint.Text" xml:space="preserve"><value>Добавьте magnet-ссылку, откройте .torrent-файл или перетащите его в это окно.</value></data>
   <data name="EmptyAddButton.Content" xml:space="preserve"><value>Открыть .torrent-файл</value></data>
   <data name="TorrentList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Торренты</value></data>
-  <data name="SettingsTitle.Text" xml:space="preserve"><value>Параметры</value></data>
   <data name="SettingsDownloadsHeader.Text" xml:space="preserve"><value>Загрузки</value></data>
   <data name="DownloadFolderCard.Header" xml:space="preserve"><value>Папка для загрузок</value></data>
   <data name="ChangeFolderButton.Content" xml:space="preserve"><value>Изменить…</value></data>

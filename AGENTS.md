@@ -62,8 +62,9 @@ Read [docs/DESIGN.md](docs/DESIGN.md) before changing any XAML. The short versio
 
 - No user-visible strings in code or XAML. XAML uses `x:Uid`; code uses `Strings.Get` / `Strings.Format`.
 - Every new string is added to **all** `src/Wintor.App/Strings/<lang>/Resources.resw` files
-  (currently `en-US` and `ru-RU`). `en-US` is the default; if you cannot translate, copy the English
-  text and mention it in the PR.
+  (12 languages; the list and their review status are in CONTRIBUTING.md, "Translations"). `en-US` is the
+  default; if you cannot translate, copy the English text and mention it in the PR. Every file keeps exactly
+  the keys and placeholders of `en-US`.
 
 ## Dependencies and licensing
 

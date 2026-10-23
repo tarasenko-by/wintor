@@ -16,8 +16,21 @@ then `winapp run src\Wintor.App` or F5 in Visual Studio.
 
 ## Translations
 
-Copy `src/Wintor.App/Strings/en-US/Resources.resw` to a new folder named after your language
-(e.g. `de-DE`) and translate the `<value>` elements. Keep `{0}`-style placeholders intact.
+The easiest way to help if you do not write C#. Strings live in
+`src/Wintor.App/Strings/<language>/Resources.resw`; Wintor follows the Windows display language.
+
+| Language | Folder | Status |
+|---|---|---|
+| English | `en-US` | Source |
+| Russian | `ru-RU` | Reviewed |
+| German, French, Spanish, Italian, Portuguese (Brazil), Polish, Ukrainian, Turkish, Chinese (Simplified), Japanese | `de-DE`, `fr-FR`, `es-ES`, `it-IT`, `pt-BR`, `pl-PL`, `uk-UA`, `tr-TR`, `zh-Hans`, `ja-JP` | **Machine-translated — needs review by a native speaker** |
+
+To review one: run Wintor with that Windows display language, fix what reads wrong in its `.resw`, and open a PR
+(screenshots welcome). When a language has been read through, change its status here to "Reviewed".
+
+To add a language, copy `en-US` to a new folder (e.g. `nl-NL`) and translate the `<value>` elements.
+Keep `{0}`-style placeholders intact, keep the "…" that marks items which open a dialog, and keep column and
+status texts short — they sit in narrow table columns.
 
 ## Pull requests
 

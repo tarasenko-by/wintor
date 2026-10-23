@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="NavTorrents.Content" xml:space="preserve"><value>Torrent’ler</value></data>
+  <data name="TorrentsTitle.Text" xml:space="preserve"><value>Torrent’ler</value></data>
+  <data name="AddMagnetButton.Label" xml:space="preserve"><value>Magnet ekle</value></data>
+  <data name="OpenFileButton.Label" xml:space="preserve"><value>.torrent aç</value></data>
+  <data name="ResumeButton.Label" xml:space="preserve"><value>Sürdür</value></data>
+  <data name="ResumeButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Sürdür</value></data>
+  <data name="PauseButton.Label" xml:space="preserve"><value>Duraklat</value></data>
+  <data name="PauseButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Duraklat</value></data>
+  <data name="RemoveButton.Label" xml:space="preserve"><value>Kaldır</value></data>
+  <data name="RemoveButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Kaldır</value></data>
+  <data name="EmptyTitle.Text" xml:space="preserve"><value>Henüz torrent yok</value></data>
+  <data name="EmptyHint.Text" xml:space="preserve"><value>Bir magnet bağlantısı ekleyin, bir .torrent dosyası açın veya dosyayı bu pencereye sürükleyin.</value></data>
+  <data name="EmptyAddButton.Content" xml:space="preserve"><value>.torrent dosyası aç</value></data>
+  <data name="TorrentList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Torrent’ler</value></data>
+  <data name="SettingsDownloadsHeader.Text" xml:space="preserve"><value>İndirilenler</value></data>
+  <data name="DownloadFolderCard.Header" xml:space="preserve"><value>İndirme klasörü</value></data>
+  <data name="ChangeFolderButton.Content" xml:space="preserve"><value>Değiştir…</value></data>
+  <data name="SettingsAboutHeader.Text" xml:space="preserve"><value>Hakkında</value></data>
+  <data name="AboutCard.Header" xml:space="preserve"><value>Wintor</value></data>
+  <data name="LicenseCard.Header" xml:space="preserve"><value>Lisans</value></data>
+  <data name="LicenseCard.Description" xml:space="preserve"><value>GPL-3.0-or-later altında özgür ve açık kaynaklı yazılım.</value></data>
+  <data name="EngineCard.Header" xml:space="preserve"><value>BitTorrent altyapısı</value></data>
+  <data name="EngineCard.Description" xml:space="preserve"><value>MonoTorrent (MIT)</value></data>
+  <data name="Status_Stopped" xml:space="preserve"><value>Durduruldu</value></data>
+  <data name="Status_Paused" xml:space="preserve"><value>Duraklatıldı</value></data>
+  <data name="Status_Starting" xml:space="preserve"><value>Başlatılıyor…</value></data>
+  <data name="Status_FetchingMetadata" xml:space="preserve"><value>Dosya listesi alınıyor…</value></data>
+  <data name="Status_Checking" xml:space="preserve"><value>Dosyalar denetleniyor…</value></data>
+  <data name="Status_Downloading" xml:space="preserve"><value>İndiriliyor</value></data>
+  <data name="Status_DownloadingEta" xml:space="preserve"><value>İndiriliyor · {0} kaldı</value></data>
+  <data name="Status_Seeding" xml:space="preserve"><value>Paylaşılıyor</value></data>
+  <data name="Status_Stopping" xml:space="preserve"><value>Durduruluyor…</value></data>
+  <data name="Status_Error" xml:space="preserve"><value>Hata</value></data>
+  <data name="Status_ErrorDetails" xml:space="preserve"><value>Hata: {0}</value></data>
+  <data name="Size_Progress" xml:space="preserve"><value>{0} / {1} · %{2}</value></data>
+  <data name="Peers" xml:space="preserve"><value>Seed {0} · Eş {1}</value></data>
+  <data name="Error_EngineStart" xml:space="preserve"><value>Torrent altyapısı başlatılamadı: {0}</value></data>
+  <data name="MagnetDialog_Title" xml:space="preserve"><value>Magnet bağlantısı ekle</value></data>
+  <data name="MagnetDialog_Header" xml:space="preserve"><value>Magnet bağlantısı</value></data>
+  <data name="MagnetDialog_Add" xml:space="preserve"><value>Ekle</value></data>
+  <data name="Cancel" xml:space="preserve"><value>İptal</value></data>
+  <data name="RemoveDialog_Title" xml:space="preserve"><value>Torrent kaldırılsın mı?</value></data>
+  <data name="RemoveDialog_DeleteFiles" xml:space="preserve"><value>İndirilen dosyalar da silinsin</value></data>
+  <data name="RemoveDialog_Remove" xml:space="preserve"><value>Kaldır</value></data>
+  <data name="Drop_Caption" xml:space="preserve"><value>Wintor’a ekle</value></data>
+  <data name="SearchBox.PlaceholderText" xml:space="preserve"><value>Torrent ara</value></data>
+  <data name="SearchBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Torrent ara</value></data>
+  <data name="OpenFolderButton.Label" xml:space="preserve"><value>Klasörü aç</value></data>
+  <data name="DetailsButton.Label" xml:space="preserve"><value>Ayrıntılar</value></data>
+  <data name="ResumeAllButton.Label" xml:space="preserve"><value>Tümünü sürdür</value></data>
+  <data name="PauseAllButton.Label" xml:space="preserve"><value>Tümünü duraklat</value></data>
+  <data name="SelectAllButton.Label" xml:space="preserve"><value>Tümünü seç</value></data>
+  <data name="Filter_All" xml:space="preserve"><value>Tümü</value></data>
+  <data name="Filter_Downloading" xml:space="preserve"><value>İndiriliyor</value></data>
+  <data name="Filter_Completed" xml:space="preserve"><value>Tamamlanan</value></data>
+  <data name="Filter_Paused" xml:space="preserve"><value>Duraklatılan</value></data>
+  <data name="NothingFound.Text" xml:space="preserve"><value>Filtreyle veya aramayla eşleşen torrent yok.</value></data>
+  <data name="Summary_OneTorrent" xml:space="preserve"><value>{0} torrent</value></data>
+  <data name="Summary_Torrents" xml:space="preserve"><value>{0} torrent</value></data>
+  <data name="Status_Done" xml:space="preserve"><value>Bitti</value></data>
+  <data name="Error_BadTorrentFile" xml:space="preserve"><value>“{0}” geçerli bir .torrent dosyası değil.</value></data>
+  <data name="Menu_Resume" xml:space="preserve"><value>Sürdür</value></data>
+  <data name="Menu_Pause" xml:space="preserve"><value>Duraklat</value></data>
+  <data name="Menu_OpenFolder" xml:space="preserve"><value>Klasörü aç</value></data>
+  <data name="Menu_Details" xml:space="preserve"><value>Ayrıntılar</value></data>
+  <data name="Menu_CopyMagnet" xml:space="preserve"><value>Magnet bağlantısını kopyala</value></data>
+  <data name="Menu_Remove" xml:space="preserve"><value>Kaldır…</value></data>
+  <data name="RemoveDialog_TitleSeveral" xml:space="preserve"><value>Torrent’ler kaldırılsın mı?</value></data>
+  <data name="RemoveDialog_Several" xml:space="preserve"><value>{0} torrent</value></data>
+  <data name="AddDialog.PrimaryButtonText" xml:space="preserve"><value>Ekle</value></data>
+  <data name="AddDialog.CloseButtonText" xml:space="preserve"><value>İptal</value></data>
+  <data name="AddDialog_MagnetTitle" xml:space="preserve"><value>Magnet bağlantısı ekle</value></data>
+  <data name="AddDialog_FileTitle" xml:space="preserve"><value>Torrent ekle</value></data>
+  <data name="AddDialogMagnet.Header" xml:space="preserve"><value>Magnet bağlantısı</value></data>
+  <data name="AddDialogFolderHeader.Text" xml:space="preserve"><value>Kaydedileceği yer</value></data>
+  <data name="AddDialogChangeFolder.Content" xml:space="preserve"><value>Değiştir…</value></data>
+  <data name="AddDialogSelectAll.Content" xml:space="preserve"><value>Tüm dosyalar</value></data>
+  <data name="AddDialogFiles.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>İndirilecek dosyalar</value></data>
+  <data name="AddDialog_OneFile" xml:space="preserve"><value>1 dosya · {1}</value></data>
+  <data name="AddDialog_Files" xml:space="preserve"><value>{0} dosya · {1}</value></data>
+  <data name="AddDialog_Selection" xml:space="preserve"><value>{1} dosyadan {0} seçildi · {2}</value></data>
+  <data name="CopyMagnetButton.Label" xml:space="preserve"><value>Magnet bağlantısını kopyala</value></data>
+  <data name="DetailsGone.Title" xml:space="preserve"><value>Bu torrent kaldırıldı.</value></data>
+  <data name="TabFiles.Text" xml:space="preserve"><value>Dosyalar</value></data>
+  <data name="TabPeers.Text" xml:space="preserve"><value>Eşler</value></data>
+  <data name="TabTrackers.Text" xml:space="preserve"><value>İzleyiciler</value></data>
+  <data name="TabInfo.Text" xml:space="preserve"><value>Bilgi</value></data>
+  <data name="NoFilesYet.Text" xml:space="preserve"><value>Dosya listesi, Wintor eşlerden aldığında görünür.</value></data>
+  <data name="NoPeers.Text" xml:space="preserve"><value>Şu anda kimseye bağlı değil.</value></data>
+  <data name="NoTrackers.Text" xml:space="preserve"><value>Bu torrentin izleyicisi yok; eşler DHT ile bulunur.</value></data>
+  <data name="FilesList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Dosyalar</value></data>
+  <data name="PeersList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Eşler</value></data>
+  <data name="TrackersList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>İzleyiciler</value></data>
+  <data name="InfoList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Bilgi</value></data>
+  <data name="PrioritySkip.Content" xml:space="preserve"><value>İndirilmesin</value></data>
+  <data name="PriorityLow.Content" xml:space="preserve"><value>Düşük öncelik</value></data>
+  <data name="PriorityNormal.Content" xml:space="preserve"><value>Normal</value></data>
+  <data name="PriorityHigh.Content" xml:space="preserve"><value>Yüksek öncelik</value></data>
+  <data name="Peer_Seed" xml:space="preserve"><value>seed</value></data>
+  <data name="Peer_Incoming" xml:space="preserve"><value>gelen</value></data>
+  <data name="Peer_Encrypted" xml:space="preserve"><value>şifreli</value></data>
+  <data name="Tracker_Unknown" xml:space="preserve"><value>Henüz sorgulanmadı</value></data>
+  <data name="Tracker_Connecting" xml:space="preserve"><value>Bağlanılıyor…</value></data>
+  <data name="Tracker_Working" xml:space="preserve"><value>Çalışıyor</value></data>
+  <data name="Tracker_Offline" xml:space="preserve"><value>Yanıt vermiyor</value></data>
+  <data name="Tracker_Error" xml:space="preserve"><value>Hata</value></data>
+  <data name="Info_SavedTo" xml:space="preserve"><value>Klasör</value></data>
+  <data name="Info_Size" xml:space="preserve"><value>Boyut</value></data>
+  <data name="Info_Hash" xml:space="preserve"><value>Info hash</value></data>
+  <data name="Info_Created" xml:space="preserve"><value>Oluşturulma</value></data>
+  <data name="Info_Comment" xml:space="preserve"><value>Açıklama</value></data>
+  <data name="Info_Private" xml:space="preserve"><value>Özel torrent</value></data>
+  <data name="Yes" xml:space="preserve"><value>Evet</value></data>
+  <data name="No" xml:space="preserve"><value>Hayır</value></data>
+  <data name="SettingsAppearanceHeader.Text" xml:space="preserve"><value>Görünüm</value></data>
+  <data name="ThemeCard.Header" xml:space="preserve"><value>Tema</value></data>
+  <data name="ThemeCard.Description" xml:space="preserve"><value>Açık, koyu veya Windows’taki gibi.</value></data>
+  <data name="ThemeBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Tema</value></data>
+  <data name="ThemeSystem.Content" xml:space="preserve"><value>Windows’taki gibi</value></data>
+  <data name="ThemeLight.Content" xml:space="preserve"><value>Açık</value></data>
+  <data name="ThemeDark.Content" xml:space="preserve"><value>Koyu</value></data>
+  <data name="BackdropCard.Header" xml:space="preserve"><value>Pencere arka planı</value></data>
+  <data name="BackdropCard.Description" xml:space="preserve"><value>Düz renkler veya başlık çubuğunun ve yan bölmenin arkasında Windows’tan Mica ya da Acrylic. Saydamlık için Windows saydamlık efektlerinin açık olması gerekir.</value></data>
+  <data name="BackdropBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Pencere arka planı</value></data>
+  <data name="BackdropSolid.Content" xml:space="preserve"><value>Düz</value></data>
+  <data name="NotifyCard.Header" xml:space="preserve"><value>İndirme bittiğinde bildir</value></data>
+  <data name="NotifyCard.Description" xml:space="preserve"><value>Klasörü açan bir düğmeyle Windows bildirimi.</value></data>
+  <data name="NotifySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>İndirme bittiğinde bildir</value></data>
+  <data name="SettingsSpeedHeader.Text" xml:space="preserve"><value>Hız</value></data>
+  <data name="DownloadLimitCard.Header" xml:space="preserve"><value>İndirme sınırı</value></data>
+  <data name="DownloadLimitCard.Description" xml:space="preserve"><value>KB/sn; 0 sınırsız demektir.</value></data>
+  <data name="DownloadLimitBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>İndirme sınırı, KB/sn</value></data>
+  <data name="UploadLimitCard.Header" xml:space="preserve"><value>Yükleme sınırı</value></data>
+  <data name="UploadLimitCard.Description" xml:space="preserve"><value>KB/sn; 0 sınırsız demektir.</value></data>
+  <data name="UploadLimitBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Yükleme sınırı, KB/sn</value></data>
+  <data name="SettingsConnectionHeader.Text" xml:space="preserve"><value>Bağlantı</value></data>
+  <data name="PortCard.Header" xml:space="preserve"><value>Dinleme bağlantı noktası</value></data>
+  <data name="PortCard.Description" xml:space="preserve"><value>Diğer eşler size bu bağlantı noktasından bağlanır. Wintor, yönlendiricinizden bunu açmasını ister (UPnP).</value></data>
+  <data name="PortBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Dinleme bağlantı noktası</value></data>
+  <data name="SettingsWindowsHeader.Text" xml:space="preserve"><value>Windows</value></data>
+  <data name="StartupCard.Header" xml:space="preserve"><value>Windows ile başlat</value></data>
+  <data name="StartupCard.Description" xml:space="preserve"><value>Oturum açtığınızda bildirim alanında başlar.</value></data>
+  <data name="StartupSwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Windows ile başlat</value></data>
+  <data name="Settings_StartupDisabledByUser" xml:space="preserve"><value>Windows Ayarları → Uygulamalar → Başlangıç bölümünde kapatılmış. Önce orada açın.</value></data>
+  <data name="Settings_StartupByPolicy" xml:space="preserve"><value>Kuruluşunuz tarafından yönetiliyor.</value></data>
+  <data name="TrayCard.Header" xml:space="preserve"><value>Pencere kapatılınca çalışmaya devam et</value></data>
+  <data name="TrayCard.Description" xml:space="preserve"><value>Wintor bildirim alanından paylaşmaya devam eder. Çıkmak için oradaki simgenin menüsünü kullanın.</value></data>
+  <data name="TraySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Pencere kapatılınca çalışmaya devam et</value></data>
+  <data name="IconsCard.Header" xml:space="preserve"><value>Simgeler</value></data>
+  <data name="IconsCard.Description" xml:space="preserve"><value>Hugeicons ücretsiz seti (MIT)</value></data>
+  <data name="Tray_Open" xml:space="preserve"><value>Wintor’u aç</value></data>
+  <data name="Tray_ResumeAll" xml:space="preserve"><value>Tümünü sürdür</value></data>
+  <data name="Tray_PauseAll" xml:space="preserve"><value>Tümünü duraklat</value></data>
+  <data name="Tray_Exit" xml:space="preserve"><value>Çıkış</value></data>
+  <data name="Notification_Completed" xml:space="preserve"><value>İndirme bitti</value></data>
+  <data name="Notification_OpenFolder" xml:space="preserve"><value>Klasörü aç</value></data>
+  <data name="Notification_StillRunningTitle" xml:space="preserve"><value>Wintor hâlâ çalışıyor</value></data>
+  <data name="Notification_StillRunning" xml:space="preserve"><value>Torrent’ler arka planda paylaşılmaya devam eder. Çıkmak için bildirim alanındaki simgeyi kullanın.</value></data>
+  <data name="CardDetailsButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Ayrıntılar</value></data>
+  <data name="CardDetailsButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Ayrıntılar</value></data>
+  <data name="OpenFileButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>.torrent dosyası aç (Ctrl+O)</value></data>
+  <data name="AddMagnetButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Magnet bağlantısı ekle (Ctrl+N)</value></data>
+  <data name="SortButton.Label" xml:space="preserve"><value>Sırala</value></data>
+  <data name="SortButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Sırala</value></data>
+  <data name="OpenFolderButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Klasörü aç</value></data>
+  <data name="View_All" xml:space="preserve"><value>Tüm torrent’ler</value></data>
+  <data name="View_Downloading" xml:space="preserve"><value>İndiriliyor</value></data>
+  <data name="View_Completed" xml:space="preserve"><value>Tamamlanan</value></data>
+  <data name="View_Paused" xml:space="preserve"><value>Duraklatılan</value></data>
+  <data name="NavAllText.Text" xml:space="preserve"><value>Tüm torrent’ler</value></data>
+  <data name="NavDownloadingText.Text" xml:space="preserve"><value>İndiriliyor</value></data>
+  <data name="NavCompletedText.Text" xml:space="preserve"><value>Tamamlanan</value></data>
+  <data name="NavPausedText.Text" xml:space="preserve"><value>Duraklatılan</value></data>
+  <data name="NavLabelsHeader.Content" xml:space="preserve"><value>Etiketler</value></data>
+  <data name="NavNoLabels" xml:space="preserve"><value>Etiket eklemek için torrente sağ tıklayın → Etiket.</value></data>
+  <data name="Column_Queue" xml:space="preserve"><value>#</value></data>
+  <data name="Column_Name" xml:space="preserve"><value>Ad</value></data>
+  <data name="Column_Size" xml:space="preserve"><value>Boyut</value></data>
+  <data name="Column_Progress" xml:space="preserve"><value>İlerleme</value></data>
+  <data name="Column_Status" xml:space="preserve"><value>Durum</value></data>
+  <data name="Column_DownloadSpeed" xml:space="preserve"><value>İndirme</value></data>
+  <data name="Column_UploadSpeed" xml:space="preserve"><value>Yükleme</value></data>
+  <data name="Column_TimeLeft" xml:space="preserve"><value>Kalan</value></data>
+  <data name="Column_Seeds" xml:space="preserve"><value>Seed</value></data>
+  <data name="Column_Peers" xml:space="preserve"><value>Eşler</value></data>
+  <data name="Column_SortBy" xml:space="preserve"><value>Şuna göre sırala: {0}</value></data>
+  <data name="Column_SortedAscending" xml:space="preserve"><value>{0}, artan sırada</value></data>
+  <data name="Column_SortedDescending" xml:space="preserve"><value>{0}, azalan sırada</value></data>
+  <data name="Sort_Ascending" xml:space="preserve"><value>Artan</value></data>
+  <data name="Sort_Descending" xml:space="preserve"><value>Azalan</value></data>
+  <data name="Menu_Label" xml:space="preserve"><value>Etiket</value></data>
+  <data name="Menu_NewLabel" xml:space="preserve"><value>Yeni etiket…</value></data>
+  <data name="Menu_NoLabel" xml:space="preserve"><value>Etiketi kaldır</value></data>
+  <data name="Menu_Order" xml:space="preserve"><value>Sıra</value></data>
+  <data name="Menu_MoveTop" xml:space="preserve"><value>En üste taşı</value></data>
+  <data name="Menu_MoveUp" xml:space="preserve"><value>Yukarı taşı</value></data>
+  <data name="Menu_MoveDown" xml:space="preserve"><value>Aşağı taşı</value></data>
+  <data name="Menu_MoveBottom" xml:space="preserve"><value>En alta taşı</value></data>
+  <data name="Menu_DeleteLabel" xml:space="preserve"><value>Etiketi sil</value></data>
+  <data name="LabelDialog_Title" xml:space="preserve"><value>Yeni etiket</value></data>
+  <data name="LabelDialog_Header" xml:space="preserve"><value>Ad</value></data>
+  <data name="LabelDialog_Create" xml:space="preserve"><value>Oluştur</value></data>
+  <data name="Splitter_Tooltip" xml:space="preserve"><value>Yeniden boyutlandırmak için sürükleyin; sıfırlamak için çift tıklayın</value></data>
+  <data name="DetailsNothingSelected.Text" xml:space="preserve"><value>Ayrıntıları görmek için bir torrent seçin.</value></data>
+  <data name="TabGeneral.Text" xml:space="preserve"><value>Genel</value></data>
+  <data name="TabSpeed.Text" xml:space="preserve"><value>Hız</value></data>
+  <data name="BarDownloaded.Text" xml:space="preserve"><value>İndirilen</value></data>
+  <data name="BarAvailability.Text" xml:space="preserve"><value>Kullanılabilirlik</value></data>
+  <data name="SectionTransfer.Text" xml:space="preserve"><value>Aktarım</value></data>
+  <data name="SectionGeneral.Text" xml:space="preserve"><value>Genel</value></data>
+  <data name="Info_TimeActive" xml:space="preserve"><value>Etkin süre</value></data>
+  <data name="Info_TimeLeft" xml:space="preserve"><value>Kalan süre</value></data>
+  <data name="Info_Downloaded" xml:space="preserve"><value>İndirilen</value></data>
+  <data name="Info_Uploaded" xml:space="preserve"><value>Yüklenen</value></data>
+  <data name="Info_Remaining" xml:space="preserve"><value>Kalan veri</value></data>
+  <data name="Info_Ratio" xml:space="preserve"><value>Paylaşım oranı</value></data>
+  <data name="Info_DownloadSpeed" xml:space="preserve"><value>İndirme hızı</value></data>
+  <data name="Info_UploadSpeed" xml:space="preserve"><value>Yükleme hızı</value></data>
+  <data name="Info_Seeds" xml:space="preserve"><value>Seed</value></data>
+  <data name="Info_Peers" xml:space="preserve"><value>Eşler</value></data>
+  <data name="Info_Connected" xml:space="preserve"><value>{0} bağlı</value></data>
+  <data name="Info_Wasted" xml:space="preserve"><value>Boşa giden</value></data>
+  <data name="Info_Pieces" xml:space="preserve"><value>Parçalar</value></data>
+  <data name="Info_PiecesValue" xml:space="preserve"><value>{0} × {1}</value></data>
+  <data name="LegendDownload.Text" xml:space="preserve"><value>İndirme</value></data>
+  <data name="LegendUpload.Text" xml:space="preserve"><value>Yükleme</value></data>
+  <data name="SpeedGraphControl.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Son beş dakikadaki hız</value></data>
+  <data name="NavAllItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Tüm torrent’ler</value></data>
+  <data name="NavDownloadingItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>İndiriliyor</value></data>
+  <data name="NavCompletedItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Tamamlanan</value></data>
+  <data name="NavPausedItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Duraklatılan</value></data>
+  <data name="ColumnsButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Sütunlar</value></data>
+  <data name="ColumnsButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Sütunlar</value></data>
+  <data name="Columns_Reset" xml:space="preserve"><value>Sütunları sıfırla</value></data>
+  <data name="ColumnResizer_Tooltip" xml:space="preserve"><value>Genişliği değiştirmek için sürükleyin; sıfırlamak için çift tıklayın</value></data>
+  <data name="Menu_LabelColor" xml:space="preserve"><value>Renk</value></data>
+  <data name="LabelColor_Red" xml:space="preserve"><value>Kırmızı</value></data>
+  <data name="LabelColor_Orange" xml:space="preserve"><value>Turuncu</value></data>
+  <data name="LabelColor_Yellow" xml:space="preserve"><value>Sarı</value></data>
+  <data name="LabelColor_Green" xml:space="preserve"><value>Yeşil</value></data>
+  <data name="LabelColor_Teal" xml:space="preserve"><value>Turkuaz</value></data>
+  <data name="LabelColor_Blue" xml:space="preserve"><value>Mavi</value></data>
+  <data name="LabelColor_Purple" xml:space="preserve"><value>Mor</value></data>
+  <data name="LabelColor_Pink" xml:space="preserve"><value>Pembe</value></data>
+  <data name="TorrentCommands.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Torrent komutları</value></data>
+  <data name="Search_Torrents" xml:space="preserve"><value>Torrent ara</value></data>
+  <data name="Search_Settings" xml:space="preserve"><value>Ayarlarda ara</value></data>
+  <data name="SettingsNothingFound.Text" xml:space="preserve"><value>Aramanızla eşleşen ayar yok.</value></data>
+  <data name="Menu_SpeedLimit" xml:space="preserve"><value>Hız sınırı…</value></data>
+  <data name="SpeedDialog_Title" xml:space="preserve"><value>Hız sınırı</value></data>
+  <data name="SpeedDialog_Download" xml:space="preserve"><value>İndirme, KB/sn</value></data>
+  <data name="SpeedDialog_Upload" xml:space="preserve"><value>Yükleme, KB/sn</value></data>
+  <data name="SpeedDialog_Hint" xml:space="preserve"><value>0, torrente özel sınır olmadığı anlamına gelir. Ayarlar’daki genel sınır her zaman geçerlidir.</value></data>
+  <data name="SpeedDialog_Apply" xml:space="preserve"><value>Uygula</value></data>
+  <data name="Info_DownloadLimit" xml:space="preserve"><value>İndirme sınırı</value></data>
+  <data name="Info_UploadLimit" xml:space="preserve"><value>Yükleme sınırı</value></data>
+  <data name="Info_NoLimit" xml:space="preserve"><value>Yok</value></data>
+  <data name="Problem_FilesMissing" xml:space="preserve"><value>Dosyalar bulunamadı — yeniden indirmek için sürdürün</value></data>
+  <data name="Problem_DiskFull" xml:space="preserve"><value>Yeterli disk alanı yok — yer açıp sürdürün</value></data>
+  <data name="Problem_NoAccess" xml:space="preserve"><value>İndirme klasörüne erişim yok</value></data>
+  <data name="OfflineInfoBar.Title" xml:space="preserve"><value>Ağ bağlantısı yok</value></data>
+  <data name="OfflineInfoBar.Message" xml:space="preserve"><value>Yeniden çevrimiçi olduğunuzda torrent’ler devam edecek.</value></data>
+  <data name="AddDialog_NotEnoughSpace" xml:space="preserve"><value>Bu sürücüde yeterli alan yok: boş alan {0}, gereken {1}.</value></data>
+  <data name="A11y_CurrentLabel" xml:space="preserve"><value>Geçerli etiket</value></data>
+</root>

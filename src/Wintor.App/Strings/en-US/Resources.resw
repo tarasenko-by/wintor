@@ -38,7 +38,6 @@
   <data name="EmptyHint.Text" xml:space="preserve"><value>Add a magnet link, open a .torrent file or drop it onto this window.</value></data>
   <data name="EmptyAddButton.Content" xml:space="preserve"><value>Open .torrent file</value></data>
   <data name="TorrentList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Torrents</value></data>
-  <data name="SettingsTitle.Text" xml:space="preserve"><value>Settings</value></data>
   <data name="SettingsDownloadsHeader.Text" xml:space="preserve"><value>Downloads</value></data>
   <data name="DownloadFolderCard.Header" xml:space="preserve"><value>Download folder</value></data>
   <data name="ChangeFolderButton.Content" xml:space="preserve"><value>Change…</value></data>

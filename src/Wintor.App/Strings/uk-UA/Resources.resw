@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="NavTorrents.Content" xml:space="preserve"><value>Торенти</value></data>
+  <data name="TorrentsTitle.Text" xml:space="preserve"><value>Торенти</value></data>
+  <data name="AddMagnetButton.Label" xml:space="preserve"><value>Magnet-посилання</value></data>
+  <data name="OpenFileButton.Label" xml:space="preserve"><value>Відкрити .torrent</value></data>
+  <data name="ResumeButton.Label" xml:space="preserve"><value>Відновити</value></data>
+  <data name="ResumeButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Відновити</value></data>
+  <data name="PauseButton.Label" xml:space="preserve"><value>Призупинити</value></data>
+  <data name="PauseButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Призупинити</value></data>
+  <data name="RemoveButton.Label" xml:space="preserve"><value>Видалити</value></data>
+  <data name="RemoveButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Видалити</value></data>
+  <data name="EmptyTitle.Text" xml:space="preserve"><value>Торентів поки немає</value></data>
+  <data name="EmptyHint.Text" xml:space="preserve"><value>Додайте magnet-посилання, відкрийте файл .torrent або перетягніть його в це вікно.</value></data>
+  <data name="EmptyAddButton.Content" xml:space="preserve"><value>Відкрити файл .torrent</value></data>
+  <data name="TorrentList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Торенти</value></data>
+  <data name="SettingsDownloadsHeader.Text" xml:space="preserve"><value>Завантаження</value></data>
+  <data name="DownloadFolderCard.Header" xml:space="preserve"><value>Папка завантажень</value></data>
+  <data name="ChangeFolderButton.Content" xml:space="preserve"><value>Змінити…</value></data>
+  <data name="SettingsAboutHeader.Text" xml:space="preserve"><value>Про програму</value></data>
+  <data name="AboutCard.Header" xml:space="preserve"><value>Wintor</value></data>
+  <data name="LicenseCard.Header" xml:space="preserve"><value>Ліцензія</value></data>
+  <data name="LicenseCard.Description" xml:space="preserve"><value>Вільне програмне забезпечення з відкритим кодом, GPL-3.0-or-later.</value></data>
+  <data name="EngineCard.Header" xml:space="preserve"><value>Торент-рушій</value></data>
+  <data name="EngineCard.Description" xml:space="preserve"><value>MonoTorrent (MIT)</value></data>
+  <data name="Status_Stopped" xml:space="preserve"><value>Зупинено</value></data>
+  <data name="Status_Paused" xml:space="preserve"><value>Призупинено</value></data>
+  <data name="Status_Starting" xml:space="preserve"><value>Запуск…</value></data>
+  <data name="Status_FetchingMetadata" xml:space="preserve"><value>Отримання списку файлів…</value></data>
+  <data name="Status_Checking" xml:space="preserve"><value>Перевірка файлів…</value></data>
+  <data name="Status_Downloading" xml:space="preserve"><value>Завантаження</value></data>
+  <data name="Status_DownloadingEta" xml:space="preserve"><value>Завантаження · залишилось {0}</value></data>
+  <data name="Status_Seeding" xml:space="preserve"><value>Роздача</value></data>
+  <data name="Status_Stopping" xml:space="preserve"><value>Зупинення…</value></data>
+  <data name="Status_Error" xml:space="preserve"><value>Помилка</value></data>
+  <data name="Status_ErrorDetails" xml:space="preserve"><value>Помилка: {0}</value></data>
+  <data name="Size_Progress" xml:space="preserve"><value>{0} з {1} · {2}%</value></data>
+  <data name="Peers" xml:space="preserve"><value>Сіди {0} · Піри {1}</value></data>
+  <data name="Error_EngineStart" xml:space="preserve"><value>Не вдалося запустити торент-рушій: {0}</value></data>
+  <data name="MagnetDialog_Title" xml:space="preserve"><value>Додати magnet-посилання</value></data>
+  <data name="MagnetDialog_Header" xml:space="preserve"><value>Magnet-посилання</value></data>
+  <data name="MagnetDialog_Add" xml:space="preserve"><value>Додати</value></data>
+  <data name="Cancel" xml:space="preserve"><value>Скасувати</value></data>
+  <data name="RemoveDialog_Title" xml:space="preserve"><value>Видалити торент?</value></data>
+  <data name="RemoveDialog_DeleteFiles" xml:space="preserve"><value>Також видалити завантажені файли</value></data>
+  <data name="RemoveDialog_Remove" xml:space="preserve"><value>Видалити</value></data>
+  <data name="Drop_Caption" xml:space="preserve"><value>Додати до Wintor</value></data>
+  <data name="SearchBox.PlaceholderText" xml:space="preserve"><value>Пошук торентів</value></data>
+  <data name="SearchBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Пошук торентів</value></data>
+  <data name="OpenFolderButton.Label" xml:space="preserve"><value>Відкрити папку</value></data>
+  <data name="DetailsButton.Label" xml:space="preserve"><value>Докладно</value></data>
+  <data name="ResumeAllButton.Label" xml:space="preserve"><value>Відновити все</value></data>
+  <data name="PauseAllButton.Label" xml:space="preserve"><value>Призупинити все</value></data>
+  <data name="SelectAllButton.Label" xml:space="preserve"><value>Вибрати все</value></data>
+  <data name="Filter_All" xml:space="preserve"><value>Усі</value></data>
+  <data name="Filter_Downloading" xml:space="preserve"><value>Завантажуються</value></data>
+  <data name="Filter_Completed" xml:space="preserve"><value>Завершені</value></data>
+  <data name="Filter_Paused" xml:space="preserve"><value>Призупинені</value></data>
+  <data name="NothingFound.Text" xml:space="preserve"><value>Немає торентів, що відповідають фільтру чи пошуку.</value></data>
+  <data name="Summary_OneTorrent" xml:space="preserve"><value>Торентів: {0}</value></data>
+  <data name="Summary_Torrents" xml:space="preserve"><value>Торентів: {0}</value></data>
+  <data name="Status_Done" xml:space="preserve"><value>Готово</value></data>
+  <data name="Error_BadTorrentFile" xml:space="preserve"><value>«{0}» — не файл .torrent або його пошкоджено.</value></data>
+  <data name="Menu_Resume" xml:space="preserve"><value>Відновити</value></data>
+  <data name="Menu_Pause" xml:space="preserve"><value>Призупинити</value></data>
+  <data name="Menu_OpenFolder" xml:space="preserve"><value>Відкрити папку</value></data>
+  <data name="Menu_Details" xml:space="preserve"><value>Докладно</value></data>
+  <data name="Menu_CopyMagnet" xml:space="preserve"><value>Копіювати magnet-посилання</value></data>
+  <data name="Menu_Remove" xml:space="preserve"><value>Видалити…</value></data>
+  <data name="RemoveDialog_TitleSeveral" xml:space="preserve"><value>Видалити торенти?</value></data>
+  <data name="RemoveDialog_Several" xml:space="preserve"><value>Торентів: {0}</value></data>
+  <data name="AddDialog.PrimaryButtonText" xml:space="preserve"><value>Додати</value></data>
+  <data name="AddDialog.CloseButtonText" xml:space="preserve"><value>Скасувати</value></data>
+  <data name="AddDialog_MagnetTitle" xml:space="preserve"><value>Додати magnet-посилання</value></data>
+  <data name="AddDialog_FileTitle" xml:space="preserve"><value>Додати торент</value></data>
+  <data name="AddDialogMagnet.Header" xml:space="preserve"><value>Magnet-посилання</value></data>
+  <data name="AddDialogFolderHeader.Text" xml:space="preserve"><value>Зберегти в</value></data>
+  <data name="AddDialogChangeFolder.Content" xml:space="preserve"><value>Змінити…</value></data>
+  <data name="AddDialogSelectAll.Content" xml:space="preserve"><value>Усі файли</value></data>
+  <data name="AddDialogFiles.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Файли для завантаження</value></data>
+  <data name="AddDialog_OneFile" xml:space="preserve"><value>1 файл · {1}</value></data>
+  <data name="AddDialog_Files" xml:space="preserve"><value>Файлів: {0} · {1}</value></data>
+  <data name="AddDialog_Selection" xml:space="preserve"><value>Вибрано {0} з {1} · {2}</value></data>
+  <data name="CopyMagnetButton.Label" xml:space="preserve"><value>Копіювати magnet-посилання</value></data>
+  <data name="DetailsGone.Title" xml:space="preserve"><value>Цей торент видалено.</value></data>
+  <data name="TabFiles.Text" xml:space="preserve"><value>Файли</value></data>
+  <data name="TabPeers.Text" xml:space="preserve"><value>Піри</value></data>
+  <data name="TabTrackers.Text" xml:space="preserve"><value>Трекери</value></data>
+  <data name="TabInfo.Text" xml:space="preserve"><value>Відомості</value></data>
+  <data name="NoFilesYet.Text" xml:space="preserve"><value>Список файлів з’явиться, щойно Wintor отримає його від пірів.</value></data>
+  <data name="NoPeers.Text" xml:space="preserve"><value>Зараз немає жодного з’єднання.</value></data>
+  <data name="NoTrackers.Text" xml:space="preserve"><value>Цей торент не має трекерів — піри знаходяться через DHT.</value></data>
+  <data name="FilesList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Файли</value></data>
+  <data name="PeersList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Піри</value></data>
+  <data name="TrackersList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Трекери</value></data>
+  <data name="InfoList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Відомості</value></data>
+  <data name="PrioritySkip.Content" xml:space="preserve"><value>Не завантажувати</value></data>
+  <data name="PriorityLow.Content" xml:space="preserve"><value>Низький пріоритет</value></data>
+  <data name="PriorityNormal.Content" xml:space="preserve"><value>Звичайний</value></data>
+  <data name="PriorityHigh.Content" xml:space="preserve"><value>Високий пріоритет</value></data>
+  <data name="Peer_Seed" xml:space="preserve"><value>сід</value></data>
+  <data name="Peer_Incoming" xml:space="preserve"><value>вхідний</value></data>
+  <data name="Peer_Encrypted" xml:space="preserve"><value>шифрування</value></data>
+  <data name="Tracker_Unknown" xml:space="preserve"><value>Ще не опитано</value></data>
+  <data name="Tracker_Connecting" xml:space="preserve"><value>Підключення…</value></data>
+  <data name="Tracker_Working" xml:space="preserve"><value>Працює</value></data>
+  <data name="Tracker_Offline" xml:space="preserve"><value>Не відповідає</value></data>
+  <data name="Tracker_Error" xml:space="preserve"><value>Помилка</value></data>
+  <data name="Info_SavedTo" xml:space="preserve"><value>Папка</value></data>
+  <data name="Info_Size" xml:space="preserve"><value>Розмір</value></data>
+  <data name="Info_Hash" xml:space="preserve"><value>Хеш</value></data>
+  <data name="Info_Created" xml:space="preserve"><value>Створено</value></data>
+  <data name="Info_Comment" xml:space="preserve"><value>Коментар</value></data>
+  <data name="Info_Private" xml:space="preserve"><value>Приватний торент</value></data>
+  <data name="Yes" xml:space="preserve"><value>Так</value></data>
+  <data name="No" xml:space="preserve"><value>Ні</value></data>
+  <data name="SettingsAppearanceHeader.Text" xml:space="preserve"><value>Оформлення</value></data>
+  <data name="ThemeCard.Header" xml:space="preserve"><value>Тема</value></data>
+  <data name="ThemeCard.Description" xml:space="preserve"><value>Світла, темна або як у Windows.</value></data>
+  <data name="ThemeBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Тема</value></data>
+  <data name="ThemeSystem.Content" xml:space="preserve"><value>Як у Windows</value></data>
+  <data name="ThemeLight.Content" xml:space="preserve"><value>Світла</value></data>
+  <data name="ThemeDark.Content" xml:space="preserve"><value>Темна</value></data>
+  <data name="BackdropCard.Header" xml:space="preserve"><value>Тло вікна</value></data>
+  <data name="BackdropCard.Description" xml:space="preserve"><value>Суцільний колір або Mica чи Acrylic з Windows за заголовком і бічною панеллю. Прозорість працює, якщо у Windows увімкнено ефекти прозорості.</value></data>
+  <data name="BackdropBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Тло вікна</value></data>
+  <data name="BackdropSolid.Content" xml:space="preserve"><value>Суцільне</value></data>
+  <data name="NotifyCard.Header" xml:space="preserve"><value>Сповіщати про завершення завантаження</value></data>
+  <data name="NotifyCard.Description" xml:space="preserve"><value>Сповіщення Windows із кнопкою «Відкрити папку».</value></data>
+  <data name="NotifySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Сповіщати про завершення завантаження</value></data>
+  <data name="SettingsSpeedHeader.Text" xml:space="preserve"><value>Швидкість</value></data>
+  <data name="DownloadLimitCard.Header" xml:space="preserve"><value>Обмеження завантаження</value></data>
+  <data name="DownloadLimitCard.Description" xml:space="preserve"><value>КБ/с; 0 — без обмеження.</value></data>
+  <data name="DownloadLimitBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Обмеження завантаження, КБ/с</value></data>
+  <data name="UploadLimitCard.Header" xml:space="preserve"><value>Обмеження віддачі</value></data>
+  <data name="UploadLimitCard.Description" xml:space="preserve"><value>КБ/с; 0 — без обмеження.</value></data>
+  <data name="UploadLimitBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Обмеження віддачі, КБ/с</value></data>
+  <data name="SettingsConnectionHeader.Text" xml:space="preserve"><value>Підключення</value></data>
+  <data name="PortCard.Header" xml:space="preserve"><value>Порт для вхідних з’єднань</value></data>
+  <data name="PortCard.Description" xml:space="preserve"><value>Через цей порт до вас підключаються інші піри. Wintor сам просить маршрутизатор відкрити його (UPnP).</value></data>
+  <data name="PortBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Порт для вхідних з’єднань</value></data>
+  <data name="SettingsWindowsHeader.Text" xml:space="preserve"><value>Windows</value></data>
+  <data name="StartupCard.Header" xml:space="preserve"><value>Запускати разом із Windows</value></data>
+  <data name="StartupCard.Description" xml:space="preserve"><value>Під час входу в систему Wintor запускається в області сповіщень.</value></data>
+  <data name="StartupSwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Запускати разом із Windows</value></data>
+  <data name="Settings_StartupDisabledByUser" xml:space="preserve"><value>Вимкнено в Параметрах Windows → Програми → Автозавантаження. Спочатку ввімкніть там.</value></data>
+  <data name="Settings_StartupByPolicy" xml:space="preserve"><value>Керується вашою організацією.</value></data>
+  <data name="TrayCard.Header" xml:space="preserve"><value>Не закриватися разом із вікном</value></data>
+  <data name="TrayCard.Description" xml:space="preserve"><value>Wintor продовжує роздачу з області сповіщень. Вийти можна з меню значка.</value></data>
+  <data name="TraySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Не закриватися разом із вікном</value></data>
+  <data name="IconsCard.Header" xml:space="preserve"><value>Піктограми</value></data>
+  <data name="IconsCard.Description" xml:space="preserve"><value>Безкоштовний набір Hugeicons (MIT)</value></data>
+  <data name="Tray_Open" xml:space="preserve"><value>Відкрити Wintor</value></data>
+  <data name="Tray_ResumeAll" xml:space="preserve"><value>Відновити все</value></data>
+  <data name="Tray_PauseAll" xml:space="preserve"><value>Призупинити все</value></data>
+  <data name="Tray_Exit" xml:space="preserve"><value>Вийти</value></data>
+  <data name="Notification_Completed" xml:space="preserve"><value>Завантаження завершено</value></data>
+  <data name="Notification_OpenFolder" xml:space="preserve"><value>Відкрити папку</value></data>
+  <data name="Notification_StillRunningTitle" xml:space="preserve"><value>Wintor продовжує працювати</value></data>
+  <data name="Notification_StillRunning" xml:space="preserve"><value>Торенти роздаються у фоні. Вийти можна через значок в області сповіщень.</value></data>
+  <data name="CardDetailsButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Докладно</value></data>
+  <data name="CardDetailsButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Докладно</value></data>
+  <data name="OpenFileButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Відкрити файл .torrent (Ctrl+O)</value></data>
+  <data name="AddMagnetButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Додати magnet-посилання (Ctrl+N)</value></data>
+  <data name="SortButton.Label" xml:space="preserve"><value>Сортування</value></data>
+  <data name="SortButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Сортування</value></data>
+  <data name="OpenFolderButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Відкрити папку</value></data>
+  <data name="View_All" xml:space="preserve"><value>Усі торенти</value></data>
+  <data name="View_Downloading" xml:space="preserve"><value>Завантажуються</value></data>
+  <data name="View_Completed" xml:space="preserve"><value>Завершені</value></data>
+  <data name="View_Paused" xml:space="preserve"><value>Призупинені</value></data>
+  <data name="NavAllText.Text" xml:space="preserve"><value>Усі торенти</value></data>
+  <data name="NavDownloadingText.Text" xml:space="preserve"><value>Завантажуються</value></data>
+  <data name="NavCompletedText.Text" xml:space="preserve"><value>Завершені</value></data>
+  <data name="NavPausedText.Text" xml:space="preserve"><value>Призупинені</value></data>
+  <data name="NavLabelsHeader.Content" xml:space="preserve"><value>Мітки</value></data>
+  <data name="NavNoLabels" xml:space="preserve"><value>Щоб додати мітку, клацніть торент правою кнопкою миші → Мітка.</value></data>
+  <data name="Column_Queue" xml:space="preserve"><value>№</value></data>
+  <data name="Column_Name" xml:space="preserve"><value>Назва</value></data>
+  <data name="Column_Size" xml:space="preserve"><value>Розмір</value></data>
+  <data name="Column_Progress" xml:space="preserve"><value>Прогрес</value></data>
+  <data name="Column_Status" xml:space="preserve"><value>Стан</value></data>
+  <data name="Column_DownloadSpeed" xml:space="preserve"><value>Завант.</value></data>
+  <data name="Column_UploadSpeed" xml:space="preserve"><value>Віддача</value></data>
+  <data name="Column_TimeLeft" xml:space="preserve"><value>Залишилось</value></data>
+  <data name="Column_Seeds" xml:space="preserve"><value>Сіди</value></data>
+  <data name="Column_Peers" xml:space="preserve"><value>Піри</value></data>
+  <data name="Column_SortBy" xml:space="preserve"><value>Сортувати за стовпцем «{0}»</value></data>
+  <data name="Column_SortedAscending" xml:space="preserve"><value>{0}, за зростанням</value></data>
+  <data name="Column_SortedDescending" xml:space="preserve"><value>{0}, за спаданням</value></data>
+  <data name="Sort_Ascending" xml:space="preserve"><value>За зростанням</value></data>
+  <data name="Sort_Descending" xml:space="preserve"><value>За спаданням</value></data>
+  <data name="Menu_Label" xml:space="preserve"><value>Мітка</value></data>
+  <data name="Menu_NewLabel" xml:space="preserve"><value>Нова мітка…</value></data>
+  <data name="Menu_NoLabel" xml:space="preserve"><value>Прибрати мітку</value></data>
+  <data name="Menu_Order" xml:space="preserve"><value>Порядок</value></data>
+  <data name="Menu_MoveTop" xml:space="preserve"><value>На початок</value></data>
+  <data name="Menu_MoveUp" xml:space="preserve"><value>Вище</value></data>
+  <data name="Menu_MoveDown" xml:space="preserve"><value>Нижче</value></data>
+  <data name="Menu_MoveBottom" xml:space="preserve"><value>У кінець</value></data>
+  <data name="Menu_DeleteLabel" xml:space="preserve"><value>Видалити мітку</value></data>
+  <data name="LabelDialog_Title" xml:space="preserve"><value>Нова мітка</value></data>
+  <data name="LabelDialog_Header" xml:space="preserve"><value>Назва</value></data>
+  <data name="LabelDialog_Create" xml:space="preserve"><value>Створити</value></data>
+  <data name="Splitter_Tooltip" xml:space="preserve"><value>Перетягніть, щоб змінити висоту; подвійне клацання — скинути</value></data>
+  <data name="DetailsNothingSelected.Text" xml:space="preserve"><value>Виберіть торент, щоб побачити відомості про нього.</value></data>
+  <data name="TabGeneral.Text" xml:space="preserve"><value>Загальні</value></data>
+  <data name="TabSpeed.Text" xml:space="preserve"><value>Швидкість</value></data>
+  <data name="BarDownloaded.Text" xml:space="preserve"><value>Завантажено</value></data>
+  <data name="BarAvailability.Text" xml:space="preserve"><value>Доступність</value></data>
+  <data name="SectionTransfer.Text" xml:space="preserve"><value>Передавання</value></data>
+  <data name="SectionGeneral.Text" xml:space="preserve"><value>Загальні відомості</value></data>
+  <data name="Info_TimeActive" xml:space="preserve"><value>Час роботи</value></data>
+  <data name="Info_TimeLeft" xml:space="preserve"><value>Залишилось часу</value></data>
+  <data name="Info_Downloaded" xml:space="preserve"><value>Завантажено</value></data>
+  <data name="Info_Uploaded" xml:space="preserve"><value>Віддано</value></data>
+  <data name="Info_Remaining" xml:space="preserve"><value>Залишилось завантажити</value></data>
+  <data name="Info_Ratio" xml:space="preserve"><value>Коефіцієнт роздачі</value></data>
+  <data name="Info_DownloadSpeed" xml:space="preserve"><value>Швидкість завантаження</value></data>
+  <data name="Info_UploadSpeed" xml:space="preserve"><value>Швидкість віддачі</value></data>
+  <data name="Info_Seeds" xml:space="preserve"><value>Сіди</value></data>
+  <data name="Info_Peers" xml:space="preserve"><value>Піри</value></data>
+  <data name="Info_Connected" xml:space="preserve"><value>підключено: {0}</value></data>
+  <data name="Info_Wasted" xml:space="preserve"><value>Втрачено</value></data>
+  <data name="Info_Pieces" xml:space="preserve"><value>Частини</value></data>
+  <data name="Info_PiecesValue" xml:space="preserve"><value>{0} × {1}</value></data>
+  <data name="LegendDownload.Text" xml:space="preserve"><value>Завантаження</value></data>
+  <data name="LegendUpload.Text" xml:space="preserve"><value>Віддача</value></data>
+  <data name="SpeedGraphControl.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Швидкість за останні п’ять хвилин</value></data>
+  <data name="NavAllItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Усі торенти</value></data>
+  <data name="NavDownloadingItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Завантажуються</value></data>
+  <data name="NavCompletedItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Завершені</value></data>
+  <data name="NavPausedItem.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Призупинені</value></data>
+  <data name="ColumnsButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Стовпці</value></data>
+  <data name="ColumnsButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Стовпці</value></data>
+  <data name="Columns_Reset" xml:space="preserve"><value>Скинути стовпці</value></data>
+  <data name="ColumnResizer_Tooltip" xml:space="preserve"><value>Перетягніть, щоб змінити ширину; подвійне клацання — скинути</value></data>
+  <data name="Menu_LabelColor" xml:space="preserve"><value>Колір</value></data>
+  <data name="LabelColor_Red" xml:space="preserve"><value>Червоний</value></data>
+  <data name="LabelColor_Orange" xml:space="preserve"><value>Помаранчевий</value></data>
+  <data name="LabelColor_Yellow" xml:space="preserve"><value>Жовтий</value></data>
+  <data name="LabelColor_Green" xml:space="preserve"><value>Зелений</value></data>
+  <data name="LabelColor_Teal" xml:space="preserve"><value>Бірюзовий</value></data>
+  <data name="LabelColor_Blue" xml:space="preserve"><value>Синій</value></data>
+  <data name="LabelColor_Purple" xml:space="preserve"><value>Фіолетовий</value></data>
+  <data name="LabelColor_Pink" xml:space="preserve"><value>Рожевий</value></data>
+  <data name="TorrentCommands.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Дії з торентами</value></data>
+  <data name="Search_Torrents" xml:space="preserve"><value>Пошук торентів</value></data>
+  <data name="Search_Settings" xml:space="preserve"><value>Пошук у параметрах</value></data>
+  <data name="SettingsNothingFound.Text" xml:space="preserve"><value>Нічого не знайдено.</value></data>
+  <data name="Menu_SpeedLimit" xml:space="preserve"><value>Обмеження швидкості…</value></data>
+  <data name="SpeedDialog_Title" xml:space="preserve"><value>Обмеження швидкості</value></data>
+  <data name="SpeedDialog_Download" xml:space="preserve"><value>Завантаження, КБ/с</value></data>
+  <data name="SpeedDialog_Upload" xml:space="preserve"><value>Віддача, КБ/с</value></data>
+  <data name="SpeedDialog_Hint" xml:space="preserve"><value>0 — без власного обмеження. Загальне обмеження з параметрів діє завжди.</value></data>
+  <data name="SpeedDialog_Apply" xml:space="preserve"><value>Застосувати</value></data>
+  <data name="Info_DownloadLimit" xml:space="preserve"><value>Обмеж. завантаження</value></data>
+  <data name="Info_UploadLimit" xml:space="preserve"><value>Обмеж. віддачі</value></data>
+  <data name="Info_NoLimit" xml:space="preserve"><value>Немає</value></data>
+  <data name="Problem_FilesMissing" xml:space="preserve"><value>Файли не знайдено — відновіть, щоб завантажити знову</value></data>
+  <data name="Problem_DiskFull" xml:space="preserve"><value>Недостатньо місця на диску — звільніть його й відновіть</value></data>
+  <data name="Problem_NoAccess" xml:space="preserve"><value>Немає доступу до папки завантажень</value></data>
+  <data name="OfflineInfoBar.Title" xml:space="preserve"><value>Немає підключення до мережі</value></data>
+  <data name="OfflineInfoBar.Message" xml:space="preserve"><value>Торенти продовжать завантаження, щойно з’явиться мережа.</value></data>
+  <data name="AddDialog_NotEnoughSpace" xml:space="preserve"><value>Недостатньо місця на диску: вільно {0}, потрібно {1}.</value></data>
+  <data name="A11y_CurrentLabel" xml:space="preserve"><value>Поточна мітка</value></data>
+</root>
