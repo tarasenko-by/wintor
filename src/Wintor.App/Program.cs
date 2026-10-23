@@ -1,3 +1,4 @@
+using System.Globalization;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Microsoft.Windows.AppLifecycle;
@@ -18,7 +19,9 @@ public static class Program
     {
         WinRT.ComWrappersSupport.InitializeComWrappers();
 
-        AppInstance mainInstance = AppInstance.FindOrRegisterForKey("main");
+        // The demo (screenshots) is an instance of its own, so it can run beside the real Wintor.
+        Services.Demo.Detect();
+        AppInstance mainInstance = AppInstance.FindOrRegisterForKey(Services.Demo.IsOn ? "demo" : "main");
         if (!mainInstance.IsCurrent)
         {
             AppActivationArguments activation = AppInstance.GetCurrent().GetActivatedEventArgs();
@@ -32,8 +35,15 @@ public static class Program
 
         // The interface language must be set before XAML starts: it picks its strings once, at startup. Our settings
         // decide, not the value Windows keeps for the app (that one did not survive reinstalls reliably).
-        ApplicationLanguages.PrimaryLanguageOverride =
-            Services.AppSettings.Load(ApplicationData.Current.LocalFolder.Path).Language;
+        ApplicationLanguages.PrimaryLanguageOverride = Services.Demo.IsOn
+            ? "en-US"
+            : Services.AppSettings.Load(ApplicationData.Current.LocalFolder.Path).Language;
+        if (Services.Demo.IsOn)
+        {
+            // Numbers and dates too ("5.78 GB", not the machine's "5,78 GB"): the screenshots are in English.
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo("en-US");
+            CultureInfo.CurrentCulture = CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
+        }
 
         Application.Start(callbackParams =>
         {

@@ -98,6 +98,10 @@ winapp run src\Wintor.App
   -AppScope local -NoBuild -ArtifactDirectory <dir>` against a running app, or `-Target sandbox`);
   what UIA cannot judge goes to `tests/ui/manual-checks.md`.
 - Give every interactive element an `AutomationProperties.AutomationId`; the UI tests rely on them.
+- Screenshots (README, Microsoft Store) come only from `wintor --demo` — sample torrents of open content, English,
+  its own settings, the real Wintor's window size and column widths — captured by `tools/screenshots.ps1` into
+  `docs/screenshots`. Never publish screenshots of someone's real torrents. The script launches windows: run it
+  only when the developer is away, or in Windows Sandbox.
 
 ## Code style
 

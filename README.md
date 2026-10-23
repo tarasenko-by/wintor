@@ -8,7 +8,17 @@ Mica, Fluent design, sensible defaults — with no ads and no telemetry.
 
 > **Status:** early development (v0.2). See [docs/ROADMAP.md](docs/ROADMAP.md).
 
-<!-- Screenshots (light and dark) and a short GIF go here before the repository is made public. -->
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/details-dark.png">
+  <img alt="Wintor: the torrent table with labels and progress colored by state, and the details pane for a downloading Ubuntu image" src="docs/screenshots/details-light.png">
+</picture>
+
+| Speed graph | Peers | Settings |
+|---|---|---|
+| ![Speed graph of a download](docs/screenshots/speed-light.png) | ![Peers of a torrent, dark theme](docs/screenshots/peers-dark.png) | ![Settings](docs/screenshots/settings-light.png) |
+
+<sub>Screenshots use `wintor --demo`: sample torrents of open content (Linux images, Blender Studio films), no network.
+Retake them with `tools/screenshots.ps1`.</sub>
 
 ## Features (so far)
 

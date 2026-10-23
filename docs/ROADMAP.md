@@ -235,7 +235,7 @@ GPL разрешает копировать код, но не название �
 | 15 | Проверить имя Wintor в Partner Center и на GitHub (**сделать пораньше**) | малый |
 | ✅ 16 | Исключение для Store (GPL §7, `LICENSE-STORE-EXCEPTION.md`), `TRADEMARKS.md`, DCO | малый |
 | ✅ 17 | `CODE_OF_CONDUCT.md`, `SECURITY.md`, `docs/ARCHITECTURE.md`, шаблоны issue, `.editorconfig` | малый |
-| 🟡 18 | README со скриншотами и GIF (текст обновлён, скриншоты — вручную) | малый |
+| ✅ 18 | README со скриншотами (демо-режим `wintor --demo`, `tools/screenshots.ps1`; GIF — позже) | малый |
 | 19 | 10–15 задач `good first issue` | малый |
 | 20 | Подписанный MSIX x64/ARM64, проверка на чистой системе | средний |
 | 21 | Открыть репозиторий, Discussions, альфа-релиз на GitHub | малый |

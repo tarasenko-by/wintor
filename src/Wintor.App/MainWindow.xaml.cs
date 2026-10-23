@@ -52,8 +52,14 @@ public sealed partial class MainWindow : Window
             presenter.PreferredMinimumHeight = 480;
         }
 
-        double scale = GetDpiForWindow(Win32Interop.GetWindowFromWindowId(AppWindow.Id)) / 96.0;
-        AppWindow.Resize(new SizeInt32((int)(1280 * scale), (int)(800 * scale)));
+        RestorePlacement();
+        AppWindow.Changed += (_, e) =>
+        {
+            if (e.DidPositionChange || e.DidSizeChange || e.DidPresenterChange)
+            {
+                RememberPlacement();
+            }
+        };
 
         HighContrast.Initialize(AppWindow.Id);
         RootGrid.RequestedTheme = _settings.Theme;
@@ -103,6 +109,50 @@ public sealed partial class MainWindow : Window
             DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low,
                 async () => await WhatsNewDialog.ShowAsync(RootGrid.XamlRoot));
         }
+    }
+
+    /// <summary>
+    /// Opens the window where the user left it. A saved place that is no longer on any screen (a monitor was
+    /// unplugged) falls back to the default size on the main screen.
+    /// </summary>
+    private void RestorePlacement()
+    {
+        if (_settings.Window is { Width: > 0, Height: > 0 } saved)
+        {
+            var bounds = new RectInt32(saved.X, saved.Y, saved.Width, saved.Height);
+            if (DisplayArea.GetFromRect(bounds, DisplayAreaFallback.None) is not null)
+            {
+                AppWindow.MoveAndResize(bounds);
+                if (saved.Maximized && AppWindow.Presenter is OverlappedPresenter overlapped)
+                {
+                    overlapped.Maximize();
+                }
+
+                return;
+            }
+        }
+
+        double scale = GetDpiForWindow(Win32Interop.GetWindowFromWindowId(AppWindow.Id)) / 96.0;
+        AppWindow.Resize(new SizeInt32((int)(1280 * scale), (int)(800 * scale)));
+    }
+
+    /// <summary>
+    /// Keeps the restored bounds while the user moves and resizes the window; saved to disk when Wintor closes or
+    /// hides to the tray. A maximized or minimized window keeps the bounds it will return to.
+    /// </summary>
+    private void RememberPlacement()
+    {
+        if (!AppWindow.IsVisible || AppWindow.Presenter is not OverlappedPresenter overlapped
+            || overlapped.State == OverlappedPresenterState.Minimized)
+        {
+            return;
+        }
+
+        bool maximized = overlapped.State == OverlappedPresenterState.Maximized;
+        WindowPlacement? previous = _settings.Window;
+        _settings.Window = maximized && previous is not null
+            ? previous with { Maximized = true }
+            : new WindowPlacement(AppWindow.Position.X, AppWindow.Position.Y, AppWindow.Size.Width, AppWindow.Size.Height, maximized);
     }
 
     public ElementTheme Theme
@@ -444,6 +494,7 @@ public sealed partial class MainWindow : Window
         if (!_exiting && _settings.CloseToTray && _tray is { IsShown: true })
         {
             args.Cancel = true;
+            _settings.Save(); // the window's place (RememberPlacement)
             AppWindow.Hide();
             // Once per launch: enough to explain why the window "closed" but the app did not, without nagging.
             if (!_trayHintShown)
@@ -471,6 +522,7 @@ public sealed partial class MainWindow : Window
         }
 
         _shuttingDown = true;
+        _settings.Save(); // the window's place (RememberPlacement)
         AppWindow.Hide();
         try
         {

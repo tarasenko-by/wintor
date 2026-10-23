@@ -120,13 +120,17 @@ public partial class App : Application
     {
         // Packaged apps get a private folder that Windows removes on uninstall.
         string dataDirectory = ApplicationData.Current.LocalFolder.Path;
-        AppSettings settings = AppSettings.Load(dataDirectory);
+        DemoEngine? demo = Demo.IsOn ? new DemoEngine() : null;
+        AppSettings settings = demo is null ? AppSettings.Load(dataDirectory) : Demo.CreateSettings(dataDirectory, demo);
+
+        var history = new SpeedHistory();
+        demo?.Prefill(history);
 
         return new ServiceCollection()
             .AddSingleton(settings)
-            .AddSingleton<ITorrentEngine>(_ => new MonoTorrentEngine(settings.ToEngineOptions()))
+            .AddSingleton<ITorrentEngine>(_ => demo ?? (ITorrentEngine)new MonoTorrentEngine(settings.ToEngineOptions()))
             .AddSingleton<NotificationService>()
-            .AddSingleton<SpeedHistory>(_ => new SpeedHistory())
+            .AddSingleton(history)
             .AddSingleton<TorrentsViewModel>()
             .AddTransient<TorrentDetailsViewModel>()
             .AddTransient<SettingsViewModel>()

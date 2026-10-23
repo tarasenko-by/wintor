@@ -15,6 +15,12 @@ public enum WindowBackdrop
     AcrylicThin,
 }
 
+/// <summary>
+/// The window's restored bounds in screen pixels, and whether it was maximized: the next launch opens it where the
+/// user left it.
+/// </summary>
+public sealed record WindowPlacement(int X, int Y, int Width, int Height, bool Maximized);
+
 /// <summary>User preferences stored as JSON next to the engine data.</summary>
 public sealed class AppSettings
 {
@@ -44,6 +50,9 @@ public sealed class AppSettings
 
     /// <summary>Interface language as a Strings/ folder name ("ru-RU"), or empty to follow Windows.</summary>
     public string Language { get; set; } = "";
+
+    /// <summary>Where the window was, in screen pixels (not maximized); null until it was first closed.</summary>
+    public WindowPlacement? Window { get; set; }
 
     /// <summary>Open "What's new" once after an update.</summary>
     public bool ShowWhatsNew { get; set; } = true;

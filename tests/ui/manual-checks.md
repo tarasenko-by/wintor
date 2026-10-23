@@ -66,6 +66,9 @@ while testing; tick them off after a look by hand. Newest on top.
       start Wintor: "What's new" opens once; the next start it does not; with the switch in About off it never does.
 - [ ] **GitHub link** — Settings → About → "Source code on GitHub" opens the repository in the browser.
 - [ ] **Resume/Pause** — select a running torrent: the bar shows Pause; pause it: the same place shows Resume.
+- [ ] **Window place** — move and resize the window, quit from the tray, start again: same place and size;
+      maximize, quit, start: maximized, and restoring gives the old size back; unplug the monitor it was on: it opens
+      on the main screen.
 - [ ] **Long languages** — switch the Windows display language to German, then Polish (Settings → Time &
       language), restart Wintor: column headers, status cells, side pane, dialogs and Settings are not clipped.
       Also look at Japanese or Chinese once for font fallback.
