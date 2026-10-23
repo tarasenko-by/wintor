@@ -294,4 +294,19 @@
   <data name="LanguageBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>言語</value></data>
   <data name="LanguageSystem" xml:space="preserve"><value>Windows の設定を使用</value></data>
   <data name="LanguageRestartButton.Content" xml:space="preserve"><value>再起動</value></data>
+  <data name="WhatsNewLink.Content" xml:space="preserve"><value>新機能</value></data>
+  <data name="GitHubLink.Content" xml:space="preserve"><value>GitHub</value></data>
+  <data name="StoreLink.Content" xml:space="preserve"><value>Microsoft Store</value></data>
+  <data name="WhatsNewAutoCard.Header" xml:space="preserve"><value>更新後に新機能を表示する</value></data>
+  <data name="WhatsNewAutoCard.Description" xml:space="preserve"><value>更新後に Wintor を初めて開いたときに 1 回だけ表示します。</value></data>
+  <data name="WhatsNewAutoSwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>更新後に新機能を表示する</value></data>
+  <data name="WhatsNew_Title" xml:space="preserve"><value>Wintor の新機能</value></data>
+  <data name="WhatsNew_Version" xml:space="preserve"><value>バージョン {0}</value></data>
+  <data name="WhatsNew_Close" xml:space="preserve"><value>閉じる</value></data>
+  <data name="WhatsNew_020_Table" xml:space="preserve"><value>すっきりしたトレント一覧：状態に応じた進行状況の色分け、ウィンドウに合わせて縮む並べ替え可能な列、自由な並び順。</value></data>
+  <data name="WhatsNew_020_Details" xml:space="preserve"><value>一覧の下に詳細ペインを追加：ピース、優先度付きのファイル、ピア、トラッカー、速度グラフ。</value></data>
+  <data name="WhatsNew_020_Labels" xml:space="preserve"><value>サイドペインに色付きのラベルと状態フィルターを追加し、タイトル バーから検索できます。</value></data>
+  <data name="WhatsNew_020_Limits" xml:space="preserve"><value>「設定」の全体制限に加えて、トレントごとに速度を制限できます。</value></data>
+  <data name="WhatsNew_020_Problems" xml:space="preserve"><value>ファイルの削除、ディスクの空き容量不足、ネットワーク切断をわかりやすく説明し、「再開」で解決できます。</value></data>
+  <data name="WhatsNew_020_Languages" xml:space="preserve"><value>12 言語の表示に対応し、「設定」で言語を選べます。</value></data>
 </root>

@@ -294,4 +294,19 @@
   <data name="LanguageBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Lingua</value></data>
   <data name="LanguageSystem" xml:space="preserve"><value>Come in Windows</value></data>
   <data name="LanguageRestartButton.Content" xml:space="preserve"><value>Riavvia</value></data>
+  <data name="WhatsNewLink.Content" xml:space="preserve"><value>Novità</value></data>
+  <data name="GitHubLink.Content" xml:space="preserve"><value>GitHub</value></data>
+  <data name="StoreLink.Content" xml:space="preserve"><value>Microsoft Store</value></data>
+  <data name="WhatsNewAutoCard.Header" xml:space="preserve"><value>Mostra le novità dopo gli aggiornamenti</value></data>
+  <data name="WhatsNewAutoCard.Description" xml:space="preserve"><value>Una sola volta, al primo avvio di Wintor dopo un aggiornamento.</value></data>
+  <data name="WhatsNewAutoSwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Mostra le novità dopo gli aggiornamenti</value></data>
+  <data name="WhatsNew_Title" xml:space="preserve"><value>Novità di Wintor</value></data>
+  <data name="WhatsNew_Version" xml:space="preserve"><value>Versione {0}</value></data>
+  <data name="WhatsNew_Close" xml:space="preserve"><value>Chiudi</value></data>
+  <data name="WhatsNew_020_Table" xml:space="preserve"><value>Una tabella dei torrent più serena: avanzamento colorato in base allo stato, colonne ordinabili che si restringono con la finestra e un ordine tutto tuo.</value></data>
+  <data name="WhatsNew_020_Details" xml:space="preserve"><value>Un riquadro dei dettagli sotto la tabella: parti, file con priorità, peer, tracker e un grafico della velocità.</value></data>
+  <data name="WhatsNew_020_Labels" xml:space="preserve"><value>Etichette colorate e filtri di stato nel riquadro laterale, e ricerca dalla barra del titolo.</value></data>
+  <data name="WhatsNew_020_Limits" xml:space="preserve"><value>Limiti di velocità per ogni torrent, oltre a quelli generali in Impostazioni.</value></data>
+  <data name="WhatsNew_020_Problems" xml:space="preserve"><value>File eliminati, disco pieno o rete assente vengono spiegati con parole semplici, e «Riprendi» risolve tutto.</value></data>
+  <data name="WhatsNew_020_Languages" xml:space="preserve"><value>Dodici lingue dell’interfaccia, con un selettore della lingua in Impostazioni.</value></data>
 </root>

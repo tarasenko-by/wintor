@@ -294,4 +294,19 @@
   <data name="LanguageBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Язык</value></data>
   <data name="LanguageSystem" xml:space="preserve"><value>Как в Windows</value></data>
   <data name="LanguageRestartButton.Content" xml:space="preserve"><value>Перезапустить</value></data>
+  <data name="WhatsNewLink.Content" xml:space="preserve"><value>Что нового</value></data>
+  <data name="GitHubLink.Content" xml:space="preserve"><value>GitHub</value></data>
+  <data name="StoreLink.Content" xml:space="preserve"><value>Microsoft Store</value></data>
+  <data name="WhatsNewAutoCard.Header" xml:space="preserve"><value>Показывать «Что нового» после обновлений</value></data>
+  <data name="WhatsNewAutoCard.Description" xml:space="preserve"><value>Один раз, при первом запуске после обновления.</value></data>
+  <data name="WhatsNewAutoSwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Показывать «Что нового» после обновлений</value></data>
+  <data name="WhatsNew_Title" xml:space="preserve"><value>Что нового в Wintor</value></data>
+  <data name="WhatsNew_Version" xml:space="preserve"><value>Версия {0}</value></data>
+  <data name="WhatsNew_Close" xml:space="preserve"><value>Закрыть</value></data>
+  <data name="WhatsNew_020_Table" xml:space="preserve"><value>Спокойная таблица торрентов: прогресс в цвете состояния, сортируемые колонки, которые сжимаются вместе с окном, и свой порядок.</value></data>
+  <data name="WhatsNew_020_Details" xml:space="preserve"><value>Панель подробностей под таблицей: части, файлы с приоритетами, пиры, трекеры и график скорости.</value></data>
+  <data name="WhatsNew_020_Labels" xml:space="preserve"><value>Цветные метки и фильтры по состоянию в боковой панели, поиск из заголовка окна.</value></data>
+  <data name="WhatsNew_020_Limits" xml:space="preserve"><value>Ограничение скорости для каждого торрента, поверх общего из параметров.</value></data>
+  <data name="WhatsNew_020_Problems" xml:space="preserve"><value>Удалённые файлы, полный диск или пропавшая сеть объясняются простыми словами, а «Продолжить» всё исправляет.</value></data>
+  <data name="WhatsNew_020_Languages" xml:space="preserve"><value>Двенадцать языков интерфейса и выбор языка в параметрах.</value></data>
 </root>

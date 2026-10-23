@@ -89,16 +89,19 @@
                     </AppBarButton.KeyboardAccelerators>
                 </AppBarButton>
                 <AppBarSeparator />
+                <!--  One place, one of the two at a time: see TorrentsViewModel.ShowPauseButton.  -->
                 <AppBarButton
                     x:Uid="ResumeButton"
                     AutomationProperties.AutomationId="ResumeButton"
                     Command="{x:Bind ViewModel.ResumeCommand}"
-                    Icon="{icons:Huge Kind=Play, Size=20}" />
+                    Icon="{icons:Huge Kind=Play, Size=20}"
+                    Visibility="{x:Bind ViewModel.ShowResumeButton, Mode=OneWay}" />
                 <AppBarButton
                     x:Uid="PauseButton"
                     AutomationProperties.AutomationId="PauseButton"
                     Command="{x:Bind ViewModel.PauseCommand}"
-                    Icon="{icons:Huge Kind=Pause, Size=20}" />
+                    Icon="{icons:Huge Kind=Pause, Size=20}"
+                    Visibility="{x:Bind ViewModel.ShowPauseButton, Mode=OneWay}" />
                 <AppBarButton
                     x:Uid="RemoveButton"
                     AutomationProperties.AutomationId="RemoveButton"
@@ -174,240 +177,254 @@
             BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
             BorderThickness="1"
             CornerRadius="{StaticResource OverlayCornerRadius}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+            <!--
+                Header and rows scroll sideways together once the window is narrower than every column at its minimum
+                (TableColumns.MinTableWidth); until then the columns shrink instead. Vertical scrolling stays the list's.
+            -->
+            <ScrollViewer
+                x:Name="TableScroller"
+                HorizontalScrollBarVisibility="Auto"
+                HorizontalScrollMode="Auto"
+                SizeChanged="TableScroller_SizeChanged"
+                VerticalScrollBarVisibility="Disabled"
+                VerticalScrollMode="Disabled">
+                <Grid x:Name="TableContent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
 
-            <!--  Column headers: click to sort, again to flip  -->
-            <Grid
-                x:Name="HeaderGrid"
-                Padding="12,0,12,0"
-                AutomationProperties.AutomationId="TableHeader"
-                BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
-                BorderThickness="0,0,0,1"
-                ColumnSpacing="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Queue, Mode=OneWay, FallbackValue=0}" />
-                    <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Name, Mode=OneWay, FallbackValue=0}" />
-                    <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Size, Mode=OneWay, FallbackValue=0}" />
-                    <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Progress, Mode=OneWay, FallbackValue=0}" />
-                    <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Status, Mode=OneWay, FallbackValue=0}" />
-                    <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Down, Mode=OneWay, FallbackValue=0}" />
-                    <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Up, Mode=OneWay, FallbackValue=0}" />
-                    <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.TimeLeft, Mode=OneWay, FallbackValue=0}" />
-                    <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Seeds, Mode=OneWay, FallbackValue=0}" />
-                    <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Peers, Mode=OneWay, FallbackValue=0}" />
-                    <ColumnDefinition Width="32" />
-                </Grid.ColumnDefinitions>
-                <!--  Header cells (sort button + width handle) are built in code: TorrentsPage.BuildHeaders.  -->
-                <Button
-                    x:Name="ColumnsButton"
-                    x:Uid="ColumnsButton"
-                    Grid.Column="10"
-                    Width="32"
-                    Height="32"
-                    Padding="0"
-                    HorizontalAlignment="Right"
-                    AutomationProperties.AutomationId="ColumnsButton"
-                    Content="{icons:Huge Kind=Columns3Cog}"
-                    Style="{StaticResource SubtleButtonStyle}" />
-            </Grid>
+                    <!--  Column headers: click to sort, again to flip  -->
+                    <Grid
+                        x:Name="HeaderGrid"
+                        Padding="12,0,12,0"
+                        AutomationProperties.AutomationId="TableHeader"
+                        BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
+                        BorderThickness="0,0,0,1"
+                        ColumnSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Queue, Mode=OneWay, FallbackValue=0}" />
+                            <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Name, Mode=OneWay, FallbackValue=0}" />
+                            <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Size, Mode=OneWay, FallbackValue=0}" />
+                            <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Progress, Mode=OneWay, FallbackValue=0}" />
+                            <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Status, Mode=OneWay, FallbackValue=0}" />
+                            <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Down, Mode=OneWay, FallbackValue=0}" />
+                            <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Up, Mode=OneWay, FallbackValue=0}" />
+                            <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.TimeLeft, Mode=OneWay, FallbackValue=0}" />
+                            <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Seeds, Mode=OneWay, FallbackValue=0}" />
+                            <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Peers, Mode=OneWay, FallbackValue=0}" />
+                            <ColumnDefinition Width="32" />
+                        </Grid.ColumnDefinitions>
+                        <!--  Header cells (sort button + width handle) are built in code: TorrentsPage.BuildHeaders.  -->
+                        <Button
+                            x:Name="ColumnsButton"
+                            x:Uid="ColumnsButton"
+                            Grid.Column="10"
+                            Width="32"
+                            Height="32"
+                            Padding="0"
+                            HorizontalAlignment="Right"
+                            AutomationProperties.AutomationId="ColumnsButton"
+                            Content="{icons:Huge Kind=Columns3Cog}"
+                            Style="{StaticResource SubtleButtonStyle}" />
+                    </Grid>
 
-            <ProgressRing
-                Grid.Row="1"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" />
+                    <ProgressRing
+                        Grid.Row="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" />
 
-            <!--  Empty state: no torrents at all  -->
-            <StackPanel
-                Grid.Row="1"
-                MaxWidth="360"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Spacing="12"
-                Visibility="{x:Bind ViewModel.IsEmpty, Mode=OneWay}">
-                <ContentPresenter
-                    HorizontalAlignment="Center"
-                    Content="{icons:Huge Kind=Download01, Size=40}"
-                    Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
-                <TextBlock
-                    x:Uid="EmptyTitle"
-                    HorizontalAlignment="Center"
-                    AutomationProperties.AutomationId="EmptyTitle"
-                    Style="{StaticResource SubtitleTextBlockStyle}" />
-                <TextBlock
-                    x:Uid="EmptyHint"
-                    HorizontalAlignment="Center"
-                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                    TextAlignment="Center"
-                    TextWrapping="Wrap" />
-                <Button
-                    x:Uid="EmptyAddButton"
-                    HorizontalAlignment="Center"
-                    AutomationProperties.AutomationId="EmptyAddButton"
-                    Click="OpenFile_Click"
-                    Style="{StaticResource AccentButtonStyle}" />
-            </StackPanel>
+                    <!--  Empty state: no torrents at all  -->
+                    <StackPanel
+                        Grid.Row="1"
+                        MaxWidth="360"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Spacing="12"
+                        Visibility="{x:Bind ViewModel.IsEmpty, Mode=OneWay}">
+                        <ContentPresenter
+                            HorizontalAlignment="Center"
+                            Content="{icons:Huge Kind=Download01, Size=40}"
+                            Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
+                        <TextBlock
+                            x:Uid="EmptyTitle"
+                            HorizontalAlignment="Center"
+                            AutomationProperties.AutomationId="EmptyTitle"
+                            Style="{StaticResource SubtitleTextBlockStyle}" />
+                        <TextBlock
+                            x:Uid="EmptyHint"
+                            HorizontalAlignment="Center"
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap" />
+                        <Button
+                            x:Uid="EmptyAddButton"
+                            HorizontalAlignment="Center"
+                            AutomationProperties.AutomationId="EmptyAddButton"
+                            Click="OpenFile_Click"
+                            Style="{StaticResource AccentButtonStyle}" />
+                    </StackPanel>
 
-            <!--  Empty state: view or search hides everything  -->
-            <TextBlock
-                x:Uid="NothingFound"
-                Grid.Row="1"
-                MaxWidth="360"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                AutomationProperties.AutomationId="NothingFound"
-                AutomationProperties.LiveSetting="Polite"
-                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                TextAlignment="Center"
-                TextWrapping="Wrap"
-                Visibility="{x:Bind ViewModel.IsNothingFound, Mode=OneWay}" />
+                    <!--  Empty state: view or search hides everything  -->
+                    <TextBlock
+                        x:Uid="NothingFound"
+                        Grid.Row="1"
+                        MaxWidth="360"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        AutomationProperties.AutomationId="NothingFound"
+                        AutomationProperties.LiveSetting="Polite"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextAlignment="Center"
+                        TextWrapping="Wrap"
+                        Visibility="{x:Bind ViewModel.IsNothingFound, Mode=OneWay}" />
 
-            <ListView
-                x:Name="TorrentList"
-                x:Uid="TorrentList"
-                Grid.Row="1"
-                Padding="0,2,0,2"
-                AutomationProperties.AutomationId="TorrentList"
-                ContainerContentChanging="TorrentList_ContainerContentChanging"
-                ItemsSource="{x:Bind ViewModel.Torrents, Mode=OneTime}"
-                KeyDown="TorrentList_KeyDown"
-                SelectionChanged="TorrentList_SelectionChanged"
-                SelectionMode="Extended"
-                Visibility="{x:Bind ViewModel.HasVisibleTorrents, Mode=OneWay}">
-                <ListView.ItemContainerTransitions>
-                    <TransitionCollection>
-                        <AddDeleteThemeTransition />
-                        <RepositionThemeTransition />
-                    </TransitionCollection>
-                </ListView.ItemContainerTransitions>
-                <ListView.ItemContainerStyle>
-                    <Style BasedOn="{StaticResource DefaultListViewItemStyle}" TargetType="ListViewItem">
-                        <Setter Property="MinHeight" Value="40" />
-                        <Setter Property="Padding" Value="12,0" />
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="vm:TorrentItemViewModel">
-                        <Grid AutomationProperties.Name="{x:Bind AccessibleName, Mode=OneWay}" ColumnSpacing="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Queue, Mode=OneWay, FallbackValue=0}" />
-                                <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Name, Mode=OneWay, FallbackValue=0}" />
-                                <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Size, Mode=OneWay, FallbackValue=0}" />
-                                <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Progress, Mode=OneWay, FallbackValue=0}" />
-                                <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Status, Mode=OneWay, FallbackValue=0}" />
-                                <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Down, Mode=OneWay, FallbackValue=0}" />
-                                <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Up, Mode=OneWay, FallbackValue=0}" />
-                                <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.TimeLeft, Mode=OneWay, FallbackValue=0}" />
-                                <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Seeds, Mode=OneWay, FallbackValue=0}" />
-                                <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Peers, Mode=OneWay, FallbackValue=0}" />
-                                <ColumnDefinition Width="32" />
-                            </Grid.ColumnDefinitions>
+                    <ListView
+                        x:Name="TorrentList"
+                        x:Uid="TorrentList"
+                        Grid.Row="1"
+                        Padding="0,2,0,2"
+                        AutomationProperties.AutomationId="TorrentList"
+                        ContainerContentChanging="TorrentList_ContainerContentChanging"
+                        ItemsSource="{x:Bind ViewModel.Torrents, Mode=OneTime}"
+                        KeyDown="TorrentList_KeyDown"
+                        SelectionChanged="TorrentList_SelectionChanged"
+                        SelectionMode="Extended"
+                        Visibility="{x:Bind ViewModel.HasVisibleTorrents, Mode=OneWay}">
+                        <ListView.ItemContainerTransitions>
+                            <TransitionCollection>
+                                <AddDeleteThemeTransition />
+                                <RepositionThemeTransition />
+                            </TransitionCollection>
+                        </ListView.ItemContainerTransitions>
+                        <ListView.ItemContainerStyle>
+                            <Style BasedOn="{StaticResource DefaultListViewItemStyle}" TargetType="ListViewItem">
+                                <Setter Property="MinHeight" Value="40" />
+                                <Setter Property="Padding" Value="12,0" />
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="vm:TorrentItemViewModel">
+                                <Grid AutomationProperties.Name="{x:Bind AccessibleName, Mode=OneWay}" ColumnSpacing="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Queue, Mode=OneWay, FallbackValue=0}" />
+                                        <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Name, Mode=OneWay, FallbackValue=0}" />
+                                        <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Size, Mode=OneWay, FallbackValue=0}" />
+                                        <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Progress, Mode=OneWay, FallbackValue=0}" />
+                                        <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Status, Mode=OneWay, FallbackValue=0}" />
+                                        <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Down, Mode=OneWay, FallbackValue=0}" />
+                                        <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Up, Mode=OneWay, FallbackValue=0}" />
+                                        <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.TimeLeft, Mode=OneWay, FallbackValue=0}" />
+                                        <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Seeds, Mode=OneWay, FallbackValue=0}" />
+                                        <ColumnDefinition Width="{x:Bind vm:TableColumns.Current.Peers, Mode=OneWay, FallbackValue=0}" />
+                                        <ColumnDefinition Width="32" />
+                                    </Grid.ColumnDefinitions>
 
-                            <TextBlock Style="{StaticResource NumberCellStyle}" Text="{x:Bind QueueNumber, Mode=OneWay}" />
+                                    <TextBlock Style="{StaticResource NumberCellStyle}" Text="{x:Bind QueueNumber, Mode=OneWay}" />
 
-                            <Grid Grid.Column="1" Margin="0,0,6,0" ColumnSpacing="8">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock
-                                    Style="{StaticResource CellStyle}"
-                                    Text="{x:Bind Name, Mode=OneWay}"
-                                    ToolTipService.ToolTip="{x:Bind Name, Mode=OneWay}" />
-                                <!--  Label pill  -->
-                                <Border
-                                    Grid.Column="1"
-                                    Padding="6,0"
-                                    VerticalAlignment="Center"
-                                    Background="{ThemeResource ControlAltFillColorTertiaryBrush}"
-                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                    BorderThickness="1"
-                                    CornerRadius="9"
-                                    Visibility="{x:Bind HasLabel, Mode=OneWay}">
-                                    <StackPanel Orientation="Horizontal" Spacing="5">
-                                        <Ellipse
-                                            Width="7"
-                                            Height="7"
-                                            VerticalAlignment="Center"
-                                            Fill="{x:Bind LabelBrush, Mode=OneWay}" />
+                                    <Grid Grid.Column="1" Margin="0,0,6,0" ColumnSpacing="8">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
                                         <TextBlock
-                                            FontSize="11"
-                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                            Text="{x:Bind Label, Mode=OneWay}" />
-                                    </StackPanel>
-                                </Border>
-                            </Grid>
+                                            Style="{StaticResource CellStyle}"
+                                            Text="{x:Bind Name, Mode=OneWay}"
+                                            ToolTipService.ToolTip="{x:Bind Name, Mode=OneWay}" />
+                                        <!--  Label pill  -->
+                                        <Border
+                                            Grid.Column="1"
+                                            Padding="6,0"
+                                            VerticalAlignment="Center"
+                                            Background="{ThemeResource ControlAltFillColorTertiaryBrush}"
+                                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                            BorderThickness="1"
+                                            CornerRadius="9"
+                                            Visibility="{x:Bind HasLabel, Mode=OneWay}">
+                                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                                <Ellipse
+                                                    Width="7"
+                                                    Height="7"
+                                                    VerticalAlignment="Center"
+                                                    Fill="{x:Bind LabelBrush, Mode=OneWay}" />
+                                                <TextBlock
+                                                    FontSize="11"
+                                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                    Text="{x:Bind Label, Mode=OneWay}" />
+                                            </StackPanel>
+                                        </Border>
+                                    </Grid>
 
-                            <TextBlock
-                                Grid.Column="2"
-                                Style="{StaticResource NumberCellStyle}"
-                                Text="{x:Bind SizeText, Mode=OneWay}" />
+                                    <TextBlock
+                                        Grid.Column="2"
+                                        Style="{StaticResource NumberCellStyle}"
+                                        Text="{x:Bind SizeText, Mode=OneWay}" />
 
-                            <!--  Progress: green downloading, blue seeding, grey when nothing moves  -->
-                            <Grid Grid.Column="3" Margin="6,0" ColumnSpacing="8">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="40" />
-                                </Grid.ColumnDefinitions>
-                                <ProgressBar
-                                    VerticalAlignment="Center"
-                                    Foreground="{ThemeResource TorrentDownloadingBrush}"
-                                    IsIndeterminate="{x:Bind IsIndeterminate, Mode=OneWay}"
-                                    Value="{x:Bind ProgressPercent, Mode=OneWay}"
-                                    Visibility="{x:Bind ShowDownloadingBar, Mode=OneWay}" />
-                                <ProgressBar
-                                    VerticalAlignment="Center"
-                                    Foreground="{ThemeResource TorrentSeedingBrush}"
-                                    Value="{x:Bind ProgressPercent, Mode=OneWay}"
-                                    Visibility="{x:Bind ShowSeedingBar, Mode=OneWay}" />
-                                <ProgressBar
-                                    VerticalAlignment="Center"
-                                    Foreground="{ThemeResource TorrentInactiveBrush}"
-                                    ShowError="{x:Bind IsError, Mode=OneWay}"
-                                    Value="{x:Bind ProgressPercent, Mode=OneWay}"
-                                    Visibility="{x:Bind ShowInactiveBar, Mode=OneWay}" />
-                                <TextBlock
-                                    Grid.Column="1"
-                                    Margin="0"
-                                    FontSize="12"
-                                    Style="{StaticResource NumberCellStyle}"
-                                    Text="{x:Bind ProgressText, Mode=OneWay}" />
-                            </Grid>
+                                    <!--  Progress: green downloading, blue seeding, grey when nothing moves  -->
+                                    <Grid Grid.Column="3" Margin="6,0" ColumnSpacing="8">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="40" />
+                                        </Grid.ColumnDefinitions>
+                                        <ProgressBar
+                                            VerticalAlignment="Center"
+                                            Foreground="{ThemeResource TorrentDownloadingBrush}"
+                                            IsIndeterminate="{x:Bind IsIndeterminate, Mode=OneWay}"
+                                            Value="{x:Bind ProgressPercent, Mode=OneWay}"
+                                            Visibility="{x:Bind ShowDownloadingBar, Mode=OneWay}" />
+                                        <ProgressBar
+                                            VerticalAlignment="Center"
+                                            Foreground="{ThemeResource TorrentSeedingBrush}"
+                                            Value="{x:Bind ProgressPercent, Mode=OneWay}"
+                                            Visibility="{x:Bind ShowSeedingBar, Mode=OneWay}" />
+                                        <ProgressBar
+                                            VerticalAlignment="Center"
+                                            Foreground="{ThemeResource TorrentInactiveBrush}"
+                                            ShowError="{x:Bind IsError, Mode=OneWay}"
+                                            Value="{x:Bind ProgressPercent, Mode=OneWay}"
+                                            Visibility="{x:Bind ShowInactiveBar, Mode=OneWay}" />
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            Margin="0"
+                                            FontSize="12"
+                                            Style="{StaticResource NumberCellStyle}"
+                                            Text="{x:Bind ProgressText, Mode=OneWay}" />
+                                    </Grid>
 
-                            <TextBlock
-                                Grid.Column="4"
-                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                Style="{StaticResource CellStyle}"
-                                Text="{x:Bind StatusText, Mode=OneWay}"
-                                ToolTipService.ToolTip="{x:Bind StatusText, Mode=OneWay}" />
-                            <TextBlock
-                                Grid.Column="5"
-                                Style="{StaticResource NumberCellStyle}"
-                                Text="{x:Bind DownText, Mode=OneWay}" />
-                            <TextBlock
-                                Grid.Column="6"
-                                Style="{StaticResource NumberCellStyle}"
-                                Text="{x:Bind UpText, Mode=OneWay}" />
-                            <TextBlock
-                                Grid.Column="7"
-                                Style="{StaticResource NumberCellStyle}"
-                                Text="{x:Bind TimeLeftText, Mode=OneWay}" />
-                            <TextBlock
-                                Grid.Column="8"
-                                Style="{StaticResource NumberCellStyle}"
-                                Text="{x:Bind SeedsText, Mode=OneWay}" />
-                            <TextBlock
-                                Grid.Column="9"
-                                Style="{StaticResource NumberCellStyle}"
-                                Text="{x:Bind PeersText, Mode=OneWay}" />
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                                    <TextBlock
+                                        Grid.Column="4"
+                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                        Style="{StaticResource CellStyle}"
+                                        Text="{x:Bind StatusText, Mode=OneWay}"
+                                        ToolTipService.ToolTip="{x:Bind StatusText, Mode=OneWay}" />
+                                    <TextBlock
+                                        Grid.Column="5"
+                                        Style="{StaticResource NumberCellStyle}"
+                                        Text="{x:Bind DownText, Mode=OneWay}" />
+                                    <TextBlock
+                                        Grid.Column="6"
+                                        Style="{StaticResource NumberCellStyle}"
+                                        Text="{x:Bind UpText, Mode=OneWay}" />
+                                    <TextBlock
+                                        Grid.Column="7"
+                                        Style="{StaticResource NumberCellStyle}"
+                                        Text="{x:Bind TimeLeftText, Mode=OneWay}" />
+                                    <TextBlock
+                                        Grid.Column="8"
+                                        Style="{StaticResource NumberCellStyle}"
+                                        Text="{x:Bind SeedsText, Mode=OneWay}" />
+                                    <TextBlock
+                                        Grid.Column="9"
+                                        Style="{StaticResource NumberCellStyle}"
+                                        Text="{x:Bind PeersText, Mode=OneWay}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </ScrollViewer>
         </Grid>
 
         <controls:PaneSplitter

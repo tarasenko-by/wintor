@@ -294,4 +294,19 @@
   <data name="LanguageBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Language</value></data>
   <data name="LanguageSystem" xml:space="preserve"><value>As in Windows</value></data>
   <data name="LanguageRestartButton.Content" xml:space="preserve"><value>Restart</value></data>
+  <data name="WhatsNewLink.Content" xml:space="preserve"><value>What's new</value></data>
+  <data name="GitHubLink.Content" xml:space="preserve"><value>GitHub</value></data>
+  <data name="StoreLink.Content" xml:space="preserve"><value>Microsoft Store</value></data>
+  <data name="WhatsNewAutoCard.Header" xml:space="preserve"><value>Show what's new after updates</value></data>
+  <data name="WhatsNewAutoCard.Description" xml:space="preserve"><value>Once, the first time Wintor opens after an update.</value></data>
+  <data name="WhatsNewAutoSwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Show what's new after updates</value></data>
+  <data name="WhatsNew_Title" xml:space="preserve"><value>What's new in Wintor</value></data>
+  <data name="WhatsNew_Version" xml:space="preserve"><value>Version {0}</value></data>
+  <data name="WhatsNew_Close" xml:space="preserve"><value>Close</value></data>
+  <data name="WhatsNew_020_Table" xml:space="preserve"><value>A calm torrent table: progress colored by state, sortable columns that shrink with the window, and your own order.</value></data>
+  <data name="WhatsNew_020_Details" xml:space="preserve"><value>A details pane under the table: pieces, files with priorities, peers, trackers and a speed graph.</value></data>
+  <data name="WhatsNew_020_Labels" xml:space="preserve"><value>Colored labels and status filters in the side pane, and search from the title bar.</value></data>
+  <data name="WhatsNew_020_Limits" xml:space="preserve"><value>Speed limits for each torrent, on top of the overall ones in Settings.</value></data>
+  <data name="WhatsNew_020_Problems" xml:space="preserve"><value>Deleted files, a full disk or a lost network are explained in plain words, and Resume fixes them.</value></data>
+  <data name="WhatsNew_020_Languages" xml:space="preserve"><value>Twelve interface languages, with a language picker in Settings.</value></data>
 </root>

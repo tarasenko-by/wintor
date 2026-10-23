@@ -62,6 +62,10 @@ while testing; tick them off after a look by hand. Newest on top.
       clicking it brings the window back.
 - [ ] **Language** — Settings → Language → pick another → Restart: Wintor closes and comes back in that language
       with the same torrents; "As in Windows" + Restart returns to the system language.
+- [ ] **What's new after an update** — set `WhatsNewSeenVersion` in settings.json to an older version ("0.1.0"),
+      start Wintor: "What's new" opens once; the next start it does not; with the switch in About off it never does.
+- [ ] **GitHub link** — Settings → About → "Source code on GitHub" opens the repository in the browser.
+- [ ] **Resume/Pause** — select a running torrent: the bar shows Pause; pause it: the same place shows Resume.
 - [ ] **Long languages** — switch the Windows display language to German, then Polish (Settings → Time &
       language), restart Wintor: column headers, status cells, side pane, dialogs and Settings are not clipped.
       Also look at Japanese or Chinese once for font fallback.

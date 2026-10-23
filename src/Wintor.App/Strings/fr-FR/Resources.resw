@@ -294,4 +294,19 @@
   <data name="LanguageBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Langue</value></data>
   <data name="LanguageSystem" xml:space="preserve"><value>Comme Windows</value></data>
   <data name="LanguageRestartButton.Content" xml:space="preserve"><value>Redémarrer</value></data>
+  <data name="WhatsNewLink.Content" xml:space="preserve"><value>Nouveautés</value></data>
+  <data name="GitHubLink.Content" xml:space="preserve"><value>GitHub</value></data>
+  <data name="StoreLink.Content" xml:space="preserve"><value>Microsoft Store</value></data>
+  <data name="WhatsNewAutoCard.Header" xml:space="preserve"><value>Afficher les nouveautés après les mises à jour</value></data>
+  <data name="WhatsNewAutoCard.Description" xml:space="preserve"><value>Une seule fois, au premier lancement de Wintor après une mise à jour.</value></data>
+  <data name="WhatsNewAutoSwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Afficher les nouveautés après les mises à jour</value></data>
+  <data name="WhatsNew_Title" xml:space="preserve"><value>Nouveautés de Wintor</value></data>
+  <data name="WhatsNew_Version" xml:space="preserve"><value>Version {0}</value></data>
+  <data name="WhatsNew_Close" xml:space="preserve"><value>Fermer</value></data>
+  <data name="WhatsNew_020_Table" xml:space="preserve"><value>Un tableau de torrents apaisé : progression colorée selon l’état, colonnes triables qui se réduisent avec la fenêtre, et votre propre ordre.</value></data>
+  <data name="WhatsNew_020_Details" xml:space="preserve"><value>Un volet de détails sous le tableau : morceaux, fichiers avec priorités, pairs, trackers et graphique de vitesse.</value></data>
+  <data name="WhatsNew_020_Labels" xml:space="preserve"><value>Étiquettes colorées et filtres d’état dans le volet latéral, et recherche depuis la barre de titre.</value></data>
+  <data name="WhatsNew_020_Limits" xml:space="preserve"><value>Limites de vitesse pour chaque torrent, en plus des limites globales des Paramètres.</value></data>
+  <data name="WhatsNew_020_Problems" xml:space="preserve"><value>Fichiers supprimés, disque plein ou réseau perdu sont expliqués en termes simples, et « Reprendre » règle le problème.</value></data>
+  <data name="WhatsNew_020_Languages" xml:space="preserve"><value>Douze langues d’interface, avec un sélecteur de langue dans les Paramètres.</value></data>
 </root>

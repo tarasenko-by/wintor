@@ -45,10 +45,15 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
         };
 
         TableColumns.Current.Attach(_settings);
-        // Measured on the header row itself (minus its 12 px padding each side), the same width the rows lay out in.
-        HeaderGrid.SizeChanged += (_, e) => TableColumns.Current.Fit(e.NewSize.Width - 24);
         BuildHeaders();
-        TableColumns.Current.PropertyChanged += (_, _) => UpdateHeaderVisibility();
+        TableColumns.Current.PropertyChanged += (_, e) =>
+        {
+            UpdateHeaderVisibility();
+            if (e.PropertyName == nameof(TableColumns.MinTableWidth))
+            {
+                SizeTable(TableScroller.ActualWidth);
+            }
+        };
         ColumnsButton.Flyout = CreateColumnsMenu();
         HeaderGrid.ContextFlyout = CreateColumnsMenu();
         UpdateHeaders();
@@ -121,6 +126,23 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
     {
         _settings.DetailsPaneHeight = PaneRow.ActualHeight;
         _settings.Save();
+    }
+
+    private void TableScroller_SizeChanged(object sender, SizeChangedEventArgs e) => SizeTable(e.NewSize.Width);
+
+    /// <summary>
+    /// Fits the columns into the visible width (minus the rows' 12 px padding each side); a window narrower than every
+    /// column at its minimum gets a table that wide, which the scroller then scrolls sideways.
+    /// </summary>
+    private void SizeTable(double viewport)
+    {
+        if (viewport <= 0)
+        {
+            return;
+        }
+
+        TableColumns.Current.Fit(viewport - 24);
+        TableContent.Width = Math.Max(viewport, TableColumns.Current.MinTableWidth);
     }
 
     /// <summary>One cell per column: a quiet button that sorts, and (except for the name) a width handle.</summary>
@@ -647,14 +669,14 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
         // Right-clicking a row that is part of a multi-selection acts on the whole selection.
         IReadOnlyList<TorrentItemViewModel> targets = ViewModel.SelectedTorrents.Contains(item) ? ViewModel.SelectedTorrents : [item];
 
-        if (targets.Any(t => !t.CanPause))
-        {
-            _itemMenu.Items.Add(Entry("Menu_Resume", HugeIconKind.Play, () => _ = ViewModel.ResumeAsync(targets)));
-        }
-
-        if (targets.Any(t => t.CanPause))
+        // One entry, like the command bar: Pause when all of them run, otherwise Resume.
+        if (targets.All(t => t.CanPause))
         {
             _itemMenu.Items.Add(Entry("Menu_Pause", HugeIconKind.Pause, () => _ = ViewModel.PauseAsync(targets)));
+        }
+        else
+        {
+            _itemMenu.Items.Add(Entry("Menu_Resume", HugeIconKind.Play, () => _ = ViewModel.ResumeAsync(targets)));
         }
 
         _itemMenu.Items.Add(Entry("Menu_OpenFolder", HugeIconKind.FolderOpen, () => Shell.OpenFolder(item.ContentPath)));

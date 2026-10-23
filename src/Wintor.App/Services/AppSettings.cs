@@ -42,6 +42,15 @@ public sealed class AppSettings
 
     public bool NotifyWhenComplete { get; set; } = true;
 
+    /// <summary>Interface language as a Strings/ folder name ("ru-RU"), or empty to follow Windows.</summary>
+    public string Language { get; set; } = "";
+
+    /// <summary>Open "What's new" once after an update.</summary>
+    public bool ShowWhatsNew { get; set; } = true;
+
+    /// <summary>The last version whose "What's new" was shown or skipped ("0.2.0"); empty before the first launch.</summary>
+    public string WhatsNewSeenVersion { get; set; } = "";
+
 
     /// <summary>The user's own order of torrents (the № column), by id.</summary>
     public List<string> Queue { get; set; } = [];

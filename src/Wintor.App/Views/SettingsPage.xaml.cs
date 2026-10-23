@@ -84,6 +84,12 @@ public sealed partial class SettingsPage : Page, ISearchablePage
 
     private void RestartForLanguage_Click(object sender, RoutedEventArgs e) => App.Window.Restart();
 
+    public Uri GitHubUri { get; } = new(SettingsViewModel.GitHubUrl);
+
+    public Uri StoreUri { get; } = new($"ms-windows-store://pdp/?ProductId={SettingsViewModel.StoreProductId}");
+
+    private void WhatsNew_Click(object sender, RoutedEventArgs e) => _ = WhatsNewDialog.ShowAsync(XamlRoot);
+
     private async void ChangeFolder_Click(object sender, RoutedEventArgs e)
     {
         if (await Shell.PickFolderAsync() is { } folder)

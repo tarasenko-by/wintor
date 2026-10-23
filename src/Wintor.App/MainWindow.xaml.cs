@@ -73,6 +73,36 @@ public sealed partial class MainWindow : Window
         _torrents.Labels.CollectionChanged += (_, _) => SyncLabelItems();
         NavView.RegisterPropertyChangedCallback(NavigationView.IsPaneOpenProperty, (_, _) => UpdateLabelsHeader());
         NavView.SelectedItem = NavAll;
+        Activated += OfferWhatsNew;
+    }
+
+    /// <summary>
+    /// After an update, "What's new" once, when the window is first really on screen (not when Wintor starts hidden
+    /// in the tray with Windows). The version is stored as seen before the dialog opens, so quitting with it open does
+    /// not bring it back.
+    /// </summary>
+    private void OfferWhatsNew(object sender, WindowActivatedEventArgs args)
+    {
+        if (args.WindowActivationState == WindowActivationState.Deactivated || !AppWindow.IsVisible)
+        {
+            return;
+        }
+
+        Activated -= OfferWhatsNew;
+        Version current = WhatsNewDialog.CurrentVersion;
+        WhatsNewStep step = WhatsNew.Decide(current, _settings.WhatsNewSeenVersion, _settings.ShowWhatsNew);
+        if (step == WhatsNewStep.None)
+        {
+            return;
+        }
+
+        _settings.WhatsNewSeenVersion = WhatsNew.Stored(current);
+        _settings.Save();
+        if (step == WhatsNewStep.Show)
+        {
+            DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low,
+                async () => await WhatsNewDialog.ShowAsync(RootGrid.XamlRoot));
+        }
     }
 
     public ElementTheme Theme

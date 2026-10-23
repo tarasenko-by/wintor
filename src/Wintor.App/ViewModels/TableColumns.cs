@@ -1,6 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml;
 using Wintor.App.Services;
+using Wintor.Core;
 
 namespace Wintor.App.ViewModels;
 
@@ -11,7 +12,7 @@ public sealed record ColumnInfo(string Key, double DefaultWidth, double MinWidth
 /// <summary>
 /// Column widths of the torrent table, shared by the header row and every data row so they line up.
 /// The user picks which columns show and drags their widths (saved in <see cref="AppSettings"/>); the name takes
-/// what is left. A window too narrow for the chosen columns hides optional ones for the moment, right to left.
+/// what is left. A narrower window shrinks every column in proportion, then scrolls; no chosen column disappears.
 /// When WinUI's TableView ships in a stable Windows App SDK, it can replace the header + ListView pair.
 /// </summary>
 public partial class TableColumns : ObservableObject
@@ -26,22 +27,29 @@ public partial class TableColumns : ObservableObject
     public static IReadOnlyList<ColumnInfo> All { get; } =
     [
         // Widths include the cell's own 6 px padding on each side (the grids have no column spacing).
-        new(nameof(Queue), 44, 36, false),
+        new(nameof(Queue), 44, 44, false),
         new(nameof(Size), 84, 64, false),
         new(nameof(Progress), 136, 88, true),
         new(nameof(Status), 112, 72, true),
-        new(nameof(Down), 88, 64, false),
-        new(nameof(Up), 88, 64, false),
-        new(nameof(TimeLeft), 80, 56, false),
+        new(nameof(Down), 88, 80, false),
+        new(nameof(Up), 88, 80, false),
+        new(nameof(TimeLeft), 80, 76, false),
         new(nameof(Seeds), 60, 48, false),
         new(nameof(Peers), 60, 48, false),
     ];
 
-    // Optional columns a narrow window gives up first.
-    private static readonly string[] NarrowDropOrder = [nameof(Peers), nameof(Seeds), nameof(TimeLeft), nameof(Up), nameof(Size), nameof(Queue), nameof(Down)];
-
     private AppSettings? _settings;
     private double _lastWidth;
+
+    // What each chosen column got in the last layout (squeezed widths in a narrow window).
+    private readonly Dictionary<string, double> _laidOut = [];
+
+    /// <summary>
+    /// The narrowest the table can be with every chosen column at its minimum (header padding included). A narrower
+    /// window scrolls the table sideways instead of dropping columns.
+    /// </summary>
+    [ObservableProperty]
+    public partial double MinTableWidth { get; set; }
 
     public static TableColumns Current { get; } = new();
 
@@ -115,23 +123,6 @@ public partial class TableColumns : ObservableObject
         }
 
         Fit(_lastWidth);
-
-        // A column the user just turned on must show up: give back room from widened columns, widest first.
-        while (chosen && !IsShownNow(key))
-        {
-            ColumnInfo? widened = All
-                .Where(c => c.Key != key && IsChosen(c.Key) && WidthOf(c.Key) > c.DefaultWidth)
-                .OrderByDescending(c => WidthOf(c.Key) - c.DefaultWidth)
-                .FirstOrDefault();
-            if (widened is null)
-            {
-                break; // the window really is too narrow; it shows once it is wider
-            }
-
-            _settings.ColumnWidths.Remove(widened.Key);
-            Fit(_lastWidth);
-        }
-
         _settings.Save();
     }
 
@@ -146,8 +137,8 @@ public partial class TableColumns : ObservableObject
     /// Width now, the name included (it gets what the other columns leave). Captured when a drag starts.
     /// </summary>
     public double CurrentWidth(string key) => key == nameof(Name)
-        ? Math.Max(MinNameWidth, _lastWidth - (NeededNow() - MinNameWidth))
-        : WidthOf(key);
+        ? Math.Max(MinNameWidth, _lastWidth - PickerWidth - _laidOut.Values.Sum())
+        : _laidOut.TryGetValue(key, out double width) ? width : WidthOf(key);
 
     /// <summary>
     /// Drags the divider between two neighbours by <paramref name="delta"/> from where the drag started: the left one
@@ -179,9 +170,6 @@ public partial class TableColumns : ObservableObject
         Fit(_lastWidth);
     }
 
-    /// <summary>Width the columns on screen need, with the name at its minimum.</summary>
-    private double NeededNow() => MinNameWidth + PickerWidth + All.Where(c => IsShownNow(c.Key)).Sum(c => WidthOf(c.Key));
-
     public void ResetWidth(string key)
     {
         if (_settings?.ColumnWidths.Remove(key) == true)
@@ -207,29 +195,27 @@ public partial class TableColumns : ObservableObject
         Fit(_lastWidth);
     }
 
-    /// <summary>Lays the chosen columns out in <paramref name="width"/> (the row's content width in DIPs).</summary>
+    /// <summary>
+    /// Lays the chosen columns out in <paramref name="width"/> (the row's content width in DIPs). The name takes what
+    /// is left down to its minimum; then every other column shrinks in proportion to its width, down to its own
+    /// minimum. Below that the table keeps its minimum width and scrolls (<see cref="MinTableWidth"/>).
+    /// </summary>
     public void Fit(double width)
     {
         _lastWidth = width;
-        var shown = All.Where(c => IsChosen(c.Key)).Select(c => c.Key).ToHashSet();
+        ColumnInfo[] chosen = All.Where(c => IsChosen(c.Key)).ToArray();
+        MinTableWidth = MinNameWidth + PickerWidth + chosen.Sum(c => c.MinWidth) + 24;
 
-        // Exact: the columns, the name and the picker add up to the row's width, nothing in between.
-        double Needed() => MinNameWidth + PickerWidth + shown.Sum(WidthOf);
-
-        if (width > 0)
+        // Before the first measure there is nothing to fit into: show the preferred widths.
+        double room = width > 0 ? width - MinNameWidth - PickerWidth : double.MaxValue;
+        double[] widths = ColumnFit.Shrink(chosen.Select(c => (WidthOf(c.Key), c.MinWidth)).ToArray(), room);
+        _laidOut.Clear();
+        for (int i = 0; i < chosen.Length; i++)
         {
-            foreach (string key in NarrowDropOrder)
-            {
-                if (Needed() <= width)
-                {
-                    break;
-                }
-
-                shown.Remove(key);
-            }
+            _laidOut[chosen[i].Key] = widths[i];
         }
 
-        GridLength Length(string key) => shown.Contains(key) ? new(WidthOf(key)) : new(0);
+        GridLength Length(string key) => _laidOut.TryGetValue(key, out double w) ? new(w) : new(0);
         Queue = Length(nameof(Queue));
         Size = Length(nameof(Size));
         Progress = Length(nameof(Progress));

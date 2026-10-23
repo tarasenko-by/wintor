@@ -1,6 +1,8 @@
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Microsoft.Windows.AppLifecycle;
+using Windows.Globalization;
+using Windows.Storage;
 
 namespace Wintor.App;
 
@@ -27,6 +29,11 @@ public static class Program
 
         // Comes on a background thread; App marshals it to the UI thread.
         mainInstance.Activated += (_, activation) => App.OnRedirected(activation);
+
+        // The interface language must be set before XAML starts: it picks its strings once, at startup. Our settings
+        // decide, not the value Windows keeps for the app (that one did not survive reinstalls reliably).
+        ApplicationLanguages.PrimaryLanguageOverride =
+            Services.AppSettings.Load(ApplicationData.Current.LocalFolder.Path).Language;
 
         Application.Start(callbackParams =>
         {

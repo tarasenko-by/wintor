@@ -58,6 +58,12 @@ Read [docs/DESIGN.md](docs/DESIGN.md) before changing any XAML. The short versio
 - The app logo and every MSIX tile/`.ico` are rendered by `dotnet run --project tools/Wintor.IconTool -- logo`;
   change the logo there, not in an image editor.
 
+## Releases
+
+- A new version (`Package.appxmanifest` `Version`) adds its entry on top of `Wintor.Core/WhatsNew.cs` with its
+  points as `WhatsNew_<version>_<name>` strings in every language. Wintor shows it once after the update and from
+  Settings → About.
+
 ## Localization
 
 - No user-visible strings in code or XAML. XAML uses `x:Uid`; code uses `Strings.Get` / `Strings.Format`.

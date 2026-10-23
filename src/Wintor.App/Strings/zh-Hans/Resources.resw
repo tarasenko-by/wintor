@@ -294,4 +294,19 @@
   <data name="LanguageBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>语言</value></data>
   <data name="LanguageSystem" xml:space="preserve"><value>跟随 Windows</value></data>
   <data name="LanguageRestartButton.Content" xml:space="preserve"><value>重新启动</value></data>
+  <data name="WhatsNewLink.Content" xml:space="preserve"><value>新增功能</value></data>
+  <data name="GitHubLink.Content" xml:space="preserve"><value>GitHub</value></data>
+  <data name="StoreLink.Content" xml:space="preserve"><value>Microsoft Store</value></data>
+  <data name="WhatsNewAutoCard.Header" xml:space="preserve"><value>更新后显示新增功能</value></data>
+  <data name="WhatsNewAutoCard.Description" xml:space="preserve"><value>仅在更新后首次打开 Wintor 时显示一次。</value></data>
+  <data name="WhatsNewAutoSwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>更新后显示新增功能</value></data>
+  <data name="WhatsNew_Title" xml:space="preserve"><value>Wintor 新增功能</value></data>
+  <data name="WhatsNew_Version" xml:space="preserve"><value>版本 {0}</value></data>
+  <data name="WhatsNew_Close" xml:space="preserve"><value>关闭</value></data>
+  <data name="WhatsNew_020_Table" xml:space="preserve"><value>清爽的种子列表：进度按状态着色，可排序的列会随窗口收缩，还能自定义顺序。</value></data>
+  <data name="WhatsNew_020_Details" xml:space="preserve"><value>列表下方的详细信息窗格：分块、带优先级的文件、对等节点、Tracker 和速度图表。</value></data>
+  <data name="WhatsNew_020_Labels" xml:space="preserve"><value>侧边栏中的彩色标签和状态筛选器，以及标题栏中的搜索。</value></data>
+  <data name="WhatsNew_020_Limits" xml:space="preserve"><value>可为每个种子单独限速，同时保留“设置”中的总体限速。</value></data>
+  <data name="WhatsNew_020_Problems" xml:space="preserve"><value>文件被删除、磁盘已满或网络中断，都会用通俗的语言说明，点击“继续”即可修复。</value></data>
+  <data name="WhatsNew_020_Languages" xml:space="preserve"><value>提供十二种界面语言，并可在“设置”中选择语言。</value></data>
 </root>

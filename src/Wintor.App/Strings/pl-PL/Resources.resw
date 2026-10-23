@@ -294,4 +294,19 @@
   <data name="LanguageBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Język</value></data>
   <data name="LanguageSystem" xml:space="preserve"><value>Jak w Windows</value></data>
   <data name="LanguageRestartButton.Content" xml:space="preserve"><value>Uruchom ponownie</value></data>
+  <data name="WhatsNewLink.Content" xml:space="preserve"><value>Co nowego</value></data>
+  <data name="GitHubLink.Content" xml:space="preserve"><value>GitHub</value></data>
+  <data name="StoreLink.Content" xml:space="preserve"><value>Microsoft Store</value></data>
+  <data name="WhatsNewAutoCard.Header" xml:space="preserve"><value>Pokazuj nowości po aktualizacjach</value></data>
+  <data name="WhatsNewAutoCard.Description" xml:space="preserve"><value>Jednorazowo, przy pierwszym uruchomieniu Wintor po aktualizacji.</value></data>
+  <data name="WhatsNewAutoSwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Pokazuj nowości po aktualizacjach</value></data>
+  <data name="WhatsNew_Title" xml:space="preserve"><value>Co nowego w Wintor</value></data>
+  <data name="WhatsNew_Version" xml:space="preserve"><value>Wersja {0}</value></data>
+  <data name="WhatsNew_Close" xml:space="preserve"><value>Zamknij</value></data>
+  <data name="WhatsNew_020_Table" xml:space="preserve"><value>Spokojna tabela torrentów: postęp w kolorze stanu, sortowalne kolumny, które zmniejszają się razem z oknem, i własna kolejność.</value></data>
+  <data name="WhatsNew_020_Details" xml:space="preserve"><value>Panel szczegółów pod tabelą: fragmenty, pliki z priorytetami, peery, trackery i wykres prędkości.</value></data>
+  <data name="WhatsNew_020_Labels" xml:space="preserve"><value>Kolorowe etykiety i filtry stanu w panelu bocznym oraz wyszukiwanie z paska tytułu.</value></data>
+  <data name="WhatsNew_020_Limits" xml:space="preserve"><value>Limity prędkości dla każdego torrenta, oprócz ogólnych w Ustawieniach.</value></data>
+  <data name="WhatsNew_020_Problems" xml:space="preserve"><value>Usunięte pliki, pełny dysk czy utrata sieci są wyjaśniane prostymi słowami, a „Wznów” je naprawia.</value></data>
+  <data name="WhatsNew_020_Languages" xml:space="preserve"><value>Dwanaście języków interfejsu i wybór języka w Ustawieniach.</value></data>
 </root>

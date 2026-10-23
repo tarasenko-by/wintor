@@ -184,7 +184,35 @@
                 <toolkit:SettingsExpander.HeaderIcon>
                     <BitmapIcon ShowAsMonochrome="False" UriSource="ms-appx:///Assets/StoreLogo.png" />
                 </toolkit:SettingsExpander.HeaderIcon>
+                <!--  Links in the header, next to the chevron, as in the author's Mail app.  -->
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                    <HyperlinkButton
+                        x:Uid="WhatsNewLink"
+                        AutomationProperties.AutomationId="WhatsNewLink"
+                        Click="WhatsNew_Click" />
+                    <HyperlinkButton
+                        x:Uid="GitHubLink"
+                        AutomationProperties.AutomationId="GitHubLink"
+                        NavigateUri="{x:Bind GitHubUri, Mode=OneTime}"
+                        ToolTipService.ToolTip="{x:Bind GitHubUri, Mode=OneTime}" />
+                    <!--  Shown once the app has a Store listing (SettingsViewModel.StoreProductId).  -->
+                    <HyperlinkButton
+                        x:Uid="StoreLink"
+                        AutomationProperties.AutomationId="StoreLink"
+                        NavigateUri="{x:Bind StoreUri, Mode=OneTime}"
+                        Visibility="{x:Bind ViewModel.HasStoreListing, Mode=OneTime}" />
+                </StackPanel>
                 <toolkit:SettingsExpander.Items>
+                    <!--  Right padding as on the other cards, so the switch lines up with theirs (the default leaves room for a chevron).  -->
+                    <toolkit:SettingsCard
+                        x:Uid="WhatsNewAutoCard"
+                        Padding="58,8,16,8"
+                        AutomationProperties.AutomationId="WhatsNewAutoCard">
+                        <ToggleSwitch
+                            x:Uid="WhatsNewAutoSwitch"
+                            AutomationProperties.AutomationId="WhatsNewAutoSwitch"
+                            IsOn="{x:Bind ViewModel.ShowWhatsNewAfterUpdates, Mode=TwoWay}" />
+                    </toolkit:SettingsCard>
                     <toolkit:SettingsCard x:Uid="LicenseCard" />
                     <toolkit:SettingsCard x:Uid="EngineCard" />
                     <toolkit:SettingsCard x:Uid="IconsCard" />

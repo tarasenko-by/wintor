@@ -294,4 +294,19 @@
   <data name="LanguageBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Idioma</value></data>
   <data name="LanguageSystem" xml:space="preserve"><value>Como en Windows</value></data>
   <data name="LanguageRestartButton.Content" xml:space="preserve"><value>Reiniciar</value></data>
+  <data name="WhatsNewLink.Content" xml:space="preserve"><value>Novedades</value></data>
+  <data name="GitHubLink.Content" xml:space="preserve"><value>GitHub</value></data>
+  <data name="StoreLink.Content" xml:space="preserve"><value>Microsoft Store</value></data>
+  <data name="WhatsNewAutoCard.Header" xml:space="preserve"><value>Mostrar las novedades tras las actualizaciones</value></data>
+  <data name="WhatsNewAutoCard.Description" xml:space="preserve"><value>Una sola vez, la primera vez que se abre Wintor después de una actualización.</value></data>
+  <data name="WhatsNewAutoSwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Mostrar las novedades tras las actualizaciones</value></data>
+  <data name="WhatsNew_Title" xml:space="preserve"><value>Novedades de Wintor</value></data>
+  <data name="WhatsNew_Version" xml:space="preserve"><value>Versión {0}</value></data>
+  <data name="WhatsNew_Close" xml:space="preserve"><value>Cerrar</value></data>
+  <data name="WhatsNew_020_Table" xml:space="preserve"><value>Una tabla de torrents tranquila: progreso coloreado según el estado, columnas ordenables que se reducen con la ventana y tu propio orden.</value></data>
+  <data name="WhatsNew_020_Details" xml:space="preserve"><value>Un panel de detalles bajo la tabla: piezas, archivos con prioridades, pares, rastreadores y un gráfico de velocidad.</value></data>
+  <data name="WhatsNew_020_Labels" xml:space="preserve"><value>Etiquetas de colores y filtros de estado en el panel lateral, y búsqueda desde la barra de título.</value></data>
+  <data name="WhatsNew_020_Limits" xml:space="preserve"><value>Límites de velocidad para cada torrent, además de los generales en Configuración.</value></data>
+  <data name="WhatsNew_020_Problems" xml:space="preserve"><value>Los archivos eliminados, un disco lleno o una red perdida se explican con palabras sencillas, y «Reanudar» los soluciona.</value></data>
+  <data name="WhatsNew_020_Languages" xml:space="preserve"><value>Doce idiomas de interfaz, con un selector de idioma en Configuración.</value></data>
 </root>

@@ -23,7 +23,11 @@ They are binding for all UI changes (see [AGENTS.md](../AGENTS.md)).
   its own placeholder (torrents; settings cards). Matching: every word, any order, ignoring case and accents.
 - Pages have no title: the selected side-pane item names the view. The torrent page's `CommandBar` is
   left-aligned, icon-only with tooltips, `IsDynamicOverflowEnabled="True"`; rare commands go to the overflow.
-  Settings start straight with the first section.
+  Resume and Pause are one place, one button at a time: Pause while everything selected runs, Resume otherwise. The
+  row menu follows the same rule. There is no separate Stop.
+  Settings start straight with the first section. About shows the version and copyright, with "What's new", GitHub
+  (and Microsoft Store once listed) as links in its header next to the chevron, as in the author's Mail app; inside
+  it, the switch for showing "What's new" after updates.
 - Side pane: status views (All / Downloading / Completed / Paused) and the user's **labels**, each with a count on
   the right in `TertiaryCaptionStyle`. Labels have a color (Services/LabelColors: 8 mid-tones that read on both
   themes) shown on their tag icon, the row's pill and menus. The "Labels" header and hint hide in the compact pane.
@@ -36,8 +40,9 @@ They are binding for all UI changes (see [AGENTS.md](../AGENTS.md)).
     the two columns next to it only, so it follows the pointer and nothing else moves; each column stops at its
     minimum (the name at 200 px). No divider after the last column. Double-click resets. Turning a column on gives
     back room from widened columns. Header hover is square, no rounding.
-    Choices and widths are remembered. A window too narrow for the chosen columns hides optional ones for the
-    moment, right to left, until the name has 200 px.
+    Choices and widths are remembered. A narrower window never hides a chosen column: the name shrinks to 200 px,
+    then every other column shrinks in proportion to its width down to its minimum (wide enough for its header and
+    values), and below that the header and rows scroll sideways together (`TableColumns.Fit`, `ColumnFit.Shrink`).
   - Progress color says the state: **blue** downloading, **green** finished and seeding, **grey** paused / stopped (red on error). Piece bars use `PieceBarBrush` (green).
     Use the `Torrent*Brush` palette keys, never ad-hoc colors.
   - Click selects (Ctrl/Shift for several, Ctrl+A, Esc clears); the selected torrent shows in the pane below.

@@ -33,8 +33,9 @@ public partial class SettingsViewModel : ObservableObject
         ListenPort = settings.ListenPort;
         CloseToTray = settings.CloseToTray;
         NotifyWhenComplete = settings.NotifyWhenComplete;
+        ShowWhatsNewAfterUpdates = settings.ShowWhatsNew;
         LanguageNames = LanguageTags.Select(t => t.Length == 0 ? Strings.Get("LanguageSystem") : NativeName(t)).ToList();
-        _startLanguageIndex = Math.Max(0, Array.IndexOf(LanguageTags, ApplicationLanguages.PrimaryLanguageOverride ?? ""));
+        _startLanguageIndex = Math.Max(0, Array.IndexOf(LanguageTags, settings.Language));
         LanguageIndex = _startLanguageIndex;
         _loading = false;
     }
@@ -88,6 +89,16 @@ public partial class SettingsViewModel : ObservableObject
     /// <summary>The project's founder, shown with "and Wintor contributors" so later contributors are credited too.</summary>
     public const string Author = "Siarhei Tarasenka";
 
+    public const string GitHubUrl = "https://github.com/tarasenko-by/wintor";
+
+    /// <summary>The Microsoft Store product ID (Partner Center); empty until the app is listed, which hides the link.</summary>
+    public const string StoreProductId = "";
+
+    public bool HasStoreListing => StoreProductId.Length > 0;
+
+    [ObservableProperty]
+    public partial bool ShowWhatsNewAfterUpdates { get; set; }
+
     public string Version
     {
         get
@@ -122,7 +133,8 @@ public partial class SettingsViewModel : ObservableObject
             return;
         }
 
-        // Windows keeps this per app and loads our strings in that language from the next start.
+        // Applied at the next start (Program.Main), before XAML loads any string.
+        Save(s => s.Language = LanguageTags[value]);
         ApplicationLanguages.PrimaryLanguageOverride = LanguageTags[value];
         LanguageNeedsRestart = value != _startLanguageIndex;
     }
@@ -167,6 +179,8 @@ public partial class SettingsViewModel : ObservableObject
     partial void OnCloseToTrayChanged(bool value) => Save(s => s.CloseToTray = value);
 
     partial void OnNotifyWhenCompleteChanged(bool value) => Save(s => s.NotifyWhenComplete = value);
+
+    partial void OnShowWhatsNewAfterUpdatesChanged(bool value) => Save(s => s.ShowWhatsNew = value);
 
     partial void OnStartWithWindowsChanged(bool value)
     {

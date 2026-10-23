@@ -294,4 +294,19 @@
   <data name="LanguageBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Dil</value></data>
   <data name="LanguageSystem" xml:space="preserve"><value>Windows’taki gibi</value></data>
   <data name="LanguageRestartButton.Content" xml:space="preserve"><value>Yeniden başlat</value></data>
+  <data name="WhatsNewLink.Content" xml:space="preserve"><value>Yenilikler</value></data>
+  <data name="GitHubLink.Content" xml:space="preserve"><value>GitHub</value></data>
+  <data name="StoreLink.Content" xml:space="preserve"><value>Microsoft Store</value></data>
+  <data name="WhatsNewAutoCard.Header" xml:space="preserve"><value>Güncellemelerden sonra yenilikleri göster</value></data>
+  <data name="WhatsNewAutoCard.Description" xml:space="preserve"><value>Bir güncellemeden sonra Wintor ilk açıldığında yalnızca bir kez.</value></data>
+  <data name="WhatsNewAutoSwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Güncellemelerden sonra yenilikleri göster</value></data>
+  <data name="WhatsNew_Title" xml:space="preserve"><value>Wintor’daki yenilikler</value></data>
+  <data name="WhatsNew_Version" xml:space="preserve"><value>Sürüm {0}</value></data>
+  <data name="WhatsNew_Close" xml:space="preserve"><value>Kapat</value></data>
+  <data name="WhatsNew_020_Table" xml:space="preserve"><value>Sakin bir torrent tablosu: duruma göre renklenen ilerleme, pencereyle birlikte küçülen sıralanabilir sütunlar ve size özel sıralama.</value></data>
+  <data name="WhatsNew_020_Details" xml:space="preserve"><value>Tablonun altında bir ayrıntı bölmesi: parçalar, öncelikli dosyalar, eşler, izleyiciler ve hız grafiği.</value></data>
+  <data name="WhatsNew_020_Labels" xml:space="preserve"><value>Yan bölmede renkli etiketler ve durum filtreleri, ayrıca başlık çubuğundan arama.</value></data>
+  <data name="WhatsNew_020_Limits" xml:space="preserve"><value>Ayarlar’daki genel sınırlara ek olarak her torrent için hız sınırı.</value></data>
+  <data name="WhatsNew_020_Problems" xml:space="preserve"><value>Silinen dosyalar, dolu disk veya kopan ağ sade bir dille açıklanır ve “Sürdür” hepsini düzeltir.</value></data>
+  <data name="WhatsNew_020_Languages" xml:space="preserve"><value>On iki arayüz dili ve Ayarlar’da dil seçici.</value></data>
 </root>

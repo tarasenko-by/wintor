@@ -145,8 +145,7 @@ public partial class TorrentsViewModel : ObservableObject
     {
         SelectedTorrents = selection;
         OnPropertyChanged(nameof(HasSelection));
-        PauseCommand.NotifyCanExecuteChanged();
-        ResumeCommand.NotifyCanExecuteChanged();
+        UpdatePlayPause();
     }
 
     /// <summary>A column header was clicked: sort by it, or flip the direction if it already is.</summary>
@@ -244,6 +243,22 @@ public partial class TorrentsViewModel : ObservableObject
     public IAsyncRelayCommand PauseCommand => PauseSelectedCommand;
 
     public IAsyncRelayCommand ResumeCommand => ResumeSelectedCommand;
+
+    /// <summary>
+    /// Resume and Pause share one place in the command bar: Pause while everything selected runs, Resume otherwise
+    /// (nothing selected, or some of it stopped), so there is never a pair where one half is useless.
+    /// </summary>
+    public bool ShowPauseButton => SelectedTorrents.Count > 0 && SelectedTorrents.All(t => t.CanPause);
+
+    public bool ShowResumeButton => !ShowPauseButton;
+
+    private void UpdatePlayPause()
+    {
+        PauseCommand.NotifyCanExecuteChanged();
+        ResumeCommand.NotifyCanExecuteChanged();
+        OnPropertyChanged(nameof(ShowPauseButton));
+        OnPropertyChanged(nameof(ShowResumeButton));
+    }
 
     /// <summary>
     /// Moves torrents in the user's order (the № column): by <paramref name="step"/> places, or to the very top
@@ -537,7 +552,6 @@ public partial class TorrentsViewModel : ObservableObject
         OnPropertyChanged(nameof(IsEmpty));
         OnPropertyChanged(nameof(IsNothingFound));
         OnPropertyChanged(nameof(HasVisibleTorrents));
-        PauseCommand.NotifyCanExecuteChanged();
-        ResumeCommand.NotifyCanExecuteChanged();
+        UpdatePlayPause();
     }
 }
