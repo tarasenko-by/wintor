@@ -63,9 +63,10 @@ First release on the Microsoft Store:
 11. 12 interface languages
 12. No ads, no telemetry, no bundled offers — free and open source (GPL-3.0)
 
-## Search terms (up to 7, 30 characters each in total per term)
+## Keywords (up to 7, 40 characters each, no more than 21 words in total)
 
-torrent, bittorrent, magnet, torrent client, p2p, download manager, open source
+torrent client, bittorrent, torrent downloader, magnet link, p2p file sharing, open source torrent,
+windows 11 torrent
 
 ## Screenshots (1366×768 or larger, PNG)
 
@@ -79,7 +80,10 @@ From `docs/screenshots` (retake with `tools/screenshots.ps1`), in this order, ea
 
 ## Other fields
 
-- **Category:** Utilities & tools (subcategory: File managers, if offered; otherwise none)
+- **Short title:** Wintor
+- **Additional license terms:** Wintor is free software under the GNU General Public License, version 3 or later,
+  with an additional permission for app stores. Source code: https://github.com/tarasenko-by/wintor
+- **Category:** Utilities + tools → File managers; secondary category Productivity
 - **Privacy policy URL:** https://github.com/tarasenko-by/wintor/blob/main/docs/PRIVACY.md
 - **Website:** https://github.com/tarasenko-by/wintor
 - **Support contact:** https://github.com/tarasenko-by/wintor/issues
