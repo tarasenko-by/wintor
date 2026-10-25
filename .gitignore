@@ -8,7 +8,6 @@
 *.suo
 *.userosscache
 *.sln.docstates
-artifacts/
 
 # Build logs
 [Ll]og/
