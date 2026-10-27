@@ -20,6 +20,11 @@ Mica, Fluent design, sensible defaults — with no ads and no telemetry.
 <sub>Screenshots use `wintor --demo`: sample torrents of open content (Linux images, Blender Studio films), no network.
 Retake them with `tools/screenshots.ps1`.</sub>
 
+## Install
+
+Get Wintor from the [Microsoft Store](https://apps.microsoft.com/detail/9P7P2DH9P4XN) — free, Windows 10 1809 or
+later, x64 and ARM64. The Store keeps it up to date. To build it yourself, see [Building](#building).
+
 ## Features (so far)
 
 - Add torrents from magnet links (prefilled from the clipboard), `.torrent` files, drag & drop,
@@ -105,6 +110,7 @@ of the License, or (at your option) any later version. See [LICENSE](LICENSE), a
 [LICENSE-STORE-EXCEPTION.md](LICENSE-STORE-EXCEPTION.md) for the additional permission to publish through app stores.
 
 The name "Wintor" and its logo are not covered by the license — see [TRADEMARKS.md](TRADEMARKS.md).
-Official builds come only from this repository's GitHub Releases and, later, the Microsoft Store.
+Official builds come only from the [Microsoft Store](https://apps.microsoft.com/detail/9P7P2DH9P4XN) and this
+repository's GitHub Releases.
 
 MonoTorrent is licensed under the MIT License.
