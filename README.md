@@ -6,7 +6,7 @@ Most torrent clients still look like it is 2010: dense tables, dozens of columns
 settings you get lost in. Wintor aims to feel like a native Windows 11 app —
 Mica, Fluent design, sensible defaults — with no ads and no telemetry.
 
-> **Status:** early development (v0.2). See [docs/ROADMAP.md](docs/ROADMAP.md).
+> **Status:** early development (v0.3). See [docs/ROADMAP.md](docs/ROADMAP.md).
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/details-dark.png">
