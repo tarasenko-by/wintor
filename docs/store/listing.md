@@ -75,9 +75,11 @@ From `docs/screenshots` (retake with `tools/screenshots.ps1`), in this order, ea
 
 1. `details-light.png` — Your torrents at a glance, with details for the one you pick
 2. `speed-dark.png` — A live speed graph for every torrent
-3. `torrents-dark.png` — Labels and status filters keep things tidy, in light or dark
-4. `peers-light.png` — See who you are connected to
-5. `settings-light.png` — Sensible defaults, everything else one click away
+3. `row-menu-light.png` — Play a video while it downloads, or fetch it from start to end
+4. `when-done-dark.png` — Sleep, hibernate or shut down the PC when downloads finish
+5. `torrents-dark.png` — Labels and status filters keep things tidy, in light or dark
+6. `peers-light.png` — See who you are connected to
+7. `settings-light.png` — Sensible defaults, everything else one click away
 
 ## Other fields
 

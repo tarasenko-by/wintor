@@ -17,6 +17,10 @@ Mica, Fluent design, sensible defaults — with no ads and no telemetry.
 |---|---|---|
 | ![Speed graph of a download](docs/screenshots/speed-light.png) | ![Peers of a torrent, dark theme](docs/screenshots/peers-dark.png) | ![Settings](docs/screenshots/settings-light.png) |
 
+| Play while downloading | When done |
+|---|---|
+| ![The menu of a torrent with Play and its Download order submenu](docs/screenshots/row-menu-light.png) | ![The Actions menu with "When done": quit, sleep, hibernate, restart or shut down, dark theme](docs/screenshots/when-done-dark.png) |
+
 <sub>Screenshots use `wintor --demo`: sample torrents of open content (Linux images, Blender Studio films), no network.
 Retake them with `tools/screenshots.ps1`.</sub>
 
