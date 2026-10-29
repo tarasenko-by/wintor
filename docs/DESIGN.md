@@ -49,6 +49,11 @@ They are binding for all UI changes (see [AGENTS.md](../AGENTS.md)).
     Right-click menu acts on the whole selection when the row is part of it. № order: Alt+↑/↓, or the "Order" menu.
     "Speed limit…" sets per-torrent download/upload limits in KB/s (0 = none); the global limit from Settings still
     applies. The Transfer section shows them.
+    "Download order" (a submenu, off by default) has "From start to end" and "First and last pieces first"; a tick
+    means every chosen torrent has it. "Play" (single torrent with a video or audio file) opens its largest one; rows
+    of the Files tab have a Play button. A finished file opens in its default app; one still downloading streams to
+    a player that takes links (the default one if it does, else VLC, mpv, MPC or PotPlayer), or a dialog offers the
+    link.
   - Problems are said in plain words with the way out, not as exception text: "Files not found — resume to
     download them again", "Not enough disk space — free some and resume" (`TorrentProblem`). Resume fixes each
     of them. No network shows one warning `InfoBar` above the table instead of every row looking stuck.

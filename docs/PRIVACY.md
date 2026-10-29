@@ -28,6 +28,10 @@ client:
   torrents you take part in.
 - With **UPnP / NAT-PMP**, Wintor asks your router to open the listening port shown in Settings.
 
+**Play while downloading** serves the file to your media player over a link on your own PC
+(`http://127.0.0.1:…`). It listens only on that local address, not on your network, and answers only the random link
+it gave the player.
+
 Wintor talks only to the peers, trackers and DHT nodes of the torrents you add. If you need your IP address hidden,
 use a VPN you trust; Wintor itself does not hide it.
 

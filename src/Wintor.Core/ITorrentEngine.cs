@@ -36,6 +36,16 @@ public interface ITorrentEngine : IAsyncDisposable
     /// <summary>Speed limits for one torrent, in bytes per second; 0 means no limit of its own (the global one still applies).</summary>
     Task SetSpeedLimitsAsync(string id, int maxDownloadRate, int maxUploadRate);
 
+    /// <summary>Which pieces this torrent asks for first. Remembered across restarts; reconnects to its peers when it runs.</summary>
+    Task SetDownloadOrderAsync(string id, DownloadOrder order);
+
+    /// <summary>
+    /// Serves one file of a torrent at a local link a media player can open while it downloads: the pieces the player
+    /// reads (seeking included) come first. Starts the torrent if needed. A torrent serves one file at a time; playing
+    /// another file of it ends the previous link.
+    /// </summary>
+    Task<Uri> StreamFileAsync(string id, int fileIndex);
+
     /// <summary>Current state of every torrent. Cheap enough to call once per second.</summary>
     IReadOnlyList<TorrentSnapshot> GetSnapshots();
 

@@ -5,7 +5,7 @@ third-party components, each under its own license.
 
 | Component | License | Source | Used for |
 |---|---|---|---|
-| MonoTorrent | MIT | https://github.com/alanmcgovern/monotorrent | BitTorrent engine |
+| MonoTorrent | MIT | https://github.com/alanmcgovern/monotorrent | BitTorrent engine; `OrderedPieceRequester` is adapted from its `StandardPieceRequester` |
 | CommunityToolkit.Mvvm | MIT | https://github.com/CommunityToolkit/dotnet | MVVM |
 | CommunityToolkit.WinUI.Controls.SettingsControls | MIT | https://github.com/CommunityToolkit/Windows | Settings cards |
 | Microsoft.Extensions.DependencyInjection | MIT | https://github.com/dotnet/runtime | Dependency injection |

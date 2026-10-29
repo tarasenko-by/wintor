@@ -225,6 +225,7 @@
                         <Grid AutomationProperties.Name="{x:Bind Path, Mode=OneWay}" ColumnSpacing="12">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="32" />
                                 <ColumnDefinition Width="84" />
                                 <ColumnDefinition Width="140" />
                                 <ColumnDefinition Width="48" />
@@ -236,26 +237,40 @@
                                 TextTrimming="CharacterEllipsis"
                                 TextWrapping="NoWrap"
                                 ToolTipService.ToolTip="{x:Bind Path, Mode=OneWay}" />
-                            <TextBlock
+                            <!--  Always the same column, so sizes line up whether a row plays or not.  -->
+                            <Button
+                                x:Uid="PlayFileButton"
                                 Grid.Column="1"
+                                Width="32"
+                                Height="32"
+                                Padding="0"
+                                VerticalAlignment="Center"
+                                AutomationProperties.AutomationId="PlayFileButton"
+                                Click="PlayFile_Click"
+                                Content="{icons:Huge Kind=PlayCircle}"
+                                Style="{StaticResource SubtleButtonStyle}"
+                                Tag="{x:Bind Index, Mode=OneTime}"
+                                Visibility="{x:Bind IsPlayable, Mode=OneWay}" />
+                            <TextBlock
+                                Grid.Column="2"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
                                 Style="{StaticResource SecondaryCaptionStyle}"
                                 Text="{x:Bind SizeText, Mode=OneWay}" />
                             <ProgressBar
-                                Grid.Column="2"
+                                Grid.Column="3"
                                 VerticalAlignment="Center"
                                 Foreground="{ThemeResource TorrentDownloadingBrush}"
                                 ShowPaused="{x:Bind IsSkipped, Mode=OneWay}"
                                 Value="{x:Bind ProgressPercent, Mode=OneWay}" />
                             <TextBlock
-                                Grid.Column="3"
+                                Grid.Column="4"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
                                 Style="{StaticResource SecondaryCaptionStyle}"
                                 Text="{x:Bind ProgressText, Mode=OneWay}" />
                             <ComboBox
-                                Grid.Column="4"
+                                Grid.Column="5"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Center"
                                 AutomationProperties.Name="{x:Bind Path, Mode=OneWay}"

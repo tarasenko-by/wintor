@@ -306,4 +306,14 @@
   <data name="WhatsNew_020_Problems" xml:space="preserve"><value>ファイルの削除、ディスクの空き容量不足、ネットワーク切断をわかりやすく説明し、「再開」で解決できます。</value></data>
   <data name="WhatsNew_020_Languages" xml:space="preserve"><value>12 言語の表示に対応し、「設定」で言語を選べます。</value></data>
   <data name="PrivacyLink.Content" xml:space="preserve"><value>プライバシー</value></data>
+  <data name="Menu_Play" xml:space="preserve"><value>再生</value></data>
+  <data name="Menu_DownloadOrder" xml:space="preserve"><value>ダウンロード順序</value></data>
+  <data name="Menu_Sequential" xml:space="preserve"><value>先頭から順に</value></data>
+  <data name="Menu_FirstLastFirst" xml:space="preserve"><value>最初と最後のピースを優先</value></data>
+  <data name="PlayFileButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>再生</value></data>
+  <data name="PlayFileButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>再生</value></data>
+  <data name="NoPlayer_Title" xml:space="preserve"><value>ダウンロード中に再生</value></data>
+  <data name="NoPlayer_Text" xml:space="preserve"><value>既定のプレーヤーはダウンロード中のファイルを開けません。VLC や mpv なら開けます。いずれかをインストールしてもう一度 [再生] を押すか、プレーヤーの「ネットワーク ストリームを開く」にこのリンクを貼り付けてください。</value></data>
+  <data name="NoPlayer_LinkHeader" xml:space="preserve"><value>ストリームのリンク</value></data>
+  <data name="NoPlayer_Copy" xml:space="preserve"><value>リンクをコピー</value></data>
 </root>

@@ -306,4 +306,14 @@
   <data name="WhatsNew_020_Problems" xml:space="preserve"><value>Видалені файли, повний диск або зникла мережа пояснюються простими словами, а «Відновити» все виправляє.</value></data>
   <data name="WhatsNew_020_Languages" xml:space="preserve"><value>Дванадцять мов інтерфейсу та вибір мови в параметрах.</value></data>
   <data name="PrivacyLink.Content" xml:space="preserve"><value>Конфіденційність</value></data>
+  <data name="Menu_Play" xml:space="preserve"><value>Відтворити</value></data>
+  <data name="Menu_DownloadOrder" xml:space="preserve"><value>Порядок завантаження</value></data>
+  <data name="Menu_Sequential" xml:space="preserve"><value>Від початку до кінця</value></data>
+  <data name="Menu_FirstLastFirst" xml:space="preserve"><value>Спочатку перші й останні частини</value></data>
+  <data name="PlayFileButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Відтворити</value></data>
+  <data name="PlayFileButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Відтворити</value></data>
+  <data name="NoPlayer_Title" xml:space="preserve"><value>Відтворення під час завантаження</value></data>
+  <data name="NoPlayer_Text" xml:space="preserve"><value>Типовий плеєр не може відкрити файл, який ще завантажується. VLC або mpv можуть: установіть один із них і знову натисніть «Відтворити» або вставте це посилання в «Відкрити мережевий потік» у плеєрі.</value></data>
+  <data name="NoPlayer_LinkHeader" xml:space="preserve"><value>Посилання на потік</value></data>
+  <data name="NoPlayer_Copy" xml:space="preserve"><value>Копіювати посилання</value></data>
 </root>

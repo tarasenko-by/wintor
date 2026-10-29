@@ -225,6 +225,27 @@ public partial class TorrentsViewModel : ObservableObject
             }
         });
 
+    /// <summary>Turns one part of the download order on or off for every torrent given, keeping the other part.</summary>
+    public Task SetDownloadOrderAsync(IReadOnlyList<TorrentItemViewModel> items, Func<DownloadOrder, DownloadOrder> change) =>
+        RunAsync(async () =>
+        {
+            foreach (TorrentItemViewModel item in items)
+            {
+                await _engine.SetDownloadOrderAsync(item.Id, change(item.Order));
+            }
+        });
+
+    /// <summary>
+    /// Plays a file of a torrent (see <see cref="Playback"/>). Returns the stream link when no player can open it,
+    /// for the page to offer; null when a player opened or it failed (the error is shown).
+    /// </summary>
+    public async Task<Uri?> PlayAsync(string id, int fileIndex)
+    {
+        Uri? link = null;
+        await RunAsync(async () => link = await Playback.PlayAsync(_engine, id, fileIndex));
+        return link;
+    }
+
     public Task PauseAllAsync() => PauseAsync(_items.Values);
 
     public Task ResumeAllAsync() => ResumeAsync(_items.Values);

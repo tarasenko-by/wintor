@@ -187,6 +187,93 @@ public sealed class MonoTorrentEngineTests : IDisposable
     }
 
     [Fact]
+    public async Task DownloadOrder_KeepsTorrentRunning_AndSurvivesARestart()
+    {
+        int port = GetFreePort();
+        string torrentPath = await CreateTorrentFileAsync();
+        string id;
+        await using (var engine = await CreateEngineAsync(port))
+        {
+            id = await engine.AddTorrentFileAsync(torrentPath, DownloadDir);
+
+            await engine.SetDownloadOrderAsync(id, new DownloadOrder(Sequential: true, FirstAndLastPiecesFirst: true));
+
+            TorrentSnapshot snapshot = engine.GetSnapshots().Single();
+            Assert.Equal(new DownloadOrder(true, true), snapshot.Order);
+            Assert.NotEqual(TorrentStatus.Stopped, snapshot.Status);
+        }
+
+        await using var restarted = await CreateEngineAsync(port);
+        Assert.Equal(new DownloadOrder(true, true), restarted.GetSnapshots().Single().Order);
+
+        await restarted.SetDownloadOrderAsync(id, DownloadOrder.Default);
+        Assert.True(restarted.GetSnapshots().Single().Order.IsDefault);
+    }
+
+    [Fact]
+    public async Task DownloadOrder_OfPausedTorrent_LeavesItPaused()
+    {
+        string torrentPath = await CreateTorrentFileAsync();
+        await using var engine = await CreateEngineAsync();
+        string id = await engine.AddTorrentFileAsync(torrentPath, DownloadDir);
+        await engine.PauseAsync(id);
+
+        await engine.SetDownloadOrderAsync(id, new DownloadOrder(Sequential: true, FirstAndLastPiecesFirst: false));
+
+        Assert.Contains(engine.GetSnapshots().Single().Status, new[] { TorrentStatus.Paused, TorrentStatus.Stopped });
+    }
+
+    [Fact]
+    public async Task StreamFile_ServesTheFileWithRanges_AndOneFileAtATime()
+    {
+        string torrentPath = await CreateTorrentFileAsync();
+        await using var engine = await CreateEngineAsync();
+        // Saved where the files already are: complete, so the stream does not wait for peers.
+        string id = await engine.AddTorrentFileAsync(torrentPath, Path.Combine(_root, "source"));
+        await WaitUntilAsync(() => engine.GetSnapshots().Single().IsComplete);
+        TorrentDetails details = (await engine.GetDetailsAsync(id))!;
+        int a = details.Files.Single(f => f.Path == "a.txt").Index;
+        int b = details.Files.Single(f => f.Path == "b.txt").Index;
+        using var http = new HttpClient { Timeout = TimeSpan.FromSeconds(15) };
+
+        Uri link = await engine.StreamFileAsync(id, b);
+
+        Assert.True(link.IsLoopback);
+        Assert.Equal(70_000, (await http.GetByteArrayAsync(link)).Length);
+
+        using var request = new HttpRequestMessage(HttpMethod.Get, link);
+        request.Headers.Range = new System.Net.Http.Headers.RangeHeaderValue(100, 199);
+        using HttpResponseMessage partial = await http.SendAsync(request);
+        Assert.Equal(HttpStatusCode.PartialContent, partial.StatusCode);
+        Assert.Equal("bytes 100-199/70000", partial.Content.Headers.ContentRange?.ToString());
+        Assert.Equal(new string('b', 100), await partial.Content.ReadAsStringAsync());
+
+        Uri other = await engine.StreamFileAsync(id, a);
+        Assert.Equal(new string('a', 40_000), await http.GetStringAsync(other));
+        using HttpResponseMessage ended = await http.GetAsync(link);
+        Assert.Equal(HttpStatusCode.NotFound, ended.StatusCode);
+    }
+
+    [Fact]
+    public async Task Snapshot_PointsPlayAtTheLargestMediaFile()
+    {
+        string source = Path.Combine(_root, "source", "film");
+        Directory.CreateDirectory(source);
+        await File.WriteAllBytesAsync(Path.Combine(source, "sample.mkv"), new byte[20_000]);
+        await File.WriteAllBytesAsync(Path.Combine(source, "film.mkv"), new byte[90_000]);
+        await File.WriteAllBytesAsync(Path.Combine(source, "poster.jpg"), new byte[200_000]);
+        var torrent = await new global::MonoTorrent.TorrentCreator().CreateAsync(new global::MonoTorrent.TorrentFileSource(source));
+        string path = Path.Combine(_root, "film.torrent");
+        await File.WriteAllBytesAsync(path, torrent.Encode());
+        await using var engine = await CreateEngineAsync();
+
+        string id = await engine.AddTorrentFileAsync(path, DownloadDir);
+
+        int? index = engine.GetSnapshots().Single().MediaFileIndex;
+        Assert.Equal("film.mkv", (await engine.GetDetailsAsync(id))!.Files.Single(f => f.Index == index).Path);
+    }
+
+    [Fact]
     public async Task ApplyOptions_WhileRunning_KeepsTorrents()
     {
         await using var engine = await CreateEngineAsync();

@@ -53,6 +53,7 @@ All under the app's local data folder (`AppSettings` knows the path):
 | `cache/` | MonoTorrent | Fast-resume data, magnet metadata, DHT nodes |
 | `paused.txt` | engine adapter | Ids the user paused — MonoTorrent restores everything as stopped |
 | `had-data.txt` | engine adapter | Ids that had downloaded data, to notice when their files were deleted |
+| `download-order.txt` | engine adapter | Torrents set to download in order or first and last pieces first — MonoTorrent does not save it |
 
 State is saved on every change and on a graceful exit (`wintor --quit`, tray → Exit). Killing the process
 can lose the last few seconds of progress, which a recheck recovers.

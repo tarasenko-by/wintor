@@ -306,4 +306,14 @@
   <data name="WhatsNew_020_Problems" xml:space="preserve"><value>Fichiers supprimés, disque plein ou réseau perdu sont expliqués en termes simples, et « Reprendre » règle le problème.</value></data>
   <data name="WhatsNew_020_Languages" xml:space="preserve"><value>Douze langues d’interface, avec un sélecteur de langue dans les Paramètres.</value></data>
   <data name="PrivacyLink.Content" xml:space="preserve"><value>Confidentialité</value></data>
+  <data name="Menu_Play" xml:space="preserve"><value>Lire</value></data>
+  <data name="Menu_DownloadOrder" xml:space="preserve"><value>Ordre de téléchargement</value></data>
+  <data name="Menu_Sequential" xml:space="preserve"><value>Du début à la fin</value></data>
+  <data name="Menu_FirstLastFirst" xml:space="preserve"><value>Premières et dernières parties d’abord</value></data>
+  <data name="PlayFileButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Lire</value></data>
+  <data name="PlayFileButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Lire</value></data>
+  <data name="NoPlayer_Title" xml:space="preserve"><value>Lire pendant le téléchargement</value></data>
+  <data name="NoPlayer_Text" xml:space="preserve"><value>Votre lecteur par défaut ne peut pas ouvrir un fichier encore en téléchargement. VLC ou mpv le peuvent : installez-en un et cliquez de nouveau sur Lire, ou collez ce lien dans « Ouvrir un flux réseau » d’un lecteur.</value></data>
+  <data name="NoPlayer_LinkHeader" xml:space="preserve"><value>Lien du flux</value></data>
+  <data name="NoPlayer_Copy" xml:space="preserve"><value>Copier le lien</value></data>
 </root>

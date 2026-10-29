@@ -74,6 +74,17 @@ while testing; tick them off after a look by hand. Newest on top.
       Also look at Japanese or Chinese once for font fallback.
 - [ ] **Narrator** — Files, Peers and Trackers rows read as one line each (not a class name); the current label
       in the Label submenu is announced as "Current label".
+- [ ] **Download order** — right-click a downloading torrent → Download order → From start to end: the menu shows it
+      ticked next time, the Downloaded bar fills from the left; it survives a restart. Several selected with mixed
+      settings: unticked, clicking turns it on for all.
+- [ ] **Play, finished file** — right-click a finished torrent with a video → Play: it opens in the default player.
+- [ ] **Play while downloading, VLC** — with VLC installed (default or not), Play on a torrent at a few percent: VLC
+      opens a 127.0.0.1 link and starts once the first pieces arrive; seeking forward waits a moment, then plays.
+      Closing VLC: after about two minutes the torrent goes back to its usual order.
+- [ ] **Play, no player for links** — with only Media Player (no VLC/mpv): the "Play while downloading" dialog
+      shows the link; Copy link puts it on the clipboard.
+- [ ] **Files tab** — video and audio rows have a Play button (same column for every row), others leave it empty;
+      Narrator reads it as "Play".
 
 ## Done
 

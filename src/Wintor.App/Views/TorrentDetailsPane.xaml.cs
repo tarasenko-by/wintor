@@ -22,6 +22,16 @@ public sealed partial class TorrentDetailsPane : UserControl
 
     public TorrentDetailsViewModel ViewModel { get; } = App.Services.GetRequiredService<TorrentDetailsViewModel>();
 
+    // Through the table's view model, so a failure shows in the page's error bar like any other action.
+    private async void PlayFile_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button { Tag: int index } && ViewModel.Id is { } id
+            && await App.Services.GetRequiredService<TorrentsViewModel>().PlayAsync(id, index) is { } link)
+        {
+            await NoPlayerDialog.ShowAsync(XamlRoot, link);
+        }
+    }
+
     private void Tabs_SelectionChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args) => UpdateViews();
 
     /// <summary>Shows the chosen tab's view, or none while nothing is selected.</summary>

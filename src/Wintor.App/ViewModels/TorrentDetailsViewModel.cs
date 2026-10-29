@@ -27,6 +27,10 @@ public partial class FileItemViewModel(TorrentDetailsViewModel owner, int index)
     [ObservableProperty]
     public partial bool IsSkipped { get; set; }
 
+    /// <summary>A video or audio file: the row gets a Play button.</summary>
+    [ObservableProperty]
+    public partial bool IsPlayable { get; set; }
+
     /// <summary>ComboBox index: 0 skip, 1 low, 2 normal, 3 high (the order of <see cref="FilePriority"/>).</summary>
     [ObservableProperty]
     public partial int PriorityIndex { get; set; }
@@ -39,6 +43,7 @@ public partial class FileItemViewModel(TorrentDetailsViewModel owner, int index)
         ProgressPercent = file.Progress * 100;
         ProgressText = $"{file.Progress * 100:0.#}%";
         IsSkipped = file.Priority == FilePriority.Skip;
+        IsPlayable = MediaFiles.IsPlayable(file.Path);
         PriorityIndex = (int)file.Priority;
         _updating = false;
     }

@@ -306,4 +306,14 @@
   <data name="WhatsNew_020_Problems" xml:space="preserve"><value>Arquivos excluídos, disco cheio ou rede perdida são explicados em palavras simples, e “Retomar” resolve.</value></data>
   <data name="WhatsNew_020_Languages" xml:space="preserve"><value>Doze idiomas de interface, com um seletor de idioma em Configurações.</value></data>
   <data name="PrivacyLink.Content" xml:space="preserve"><value>Privacidade</value></data>
+  <data name="Menu_Play" xml:space="preserve"><value>Reproduzir</value></data>
+  <data name="Menu_DownloadOrder" xml:space="preserve"><value>Ordem do download</value></data>
+  <data name="Menu_Sequential" xml:space="preserve"><value>Do início ao fim</value></data>
+  <data name="Menu_FirstLastFirst" xml:space="preserve"><value>Primeiro as partes inicial e final</value></data>
+  <data name="PlayFileButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Reproduzir</value></data>
+  <data name="PlayFileButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Reproduzir</value></data>
+  <data name="NoPlayer_Title" xml:space="preserve"><value>Reproduzir enquanto baixa</value></data>
+  <data name="NoPlayer_Text" xml:space="preserve"><value>Seu player padrão não abre um arquivo que ainda está sendo baixado. O VLC ou o mpv abrem: instale um deles e clique em Reproduzir de novo, ou cole este link em “Abrir fluxo de rede” de um player.</value></data>
+  <data name="NoPlayer_LinkHeader" xml:space="preserve"><value>Link do stream</value></data>
+  <data name="NoPlayer_Copy" xml:space="preserve"><value>Copiar link</value></data>
 </root>

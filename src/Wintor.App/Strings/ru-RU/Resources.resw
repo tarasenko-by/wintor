@@ -306,4 +306,14 @@
   <data name="WhatsNew_020_Problems" xml:space="preserve"><value>Удалённые файлы, полный диск или пропавшая сеть объясняются простыми словами, а «Продолжить» всё исправляет.</value></data>
   <data name="WhatsNew_020_Languages" xml:space="preserve"><value>Двенадцать языков интерфейса и выбор языка в параметрах.</value></data>
   <data name="PrivacyLink.Content" xml:space="preserve"><value>Конфиденциальность</value></data>
+  <data name="Menu_Play" xml:space="preserve"><value>Воспроизвести</value></data>
+  <data name="Menu_DownloadOrder" xml:space="preserve"><value>Порядок загрузки</value></data>
+  <data name="Menu_Sequential" xml:space="preserve"><value>С начала до конца</value></data>
+  <data name="Menu_FirstLastFirst" xml:space="preserve"><value>Сначала первые и последние части</value></data>
+  <data name="PlayFileButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Воспроизвести</value></data>
+  <data name="PlayFileButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Воспроизвести</value></data>
+  <data name="NoPlayer_Title" xml:space="preserve"><value>Воспроизведение во время загрузки</value></data>
+  <data name="NoPlayer_Text" xml:space="preserve"><value>Плеер по умолчанию не может открыть файл, который ещё загружается. VLC или mpv могут: установите один из них и снова нажмите «Воспроизвести» или вставьте эту ссылку в «Открыть сетевой поток» в плеере.</value></data>
+  <data name="NoPlayer_LinkHeader" xml:space="preserve"><value>Ссылка на поток</value></data>
+  <data name="NoPlayer_Copy" xml:space="preserve"><value>Копировать ссылку</value></data>
 </root>

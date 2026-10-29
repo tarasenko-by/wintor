@@ -306,4 +306,14 @@
   <data name="WhatsNew_020_Problems" xml:space="preserve"><value>File eliminati, disco pieno o rete assente vengono spiegati con parole semplici, e «Riprendi» risolve tutto.</value></data>
   <data name="WhatsNew_020_Languages" xml:space="preserve"><value>Dodici lingue dell’interfaccia, con un selettore della lingua in Impostazioni.</value></data>
   <data name="PrivacyLink.Content" xml:space="preserve"><value>Privacy</value></data>
+  <data name="Menu_Play" xml:space="preserve"><value>Riproduci</value></data>
+  <data name="Menu_DownloadOrder" xml:space="preserve"><value>Ordine di download</value></data>
+  <data name="Menu_Sequential" xml:space="preserve"><value>Dall’inizio alla fine</value></data>
+  <data name="Menu_FirstLastFirst" xml:space="preserve"><value>Prima le parti iniziali e finali</value></data>
+  <data name="PlayFileButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Riproduci</value></data>
+  <data name="PlayFileButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Riproduci</value></data>
+  <data name="NoPlayer_Title" xml:space="preserve"><value>Riproduci durante il download</value></data>
+  <data name="NoPlayer_Text" xml:space="preserve"><value>Il lettore predefinito non può aprire un file ancora in download. VLC o mpv possono farlo: installane uno e premi di nuovo Riproduci, oppure incolla questo link in «Apri flusso di rete» di un lettore.</value></data>
+  <data name="NoPlayer_LinkHeader" xml:space="preserve"><value>Link dello stream</value></data>
+  <data name="NoPlayer_Copy" xml:space="preserve"><value>Copia link</value></data>
 </root>

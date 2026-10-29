@@ -20,7 +20,13 @@ public enum TrackerStatus
 /// <param name="Index">Position in the torrent; used to change the priority.</param>
 /// <param name="Path">Relative to the torrent's folder.</param>
 /// <param name="Progress">0.0 to 1.0.</param>
-public sealed record TorrentFileEntry(int Index, string Path, long Size, double Progress, FilePriority Priority);
+public sealed record TorrentFileEntry(int Index, string Path, long Size, double Progress, FilePriority Priority)
+{
+    /// <summary>Where the file is on disk now (an unfinished file may have another name until it completes).</summary>
+    public string FullPath { get; init; } = "";
+
+    public bool IsComplete => Progress >= 1;
+}
 
 /// <param name="Progress">How much of the torrent the peer has, 0.0 to 1.0.</param>
 public sealed record PeerEntry(

@@ -31,6 +31,7 @@ public sealed class DemoEngine : ITorrentEngine
         public string[] Trackers { get; init; } = ["udp://tracker.opentrackr.org:1337/announce"];
         public string? Label { get; init; }
         public TimeSpan Active { get; init; } = TimeSpan.FromHours(2);
+        public DownloadOrder Order { get; set; } = DownloadOrder.Default;
     }
 
     private readonly List<Item> _items =
@@ -144,6 +145,15 @@ public sealed class DemoEngine : ITorrentEngine
 
     public Task SetSpeedLimitsAsync(string id, int maxDownloadRate, int maxUploadRate) => Task.CompletedTask;
 
+    public Task SetDownloadOrderAsync(string id, DownloadOrder order)
+    {
+        Get(id).Order = order;
+        return Task.CompletedTask;
+    }
+
+    public Task<Uri> StreamFileAsync(string id, int fileIndex) =>
+        throw new InvalidOperationException("The demo does not play files.");
+
     public IReadOnlyList<TorrentSnapshot> GetSnapshots()
     {
         double now = (DateTime.UtcNow - _start).TotalSeconds;
@@ -232,6 +242,8 @@ public sealed class DemoEngine : ITorrentEngine
             null)
         {
             ContentPath = Path.Combine(Folder, item.Name),
+            Order = item.Order,
+            MediaFileIndex = MediaFiles.MainFile(item.Files.Select((f, i) => (i, f.Path, (long)(item.Size * f.Share)))),
         };
     }
 

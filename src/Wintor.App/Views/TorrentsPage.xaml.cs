@@ -650,6 +650,11 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
             _itemMenu.Items.Add(Entry("Menu_Resume", HugeIconKind.Play, () => _ = ViewModel.ResumeAsync(targets)));
         }
 
+        if (targets.Count == 1 && item.MediaFileIndex is int media)
+        {
+            _itemMenu.Items.Add(Entry("Menu_Play", HugeIconKind.PlayCircle, () => _ = PlayAsync(item.Id, media)));
+        }
+
         _itemMenu.Items.Add(Entry("Menu_OpenFolder", HugeIconKind.FolderOpen, () => Shell.OpenFolder(item.ContentPath)));
         if (targets.Count == 1)
         {
@@ -657,6 +662,7 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
         }
 
         _itemMenu.Items.Add(Entry("Menu_SpeedLimit", HugeIconKind.DashboardSpeed01, () => _ = AskSpeedLimitsAsync(targets)));
+        _itemMenu.Items.Add(DownloadOrderMenu(targets));
         _itemMenu.Items.Add(new MenuFlyoutSeparator());
         _itemMenu.Items.Add(LabelMenu(targets));
         _itemMenu.Items.Add(OrderMenu(targets));
@@ -706,6 +712,38 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
         }
 
         return menu;
+    }
+
+    /// <summary>
+    /// Which pieces come first. In a submenu of its own: off is right for almost everyone (DESIGN.md, advanced options
+    /// hidden but reachable), and toggles there do not add a check-mark gutter to the whole row menu.
+    /// </summary>
+    private MenuFlyoutSubItem DownloadOrderMenu(IReadOnlyList<TorrentItemViewModel> targets)
+    {
+        var menu = new MenuFlyoutSubItem { Text = Strings.Get("Menu_DownloadOrder"), Icon = HugeIcons.Create(HugeIconKind.ArrangeByNumbers19) };
+        AutomationProperties.SetAutomationId(menu, "Menu_DownloadOrder");
+
+        ToggleMenuFlyoutItem Toggle(string key, Func<DownloadOrder, bool> isOn, Func<DownloadOrder, bool, DownloadOrder> set)
+        {
+            // Ticked when every chosen torrent has it; clicking then turns it off for all, otherwise on for all.
+            bool on = targets.All(t => isOn(t.Order));
+            var toggle = new ToggleMenuFlyoutItem { Text = Strings.Get(key), IsChecked = on };
+            AutomationProperties.SetAutomationId(toggle, key);
+            toggle.Click += (_, _) => _ = ViewModel.SetDownloadOrderAsync(targets, order => set(order, !on));
+            return toggle;
+        }
+
+        menu.Items.Add(Toggle("Menu_Sequential", o => o.Sequential, (o, on) => o with { Sequential = on }));
+        menu.Items.Add(Toggle("Menu_FirstLastFirst", o => o.FirstAndLastPiecesFirst, (o, on) => o with { FirstAndLastPiecesFirst = on }));
+        return menu;
+    }
+
+    private async Task PlayAsync(string id, int fileIndex)
+    {
+        if (await ViewModel.PlayAsync(id, fileIndex) is { } link && XamlRoot is not null)
+        {
+            await NoPlayerDialog.ShowAsync(XamlRoot, link);
+        }
     }
 
     private MenuFlyoutSubItem OrderMenu(IReadOnlyList<TorrentItemViewModel> targets)

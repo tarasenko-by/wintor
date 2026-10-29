@@ -306,4 +306,14 @@
   <data name="WhatsNew_020_Problems" xml:space="preserve"><value>Deleted files, a full disk or a lost network are explained in plain words, and Resume fixes them.</value></data>
   <data name="WhatsNew_020_Languages" xml:space="preserve"><value>Twelve interface languages, with a language picker in Settings.</value></data>
   <data name="PrivacyLink.Content" xml:space="preserve"><value>Privacy</value></data>
+  <data name="Menu_Play" xml:space="preserve"><value>Play</value></data>
+  <data name="Menu_DownloadOrder" xml:space="preserve"><value>Download order</value></data>
+  <data name="Menu_Sequential" xml:space="preserve"><value>From start to end</value></data>
+  <data name="Menu_FirstLastFirst" xml:space="preserve"><value>First and last pieces first</value></data>
+  <data name="PlayFileButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Play</value></data>
+  <data name="PlayFileButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Play</value></data>
+  <data name="NoPlayer_Title" xml:space="preserve"><value>Play while downloading</value></data>
+  <data name="NoPlayer_Text" xml:space="preserve"><value>Your default player can't open a file that is still downloading. VLC or mpv can: install one and press Play again, or paste this link into a player's “Open network stream”.</value></data>
+  <data name="NoPlayer_LinkHeader" xml:space="preserve"><value>Stream link</value></data>
+  <data name="NoPlayer_Copy" xml:space="preserve"><value>Copy link</value></data>
 </root>

@@ -306,4 +306,14 @@
   <data name="WhatsNew_020_Problems" xml:space="preserve"><value>Usunięte pliki, pełny dysk czy utrata sieci są wyjaśniane prostymi słowami, a „Wznów” je naprawia.</value></data>
   <data name="WhatsNew_020_Languages" xml:space="preserve"><value>Dwanaście języków interfejsu i wybór języka w Ustawieniach.</value></data>
   <data name="PrivacyLink.Content" xml:space="preserve"><value>Prywatność</value></data>
+  <data name="Menu_Play" xml:space="preserve"><value>Odtwórz</value></data>
+  <data name="Menu_DownloadOrder" xml:space="preserve"><value>Kolejność pobierania</value></data>
+  <data name="Menu_Sequential" xml:space="preserve"><value>Od początku do końca</value></data>
+  <data name="Menu_FirstLastFirst" xml:space="preserve"><value>Najpierw pierwsze i ostatnie części</value></data>
+  <data name="PlayFileButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Odtwórz</value></data>
+  <data name="PlayFileButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Odtwórz</value></data>
+  <data name="NoPlayer_Title" xml:space="preserve"><value>Odtwarzanie w trakcie pobierania</value></data>
+  <data name="NoPlayer_Text" xml:space="preserve"><value>Domyślny odtwarzacz nie otworzy pliku, który jeszcze się pobiera. VLC lub mpv to potrafią: zainstaluj jeden z nich i ponownie kliknij Odtwórz albo wklej ten link w „Otwórz strumień sieciowy” odtwarzacza.</value></data>
+  <data name="NoPlayer_LinkHeader" xml:space="preserve"><value>Link do strumienia</value></data>
+  <data name="NoPlayer_Copy" xml:space="preserve"><value>Kopiuj link</value></data>
 </root>

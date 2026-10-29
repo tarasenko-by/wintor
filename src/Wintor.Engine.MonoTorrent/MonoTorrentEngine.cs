@@ -2,6 +2,7 @@ using System.Net;
 using MonoTorrent;
 using MonoTorrent.Client;
 using MonoTorrent.Connections;
+using MonoTorrent.PiecePicking;
 using MonoTorrent.Trackers;
 using Wintor.Core;
 
@@ -32,9 +33,23 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
     // Torrents started this session: their piece map is loaded and tells whether they have data.
     private readonly HashSet<string> _startedIds = [];
 
+    // MonoTorrent does not save which pieces a torrent asks for first, so the adapter does.
+    private Dictionary<string, DownloadOrder> _orders = [];
+
+    // The file "Play" opens, worked out once the file list is known (it never changes).
+    private readonly Dictionary<string, int?> _mediaFiles = [];
+
+    private readonly StreamServer _streams = new();
+    private bool _endingIdleStreams;
+
     private static readonly TimeSpan RateWindow = TimeSpan.FromSeconds(5);
 
+    // Players keep their connection open while paused, so a stream nobody reads for this long was closed.
+    private static readonly TimeSpan StreamIdleTime = TimeSpan.FromMinutes(2);
+
     private string StatePath => Path.Combine(_options.DataDirectory, "engine.state");
+
+    private string OrderPath => Path.Combine(_options.DataDirectory, "download-order.txt");
 
     private string PausedPath => Path.Combine(_options.DataDirectory, "paused.txt");
 
@@ -77,10 +92,17 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
         _engine = engine;
         _pausedIds = await LoadIdsAsync(PausedPath);
         _hadDataIds = await LoadIdsAsync(HadDataPath);
+        _orders = await LoadOrdersAsync(OrderPath);
 
         foreach (TorrentManager manager in engine.Torrents)
         {
             string id = IdOf(manager);
+            if (_orders.TryGetValue(id, out DownloadOrder? order))
+            {
+                // Restored torrents are stopped: the only state in which MonoTorrent lets the requester change.
+                await manager.ChangePickerAsync(CreateRequester(order));
+            }
+
             if (FilesMissing(manager))
             {
                 _missingIds.Add(id);
@@ -185,6 +207,62 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
         await SaveStateAsync();
     }
 
+    public async Task SetDownloadOrderAsync(string id, DownloadOrder order)
+    {
+        TorrentManager manager = Get(id);
+        if (order.IsDefault)
+        {
+            _orders.Remove(id);
+        }
+        else
+        {
+            _orders[id] = order;
+        }
+
+        await SaveOrdersAsync();
+
+        // While a player streams from it, the torrent keeps the streaming requester; the order applies when it ends.
+        if (!_streams.IsServing(id))
+        {
+            await ChangeRequesterAsync(manager, CreateRequester(order));
+        }
+    }
+
+    public async Task<Uri> StreamFileAsync(string id, int fileIndex)
+    {
+        TorrentManager manager = Get(id);
+        if (!manager.HasMetadata)
+        {
+            throw new InvalidOperationException("The torrent's files are not known yet.");
+        }
+
+        if (fileIndex < 0 || fileIndex >= manager.Files.Count)
+        {
+            throw new ArgumentOutOfRangeException(nameof(fileIndex));
+        }
+
+        // MonoTorrent streams one file per torrent; the previous link ends.
+        _streams.Remove(id);
+        ITorrentManagerFile file = manager.Files[fileIndex];
+        if (file.Priority == Priority.DoNotDownload)
+        {
+            await manager.SetFilePriorityAsync(file, Priority.Normal);
+        }
+
+        if (manager.StreamProvider is null)
+        {
+            await ChangeRequesterAsync(manager, new StreamingPieceRequester());
+        }
+
+        // Playing means downloading: a paused torrent resumes.
+        await StartAsync(id);
+
+        // No prebuffering: the link is ready at once, and the player waits for the pieces it reads.
+        Stream stream = await manager.StreamProvider!.CreateStreamAsync(file, prebuffer: false);
+        await SaveStateAsync();
+        return _streams.Add(id, stream, file.Path);
+    }
+
     public async Task<TorrentDetails?> GetDetailsAsync(string id)
     {
         TorrentManager? manager = _engine?.Torrents.FirstOrDefault(t => IdOf(t) == id);
@@ -240,7 +318,10 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
                     Priority.Lowest or Priority.Low => FilePriority.Low,
                     Priority.High or Priority.Highest or Priority.Immediate => FilePriority.High,
                     _ => FilePriority.Normal,
-                })).ToList(),
+                })
+                {
+                    FullPath = f.FullPath,
+                }).ToList(),
             Peers: connected.Select(p => new PeerEntry(
                 p.Uri.Host + ":" + p.Uri.Port,
                 p.ClientApp.ToString(),
@@ -329,6 +410,8 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
     public async Task RemoveAsync(string id, bool deleteFiles)
     {
         TorrentManager manager = Get(id);
+        // The player holds the files open; deleting them must not fail because of it.
+        _streams.Remove(id);
         if (manager.State != TorrentState.Stopped)
         {
             await manager.StopAsync();
@@ -336,9 +419,15 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
 
         await Engine.RemoveAsync(manager, deleteFiles ? RemoveMode.CacheDataAndDownloadedData : RemoveMode.CacheDataOnly);
         _missingIds.Remove(id);
+        _mediaFiles.Remove(id);
         if (_pausedIds.Remove(id))
         {
             await SavePausedIdsAsync();
+        }
+
+        if (_orders.Remove(id))
+        {
+            await SaveOrdersAsync();
         }
 
         await SaveStateAsync();
@@ -355,6 +444,12 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
         foreach (string id in _rates.Keys.Except(snapshots.Select(s => s.Id)).ToList())
         {
             _rates.Remove(id);
+        }
+
+        // Asked for once a second anyway, so this is where closed players are noticed.
+        if (!_endingIdleStreams && _streams.IdleTorrents(StreamIdleTime) is { Count: > 0 } idle)
+        {
+            _ = EndStreamsAsync(idle);
         }
 
         return snapshots;
@@ -385,6 +480,8 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
         {
             return;
         }
+
+        _streams.Dispose();
 
         // Save before stopping so torrents that were running restart automatically next launch.
         await SaveStateAsync();
@@ -433,6 +530,116 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
 
     private Task SavePausedIdsAsync() => File.WriteAllLinesAsync(PausedPath, _pausedIds);
 
+    private static IPieceRequester CreateRequester(DownloadOrder order) =>
+        order.IsDefault ? new StandardPieceRequester(PieceRequesterSettings.Default) : new OrderedPieceRequester(order);
+
+    /// <summary>
+    /// MonoTorrent swaps a torrent's requester only while it is stopped: a running torrent stops (dropping its peers
+    /// for a moment) and starts again. A paused one stays stopped, which looks the same.
+    /// </summary>
+    private async Task ChangeRequesterAsync(TorrentManager manager, IPieceRequester requester)
+    {
+        bool resume = manager.State is TorrentState.Downloading or TorrentState.Seeding or TorrentState.Metadata
+            or TorrentState.Starting or TorrentState.Hashing or TorrentState.FetchingHashes;
+        // A torrent that is still starting (checking its files) can switch itself back on right after it stopped, so
+        // stopping and swapping are retried until the swap lands.
+        for (int attempt = 1; ; attempt++)
+        {
+            if (manager.State is TorrentState.Stopping)
+            {
+                await Task.Delay(100);
+                continue;
+            }
+
+            if (manager.State != TorrentState.Stopped)
+            {
+                await manager.StopAsync(TimeSpan.FromSeconds(5));
+            }
+
+            try
+            {
+                await manager.ChangePickerAsync(requester);
+                break;
+            }
+            catch (InvalidOperationException) when (attempt < 20)
+            {
+                await Task.Delay(100);
+            }
+        }
+
+        if (resume)
+        {
+            await manager.StartAsync();
+            _startedIds.Add(IdOf(manager));
+        }
+    }
+
+    /// <summary>The players of these torrents were closed: end their links and go back to the chosen order.</summary>
+    private async Task EndStreamsAsync(IReadOnlyList<string> ids)
+    {
+        _endingIdleStreams = true;
+        try
+        {
+            foreach (string id in ids)
+            {
+                _streams.Remove(id);
+                if (_engine?.Torrents.FirstOrDefault(t => IdOf(t) == id) is { } manager)
+                {
+                    await ChangeRequesterAsync(manager, CreateRequester(_orders.GetValueOrDefault(id, DownloadOrder.Default)));
+                }
+            }
+        }
+        catch (Exception)
+        {
+            // The torrent was removed meanwhile; the next restart applies the order anyway.
+        }
+        finally
+        {
+            _endingIdleStreams = false;
+        }
+    }
+
+    // One line per torrent with a non-default order: "<id> sequential first-last" (either word may be missing).
+    private static async Task<Dictionary<string, DownloadOrder>> LoadOrdersAsync(string path)
+    {
+        var orders = new Dictionary<string, DownloadOrder>();
+        foreach (string line in await LoadIdsAsync(path))
+        {
+            string[] parts = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            var order = new DownloadOrder(parts.Contains("sequential"), parts.Contains("first-last"));
+            if (parts.Length > 0 && !order.IsDefault)
+            {
+                orders[parts[0]] = order;
+            }
+        }
+
+        return orders;
+    }
+
+    private Task SaveOrdersAsync() =>
+        File.WriteAllLinesAsync(OrderPath, _orders.Select(p => string.Join(' ', new[]
+        {
+            p.Key,
+            p.Value.Sequential ? "sequential" : null,
+            p.Value.FirstAndLastPiecesFirst ? "first-last" : null,
+        }.Where(w => w is not null))));
+
+    private int? MediaFileOf(TorrentManager manager, string id)
+    {
+        if (!manager.HasMetadata)
+        {
+            return null;
+        }
+
+        if (!_mediaFiles.TryGetValue(id, out int? index))
+        {
+            index = MediaFiles.MainFile(manager.Files.Select((f, i) => (i, f.Path, f.Length)));
+            _mediaFiles[id] = index;
+        }
+
+        return index;
+    }
+
     /// <summary>True when the torrent had downloaded data but none of its files are on disk any more.</summary>
     private bool FilesMissing(TorrentManager manager) =>
         manager.HasMetadata
@@ -475,6 +682,8 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
             ContentPath = manager.ContainingDirectory,
             DownloadLimit = manager.Settings.MaximumDownloadRate,
             UploadLimit = manager.Settings.MaximumUploadRate,
+            Order = _orders.GetValueOrDefault(id, DownloadOrder.Default),
+            MediaFileIndex = MediaFileOf(manager, id),
             Problem = missing ? TorrentProblem.FilesMissing
                 : manager.State == TorrentState.Error ? TorrentProblems.Classify(manager.Error?.Exception)
                 : TorrentProblem.None,

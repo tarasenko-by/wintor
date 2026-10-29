@@ -45,6 +45,11 @@ public sealed record TorrentSnapshot(
 
     public bool HasSpeedLimit => DownloadLimit > 0 || UploadLimit > 0;
 
+    public DownloadOrder Order { get; init; } = DownloadOrder.Default;
+
+    /// <summary>The file "Play" opens (<see cref="MediaFiles.MainFile"/>), or null when nothing in it plays.</summary>
+    public int? MediaFileIndex { get; init; }
+
     /// <summary>Why the torrent cannot run, in terms the UI can explain; <see cref="TorrentProblem.None"/> otherwise.</summary>
     public TorrentProblem Problem { get; init; }
 

@@ -88,6 +88,11 @@ public partial class TorrentItemViewModel(string id) : ObservableObject
 
     public string ContentPath => Snapshot?.ContentPath ?? "";
 
+    public DownloadOrder Order => Snapshot?.Order ?? DownloadOrder.Default;
+
+    /// <summary>The file "Play" opens, or null when nothing in the torrent plays (or its files are not known yet).</summary>
+    public int? MediaFileIndex => Snapshot?.MediaFileIndex;
+
     public void Update(TorrentSnapshot s, int queueNumber, string? label, string? labelColor)
     {
         Snapshot = s;
