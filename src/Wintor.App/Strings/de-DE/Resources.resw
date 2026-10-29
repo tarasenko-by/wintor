@@ -316,4 +316,29 @@
   <data name="NoPlayer_Text" xml:space="preserve"><value>Dein Standard-Player kann keine Datei öffnen, die noch heruntergeladen wird. VLC oder mpv können das: Installiere einen davon und klicke erneut auf „Abspielen“, oder füge diesen Link in „Netzwerkstream öffnen“ eines Players ein.</value></data>
   <data name="NoPlayer_LinkHeader" xml:space="preserve"><value>Stream-Link</value></data>
   <data name="NoPlayer_Copy" xml:space="preserve"><value>Link kopieren</value></data>
+  <data name="NavActionsItem.Content" xml:space="preserve"><value>Aktionen</value></data>
+  <data name="WhenDone_Menu" xml:space="preserve"><value>Wenn fertig</value></data>
+  <data name="WhenDone_Off" xml:space="preserve"><value>Aus</value></data>
+  <data name="WhenDone_Quit_Downloads" xml:space="preserve"><value>Wintor beenden, wenn Downloads fertig sind</value></data>
+  <data name="WhenDone_Quit_All" xml:space="preserve"><value>Wintor beenden, wenn Downloads und Seeding fertig sind</value></data>
+  <data name="WhenDone_Sleep_Downloads" xml:space="preserve"><value>Energie sparen, wenn Downloads fertig sind</value></data>
+  <data name="WhenDone_Sleep_All" xml:space="preserve"><value>Energie sparen, wenn Downloads und Seeding fertig sind</value></data>
+  <data name="WhenDone_Hibernate_Downloads" xml:space="preserve"><value>Ruhezustand, wenn Downloads fertig sind</value></data>
+  <data name="WhenDone_Hibernate_All" xml:space="preserve"><value>Ruhezustand, wenn Downloads und Seeding fertig sind</value></data>
+  <data name="WhenDone_Restart_Downloads" xml:space="preserve"><value>Neu starten, wenn Downloads fertig sind</value></data>
+  <data name="WhenDone_Restart_All" xml:space="preserve"><value>Neu starten, wenn Downloads und Seeding fertig sind</value></data>
+  <data name="WhenDone_ShutDown_Downloads" xml:space="preserve"><value>Herunterfahren, wenn Downloads fertig sind</value></data>
+  <data name="WhenDone_ShutDown_All" xml:space="preserve"><value>Herunterfahren, wenn Downloads und Seeding fertig sind</value></data>
+  <data name="WhenDone_Title_Downloads" xml:space="preserve"><value>Downloads fertig</value></data>
+  <data name="WhenDone_Title_All" xml:space="preserve"><value>Downloads und Seeding fertig</value></data>
+  <data name="WhenDone_Countdown_Quit" xml:space="preserve"><value>Wintor wird in {0} s beendet.</value></data>
+  <data name="WhenDone_Countdown_Sleep" xml:space="preserve"><value>Der PC wechselt in {0} s in den Energiesparmodus.</value></data>
+  <data name="WhenDone_Countdown_Hibernate" xml:space="preserve"><value>Der PC wechselt in {0} s in den Ruhezustand.</value></data>
+  <data name="WhenDone_Countdown_Restart" xml:space="preserve"><value>Windows wird in {0} s neu gestartet.</value></data>
+  <data name="WhenDone_Countdown_ShutDown" xml:space="preserve"><value>Windows wird in {0} s heruntergefahren.</value></data>
+  <data name="WhenDone_Now_Quit" xml:space="preserve"><value>Jetzt beenden</value></data>
+  <data name="WhenDone_Now_Sleep" xml:space="preserve"><value>Jetzt Energie sparen</value></data>
+  <data name="WhenDone_Now_Hibernate" xml:space="preserve"><value>Jetzt Ruhezustand</value></data>
+  <data name="WhenDone_Now_Restart" xml:space="preserve"><value>Jetzt neu starten</value></data>
+  <data name="WhenDone_Now_ShutDown" xml:space="preserve"><value>Jetzt herunterfahren</value></data>
 </root>

@@ -316,4 +316,29 @@
   <data name="NoPlayer_Text" xml:space="preserve"><value>Типовий плеєр не може відкрити файл, який ще завантажується. VLC або mpv можуть: установіть один із них і знову натисніть «Відтворити» або вставте це посилання в «Відкрити мережевий потік» у плеєрі.</value></data>
   <data name="NoPlayer_LinkHeader" xml:space="preserve"><value>Посилання на потік</value></data>
   <data name="NoPlayer_Copy" xml:space="preserve"><value>Копіювати посилання</value></data>
+  <data name="NavActionsItem.Content" xml:space="preserve"><value>Дії</value></data>
+  <data name="WhenDone_Menu" xml:space="preserve"><value>Після завершення</value></data>
+  <data name="WhenDone_Off" xml:space="preserve"><value>Вимкнено</value></data>
+  <data name="WhenDone_Quit_Downloads" xml:space="preserve"><value>Вийти з Wintor після завершення завантажень</value></data>
+  <data name="WhenDone_Quit_All" xml:space="preserve"><value>Вийти з Wintor після завершення завантажень і роздач</value></data>
+  <data name="WhenDone_Sleep_Downloads" xml:space="preserve"><value>Режим сну після завершення завантажень</value></data>
+  <data name="WhenDone_Sleep_All" xml:space="preserve"><value>Режим сну після завершення завантажень і роздач</value></data>
+  <data name="WhenDone_Hibernate_Downloads" xml:space="preserve"><value>Гібернація після завершення завантажень</value></data>
+  <data name="WhenDone_Hibernate_All" xml:space="preserve"><value>Гібернація після завершення завантажень і роздач</value></data>
+  <data name="WhenDone_Restart_Downloads" xml:space="preserve"><value>Перезавантаження після завершення завантажень</value></data>
+  <data name="WhenDone_Restart_All" xml:space="preserve"><value>Перезавантаження після завершення завантажень і роздач</value></data>
+  <data name="WhenDone_ShutDown_Downloads" xml:space="preserve"><value>Вимкнення після завершення завантажень</value></data>
+  <data name="WhenDone_ShutDown_All" xml:space="preserve"><value>Вимкнення після завершення завантажень і роздач</value></data>
+  <data name="WhenDone_Title_Downloads" xml:space="preserve"><value>Завантаження завершено</value></data>
+  <data name="WhenDone_Title_All" xml:space="preserve"><value>Завантаження й роздачі завершено</value></data>
+  <data name="WhenDone_Countdown_Quit" xml:space="preserve"><value>Wintor закриється через {0} с.</value></data>
+  <data name="WhenDone_Countdown_Sleep" xml:space="preserve"><value>Комп'ютер перейде в режим сну через {0} с.</value></data>
+  <data name="WhenDone_Countdown_Hibernate" xml:space="preserve"><value>Комп'ютер перейде в режим гібернації через {0} с.</value></data>
+  <data name="WhenDone_Countdown_Restart" xml:space="preserve"><value>Windows перезавантажиться через {0} с.</value></data>
+  <data name="WhenDone_Countdown_ShutDown" xml:space="preserve"><value>Windows вимкнеться через {0} с.</value></data>
+  <data name="WhenDone_Now_Quit" xml:space="preserve"><value>Вийти зараз</value></data>
+  <data name="WhenDone_Now_Sleep" xml:space="preserve"><value>Сон зараз</value></data>
+  <data name="WhenDone_Now_Hibernate" xml:space="preserve"><value>Гібернація зараз</value></data>
+  <data name="WhenDone_Now_Restart" xml:space="preserve"><value>Перезавантажити зараз</value></data>
+  <data name="WhenDone_Now_ShutDown" xml:space="preserve"><value>Вимкнути зараз</value></data>
 </root>

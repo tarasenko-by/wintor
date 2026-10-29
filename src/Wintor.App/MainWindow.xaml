@@ -62,6 +62,7 @@
             IsBackButtonVisible="Collapsed"
             IsPaneToggleButtonVisible="False"
             OpenPaneLength="260"
+            ItemInvoked="NavView_ItemInvoked"
             PaneDisplayMode="Left"
             SelectionChanged="NavView_SelectionChanged">
             <NavigationView.MenuItems>
@@ -137,6 +138,19 @@
                 <NavigationViewItemHeader x:Name="LabelsHeader" x:Uid="NavLabelsHeader" />
                 <!--  Label items follow, added from Torrents.Labels (SyncLabelItems).  -->
             </NavigationView.MenuItems>
+            <NavigationView.FooterMenuItems>
+                <!--
+                    Not a page: opens a menu (NavView_ItemInvoked), so it never takes the selection. Tag holds the
+                    hover brush, in the window's theme, to keep the item lit while its menu is open.
+                -->
+                <NavigationViewItem
+                    x:Name="NavActions"
+                    x:Uid="NavActionsItem"
+                    AutomationProperties.AutomationId="NavActions"
+                    Icon="{icons:Huge Kind=Flash}"
+                    SelectsOnInvoked="False"
+                    Tag="{ThemeResource NavigationViewItemBackgroundPointerOver}" />
+            </NavigationView.FooterMenuItems>
 
             <Frame x:Name="ContentFrame" Navigated="ContentFrame_Navigated" />
         </NavigationView>

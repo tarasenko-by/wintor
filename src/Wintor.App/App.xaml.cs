@@ -132,6 +132,7 @@ public partial class App : Application
             .AddSingleton<NotificationService>()
             .AddSingleton(history)
             .AddSingleton<TorrentsViewModel>()
+            .AddSingleton<WhenDoneService>()
             .AddTransient<TorrentDetailsViewModel>()
             .AddTransient<SettingsViewModel>()
             .BuildServiceProvider();

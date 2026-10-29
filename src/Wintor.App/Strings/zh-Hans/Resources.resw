@@ -316,4 +316,29 @@
   <data name="NoPlayer_Text" xml:space="preserve"><value>默认播放器无法打开仍在下载的文件。VLC 或 mpv 可以：安装其中一个后再次点击“播放”，或将此链接粘贴到播放器的“打开网络串流”中。</value></data>
   <data name="NoPlayer_LinkHeader" xml:space="preserve"><value>串流链接</value></data>
   <data name="NoPlayer_Copy" xml:space="preserve"><value>复制链接</value></data>
+  <data name="NavActionsItem.Content" xml:space="preserve"><value>操作</value></data>
+  <data name="WhenDone_Menu" xml:space="preserve"><value>完成后</value></data>
+  <data name="WhenDone_Off" xml:space="preserve"><value>关闭</value></data>
+  <data name="WhenDone_Quit_Downloads" xml:space="preserve"><value>下载完成后退出 Wintor</value></data>
+  <data name="WhenDone_Quit_All" xml:space="preserve"><value>下载和做种完成后退出 Wintor</value></data>
+  <data name="WhenDone_Sleep_Downloads" xml:space="preserve"><value>下载完成后睡眠</value></data>
+  <data name="WhenDone_Sleep_All" xml:space="preserve"><value>下载和做种完成后睡眠</value></data>
+  <data name="WhenDone_Hibernate_Downloads" xml:space="preserve"><value>下载完成后休眠</value></data>
+  <data name="WhenDone_Hibernate_All" xml:space="preserve"><value>下载和做种完成后休眠</value></data>
+  <data name="WhenDone_Restart_Downloads" xml:space="preserve"><value>下载完成后重启</value></data>
+  <data name="WhenDone_Restart_All" xml:space="preserve"><value>下载和做种完成后重启</value></data>
+  <data name="WhenDone_ShutDown_Downloads" xml:space="preserve"><value>下载完成后关机</value></data>
+  <data name="WhenDone_ShutDown_All" xml:space="preserve"><value>下载和做种完成后关机</value></data>
+  <data name="WhenDone_Title_Downloads" xml:space="preserve"><value>下载已完成</value></data>
+  <data name="WhenDone_Title_All" xml:space="preserve"><value>下载和做种已完成</value></data>
+  <data name="WhenDone_Countdown_Quit" xml:space="preserve"><value>Wintor 将在 {0} 秒后退出。</value></data>
+  <data name="WhenDone_Countdown_Sleep" xml:space="preserve"><value>电脑将在 {0} 秒后睡眠。</value></data>
+  <data name="WhenDone_Countdown_Hibernate" xml:space="preserve"><value>电脑将在 {0} 秒后休眠。</value></data>
+  <data name="WhenDone_Countdown_Restart" xml:space="preserve"><value>Windows 将在 {0} 秒后重启。</value></data>
+  <data name="WhenDone_Countdown_ShutDown" xml:space="preserve"><value>Windows 将在 {0} 秒后关机。</value></data>
+  <data name="WhenDone_Now_Quit" xml:space="preserve"><value>立即退出</value></data>
+  <data name="WhenDone_Now_Sleep" xml:space="preserve"><value>立即睡眠</value></data>
+  <data name="WhenDone_Now_Hibernate" xml:space="preserve"><value>立即休眠</value></data>
+  <data name="WhenDone_Now_Restart" xml:space="preserve"><value>立即重启</value></data>
+  <data name="WhenDone_Now_ShutDown" xml:space="preserve"><value>立即关机</value></data>
 </root>

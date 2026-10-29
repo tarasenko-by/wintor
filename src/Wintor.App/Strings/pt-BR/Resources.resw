@@ -316,4 +316,29 @@
   <data name="NoPlayer_Text" xml:space="preserve"><value>Seu player padrão não abre um arquivo que ainda está sendo baixado. O VLC ou o mpv abrem: instale um deles e clique em Reproduzir de novo, ou cole este link em “Abrir fluxo de rede” de um player.</value></data>
   <data name="NoPlayer_LinkHeader" xml:space="preserve"><value>Link do stream</value></data>
   <data name="NoPlayer_Copy" xml:space="preserve"><value>Copiar link</value></data>
+  <data name="NavActionsItem.Content" xml:space="preserve"><value>Ações</value></data>
+  <data name="WhenDone_Menu" xml:space="preserve"><value>Ao terminar</value></data>
+  <data name="WhenDone_Off" xml:space="preserve"><value>Desativado</value></data>
+  <data name="WhenDone_Quit_Downloads" xml:space="preserve"><value>Sair do Wintor ao terminar os downloads</value></data>
+  <data name="WhenDone_Quit_All" xml:space="preserve"><value>Sair do Wintor ao terminar downloads e semeadura</value></data>
+  <data name="WhenDone_Sleep_Downloads" xml:space="preserve"><value>Suspender ao terminar os downloads</value></data>
+  <data name="WhenDone_Sleep_All" xml:space="preserve"><value>Suspender ao terminar downloads e semeadura</value></data>
+  <data name="WhenDone_Hibernate_Downloads" xml:space="preserve"><value>Hibernar ao terminar os downloads</value></data>
+  <data name="WhenDone_Hibernate_All" xml:space="preserve"><value>Hibernar ao terminar downloads e semeadura</value></data>
+  <data name="WhenDone_Restart_Downloads" xml:space="preserve"><value>Reiniciar ao terminar os downloads</value></data>
+  <data name="WhenDone_Restart_All" xml:space="preserve"><value>Reiniciar ao terminar downloads e semeadura</value></data>
+  <data name="WhenDone_ShutDown_Downloads" xml:space="preserve"><value>Desligar ao terminar os downloads</value></data>
+  <data name="WhenDone_ShutDown_All" xml:space="preserve"><value>Desligar ao terminar downloads e semeadura</value></data>
+  <data name="WhenDone_Title_Downloads" xml:space="preserve"><value>Downloads concluídos</value></data>
+  <data name="WhenDone_Title_All" xml:space="preserve"><value>Downloads e semeadura concluídos</value></data>
+  <data name="WhenDone_Countdown_Quit" xml:space="preserve"><value>O Wintor será fechado em {0} s.</value></data>
+  <data name="WhenDone_Countdown_Sleep" xml:space="preserve"><value>O PC entrará em suspensão em {0} s.</value></data>
+  <data name="WhenDone_Countdown_Hibernate" xml:space="preserve"><value>O PC vai hibernar em {0} s.</value></data>
+  <data name="WhenDone_Countdown_Restart" xml:space="preserve"><value>O Windows será reiniciado em {0} s.</value></data>
+  <data name="WhenDone_Countdown_ShutDown" xml:space="preserve"><value>O Windows será desligado em {0} s.</value></data>
+  <data name="WhenDone_Now_Quit" xml:space="preserve"><value>Sair agora</value></data>
+  <data name="WhenDone_Now_Sleep" xml:space="preserve"><value>Suspender agora</value></data>
+  <data name="WhenDone_Now_Hibernate" xml:space="preserve"><value>Hibernar agora</value></data>
+  <data name="WhenDone_Now_Restart" xml:space="preserve"><value>Reiniciar agora</value></data>
+  <data name="WhenDone_Now_ShutDown" xml:space="preserve"><value>Desligar agora</value></data>
 </root>

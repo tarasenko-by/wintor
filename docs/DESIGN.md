@@ -31,6 +31,16 @@ They are binding for all UI changes (see [AGENTS.md](../AGENTS.md)).
 - Side pane: status views (All / Downloading / Completed / Paused) and the user's **labels**, each with a count on
   the right in `TertiaryCaptionStyle`. Labels have a color (Services/LabelColors: 8 mid-tones that read on both
   themes) shown on their tag icon, the row's pill and menus. The "Labels" header and hint hide in the compact pane.
+  At the bottom, above Settings, **Actions** (flash icon) is not a page: it opens a menu. Its first item, "When
+  done" (shut-down icon), is µTorrent's auto-shutdown: Off (ticked by default), then Quit Wintor / Sleep /
+  Hibernate / Restart / Shut down, each "when downloads finish" or "when downloads and seeding finish" (radio
+  items, a separator between actions; Sleep and Hibernate only where the PC has them), then Resume all / Pause all.
+  The choice lasts for this run only — it is never saved, so Wintor never shuts a PC down because of a choice made
+  days ago. While one waits, Actions shows a dot (`InfoBadge`) and names it in its tooltip. It waits for something
+  to finish (picked with nothing downloading, it waits for the next torrent); paused, stopped and failed torrents
+  are not waited for. When the time comes, the window comes back and a dialog counts down 60 s ("Windows will shut
+  down in 60 s"), Cancel focused, "Shut down now" as the primary button; when the time runs out it goes ahead, as
+  the PC may be unattended. Quit, Restart and Shut down first stop the torrents as `wintor --quit` does.
 - **Torrent list = table + details pane, no drill-in** (as in µTorrent / BitTorrent, Windows 11 look):
   - The table sits in a card. Column headers are quiet buttons: click sorts, again flips, the active one shows an
     arrow. Numbers are right-aligned, text left-aligned, one line per row (40 px), names trimmed with a tooltip.

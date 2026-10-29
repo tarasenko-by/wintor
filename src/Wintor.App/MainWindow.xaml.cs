@@ -31,9 +31,11 @@ public sealed partial class MainWindow : Window
     private readonly AppSettings _settings = App.Services.GetRequiredService<AppSettings>();
     private readonly TorrentsViewModel _torrents = App.Services.GetRequiredService<TorrentsViewModel>();
     private readonly NotificationService _notifications = App.Services.GetRequiredService<NotificationService>();
+    private readonly WhenDoneService _whenDone = App.Services.GetRequiredService<WhenDoneService>();
     private TrayIcon? _tray;
     private bool _exiting;
     private bool _restartAfterExit;
+    private Action? _afterExit;
     private bool _shuttingDown;
     private bool _trayHintShown;
     private bool _engineStopped;
@@ -73,6 +75,8 @@ public sealed partial class MainWindow : Window
 
         AppWindow.Closing += AppWindow_Closing;
         _torrents.Completed += OnTorrentCompleted;
+        _whenDone.RuleChanged += UpdateActionsItem;
+        _whenDone.Triggered += OnWhenDone;
         SetupTray();
 
         SyncLabelItems();
@@ -246,6 +250,120 @@ public sealed partial class MainWindow : Window
         }
 
         Navigate(typeof(TorrentsPage));
+    }
+
+    private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+    {
+        if (ReferenceEquals(args.InvokedItemContainer, NavActions))
+        {
+            MenuFlyout menu = ActionsMenu();
+            // Lit like on hover while the menu is open, so it is clear where the menu came from.
+            menu.Opened += (_, _) => NavActions.Background = NavActions.Tag as Microsoft.UI.Xaml.Media.Brush;
+            menu.Closed += (_, _) => NavActions.ClearValue(Control.BackgroundProperty);
+            // Above the item, as the Start menu's power button does: the item sits at the bottom of the pane.
+            menu.ShowAt(NavActions, new Microsoft.UI.Xaml.Controls.Primitives.FlyoutShowOptions
+            {
+                Placement = Microsoft.UI.Xaml.Controls.Primitives.FlyoutPlacementMode.TopEdgeAlignedLeft,
+            });
+        }
+    }
+
+    /// <summary>
+    /// The side pane's Actions: "When done" (as µTorrent's "Shut down Windows": Off, then each action after the
+    /// downloads, or after the downloads and seeding), then the tray's Resume all / Pause all.
+    /// </summary>
+    private MenuFlyout ActionsMenu()
+    {
+        var whenDone = new MenuFlyoutSubItem { Text = Strings.Get("WhenDone_Menu"), Icon = Icons.HugeIcons.Create(Icons.HugeIconKind.ShutDown) };
+        Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(whenDone, "WhenDoneMenu");
+        whenDone.Items.Add(WhenDoneItem(WhenDoneRule.Off));
+        foreach (WhenDoneAction action in Enum.GetValues<WhenDoneAction>())
+        {
+            if (action == WhenDoneAction.None
+                || (action == WhenDoneAction.Sleep && !Power.CanSleep)
+                || (action == WhenDoneAction.Hibernate && !Power.CanHibernate))
+            {
+                continue;
+            }
+
+            whenDone.Items.Add(new MenuFlyoutSeparator());
+            whenDone.Items.Add(WhenDoneItem(new WhenDoneRule(action, WhenDoneCondition.DownloadsFinished)));
+            whenDone.Items.Add(WhenDoneItem(new WhenDoneRule(action, WhenDoneCondition.AllFinished)));
+        }
+
+        var resume = new MenuFlyoutItem { Text = Strings.Get("Tray_ResumeAll"), Icon = Icons.HugeIcons.Create(Icons.HugeIconKind.Play) };
+        Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(resume, "ActionsResumeAll");
+        resume.Click += (_, _) => _ = _torrents.ResumeAllAsync();
+        var pause = new MenuFlyoutItem { Text = Strings.Get("Tray_PauseAll"), Icon = Icons.HugeIcons.Create(Icons.HugeIconKind.Pause) };
+        Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(pause, "ActionsPauseAll");
+        pause.Click += (_, _) => _ = _torrents.PauseAllAsync();
+
+        var menu = new MenuFlyout();
+        menu.Items.Add(whenDone);
+        menu.Items.Add(new MenuFlyoutSeparator());
+        menu.Items.Add(resume);
+        menu.Items.Add(pause);
+        return menu;
+    }
+
+    private RadioMenuFlyoutItem WhenDoneItem(WhenDoneRule rule)
+    {
+        var item = new RadioMenuFlyoutItem
+        {
+            Text = WhenDoneText(rule),
+            GroupName = "WhenDone",
+            IsChecked = rule == _whenDone.Rule,
+        };
+        Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(item, WhenDoneKey(rule));
+        item.Click += (_, _) => _whenDone.Set(rule);
+        return item;
+    }
+
+    private static string WhenDoneKey(WhenDoneRule rule) => rule.IsOff
+        ? "WhenDone_Off"
+        : $"WhenDone_{rule.Action}_{(rule.Condition == WhenDoneCondition.AllFinished ? "All" : "Downloads")}";
+
+    private static string WhenDoneText(WhenDoneRule rule) => Strings.Get(WhenDoneKey(rule));
+
+    /// <summary>While a "When done" action waits, Actions wears a dot and says which one in its tooltip.</summary>
+    private void UpdateActionsItem()
+    {
+        WhenDoneRule rule = _whenDone.Rule;
+        NavActions.InfoBadge = rule.IsOff ? null : new InfoBadge();
+        ToolTipService.SetToolTip(NavActions, rule.IsOff ? null : WhenDoneText(rule));
+        Microsoft.UI.Xaml.Automation.AutomationProperties.SetHelpText(NavActions, rule.IsOff ? "" : WhenDoneText(rule));
+    }
+
+    /// <summary>The torrents are done: a minute's countdown in the window (brought back from the tray), then the action.</summary>
+    private async void OnWhenDone(WhenDoneRule rule)
+    {
+        ShowAndActivate();
+        if (!await WhenDoneDialog.ConfirmAsync(RootGrid.XamlRoot, rule))
+        {
+            return;
+        }
+
+        switch (rule.Action)
+        {
+            case WhenDoneAction.Quit:
+                Exit();
+                break;
+            case WhenDoneAction.Sleep:
+                _ = Task.Run(Power.Sleep); // returns only after the PC wakes up
+                break;
+            case WhenDoneAction.Hibernate:
+                _ = Task.Run(Power.Hibernate);
+                break;
+            // Torrents stop first (resume data saved, as with "wintor --quit"), then Windows goes down.
+            case WhenDoneAction.Restart:
+                _afterExit = Power.Restart;
+                Exit();
+                break;
+            case WhenDoneAction.ShutDown:
+                _afterExit = Power.ShutDown;
+                Exit();
+                break;
+        }
     }
 
     private void Navigate(Type page)
@@ -538,6 +656,7 @@ public sealed partial class MainWindow : Window
                 await LaunchNewInstanceAsync();
             }
 
+            _afterExit?.Invoke();
             Close();
         }
     }

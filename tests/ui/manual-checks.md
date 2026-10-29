@@ -5,6 +5,15 @@ while testing; tick them off after a look by hand. Newest on top.
 
 ## Open
 
+- [ ] **When done (Actions)** — side pane → Actions → When done: Off is ticked; on a PC without hibernation (or
+      Modern Standby) Hibernate is not listed. Pick "Quit Wintor when downloads finish" with a small legal torrent
+      downloading: Actions gets a dot and the tooltip names the choice; when it finishes the window comes back (also
+      from the tray) with "Wintor will quit in 60 s", the number counts down, Cancel keeps Wintor running and the
+      choice is Off again; "Quit now" / the time running out quits and the torrent resumes on the next start.
+      Then once each, on a PC you can spare: Sleep (also on a Modern Standby laptop: the screen goes off and it
+      sleeps), Hibernate, Restart, Shut down — after Restart / Shut down Wintor's torrents come back intact.
+      Narrator reads the countdown when the dialog opens.
+
 - [ ] **Column widths** — hover a header's right edge: the resize cursor and a thin line appear; dragging changes
       the width (the name column gives way), double-click resets; widths are back after a restart.
 - [ ] **Columns menu** — right-click the header and the ⚙ button at its end both open it; Name, Progress and Status

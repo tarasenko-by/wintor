@@ -264,6 +264,36 @@ try {
         Test-UI 'Magnet dialog cancels' { Close-Dialog }
     }
 
+    # --- Actions -------------------------------------------------------------------------
+    Test-UI 'Actions menu offers "When done", Off by default; a choice sticks and goes back to Off' {
+        function Open-WhenDoneMenu {
+            Invoke-Ui @('invoke', 'NavActions') -Window $hwnd | Out-Null
+            Start-Sleep -Milliseconds 400
+            $popup = @(Invoke-Ui @('list-windows', '--json') | ConvertFrom-Json | ForEach-Object { $_ } |
+                Where-Object { $_.title -eq 'PopupHost' }) | Select-Object -Last 1
+            if (-not $popup) { throw 'Actions menu did not open.' }
+            Invoke-Ui @('wait-for', 'ActionsPauseAll', '-t', '2000') -Window ([string]$popup.hwnd) | Out-Null
+            Invoke-Ui @('invoke', 'WhenDoneMenu') -Window ([string]$popup.hwnd) | Out-Null
+            Start-Sleep -Milliseconds 400
+            # The submenu is a popup of its own, opened last.
+            $sub = @(Invoke-Ui @('list-windows', '--json') | ConvertFrom-Json | ForEach-Object { $_ } |
+                Where-Object { $_.title -eq 'PopupHost' -and $_.height -gt 200 }) | Select-Object -Last 1
+            if (-not $sub) { throw '"When done" submenu did not open.' }
+            [string]$sub.hwnd
+        }
+        $menu = Open-WhenDoneMenu
+        Invoke-Ui @('wait-for', 'WhenDone_Off', '-p', 'ToggleState', '--value', 'On', '-t', '2000') -Window $menu | Out-Null
+        foreach ($id in 'WhenDone_Quit_Downloads', 'WhenDone_Restart_All', 'WhenDone_ShutDown_Downloads', 'WhenDone_ShutDown_All') {
+            Invoke-Ui @('wait-for', $id, '-t', '1000') -Window $menu | Out-Null
+        }
+        Save-Screenshot '04b-when-done.png'
+        # Only ever pick Quit here: even if it fired, it would close Wintor, never the PC running the tests.
+        Invoke-Ui @('invoke', 'WhenDone_Quit_All') -Window $menu | Out-Null
+        $menu = Open-WhenDoneMenu
+        Invoke-Ui @('wait-for', 'WhenDone_Quit_All', '-p', 'ToggleState', '--value', 'On', '-t', '2000') -Window $menu | Out-Null
+        Invoke-Ui @('invoke', 'WhenDone_Off') -Window $menu | Out-Null
+    }
+
     # --- Settings ------------------------------------------------------------------------
     Test-UI 'Settings page opens' {
         Invoke-Ui @('invoke', 'SettingsItem')

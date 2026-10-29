@@ -316,4 +316,29 @@
   <data name="NoPlayer_Text" xml:space="preserve"><value>Varsayılan oynatıcınız hâlâ indirilen bir dosyayı açamıyor. VLC veya mpv açabilir: birini yükleyip Oynat'a yeniden basın ya da bu bağlantıyı bir oynatıcının “Ağ akışı aç” bölümüne yapıştırın.</value></data>
   <data name="NoPlayer_LinkHeader" xml:space="preserve"><value>Akış bağlantısı</value></data>
   <data name="NoPlayer_Copy" xml:space="preserve"><value>Bağlantıyı kopyala</value></data>
+  <data name="NavActionsItem.Content" xml:space="preserve"><value>Eylemler</value></data>
+  <data name="WhenDone_Menu" xml:space="preserve"><value>Bitince</value></data>
+  <data name="WhenDone_Off" xml:space="preserve"><value>Kapalı</value></data>
+  <data name="WhenDone_Quit_Downloads" xml:space="preserve"><value>İndirmeler bitince Wintor'dan çık</value></data>
+  <data name="WhenDone_Quit_All" xml:space="preserve"><value>İndirmeler ve paylaşım bitince Wintor'dan çık</value></data>
+  <data name="WhenDone_Sleep_Downloads" xml:space="preserve"><value>İndirmeler bitince uyku moduna geç</value></data>
+  <data name="WhenDone_Sleep_All" xml:space="preserve"><value>İndirmeler ve paylaşım bitince uyku moduna geç</value></data>
+  <data name="WhenDone_Hibernate_Downloads" xml:space="preserve"><value>İndirmeler bitince hazırda beklet</value></data>
+  <data name="WhenDone_Hibernate_All" xml:space="preserve"><value>İndirmeler ve paylaşım bitince hazırda beklet</value></data>
+  <data name="WhenDone_Restart_Downloads" xml:space="preserve"><value>İndirmeler bitince yeniden başlat</value></data>
+  <data name="WhenDone_Restart_All" xml:space="preserve"><value>İndirmeler ve paylaşım bitince yeniden başlat</value></data>
+  <data name="WhenDone_ShutDown_Downloads" xml:space="preserve"><value>İndirmeler bitince bilgisayarı kapat</value></data>
+  <data name="WhenDone_ShutDown_All" xml:space="preserve"><value>İndirmeler ve paylaşım bitince bilgisayarı kapat</value></data>
+  <data name="WhenDone_Title_Downloads" xml:space="preserve"><value>İndirmeler bitti</value></data>
+  <data name="WhenDone_Title_All" xml:space="preserve"><value>İndirmeler ve paylaşım bitti</value></data>
+  <data name="WhenDone_Countdown_Quit" xml:space="preserve"><value>Wintor {0} sn içinde kapanacak.</value></data>
+  <data name="WhenDone_Countdown_Sleep" xml:space="preserve"><value>Bilgisayar {0} sn içinde uyku moduna geçecek.</value></data>
+  <data name="WhenDone_Countdown_Hibernate" xml:space="preserve"><value>Bilgisayar {0} sn içinde hazırda bekletilecek.</value></data>
+  <data name="WhenDone_Countdown_Restart" xml:space="preserve"><value>Windows {0} sn içinde yeniden başlatılacak.</value></data>
+  <data name="WhenDone_Countdown_ShutDown" xml:space="preserve"><value>Windows {0} sn içinde kapanacak.</value></data>
+  <data name="WhenDone_Now_Quit" xml:space="preserve"><value>Şimdi çık</value></data>
+  <data name="WhenDone_Now_Sleep" xml:space="preserve"><value>Şimdi uyut</value></data>
+  <data name="WhenDone_Now_Hibernate" xml:space="preserve"><value>Şimdi hazırda beklet</value></data>
+  <data name="WhenDone_Now_Restart" xml:space="preserve"><value>Şimdi yeniden başlat</value></data>
+  <data name="WhenDone_Now_ShutDown" xml:space="preserve"><value>Şimdi kapat</value></data>
 </root>

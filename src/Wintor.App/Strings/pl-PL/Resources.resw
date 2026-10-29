@@ -316,4 +316,29 @@
   <data name="NoPlayer_Text" xml:space="preserve"><value>Domyślny odtwarzacz nie otworzy pliku, który jeszcze się pobiera. VLC lub mpv to potrafią: zainstaluj jeden z nich i ponownie kliknij Odtwórz albo wklej ten link w „Otwórz strumień sieciowy” odtwarzacza.</value></data>
   <data name="NoPlayer_LinkHeader" xml:space="preserve"><value>Link do strumienia</value></data>
   <data name="NoPlayer_Copy" xml:space="preserve"><value>Kopiuj link</value></data>
+  <data name="NavActionsItem.Content" xml:space="preserve"><value>Akcje</value></data>
+  <data name="WhenDone_Menu" xml:space="preserve"><value>Po zakończeniu</value></data>
+  <data name="WhenDone_Off" xml:space="preserve"><value>Wyłączone</value></data>
+  <data name="WhenDone_Quit_Downloads" xml:space="preserve"><value>Zamknij Wintor po zakończeniu pobierania</value></data>
+  <data name="WhenDone_Quit_All" xml:space="preserve"><value>Zamknij Wintor po zakończeniu pobierania i seedowania</value></data>
+  <data name="WhenDone_Sleep_Downloads" xml:space="preserve"><value>Uśpij po zakończeniu pobierania</value></data>
+  <data name="WhenDone_Sleep_All" xml:space="preserve"><value>Uśpij po zakończeniu pobierania i seedowania</value></data>
+  <data name="WhenDone_Hibernate_Downloads" xml:space="preserve"><value>Hibernuj po zakończeniu pobierania</value></data>
+  <data name="WhenDone_Hibernate_All" xml:space="preserve"><value>Hibernuj po zakończeniu pobierania i seedowania</value></data>
+  <data name="WhenDone_Restart_Downloads" xml:space="preserve"><value>Uruchom ponownie po zakończeniu pobierania</value></data>
+  <data name="WhenDone_Restart_All" xml:space="preserve"><value>Uruchom ponownie po zakończeniu pobierania i seedowania</value></data>
+  <data name="WhenDone_ShutDown_Downloads" xml:space="preserve"><value>Wyłącz po zakończeniu pobierania</value></data>
+  <data name="WhenDone_ShutDown_All" xml:space="preserve"><value>Wyłącz po zakończeniu pobierania i seedowania</value></data>
+  <data name="WhenDone_Title_Downloads" xml:space="preserve"><value>Pobieranie zakończone</value></data>
+  <data name="WhenDone_Title_All" xml:space="preserve"><value>Pobieranie i seedowanie zakończone</value></data>
+  <data name="WhenDone_Countdown_Quit" xml:space="preserve"><value>Wintor zostanie zamknięty za {0} s.</value></data>
+  <data name="WhenDone_Countdown_Sleep" xml:space="preserve"><value>Komputer zostanie uśpiony za {0} s.</value></data>
+  <data name="WhenDone_Countdown_Hibernate" xml:space="preserve"><value>Komputer przejdzie w hibernację za {0} s.</value></data>
+  <data name="WhenDone_Countdown_Restart" xml:space="preserve"><value>Windows uruchomi się ponownie za {0} s.</value></data>
+  <data name="WhenDone_Countdown_ShutDown" xml:space="preserve"><value>Windows zostanie wyłączony za {0} s.</value></data>
+  <data name="WhenDone_Now_Quit" xml:space="preserve"><value>Zamknij teraz</value></data>
+  <data name="WhenDone_Now_Sleep" xml:space="preserve"><value>Uśpij teraz</value></data>
+  <data name="WhenDone_Now_Hibernate" xml:space="preserve"><value>Hibernuj teraz</value></data>
+  <data name="WhenDone_Now_Restart" xml:space="preserve"><value>Uruchom ponownie teraz</value></data>
+  <data name="WhenDone_Now_ShutDown" xml:space="preserve"><value>Wyłącz teraz</value></data>
 </root>

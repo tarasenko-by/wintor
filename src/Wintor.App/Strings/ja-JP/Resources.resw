@@ -316,4 +316,29 @@
   <data name="NoPlayer_Text" xml:space="preserve"><value>既定のプレーヤーはダウンロード中のファイルを開けません。VLC や mpv なら開けます。いずれかをインストールしてもう一度 [再生] を押すか、プレーヤーの「ネットワーク ストリームを開く」にこのリンクを貼り付けてください。</value></data>
   <data name="NoPlayer_LinkHeader" xml:space="preserve"><value>ストリームのリンク</value></data>
   <data name="NoPlayer_Copy" xml:space="preserve"><value>リンクをコピー</value></data>
+  <data name="NavActionsItem.Content" xml:space="preserve"><value>操作</value></data>
+  <data name="WhenDone_Menu" xml:space="preserve"><value>完了時</value></data>
+  <data name="WhenDone_Off" xml:space="preserve"><value>オフ</value></data>
+  <data name="WhenDone_Quit_Downloads" xml:space="preserve"><value>ダウンロード完了後に Wintor を終了</value></data>
+  <data name="WhenDone_Quit_All" xml:space="preserve"><value>ダウンロードとシード完了後に Wintor を終了</value></data>
+  <data name="WhenDone_Sleep_Downloads" xml:space="preserve"><value>ダウンロード完了後にスリープ</value></data>
+  <data name="WhenDone_Sleep_All" xml:space="preserve"><value>ダウンロードとシード完了後にスリープ</value></data>
+  <data name="WhenDone_Hibernate_Downloads" xml:space="preserve"><value>ダウンロード完了後に休止状態</value></data>
+  <data name="WhenDone_Hibernate_All" xml:space="preserve"><value>ダウンロードとシード完了後に休止状態</value></data>
+  <data name="WhenDone_Restart_Downloads" xml:space="preserve"><value>ダウンロード完了後に再起動</value></data>
+  <data name="WhenDone_Restart_All" xml:space="preserve"><value>ダウンロードとシード完了後に再起動</value></data>
+  <data name="WhenDone_ShutDown_Downloads" xml:space="preserve"><value>ダウンロード完了後にシャットダウン</value></data>
+  <data name="WhenDone_ShutDown_All" xml:space="preserve"><value>ダウンロードとシード完了後にシャットダウン</value></data>
+  <data name="WhenDone_Title_Downloads" xml:space="preserve"><value>ダウンロードが完了しました</value></data>
+  <data name="WhenDone_Title_All" xml:space="preserve"><value>ダウンロードとシードが完了しました</value></data>
+  <data name="WhenDone_Countdown_Quit" xml:space="preserve"><value>{0} 秒後に Wintor を終了します。</value></data>
+  <data name="WhenDone_Countdown_Sleep" xml:space="preserve"><value>{0} 秒後にスリープします。</value></data>
+  <data name="WhenDone_Countdown_Hibernate" xml:space="preserve"><value>{0} 秒後に休止状態にします。</value></data>
+  <data name="WhenDone_Countdown_Restart" xml:space="preserve"><value>{0} 秒後に Windows を再起動します。</value></data>
+  <data name="WhenDone_Countdown_ShutDown" xml:space="preserve"><value>{0} 秒後に Windows をシャットダウンします。</value></data>
+  <data name="WhenDone_Now_Quit" xml:space="preserve"><value>今すぐ終了</value></data>
+  <data name="WhenDone_Now_Sleep" xml:space="preserve"><value>今すぐスリープ</value></data>
+  <data name="WhenDone_Now_Hibernate" xml:space="preserve"><value>今すぐ休止状態</value></data>
+  <data name="WhenDone_Now_Restart" xml:space="preserve"><value>今すぐ再起動</value></data>
+  <data name="WhenDone_Now_ShutDown" xml:space="preserve"><value>今すぐシャットダウン</value></data>
 </root>
