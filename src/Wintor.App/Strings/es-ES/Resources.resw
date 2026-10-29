@@ -172,6 +172,11 @@
   <data name="TrayCard.Header" xml:space="preserve"><value>Seguir en ejecución al cerrar la ventana</value></data>
   <data name="TrayCard.Description" xml:space="preserve"><value>Wintor sigue compartiendo desde el área de notificaciones. Sal desde el menú de su icono.</value></data>
   <data name="TraySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Seguir en ejecución al cerrar la ventana</value></data>
+  <data name="TrayIconCard.Header" xml:space="preserve"><value>Icono del área de notificación</value></data>
+  <data name="TrayIconCard.Description" xml:space="preserve"><value>En color, o monocromo como los iconos de Windows de al lado.</value></data>
+  <data name="TrayIconBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Icono del área de notificación</value></data>
+  <data name="TrayIconColor.Content" xml:space="preserve"><value>Color</value></data>
+  <data name="TrayIconMonochrome.Content" xml:space="preserve"><value>Monocromo</value></data>
   <data name="IconsCard.Header" xml:space="preserve"><value>Iconos</value></data>
   <data name="IconsCard.Description" xml:space="preserve"><value>Conjunto gratuito de Hugeicons (MIT)</value></data>
   <data name="Tray_Open" xml:space="preserve"><value>Abrir Wintor</value></data>

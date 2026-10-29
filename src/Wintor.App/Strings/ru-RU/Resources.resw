@@ -172,6 +172,11 @@
   <data name="TrayCard.Header" xml:space="preserve"><value>Не закрываться вместе с окном</value></data>
   <data name="TrayCard.Description" xml:space="preserve"><value>Wintor продолжает раздавать из области уведомлений. Выйти можно из меню значка.</value></data>
   <data name="TraySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Не закрываться вместе с окном</value></data>
+  <data name="TrayIconCard.Header" xml:space="preserve"><value>Значок в области уведомлений</value></data>
+  <data name="TrayIconCard.Description" xml:space="preserve"><value>Цветной или монохромный, как значки Windows рядом с ним.</value></data>
+  <data name="TrayIconBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Значок в области уведомлений</value></data>
+  <data name="TrayIconColor.Content" xml:space="preserve"><value>Цветной</value></data>
+  <data name="TrayIconMonochrome.Content" xml:space="preserve"><value>Монохромный</value></data>
   <data name="IconsCard.Header" xml:space="preserve"><value>Иконки</value></data>
   <data name="IconsCard.Description" xml:space="preserve"><value>Бесплатный набор Hugeicons (MIT)</value></data>
   <data name="Tray_Open" xml:space="preserve"><value>Открыть Wintor</value></data>

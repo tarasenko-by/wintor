@@ -172,6 +172,11 @@
   <data name="TrayCard.Header" xml:space="preserve"><value>ウィンドウを閉じても実行を続ける</value></data>
   <data name="TrayCard.Description" xml:space="preserve"><value>Wintor は通知領域でシードを続けます。終了するには、そこにあるアイコンのメニューを使用してください。</value></data>
   <data name="TraySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>ウィンドウを閉じても実行を続ける</value></data>
+  <data name="TrayIconCard.Header" xml:space="preserve"><value>通知領域のアイコン</value></data>
+  <data name="TrayIconCard.Description" xml:space="preserve"><value>カラー、または隣にある Windows のアイコンのようなモノクロ。</value></data>
+  <data name="TrayIconBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>通知領域のアイコン</value></data>
+  <data name="TrayIconColor.Content" xml:space="preserve"><value>カラー</value></data>
+  <data name="TrayIconMonochrome.Content" xml:space="preserve"><value>モノクロ</value></data>
   <data name="IconsCard.Header" xml:space="preserve"><value>アイコン</value></data>
   <data name="IconsCard.Description" xml:space="preserve"><value>Hugeicons 無料セット (MIT)</value></data>
   <data name="Tray_Open" xml:space="preserve"><value>Wintor を開く</value></data>

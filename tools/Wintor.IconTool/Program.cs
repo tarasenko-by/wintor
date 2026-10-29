@@ -139,15 +139,10 @@ void Preview(string pngPath)
 void Logo()
 {
     string assets = Path.Combine(root, "src", "Wintor.App", "Assets");
-    XDocument arrow = XDocument.Load(Path.Combine(iconsDir, "download-01.svg"));
-    // A slightly heavier stroke than the 1.5 of the UI icons reads better at tile sizes.
-    foreach (XElement e in arrow.Root!.Descendants())
-    {
-        e.SetAttributeValue("stroke-width", "2");
-    }
-
-    using SKPath glyph = SKPath.ParseSvgPathData(Outline(arrow)[3..]);
-    glyph.FillType = SKPathFillType.EvenOdd;
+    // A slightly heavier stroke than the 1.5 of the UI icons reads better on the tile. The tray keeps 1.5:
+    // one pixel at 16 px, as thin as the Windows icons next to it.
+    using SKPath glyph = Glyph("download-01", 2);
+    using SKPath trayGlyph = Glyph("download-circle-01", 1.5f);
 
     (string File, int Width, int Height, float TileShare)[] targets =
     [
@@ -166,33 +161,68 @@ void Logo()
         Console.WriteLine($"logo -> Assets/{file}");
     }
 
+    WriteIco("AppIcon.ico", [16, 20, 24, 32, 40, 48, 64, 256], s => Render(s, s, 1f));
+
+    // The monochrome tray icon: an arrow in a circle, line-drawn like the Windows icons next to it, in the taskbar's text color.
+    // "Light" is for a light taskbar (a dark arrow), "Dark" for a dark one. Sizes cover the tray from 100 to 300%.
+    int[] traySizes = [16, 20, 24, 32, 40, 48];
+    WriteIco("TrayIconLight.ico", traySizes, s => RenderGlyph(s, new SKColor(0, 0, 0, 0xE4)));
+    WriteIco("TrayIconDark.ico", traySizes, s => RenderGlyph(s, SKColors.White));
+
     // ICO with PNG entries (supported since Windows Vista).
-    int[] sizes = [16, 20, 24, 32, 40, 48, 64, 256];
-    byte[][] images = sizes.Select(s => Render(s, s, 1f)).ToArray();
-    using var ico = new BinaryWriter(File.Create(Path.Combine(assets, "AppIcon.ico")));
-    ico.Write((short)0);
-    ico.Write((short)1);
-    ico.Write((short)sizes.Length);
-    int offset = 6 + 16 * sizes.Length;
-    for (int i = 0; i < sizes.Length; i++)
+    void WriteIco(string file, int[] sizes, Func<int, byte[]> render)
     {
-        ico.Write((byte)(sizes[i] >= 256 ? 0 : sizes[i]));
-        ico.Write((byte)(sizes[i] >= 256 ? 0 : sizes[i]));
-        ico.Write((byte)0);
-        ico.Write((byte)0);
+        byte[][] images = sizes.Select(render).ToArray();
+        using var ico = new BinaryWriter(File.Create(Path.Combine(assets, file)));
+        ico.Write((short)0);
         ico.Write((short)1);
-        ico.Write((short)32);
-        ico.Write(images[i].Length);
-        ico.Write(offset);
-        offset += images[i].Length;
+        ico.Write((short)sizes.Length);
+        int offset = 6 + 16 * sizes.Length;
+        for (int i = 0; i < sizes.Length; i++)
+        {
+            ico.Write((byte)(sizes[i] >= 256 ? 0 : sizes[i]));
+            ico.Write((byte)(sizes[i] >= 256 ? 0 : sizes[i]));
+            ico.Write((byte)0);
+            ico.Write((byte)0);
+            ico.Write((short)1);
+            ico.Write((short)32);
+            ico.Write(images[i].Length);
+            ico.Write(offset);
+            offset += images[i].Length;
+        }
+
+        foreach (byte[] image in images)
+        {
+            ico.Write(image);
+        }
+
+        Console.WriteLine($"logo -> Assets/{file}");
     }
 
-    foreach (byte[] image in images)
+    byte[] RenderGlyph(int size, SKColor color)
     {
-        ico.Write(image);
+        using var surface = SKSurface.Create(new SKImageInfo(size, size, SKColorType.Rgba8888, SKAlphaType.Premul));
+        surface.Canvas.Clear(SKColors.Transparent);
+        surface.Canvas.Scale(size / 24f);
+        using var paint = new SKPaint { IsAntialias = true, Color = color };
+        surface.Canvas.DrawPath(trayGlyph, paint);
+        using SKData png = surface.Snapshot().Encode(SKEncodedImageFormat.Png, 100);
+        return png.ToArray();
     }
 
-    Console.WriteLine("logo -> Assets/AppIcon.ico");
+    SKPath Glyph(string name, float strokeWidth)
+    {
+        XDocument svg = XDocument.Load(Path.Combine(iconsDir, name + ".svg"));
+        foreach (XElement e in svg.Root!.Descendants())
+        {
+            e.SetAttributeValue("stroke-width", strokeWidth.ToString(CultureInfo.InvariantCulture));
+        }
+
+        string outline = Outline(svg);
+        SKPath path = SKPath.ParseSvgPathData(outline[3..]);
+        path.FillType = outline.StartsWith("F0") ? SKPathFillType.EvenOdd : SKPathFillType.Winding;
+        return path;
+    }
 
     byte[] Render(int width, int height, float share)
     {

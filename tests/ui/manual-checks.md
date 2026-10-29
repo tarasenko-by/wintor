@@ -33,6 +33,10 @@ while testing; tick them off after a look by hand. Newest on top.
 - [ ] **Tray** — close the window: Wintor stays in the notification area, a one-time "still running"
       notification appears; left-click the icon brings the window back; right-click menu: Open, Resume all,
       Pause all, Exit (Exit really quits). Settings → "Keep running when the window is closed" off: closing quits.
+- [ ] **Tray icon style** — Settings → "Notification area icon" → Monochrome: the tray shows a line-drawn arrow in a circle at once,
+      white on a dark taskbar, dark on a light one; switch Windows "Choose your mode" between Light and Dark (and a
+      contrast theme on and off): the arrow follows without a restart. Color brings the logo back. Check at 100% and
+      150% display scale: the arrow is sharp, not blurry.
 - [ ] **"Download finished" notification** — when a torrent completes, the notification shows its name;
       "Open folder" opens Explorer on it; clicking the body brings the window back (also when Wintor was hidden).
 - [ ] **.torrent double-click / magnet in a browser** — pick Wintor as the default app for `.torrent` and

@@ -181,6 +181,17 @@ public sealed partial class MainWindow : Window
         Activate();
     }
 
+    /// <summary>Applies the tray icon setting; the monochrome one also follows the taskbar's light or dark mode.</summary>
+    public void UpdateTrayIcon() => _tray?.SetIcon(TrayIconPath());
+
+    private string TrayIconPath()
+    {
+        string file = _settings.TrayIcon != TrayIconStyle.Monochrome ? "AppIcon.ico"
+            : TrayIcon.TaskbarIsLight ? "TrayIconLight.ico"
+            : "TrayIconDark.ico";
+        return Path.Combine(AppContext.BaseDirectory, "Assets", file);
+    }
+
     /// <summary>For x:Bind in the side pane (counts).</summary>
     public TorrentsViewModel Torrents => _torrents;
 
@@ -569,7 +580,7 @@ public sealed partial class MainWindow : Window
     {
         try
         {
-            _tray = new TrayIcon(Path.Combine(AppContext.BaseDirectory, "Assets", "AppIcon.ico"), "Wintor");
+            _tray = new TrayIcon(TrayIconPath(), "Wintor");
         }
         catch (Exception)
         {
@@ -584,6 +595,7 @@ public sealed partial class MainWindow : Window
         _tray.MenuItems.Add((Strings.Get("Tray_Exit"), Exit));
         _tray.Activated += ShowAndActivate;
         _tray.SessionEnding += Exit;
+        _tray.SystemThemeChanged += UpdateTrayIcon;
         _torrents.PropertyChanged += (_, e) =>
         {
             if (e.PropertyName == nameof(TorrentsViewModel.TotalSpeedText))

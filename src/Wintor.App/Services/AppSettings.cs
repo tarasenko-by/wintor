@@ -15,6 +15,13 @@ public enum WindowBackdrop
     AcrylicThin,
 }
 
+/// <summary>The notification-area icon: the color logo (the default), or a monochrome arrow like the Windows icons.</summary>
+public enum TrayIconStyle
+{
+    Color,
+    Monochrome,
+}
+
 /// <summary>
 /// The window's restored bounds in screen pixels, and whether it was maximized: the next launch opens it where the
 /// user left it.
@@ -45,6 +52,8 @@ public sealed class AppSettings
 
     /// <summary>Closing the window keeps Wintor seeding in the notification area.</summary>
     public bool CloseToTray { get; set; } = true;
+
+    public TrayIconStyle TrayIcon { get; set; } = TrayIconStyle.Color;
 
     public bool NotifyWhenComplete { get; set; } = true;
 

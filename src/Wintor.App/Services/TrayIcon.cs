@@ -12,6 +12,8 @@ internal sealed partial class TrayIcon : IDisposable
     private const uint WM_NULL = 0x0000;
     private const uint WM_CONTEXTMENU = 0x007B;
     private const uint WM_ENDSESSION = 0x0016;
+    private const uint WM_SYSCOLORCHANGE = 0x0015;
+    private const uint WM_SETTINGCHANGE = 0x001A;
     private const uint WM_APP_TRAY = 0x8001;
     private const uint WM_TIMER = 0x0113;
     private const uint RetryEveryMs = 2000;
@@ -24,11 +26,14 @@ internal sealed partial class TrayIcon : IDisposable
     private const uint TPM_RIGHTBUTTON = 0x2, TPM_RETURNCMD = 0x100, TPM_BOTTOMALIGN = 0x20;
     private const uint IMAGE_ICON = 1, LR_LOADFROMFILE = 0x10;
     private const int SM_CXSMICON = 49, SM_CYSMICON = 50;
+    private const uint SPI_GETHIGHCONTRAST = 0x0042, HCF_HIGHCONTRASTON = 0x1;
+    private const int COLOR_WINDOW = 5;
     private static readonly UIntPtr RetryTimer = 1;
 
     private readonly WndProc _wndProc; // kept alive: native code holds a pointer to it
     private readonly IntPtr _hwnd;
-    private readonly IntPtr _icon;
+    private IntPtr _icon;
+    private string _iconPath;
     private readonly uint _taskbarCreatedMessage;
     private string _tooltip;
     private bool _disposed;
@@ -36,6 +41,7 @@ internal sealed partial class TrayIcon : IDisposable
     public TrayIcon(string iconPath, string tooltip)
     {
         _tooltip = tooltip;
+        _iconPath = iconPath;
         _wndProc = OnWindowMessage;
 
         var wc = new WNDCLASSEXW
@@ -51,7 +57,7 @@ internal sealed partial class TrayIcon : IDisposable
         // "TaskbarCreated" broadcast and can re-add the icon after Explorer restarts.
         _hwnd = CreateWindowExW(0, WindowClassName, "", 0, 0, 0, 0, 0, IntPtr.Zero, IntPtr.Zero, wc.hInstance, IntPtr.Zero);
         _taskbarCreatedMessage = RegisterWindowMessageW("TaskbarCreated");
-        _icon = LoadImageW(IntPtr.Zero, iconPath, IMAGE_ICON, GetSystemMetrics(SM_CXSMICON), GetSystemMetrics(SM_CYSMICON), LR_LOADFROMFILE);
+        _icon = LoadIcon(iconPath);
 
         AddIcon();
     }
@@ -68,6 +74,29 @@ internal sealed partial class TrayIcon : IDisposable
     /// <summary>Windows is ending the session or replacing the package: the app must exit now, not hide.</summary>
     public event Action? SessionEnding;
 
+    /// <summary>The Windows mode or the system colors changed: <see cref="TaskbarIsLight"/> may say otherwise now.</summary>
+    public event Action? SystemThemeChanged;
+
+    /// <summary>
+    /// The taskbar is light, so a monochrome icon has to be dark. It follows the Windows mode ("Choose your mode"),
+    /// not the app's theme; in high contrast, the window color of the contrast theme.
+    /// </summary>
+    public static bool TaskbarIsLight
+    {
+        get
+        {
+            var contrast = new HIGHCONTRASTW { cbSize = (uint)Marshal.SizeOf<HIGHCONTRASTW>() };
+            if (SystemParametersInfoW(SPI_GETHIGHCONTRAST, contrast.cbSize, ref contrast, 0) && (contrast.dwFlags & HCF_HIGHCONTRASTON) != 0)
+            {
+                uint c = GetSysColor(COLOR_WINDOW); // 0x00BBGGRR
+                return (c & 0xFF) * 299 + ((c >> 8) & 0xFF) * 587 + ((c >> 16) & 0xFF) * 114 > 128_000;
+            }
+
+            using var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize");
+            return key?.GetValue("SystemUsesLightTheme") is int light && light != 0;
+        }
+    }
+
     /// <summary>Context menu entries; a null text is a separator. The first entry is shown in bold.</summary>
     public List<(string? Text, Action? Action)> MenuItems { get; } = [];
 
@@ -81,6 +110,24 @@ internal sealed partial class TrayIcon : IDisposable
         _tooltip = tooltip;
         var data = NewData(NIF_TIP | NIF_SHOWTIP);
         Shell_NotifyIconW(NIM_MODIFY, ref data);
+    }
+
+    public void SetIcon(string iconPath)
+    {
+        if (iconPath == _iconPath)
+        {
+            return;
+        }
+
+        _iconPath = iconPath;
+        IntPtr old = _icon;
+        _icon = LoadIcon(iconPath);
+        var data = NewData(NIF_ICON);
+        Shell_NotifyIconW(NIM_MODIFY, ref data);
+        if (old != IntPtr.Zero)
+        {
+            DestroyIcon(old);
+        }
     }
 
     public void Dispose()
@@ -102,6 +149,9 @@ internal sealed partial class TrayIcon : IDisposable
         DestroyWindow(_hwnd);
         UnregisterClassW(WindowClassName, GetModuleHandleW(null));
     }
+
+    private static IntPtr LoadIcon(string path) =>
+        LoadImageW(IntPtr.Zero, path, IMAGE_ICON, GetSystemMetrics(SM_CXSMICON), GetSystemMetrics(SM_CYSMICON), LR_LOADFROMFILE);
 
     private void AddIcon()
     {
@@ -173,6 +223,14 @@ internal sealed partial class TrayIcon : IDisposable
             }
 
             return IntPtr.Zero;
+        }
+
+        // Broadcast to every top-level window, hidden ones too: switching the Windows mode sends "ImmersiveColorSet",
+        // a high-contrast theme also changes the system colors.
+        if (msg is WM_SETTINGCHANGE or WM_SYSCOLORCHANGE)
+        {
+            SystemThemeChanged?.Invoke();
+            return DefWindowProcW(hwnd, msg, wParam, lParam);
         }
 
         if ((msg == _taskbarCreatedMessage && _taskbarCreatedMessage != 0) || (msg == WM_TIMER && wParam == (IntPtr)RetryTimer))
@@ -253,6 +311,14 @@ internal sealed partial class TrayIcon : IDisposable
         public IntPtr hBalloonIcon;
     }
 
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+    private struct HIGHCONTRASTW
+    {
+        public uint cbSize;
+        public uint dwFlags;
+        public IntPtr lpszDefaultScheme;
+    }
+
     [DllImport("user32.dll", CharSet = CharSet.Unicode)] private static extern ushort RegisterClassExW(ref WNDCLASSEXW wc);
     [DllImport("user32.dll", CharSet = CharSet.Unicode)] private static extern IntPtr CreateWindowExW(uint exStyle, string className, string windowName, uint style, int x, int y, int w, int h, IntPtr parent, IntPtr menu, IntPtr instance, IntPtr param);
     [DllImport("user32.dll", CharSet = CharSet.Unicode)] private static extern bool UnregisterClassW(string className, IntPtr instance);
@@ -266,6 +332,8 @@ internal sealed partial class TrayIcon : IDisposable
     [DllImport("user32.dll", CharSet = CharSet.Unicode)] private static extern IntPtr LoadImageW(IntPtr instance, string name, uint type, int cx, int cy, uint load);
     [DllImport("user32.dll")] private static extern bool DestroyIcon(IntPtr icon);
     [DllImport("user32.dll")] private static extern int GetSystemMetrics(int index);
+    [DllImport("user32.dll")] private static extern uint GetSysColor(int index);
+    [DllImport("user32.dll")] private static extern bool SystemParametersInfoW(uint action, uint param, ref HIGHCONTRASTW value, uint winIni);
     [DllImport("user32.dll")] private static extern IntPtr CreatePopupMenu();
     [DllImport("user32.dll", CharSet = CharSet.Unicode)] private static extern bool AppendMenuW(IntPtr menu, uint flags, UIntPtr id, string? text);
     [DllImport("user32.dll")] private static extern bool SetMenuDefaultItem(IntPtr menu, uint item, uint byPosition);

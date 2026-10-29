@@ -32,6 +32,7 @@ public partial class SettingsViewModel : ObservableObject
         MaxUploadKiB = settings.MaxUploadKiB;
         ListenPort = settings.ListenPort;
         CloseToTray = settings.CloseToTray;
+        TrayIconIndex = (int)settings.TrayIcon;
         NotifyWhenComplete = settings.NotifyWhenComplete;
         ShowWhatsNewAfterUpdates = settings.ShowWhatsNew;
         LanguageNames = LanguageTags.Select(t => t.Length == 0 ? Strings.Get("LanguageSystem") : NativeName(t)).ToList();
@@ -72,6 +73,10 @@ public partial class SettingsViewModel : ObservableObject
 
     [ObservableProperty]
     public partial bool CloseToTray { get; set; }
+
+    /// <summary>Index of <see cref="TrayIconStyle"/>.</summary>
+    [ObservableProperty]
+    public partial int TrayIconIndex { get; set; }
 
     [ObservableProperty]
     public partial bool NotifyWhenComplete { get; set; }
@@ -180,6 +185,15 @@ public partial class SettingsViewModel : ObservableObject
     }
 
     partial void OnCloseToTrayChanged(bool value) => Save(s => s.CloseToTray = value);
+
+    partial void OnTrayIconIndexChanged(int value)
+    {
+        Save(s => s.TrayIcon = (TrayIconStyle)Math.Clamp(value, 0, (int)TrayIconStyle.Monochrome));
+        if (!_loading)
+        {
+            App.Window.UpdateTrayIcon();
+        }
+    }
 
     partial void OnNotifyWhenCompleteChanged(bool value) => Save(s => s.NotifyWhenComplete = value);
 

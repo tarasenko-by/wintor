@@ -172,6 +172,11 @@
   <data name="TrayCard.Header" xml:space="preserve"><value>Не закриватися разом із вікном</value></data>
   <data name="TrayCard.Description" xml:space="preserve"><value>Wintor продовжує роздачу з області сповіщень. Вийти можна з меню значка.</value></data>
   <data name="TraySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Не закриватися разом із вікном</value></data>
+  <data name="TrayIconCard.Header" xml:space="preserve"><value>Значок в області сповіщень</value></data>
+  <data name="TrayIconCard.Description" xml:space="preserve"><value>Кольоровий або монохромний, як значки Windows поруч із ним.</value></data>
+  <data name="TrayIconBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Значок в області сповіщень</value></data>
+  <data name="TrayIconColor.Content" xml:space="preserve"><value>Кольоровий</value></data>
+  <data name="TrayIconMonochrome.Content" xml:space="preserve"><value>Монохромний</value></data>
   <data name="IconsCard.Header" xml:space="preserve"><value>Піктограми</value></data>
   <data name="IconsCard.Description" xml:space="preserve"><value>Безкоштовний набір Hugeicons (MIT)</value></data>
   <data name="Tray_Open" xml:space="preserve"><value>Відкрити Wintor</value></data>

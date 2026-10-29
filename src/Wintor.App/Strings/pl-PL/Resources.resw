@@ -172,6 +172,11 @@
   <data name="TrayCard.Header" xml:space="preserve"><value>Działaj po zamknięciu okna</value></data>
   <data name="TrayCard.Description" xml:space="preserve"><value>Wintor nadal seeduje z obszaru powiadomień. Zamknij go z menu ikony.</value></data>
   <data name="TraySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Działaj po zamknięciu okna</value></data>
+  <data name="TrayIconCard.Header" xml:space="preserve"><value>Ikona w obszarze powiadomień</value></data>
+  <data name="TrayIconCard.Description" xml:space="preserve"><value>Kolorowa lub monochromatyczna, jak sąsiednie ikony Windows.</value></data>
+  <data name="TrayIconBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Ikona w obszarze powiadomień</value></data>
+  <data name="TrayIconColor.Content" xml:space="preserve"><value>Kolorowa</value></data>
+  <data name="TrayIconMonochrome.Content" xml:space="preserve"><value>Monochromatyczna</value></data>
   <data name="IconsCard.Header" xml:space="preserve"><value>Ikony</value></data>
   <data name="IconsCard.Description" xml:space="preserve"><value>Bezpłatny zestaw Hugeicons (MIT)</value></data>
   <data name="Tray_Open" xml:space="preserve"><value>Otwórz Wintor</value></data>

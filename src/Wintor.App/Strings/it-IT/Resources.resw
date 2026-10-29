@@ -172,6 +172,11 @@
   <data name="TrayCard.Header" xml:space="preserve"><value>Resta in esecuzione alla chiusura della finestra</value></data>
   <data name="TrayCard.Description" xml:space="preserve"><value>Wintor continua il seeding dall’area di notifica. Per uscire usa il menu della sua icona.</value></data>
   <data name="TraySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Resta in esecuzione alla chiusura della finestra</value></data>
+  <data name="TrayIconCard.Header" xml:space="preserve"><value>Icona nell’area di notifica</value></data>
+  <data name="TrayIconCard.Description" xml:space="preserve"><value>A colori, o monocromatica come le icone di Windows accanto.</value></data>
+  <data name="TrayIconBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Icona nell’area di notifica</value></data>
+  <data name="TrayIconColor.Content" xml:space="preserve"><value>A colori</value></data>
+  <data name="TrayIconMonochrome.Content" xml:space="preserve"><value>Monocromatica</value></data>
   <data name="IconsCard.Header" xml:space="preserve"><value>Icone</value></data>
   <data name="IconsCard.Description" xml:space="preserve"><value>Set gratuito di Hugeicons (MIT)</value></data>
   <data name="Tray_Open" xml:space="preserve"><value>Apri Wintor</value></data>

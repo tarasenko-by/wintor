@@ -172,6 +172,11 @@
   <data name="TrayCard.Header" xml:space="preserve"><value>Continuer en arrière-plan à la fermeture de la fenêtre</value></data>
   <data name="TrayCard.Description" xml:space="preserve"><value>Wintor continue le partage depuis la zone de notification. Quittez via le menu de son icône.</value></data>
   <data name="TraySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Continuer en arrière-plan à la fermeture de la fenêtre</value></data>
+  <data name="TrayIconCard.Header" xml:space="preserve"><value>Icône de la zone de notification</value></data>
+  <data name="TrayIconCard.Description" xml:space="preserve"><value>En couleur, ou monochrome comme les icônes Windows à côté.</value></data>
+  <data name="TrayIconBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Icône de la zone de notification</value></data>
+  <data name="TrayIconColor.Content" xml:space="preserve"><value>Couleur</value></data>
+  <data name="TrayIconMonochrome.Content" xml:space="preserve"><value>Monochrome</value></data>
   <data name="IconsCard.Header" xml:space="preserve"><value>Icônes</value></data>
   <data name="IconsCard.Description" xml:space="preserve"><value>Jeu gratuit Hugeicons (MIT)</value></data>
   <data name="Tray_Open" xml:space="preserve"><value>Ouvrir Wintor</value></data>

@@ -172,6 +172,11 @@
   <data name="TrayCard.Header" xml:space="preserve"><value>Pencere kapatılınca çalışmaya devam et</value></data>
   <data name="TrayCard.Description" xml:space="preserve"><value>Wintor bildirim alanından paylaşmaya devam eder. Çıkmak için oradaki simgenin menüsünü kullanın.</value></data>
   <data name="TraySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Pencere kapatılınca çalışmaya devam et</value></data>
+  <data name="TrayIconCard.Header" xml:space="preserve"><value>Bildirim alanı simgesi</value></data>
+  <data name="TrayIconCard.Description" xml:space="preserve"><value>Renkli veya yanındaki Windows simgeleri gibi tek renkli.</value></data>
+  <data name="TrayIconBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Bildirim alanı simgesi</value></data>
+  <data name="TrayIconColor.Content" xml:space="preserve"><value>Renkli</value></data>
+  <data name="TrayIconMonochrome.Content" xml:space="preserve"><value>Tek renkli</value></data>
   <data name="IconsCard.Header" xml:space="preserve"><value>Simgeler</value></data>
   <data name="IconsCard.Description" xml:space="preserve"><value>Hugeicons ücretsiz seti (MIT)</value></data>
   <data name="Tray_Open" xml:space="preserve"><value>Wintor’u aç</value></data>

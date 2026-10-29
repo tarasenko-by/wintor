@@ -172,6 +172,11 @@
   <data name="TrayCard.Header" xml:space="preserve"><value>Beim Schließen des Fensters weiterlaufen</value></data>
   <data name="TrayCard.Description" xml:space="preserve"><value>Wintor führt das Seeding im Infobereich fort. Beenden Sie die App über das Menü des dortigen Symbols.</value></data>
   <data name="TraySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Beim Schließen des Fensters weiterlaufen</value></data>
+  <data name="TrayIconCard.Header" xml:space="preserve"><value>Symbol im Infobereich</value></data>
+  <data name="TrayIconCard.Description" xml:space="preserve"><value>Farbig oder einfarbig wie die Windows-Symbole daneben.</value></data>
+  <data name="TrayIconBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Symbol im Infobereich</value></data>
+  <data name="TrayIconColor.Content" xml:space="preserve"><value>Farbig</value></data>
+  <data name="TrayIconMonochrome.Content" xml:space="preserve"><value>Einfarbig</value></data>
   <data name="IconsCard.Header" xml:space="preserve"><value>Symbole</value></data>
   <data name="IconsCard.Description" xml:space="preserve"><value>Hugeicons, kostenloses Set (MIT)</value></data>
   <data name="Tray_Open" xml:space="preserve"><value>Wintor öffnen</value></data>

@@ -307,7 +307,7 @@ try {
         Invoke-Ui @('wait-for', 'SettingsNothingFound', '--gone', '-t', '3000') -Window $hwnd | Out-Null
     }
     Test-UI 'Settings has appearance, speed, connection and Windows sections' {
-        foreach ($id in 'ThemeBox', 'BackdropBox', 'NotifySwitch', 'DownloadLimitBox', 'UploadLimitBox', 'PortBox', 'StartupSwitch', 'TraySwitch') {
+        foreach ($id in 'ThemeBox', 'BackdropBox', 'NotifySwitch', 'DownloadLimitBox', 'UploadLimitBox', 'PortBox', 'StartupSwitch', 'TraySwitch', 'TrayIconBox') {
             Invoke-Ui @('wait-for', $id, '-t', '2000') | Out-Null
         }
     }

@@ -172,6 +172,11 @@
   <data name="TrayCard.Header" xml:space="preserve"><value>Keep running when the window is closed</value></data>
   <data name="TrayCard.Description" xml:space="preserve"><value>Wintor keeps seeding from the notification area. Quit from the icon’s menu there.</value></data>
   <data name="TraySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Keep running when the window is closed</value></data>
+  <data name="TrayIconCard.Header" xml:space="preserve"><value>Notification area icon</value></data>
+  <data name="TrayIconCard.Description" xml:space="preserve"><value>Color, or monochrome like the Windows icons next to it.</value></data>
+  <data name="TrayIconBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Notification area icon</value></data>
+  <data name="TrayIconColor.Content" xml:space="preserve"><value>Color</value></data>
+  <data name="TrayIconMonochrome.Content" xml:space="preserve"><value>Monochrome</value></data>
   <data name="IconsCard.Header" xml:space="preserve"><value>Icons</value></data>
   <data name="IconsCard.Description" xml:space="preserve"><value>Hugeicons free set (MIT)</value></data>
   <data name="Tray_Open" xml:space="preserve"><value>Open Wintor</value></data>

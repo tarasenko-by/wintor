@@ -172,6 +172,11 @@
   <data name="TrayCard.Header" xml:space="preserve"><value>关闭窗口后继续运行</value></data>
   <data name="TrayCard.Description" xml:space="preserve"><value>Wintor 会在通知区域继续做种。可从该处图标的菜单中退出。</value></data>
   <data name="TraySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>关闭窗口后继续运行</value></data>
+  <data name="TrayIconCard.Header" xml:space="preserve"><value>通知区域图标</value></data>
+  <data name="TrayIconCard.Description" xml:space="preserve"><value>彩色，或与旁边的 Windows 图标一样的单色。</value></data>
+  <data name="TrayIconBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>通知区域图标</value></data>
+  <data name="TrayIconColor.Content" xml:space="preserve"><value>彩色</value></data>
+  <data name="TrayIconMonochrome.Content" xml:space="preserve"><value>单色</value></data>
   <data name="IconsCard.Header" xml:space="preserve"><value>图标</value></data>
   <data name="IconsCard.Description" xml:space="preserve"><value>Hugeicons 免费图标集 (MIT)</value></data>
   <data name="Tray_Open" xml:space="preserve"><value>打开 Wintor</value></data>
