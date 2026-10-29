@@ -341,4 +341,7 @@
   <data name="WhenDone_Now_Hibernate" xml:space="preserve"><value>Veille prolongée</value></data>
   <data name="WhenDone_Now_Restart" xml:space="preserve"><value>Redémarrer maintenant</value></data>
   <data name="WhenDone_Now_ShutDown" xml:space="preserve"><value>Arrêter maintenant</value></data>
+  <data name="WhatsNew_030_Play" xml:space="preserve"><value>Lisez vidéos et musique pendant le téléchargement, dans votre propre lecteur.</value></data>
+  <data name="WhatsNew_030_Order" xml:space="preserve"><value>Ordre de téléchargement : du début à la fin, ou d'abord les premières et dernières parties.</value></data>
+  <data name="WhatsNew_030_WhenDone" xml:space="preserve"><value>Actions → Une fois terminé : quitter Wintor, ou mettre le PC en veille ou en veille prolongée, le redémarrer ou l'arrêter à la fin des téléchargements.</value></data>
 </root>

@@ -15,7 +15,7 @@
   <Identity
     Name="SiarheiTarasenka.Wintor-TorrentClient"
     Publisher="CN=80472E69-09D4-42FB-AC2D-A07586A834F7"
-    Version="0.2.0.0" />
+    Version="0.3.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="F28EBC3D-BBCD-4C21-9760-297D0F2BBA80" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

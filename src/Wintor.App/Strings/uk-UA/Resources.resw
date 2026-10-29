@@ -341,4 +341,7 @@
   <data name="WhenDone_Now_Hibernate" xml:space="preserve"><value>Гібернація зараз</value></data>
   <data name="WhenDone_Now_Restart" xml:space="preserve"><value>Перезавантажити зараз</value></data>
   <data name="WhenDone_Now_ShutDown" xml:space="preserve"><value>Вимкнути зараз</value></data>
+  <data name="WhatsNew_030_Play" xml:space="preserve"><value>Відео й музику можна ввімкнути просто під час завантаження, у своєму плеєрі.</value></data>
+  <data name="WhatsNew_030_Order" xml:space="preserve"><value>Порядок завантаження: від початку до кінця або спершу перші й останні частини.</value></data>
+  <data name="WhatsNew_030_WhenDone" xml:space="preserve"><value>Дії → Після завершення: вийти з Wintor, перевести комп'ютер у сон чи гібернацію, перезавантажити або вимкнути його, коли завантаження закінчаться.</value></data>
 </root>

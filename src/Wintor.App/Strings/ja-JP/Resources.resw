@@ -341,4 +341,7 @@
   <data name="WhenDone_Now_Hibernate" xml:space="preserve"><value>今すぐ休止状態</value></data>
   <data name="WhenDone_Now_Restart" xml:space="preserve"><value>今すぐ再起動</value></data>
   <data name="WhenDone_Now_ShutDown" xml:space="preserve"><value>今すぐシャットダウン</value></data>
+  <data name="WhatsNew_030_Play" xml:space="preserve"><value>ダウンロード中の動画や音楽を、お使いのプレーヤーで再生できます。</value></data>
+  <data name="WhatsNew_030_Order" xml:space="preserve"><value>ダウンロードの順序：最初から最後まで、または最初と最後の部分を先に。</value></data>
+  <data name="WhatsNew_030_WhenDone" xml:space="preserve"><value>操作 → 完了時：ダウンロード完了後に Wintor を終了、または PC をスリープ、休止状態、再起動、シャットダウン。</value></data>
 </root>

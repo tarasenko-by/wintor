@@ -341,4 +341,7 @@
   <data name="WhenDone_Now_Hibernate" xml:space="preserve"><value>Hibernuj teraz</value></data>
   <data name="WhenDone_Now_Restart" xml:space="preserve"><value>Uruchom ponownie teraz</value></data>
   <data name="WhenDone_Now_ShutDown" xml:space="preserve"><value>Wyłącz teraz</value></data>
+  <data name="WhatsNew_030_Play" xml:space="preserve"><value>Odtwarzaj wideo i muzykę już w trakcie pobierania, we własnym odtwarzaczu.</value></data>
+  <data name="WhatsNew_030_Order" xml:space="preserve"><value>Kolejność pobierania: od początku do końca albo najpierw pierwsze i ostatnie części.</value></data>
+  <data name="WhatsNew_030_WhenDone" xml:space="preserve"><value>Akcje → Po zakończeniu: zamknij Wintor albo uśpij, zahibernuj, uruchom ponownie lub wyłącz komputer, gdy pobieranie się zakończy.</value></data>
 </root>

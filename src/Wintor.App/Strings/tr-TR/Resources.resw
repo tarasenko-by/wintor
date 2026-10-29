@@ -341,4 +341,7 @@
   <data name="WhenDone_Now_Hibernate" xml:space="preserve"><value>Şimdi hazırda beklet</value></data>
   <data name="WhenDone_Now_Restart" xml:space="preserve"><value>Şimdi yeniden başlat</value></data>
   <data name="WhenDone_Now_ShutDown" xml:space="preserve"><value>Şimdi kapat</value></data>
+  <data name="WhatsNew_030_Play" xml:space="preserve"><value>Videoları ve müzikleri inerken kendi oynatıcınızda açın.</value></data>
+  <data name="WhatsNew_030_Order" xml:space="preserve"><value>İndirme sırası: baştan sona ya da önce ilk ve son parçalar.</value></data>
+  <data name="WhatsNew_030_WhenDone" xml:space="preserve"><value>Eylemler → Bitince: indirmeler bitince Wintor'dan çıkın ya da bilgisayarı uyutun, hazırda bekletin, yeniden başlatın veya kapatın.</value></data>
 </root>

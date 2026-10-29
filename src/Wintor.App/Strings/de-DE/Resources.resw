@@ -341,4 +341,7 @@
   <data name="WhenDone_Now_Hibernate" xml:space="preserve"><value>Jetzt Ruhezustand</value></data>
   <data name="WhenDone_Now_Restart" xml:space="preserve"><value>Jetzt neu starten</value></data>
   <data name="WhenDone_Now_ShutDown" xml:space="preserve"><value>Jetzt herunterfahren</value></data>
+  <data name="WhatsNew_030_Play" xml:space="preserve"><value>Videos und Musik schon während des Downloads abspielen, im eigenen Player.</value></data>
+  <data name="WhatsNew_030_Order" xml:space="preserve"><value>Download-Reihenfolge: vom Anfang bis zum Ende oder zuerst die ersten und letzten Teile.</value></data>
+  <data name="WhatsNew_030_WhenDone" xml:space="preserve"><value>Aktionen → Wenn fertig: Wintor beenden oder den PC in den Energiesparmodus oder Ruhezustand versetzen, neu starten oder herunterfahren, wenn die Downloads fertig sind.</value></data>
 </root>

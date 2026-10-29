@@ -341,4 +341,7 @@
   <data name="WhenDone_Now_Hibernate" xml:space="preserve"><value>Hibernar ahora</value></data>
   <data name="WhenDone_Now_Restart" xml:space="preserve"><value>Reiniciar ahora</value></data>
   <data name="WhenDone_Now_ShutDown" xml:space="preserve"><value>Apagar ahora</value></data>
+  <data name="WhatsNew_030_Play" xml:space="preserve"><value>Reproduce vídeos y música mientras se descargan, en tu propio reproductor.</value></data>
+  <data name="WhatsNew_030_Order" xml:space="preserve"><value>Orden de descarga: del principio al final, o primero las primeras y últimas partes.</value></data>
+  <data name="WhatsNew_030_WhenDone" xml:space="preserve"><value>Acciones → Al terminar: salir de Wintor, o suspender, hibernar, reiniciar o apagar el equipo cuando terminen las descargas.</value></data>
 </root>

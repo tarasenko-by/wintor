@@ -341,4 +341,7 @@
   <data name="WhenDone_Now_Hibernate" xml:space="preserve"><value>Hibernate now</value></data>
   <data name="WhenDone_Now_Restart" xml:space="preserve"><value>Restart now</value></data>
   <data name="WhenDone_Now_ShutDown" xml:space="preserve"><value>Shut down now</value></data>
+  <data name="WhatsNew_030_Play" xml:space="preserve"><value>Play a video or a song while it downloads, in your own player.</value></data>
+  <data name="WhatsNew_030_Order" xml:space="preserve"><value>Download order: from start to end, or the first and last pieces first.</value></data>
+  <data name="WhatsNew_030_WhenDone" xml:space="preserve"><value>Actions → When done: quit Wintor, or sleep, hibernate, restart or shut down the PC when the downloads finish.</value></data>
 </root>

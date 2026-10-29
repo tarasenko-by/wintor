@@ -40,13 +40,10 @@ Source code, issues and ideas: https://github.com/tarasenko-by/wintor
 
 ## What's new in this version (release notes)
 
-First release on the Microsoft Store:
-- A calm torrent table: progress colored by state, sortable columns that shrink with the window, your own order.
-- A details pane: pieces, files with priorities, peers, trackers and a speed graph.
-- Colored labels and status filters, search from the title bar.
-- Speed limits for everything and for each torrent.
-- Problems explained in plain words; Resume fixes them.
-- 12 interface languages.
+Version 0.3:
+- Play a video or a song while it downloads, in your own player.
+- Download order: from start to end, or the first and last pieces first.
+- Actions → When done: quit Wintor, or sleep, hibernate, restart or shut down the PC when the downloads finish.
 
 ## Product features (up to 20, up to 200 characters each)
 
@@ -59,9 +56,11 @@ First release on the Microsoft Store:
 7. Speed limits for all torrents and for each one
 8. Keeps seeding from the notification area; "download finished" notifications
 9. Clear explanations for missing files, a full disk or no network
-10. Light, dark and high-contrast themes; optional Mica or Acrylic
-11. 12 interface languages
-12. No ads, no telemetry, no bundled offers — free and open source (GPL-3.0)
+10. Play a video or a song while it downloads, in your own player; download in order
+11. When done: quit, sleep, hibernate, restart or shut down the PC after the downloads
+12. Light, dark and high-contrast themes; optional Mica or Acrylic
+13. 12 interface languages
+14. No ads, no telemetry, no bundled offers — free and open source (GPL-3.0)
 
 ## Keywords (up to 7, 40 characters each, no more than 21 words in total)
 

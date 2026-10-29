@@ -341,4 +341,7 @@
   <data name="WhenDone_Now_Hibernate" xml:space="preserve"><value>立即休眠</value></data>
   <data name="WhenDone_Now_Restart" xml:space="preserve"><value>立即重启</value></data>
   <data name="WhenDone_Now_ShutDown" xml:space="preserve"><value>立即关机</value></data>
+  <data name="WhatsNew_030_Play" xml:space="preserve"><value>下载过程中即可用你自己的播放器播放视频和音乐。</value></data>
+  <data name="WhatsNew_030_Order" xml:space="preserve"><value>下载顺序：从头到尾，或先下载首尾部分。</value></data>
+  <data name="WhatsNew_030_WhenDone" xml:space="preserve"><value>操作 → 完成后：下载完成后退出 Wintor，或让电脑睡眠、休眠、重启、关机。</value></data>
 </root>

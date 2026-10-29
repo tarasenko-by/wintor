@@ -39,6 +39,9 @@ later, x64 and ARM64. The Store keeps it up to date. To build it yourself, see [
 - Speed limits for everything and for each torrent; listening port, start with Windows
 - Keeps seeding in the notification area when the window is closed; "download finished" notifications
 - Explains problems in plain words — files deleted, disk full, no network — and resumes when you fix them
+- Play a video or a song while it downloads, in your own player (VLC, mpv, …); download in order, or the first and
+  last pieces first
+- When done: quit Wintor, sleep, hibernate, restart or shut down the PC after the downloads, with a countdown to cancel
 - Solid light/dark look by default, Mica or Acrylic if you like; high contrast
 - English and Russian UI, plus ten more languages machine-translated and waiting for native speakers to review
   (see [Translations](CONTRIBUTING.md#translations))
