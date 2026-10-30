@@ -65,9 +65,10 @@ Version 0.3:
 ## Keywords (up to 7, 40 characters each, no more than 21 words in total)
 
 torrent client, bittorrent, torrent downloader, magnet link, p2p file sharing, open source torrent,
-free torrent app
+torrent manager
 
 No other products' names, "Windows 11" included: certification rejected "windows 11 torrent" (policy 10.1.3).
+No "free" either: certification rejected "free torrent app" for 0.3.0 (policy 10.1.3, rules updated in October 2026).
 
 ## Screenshots (1366×768 or larger, PNG)
 
