@@ -64,11 +64,14 @@ Version 0.3:
 
 ## Keywords (up to 7, 40 characters each, no more than 21 words in total)
 
-torrent client, bittorrent, torrent downloader, magnet link, p2p file sharing, open source torrent,
-torrent manager
+torrent client, torrent downloader, magnet link, p2p file sharing, open source torrent, torrent manager,
+download manager
 
 No other products' names, "Windows 11" included: certification rejected "windows 11 torrent" (policy 10.1.3).
 No "free" either: certification rejected "free torrent app" for 0.3.0 (policy 10.1.3, rules updated in October 2026).
+No "bittorrent": a Store health review on 2026-11-02 flagged it as another publisher's product title (policy 10.1.3),
+even though it is also the protocol's name. The descriptions may still say "BitTorrent client".
+Each of the 12 Store listing languages has its own translated keywords; these rules apply to all of them.
 
 ## Screenshots (1366×768 or larger, PNG)
 
