@@ -365,4 +365,7 @@
   <data name="WhatsNew_040_Queue" xml:space="preserve"><value>Coda di download: in Impostazioni → Download scegli quanti torrent scaricare contemporaneamente. Gli altri attendono «In coda» e partono da soli, nell’ordine della colonna #.</value></data>
   <data name="WhatsNew_040_Order" xml:space="preserve"><value>«Sposta su» e «Sposta giù» nella barra dei comandi (Alt+↑, Alt+↓) cambiano l’ordine della coda; «Avvia ora» fa saltare la coda a un torrent.</value></data>
   <data name="WhatsNew_040_Look" xml:space="preserve"><value>Una nuova icona verde e un’icona monocromatica nell’area di notifica, in tono con le icone di Windows accanto: Impostazioni → Windows.</value></data>
+  <data name="WhatsNew_041_Pause" xml:space="preserve"><value>Un torrent messo in pausa a metà download e ripreso non si blocca più verso la fine con i seed connessi.</value></data>
+  <data name="WhatsNew_041_Progress" xml:space="preserve"><value>Nei torrent con file esclusi contano solo i file scelti: arrivano al 100% e passano in Completati. E 100% ora significa sempre tutto.</value></data>
+  <data name="WhatsNew_041_Availability" xml:space="preserve"><value>La disponibilità nel riquadro dei dettagli è indicata in copie («25,9 copie»); passaci sopra per vedere cosa significa.</value></data>
 </root>

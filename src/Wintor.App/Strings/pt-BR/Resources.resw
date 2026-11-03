@@ -365,4 +365,7 @@
   <data name="WhatsNew_040_Queue" xml:space="preserve"><value>Fila de downloads: escolha em Configurações → Downloads quantos torrents baixam ao mesmo tempo. Os demais esperam “Na fila” e começam sozinhos, na ordem da coluna #.</value></data>
   <data name="WhatsNew_040_Order" xml:space="preserve"><value>“Mover para cima” e “Mover para baixo” na barra de comandos (Alt+↑, Alt+↓) mudam a ordem da fila; “Iniciar agora” deixa um torrent furar a fila.</value></data>
   <data name="WhatsNew_040_Look" xml:space="preserve"><value>Um novo ícone verde e um ícone monocromático na área de notificação, combinando com os ícones do Windows ao lado: Configurações → Windows.</value></data>
+  <data name="WhatsNew_041_Pause" xml:space="preserve"><value>Um torrent pausado no meio do download e retomado não fica mais travado perto do fim com seeds conectados.</value></data>
+  <data name="WhatsNew_041_Progress" xml:space="preserve"><value>Em torrents com arquivos ignorados, só contam os arquivos escolhidos: eles chegam a 100% e vão para Concluídos. E 100% agora sempre significa tudo.</value></data>
+  <data name="WhatsNew_041_Availability" xml:space="preserve"><value>A disponibilidade no painel de detalhes aparece em cópias (“25,9 cópias”); passe o ponteiro sobre ela para ver o que significa.</value></data>
 </root>

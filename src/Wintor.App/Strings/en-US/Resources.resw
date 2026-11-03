@@ -365,4 +365,7 @@
   <data name="WhatsNew_040_Queue" xml:space="preserve"><value>Download queue: choose how many torrents download at a time in Settings → Downloads. The rest wait as Queued and start by themselves, in the order of the # column.</value></data>
   <data name="WhatsNew_040_Order" xml:space="preserve"><value>Move up and Move down on the command bar (Alt+↑, Alt+↓) change the queue order; Start now lets a torrent skip the queue.</value></data>
   <data name="WhatsNew_040_Look" xml:space="preserve"><value>A new green icon, and a monochrome notification area icon to match the Windows icons next to it: Settings → Windows.</value></data>
+  <data name="WhatsNew_041_Pause" xml:space="preserve"><value>A torrent paused in the middle of a download and resumed no longer gets stuck near the end with seeds connected.</value></data>
+  <data name="WhatsNew_041_Progress" xml:space="preserve"><value>Torrents with skipped files count only the files you chose: they reach 100% and move to Completed. And 100% now always means all of it.</value></data>
+  <data name="WhatsNew_041_Availability" xml:space="preserve"><value>Availability in the details pane reads as copies (“25.9 copies”); hover it to see what it means.</value></data>
 </root>
