@@ -360,4 +360,7 @@
   <data name="WhatsNew_030_Play" xml:space="preserve"><value>Reproduce vídeos y música mientras se descargan, en tu propio reproductor.</value></data>
   <data name="WhatsNew_030_Order" xml:space="preserve"><value>Orden de descarga: del principio al final, o primero las primeras y últimas partes.</value></data>
   <data name="WhatsNew_030_WhenDone" xml:space="preserve"><value>Acciones → Al terminar: salir de Wintor, o suspender, hibernar, reiniciar o apagar el equipo cuando terminen las descargas.</value></data>
+  <data name="WhatsNew_040_Queue" xml:space="preserve"><value>Cola de descargas: elige en Configuración → Descargas cuántos torrents se descargan a la vez. Los demás esperan «En cola» y empiezan solos, en el orden de la columna #.</value></data>
+  <data name="WhatsNew_040_Order" xml:space="preserve"><value>«Subir» y «Bajar» en la barra de comandos (Alt+↑, Alt+↓) cambian el orden de la cola; «Iniciar ahora» deja que un torrent se salte la cola.</value></data>
+  <data name="WhatsNew_040_Look" xml:space="preserve"><value>Un nuevo icono verde y un icono monocromo en el área de notificación, a juego con los iconos de Windows de al lado: Configuración → Windows.</value></data>
 </root>

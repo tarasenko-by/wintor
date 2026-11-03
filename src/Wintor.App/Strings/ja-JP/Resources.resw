@@ -360,4 +360,7 @@
   <data name="WhatsNew_030_Play" xml:space="preserve"><value>ダウンロード中の動画や音楽を、お使いのプレーヤーで再生できます。</value></data>
   <data name="WhatsNew_030_Order" xml:space="preserve"><value>ダウンロードの順序：最初から最後まで、または最初と最後の部分を先に。</value></data>
   <data name="WhatsNew_030_WhenDone" xml:space="preserve"><value>操作 → 完了時：ダウンロード完了後に Wintor を終了、または PC をスリープ、休止状態、再起動、シャットダウン。</value></data>
+  <data name="WhatsNew_040_Queue" xml:space="preserve"><value>ダウンロード キュー：設定 → ダウンロードで同時にダウンロードする数を選べます。残りは「待機中」になり、# 列の順に自動で開始します。</value></data>
+  <data name="WhatsNew_040_Order" xml:space="preserve"><value>コマンド バーの「上へ移動」「下へ移動」（Alt+↑、Alt+↓）でキューの順序を変更、「今すぐ開始」でキューを飛ばして開始できます。</value></data>
+  <data name="WhatsNew_040_Look" xml:space="preserve"><value>新しい緑のアイコンと、隣の Windows のアイコンに合わせたモノクロの通知領域アイコン：設定 → Windows。</value></data>
 </root>

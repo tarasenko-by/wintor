@@ -360,4 +360,7 @@
   <data name="WhatsNew_030_Play" xml:space="preserve"><value>Videoları ve müzikleri inerken kendi oynatıcınızda açın.</value></data>
   <data name="WhatsNew_030_Order" xml:space="preserve"><value>İndirme sırası: baştan sona ya da önce ilk ve son parçalar.</value></data>
   <data name="WhatsNew_030_WhenDone" xml:space="preserve"><value>Eylemler → Bitince: indirmeler bitince Wintor'dan çıkın ya da bilgisayarı uyutun, hazırda bekletin, yeniden başlatın veya kapatın.</value></data>
+  <data name="WhatsNew_040_Queue" xml:space="preserve"><value>İndirme kuyruğu: Ayarlar → İndirilenler bölümünde aynı anda kaç torrent indirileceğini seçin. Diğerleri “Sırada” bekler ve # sütunundaki sırayla kendiliğinden başlar.</value></data>
+  <data name="WhatsNew_040_Order" xml:space="preserve"><value>Komut çubuğundaki “Yukarı taşı” ve “Aşağı taşı” (Alt+↑, Alt+↓) kuyruk sırasını değiştirir; “Şimdi başlat” bir torrentin sırayı atlamasını sağlar.</value></data>
+  <data name="WhatsNew_040_Look" xml:space="preserve"><value>Yeni yeşil bir simge ve yanındaki Windows simgeleriyle uyumlu tek renkli bir bildirim alanı simgesi: Ayarlar → Windows.</value></data>
 </root>

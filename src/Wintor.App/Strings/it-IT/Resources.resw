@@ -360,4 +360,7 @@
   <data name="WhatsNew_030_Play" xml:space="preserve"><value>Riproduci video e musica mentre si scaricano, nel tuo lettore.</value></data>
   <data name="WhatsNew_030_Order" xml:space="preserve"><value>Ordine di download: dall'inizio alla fine, o prima le parti iniziali e finali.</value></data>
   <data name="WhatsNew_030_WhenDone" xml:space="preserve"><value>Azioni → Al termine: esci da Wintor, oppure sospendi, iberna, riavvia o arresta il PC al termine dei download.</value></data>
+  <data name="WhatsNew_040_Queue" xml:space="preserve"><value>Coda di download: in Impostazioni → Download scegli quanti torrent scaricare contemporaneamente. Gli altri attendono «In coda» e partono da soli, nell’ordine della colonna #.</value></data>
+  <data name="WhatsNew_040_Order" xml:space="preserve"><value>«Sposta su» e «Sposta giù» nella barra dei comandi (Alt+↑, Alt+↓) cambiano l’ordine della coda; «Avvia ora» fa saltare la coda a un torrent.</value></data>
+  <data name="WhatsNew_040_Look" xml:space="preserve"><value>Una nuova icona verde e un’icona monocromatica nell’area di notifica, in tono con le icone di Windows accanto: Impostazioni → Windows.</value></data>
 </root>

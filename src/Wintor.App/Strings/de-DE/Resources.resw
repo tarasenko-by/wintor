@@ -360,4 +360,7 @@
   <data name="WhatsNew_030_Play" xml:space="preserve"><value>Videos und Musik schon während des Downloads abspielen, im eigenen Player.</value></data>
   <data name="WhatsNew_030_Order" xml:space="preserve"><value>Download-Reihenfolge: vom Anfang bis zum Ende oder zuerst die ersten und letzten Teile.</value></data>
   <data name="WhatsNew_030_WhenDone" xml:space="preserve"><value>Aktionen → Wenn fertig: Wintor beenden oder den PC in den Energiesparmodus oder Ruhezustand versetzen, neu starten oder herunterfahren, wenn die Downloads fertig sind.</value></data>
+  <data name="WhatsNew_040_Queue" xml:space="preserve"><value>Download-Warteschlange: Unter Einstellungen → Downloads legen Sie fest, wie viele Torrents gleichzeitig laden. Die übrigen warten „In Warteschlange“ und starten von selbst in der Reihenfolge der Spalte #.</value></data>
+  <data name="WhatsNew_040_Order" xml:space="preserve"><value>„Nach oben“ und „Nach unten“ in der Befehlsleiste (Alt+↑, Alt+↓) ändern die Reihenfolge; „Jetzt starten“ lässt einen Torrent die Warteschlange überspringen.</value></data>
+  <data name="WhatsNew_040_Look" xml:space="preserve"><value>Ein neues grünes Symbol und ein einfarbiges Symbol im Infobereich, passend zu den Windows-Symbolen daneben: Einstellungen → Windows.</value></data>
 </root>

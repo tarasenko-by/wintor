@@ -360,4 +360,7 @@
   <data name="WhatsNew_030_Play" xml:space="preserve"><value>Reproduza vídeos e músicas enquanto baixam, no seu próprio player.</value></data>
   <data name="WhatsNew_030_Order" xml:space="preserve"><value>Ordem de download: do início ao fim, ou primeiro as partes iniciais e finais.</value></data>
   <data name="WhatsNew_030_WhenDone" xml:space="preserve"><value>Ações → Ao terminar: sair do Wintor, ou suspender, hibernar, reiniciar ou desligar o PC quando os downloads terminarem.</value></data>
+  <data name="WhatsNew_040_Queue" xml:space="preserve"><value>Fila de downloads: escolha em Configurações → Downloads quantos torrents baixam ao mesmo tempo. Os demais esperam “Na fila” e começam sozinhos, na ordem da coluna #.</value></data>
+  <data name="WhatsNew_040_Order" xml:space="preserve"><value>“Mover para cima” e “Mover para baixo” na barra de comandos (Alt+↑, Alt+↓) mudam a ordem da fila; “Iniciar agora” deixa um torrent furar a fila.</value></data>
+  <data name="WhatsNew_040_Look" xml:space="preserve"><value>Um novo ícone verde e um ícone monocromático na área de notificação, combinando com os ícones do Windows ao lado: Configurações → Windows.</value></data>
 </root>

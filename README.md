@@ -6,7 +6,7 @@ Most torrent clients still look like it is 2010: dense tables, dozens of columns
 settings you get lost in. Wintor aims to feel like a native Windows 11 app —
 Mica, Fluent design, sensible defaults — with no ads and no telemetry.
 
-> **Status:** early development (v0.3). See [docs/ROADMAP.md](docs/ROADMAP.md).
+> **Status:** early development (v0.4). See [docs/ROADMAP.md](docs/ROADMAP.md).
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/details-dark.png">
@@ -42,7 +42,8 @@ later, x64 and ARM64. The Store keeps it up to date. To build it yourself, see [
 - Select several torrents to pause, resume, label or remove them together; right-click menu on every row
 - A download queue: a few torrents download at a time (3 by default), the rest wait their turn in your order
 - Speed limits for everything and for each torrent; listening port, start with Windows
-- Keeps seeding in the notification area when the window is closed; "download finished" notifications
+- Keeps seeding in the notification area when the window is closed, with a color or monochrome icon;
+  "download finished" notifications
 - Explains problems in plain words — files deleted, disk full, no network — and resumes when you fix them
 - Play a video or a song while it downloads, in your own player (VLC, mpv, …); download in order, or the first and
   last pieces first

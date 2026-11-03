@@ -24,7 +24,8 @@ Under the table, a details pane shows what is going on: which pieces you have an
 the files with their priorities, connected peers, trackers and a live speed graph.
 
 Organize with status filters and colored labels in the side pane, search from the title bar, sort by any column,
-keep your own order, and pick which columns to show. Set speed limits for everything or for a single torrent.
+keep your own order, and pick which columns to show. A download queue keeps a few torrents downloading at a time
+while the rest wait their turn. Set speed limits for everything or for a single torrent.
 When the window is closed, Wintor keeps seeding quietly from the notification area and lets you know when a
 download finishes.
 
@@ -40,10 +41,12 @@ Source code, issues and ideas: https://github.com/tarasenko-by/wintor
 
 ## What's new in this version (release notes)
 
-Version 0.3:
-- Play a video or a song while it downloads, in your own player.
-- Download order: from start to end, or the first and last pieces first.
-- Actions → When done: quit Wintor, or sleep, hibernate, restart or shut down the PC when the downloads finish.
+Version 0.4:
+- Download queue: choose how many torrents download at a time in Settings → Downloads. The rest wait as Queued and
+  start by themselves, in the order of the # column.
+- Move up and Move down on the command bar (Alt+↑, Alt+↓) change the queue order; Start now lets a torrent skip the
+  queue.
+- A new green icon, and a monochrome notification area icon to match the Windows icons next to it: Settings → Windows.
 
 ## Product features (up to 20, up to 200 characters each)
 
@@ -53,14 +56,15 @@ Version 0.3:
 4. Details pane with piece map, files and priorities, peers, trackers and a live speed graph
 5. Status filters and colored labels; search from the title bar
 6. Sortable, resizable columns; pick which ones to show; keep your own order
-7. Speed limits for all torrents and for each one
-8. Keeps seeding from the notification area; "download finished" notifications
-9. Clear explanations for missing files, a full disk or no network
-10. Play a video or a song while it downloads, in your own player; download in order
-11. When done: quit, sleep, hibernate, restart or shut down the PC after the downloads
-12. Light, dark and high-contrast themes; optional Mica or Acrylic
-13. 12 interface languages
-14. No ads, no telemetry, no bundled offers — free and open source (GPL-3.0)
+7. Download queue: a few torrents download at a time, the rest start by themselves in your order
+8. Speed limits for all torrents and for each one
+9. Keeps seeding from the notification area, with a color or monochrome icon; "download finished" notifications
+10. Clear explanations for missing files, a full disk or no network
+11. Play a video or a song while it downloads, in your own player; download in order
+12. When done: quit, sleep, hibernate, restart or shut down the PC after the downloads
+13. Light, dark and high-contrast themes; optional Mica or Acrylic
+14. 12 interface languages
+15. No ads, no telemetry, no bundled offers — free and open source (GPL-3.0)
 
 ## Keywords (up to 7, 40 characters each, no more than 21 words in total)
 

@@ -360,4 +360,7 @@
   <data name="WhatsNew_030_Play" xml:space="preserve"><value>Відео й музику можна ввімкнути просто під час завантаження, у своєму плеєрі.</value></data>
   <data name="WhatsNew_030_Order" xml:space="preserve"><value>Порядок завантаження: від початку до кінця або спершу перші й останні частини.</value></data>
   <data name="WhatsNew_030_WhenDone" xml:space="preserve"><value>Дії → Після завершення: вийти з Wintor, перевести комп'ютер у сон чи гібернацію, перезавантажити або вимкнути його, коли завантаження закінчаться.</value></data>
+  <data name="WhatsNew_040_Queue" xml:space="preserve"><value>Черга завантажень: у Параметрах → Завантаження виберіть, скільки торентів завантажувати одночасно. Решта чекають «У черзі» й запускаються самі, у порядку колонки №.</value></data>
+  <data name="WhatsNew_040_Order" xml:space="preserve"><value>Кнопки «Вище» і «Нижче» на панелі команд (Alt+↑, Alt+↓) змінюють порядок черги, а «Запустити зараз» запускає торент поза чергою.</value></data>
+  <data name="WhatsNew_040_Look" xml:space="preserve"><value>Новий зелений значок і монохромний значок в області сповіщень, у тон значкам Windows поруч: Параметри → Windows.</value></data>
 </root>

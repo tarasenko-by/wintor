@@ -360,4 +360,7 @@
   <data name="WhatsNew_030_Play" xml:space="preserve"><value>Lisez vidéos et musique pendant le téléchargement, dans votre propre lecteur.</value></data>
   <data name="WhatsNew_030_Order" xml:space="preserve"><value>Ordre de téléchargement : du début à la fin, ou d'abord les premières et dernières parties.</value></data>
   <data name="WhatsNew_030_WhenDone" xml:space="preserve"><value>Actions → Une fois terminé : quitter Wintor, ou mettre le PC en veille ou en veille prolongée, le redémarrer ou l'arrêter à la fin des téléchargements.</value></data>
+  <data name="WhatsNew_040_Queue" xml:space="preserve"><value>File de téléchargement : choisissez dans Paramètres → Téléchargements combien de torrents se téléchargent en même temps. Les autres attendent « En file d’attente » et démarrent d’eux-mêmes, dans l’ordre de la colonne #.</value></data>
+  <data name="WhatsNew_040_Order" xml:space="preserve"><value>« Monter » et « Descendre » dans la barre de commandes (Alt+↑, Alt+↓) changent l’ordre de la file ; « Démarrer maintenant » fait passer un torrent devant.</value></data>
+  <data name="WhatsNew_040_Look" xml:space="preserve"><value>Une nouvelle icône verte, et une icône monochrome dans la zone de notification, assortie aux icônes de Windows à côté : Paramètres → Windows.</value></data>
 </root>

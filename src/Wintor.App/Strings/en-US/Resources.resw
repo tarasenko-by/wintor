@@ -360,4 +360,7 @@
   <data name="WhatsNew_030_Play" xml:space="preserve"><value>Play a video or a song while it downloads, in your own player.</value></data>
   <data name="WhatsNew_030_Order" xml:space="preserve"><value>Download order: from start to end, or the first and last pieces first.</value></data>
   <data name="WhatsNew_030_WhenDone" xml:space="preserve"><value>Actions → When done: quit Wintor, or sleep, hibernate, restart or shut down the PC when the downloads finish.</value></data>
+  <data name="WhatsNew_040_Queue" xml:space="preserve"><value>Download queue: choose how many torrents download at a time in Settings → Downloads. The rest wait as Queued and start by themselves, in the order of the # column.</value></data>
+  <data name="WhatsNew_040_Order" xml:space="preserve"><value>Move up and Move down on the command bar (Alt+↑, Alt+↓) change the queue order; Start now lets a torrent skip the queue.</value></data>
+  <data name="WhatsNew_040_Look" xml:space="preserve"><value>A new green icon, and a monochrome notification area icon to match the Windows icons next to it: Settings → Windows.</value></data>
 </root>
