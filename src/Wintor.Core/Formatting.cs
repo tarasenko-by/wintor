@@ -31,6 +31,17 @@ public static class Formatting
     public static string Rate(long bytesPerSecond, IFormatProvider? culture = null) =>
         Bytes(bytesPerSecond, culture) + "/s";
 
+    /// <summary>
+    /// A 0–1 fraction as "62.8%". Rounds down to a tenth, so "100%" only ever means all of it: 0.9996 with a few
+    /// megabytes still missing reads "99.9%", not a finished-looking "100%".
+    /// </summary>
+    public static string Percent(double fraction, IFormatProvider? culture = null)
+    {
+        // The small epsilon keeps 0.628 (627.99999… thousandths in binary) at 62.8 instead of 62.7.
+        double tenths = Math.Floor(Math.Clamp(fraction, 0, 1) * 1000 + 1e-6) / 10;
+        return tenths.ToString("0.#", culture ?? CultureInfo.CurrentCulture) + "%";
+    }
+
     /// <summary>Compact duration: "45s", "12m", "3h 05m", "2d 4h".</summary>
     public static string Duration(TimeSpan duration)
     {

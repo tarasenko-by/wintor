@@ -715,6 +715,20 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
     // Torrent.Size includes the padding hybrid v1/v2 torrents insert between files; users care about real files.
     private static long ContentSize(Torrent torrent) => torrent.Files.Sum(f => f.Length);
 
+    // Progress and size count only the files the user wants, as MonoTorrent does when it switches to seeding: with
+    // skipped files, the rest being in is "done", not "100%" with megabytes still left to download.
+    private static double SelectedProgress(TorrentManager manager) =>
+        HasSelectedFiles(manager) ? manager.PartialProgress : manager.Progress;
+
+    private static long SelectedSize(TorrentManager manager, Torrent torrent) =>
+        HasSelectedFiles(manager)
+            ? manager.Files.Where(f => f.Priority != Priority.DoNotDownload).Sum(f => f.Length)
+            : ContentSize(torrent);
+
+    // Every file skipped is not a real selection (the torrent then wants nothing): show the whole torrent instead.
+    private static bool HasSelectedFiles(TorrentManager manager) =>
+        manager.Files.Any(f => f.Priority != Priority.DoNotDownload);
+
     private TorrentSnapshot ToSnapshot(TorrentManager manager)
     {
         string id = IdOf(manager);
@@ -730,8 +744,8 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
             Id: id,
             Name: manager.Name,
             Status: missing ? TorrentStatus.Error : StatusOf(manager, id),
-            Progress: manager.Progress / 100.0,
-            TotalSize: manager.Torrent is { } torrent ? ContentSize(torrent) : manager.MagnetLink?.Size ?? 0,
+            Progress: SelectedProgress(manager) / 100.0,
+            TotalSize: manager.Torrent is { } torrent ? SelectedSize(manager, torrent) : manager.MagnetLink?.Size ?? 0,
             DownloadRate: rate.Down.Sample(manager.Monitor.DataBytesReceived, now),
             UploadRate: rate.Up.Sample(manager.Monitor.DataBytesSent, now),
             Seeds: manager.Peers.Seeds,
