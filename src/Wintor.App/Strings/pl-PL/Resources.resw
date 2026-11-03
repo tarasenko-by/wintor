@@ -365,4 +365,7 @@
   <data name="WhatsNew_040_Queue" xml:space="preserve"><value>Kolejka pobierania: w Ustawieniach → Pobieranie wybierz, ile torrentów pobierać jednocześnie. Pozostałe czekają „W kolejce” i startują same, w kolejności kolumny #.</value></data>
   <data name="WhatsNew_040_Order" xml:space="preserve"><value>„Przenieś w górę” i „Przenieś w dół” na pasku poleceń (Alt+↑, Alt+↓) zmieniają kolejność; „Uruchom teraz” pozwala torrentowi ominąć kolejkę.</value></data>
   <data name="WhatsNew_040_Look" xml:space="preserve"><value>Nowa zielona ikona i monochromatyczna ikona w obszarze powiadomień, pasująca do ikon Windows obok: Ustawienia → Windows.</value></data>
+  <data name="WhatsNew_041_Pause" xml:space="preserve"><value>Torrent wstrzymany w trakcie pobierania i wznowiony nie zatrzymuje się już tuż przed końcem mimo połączonych seedów.</value></data>
+  <data name="WhatsNew_041_Progress" xml:space="preserve"><value>W torrentach z pominiętymi plikami liczą się tylko wybrane pliki: dochodzą do 100% i trafiają do Ukończonych. A 100% oznacza teraz zawsze całość.</value></data>
+  <data name="WhatsNew_041_Availability" xml:space="preserve"><value>Dostępność w panelu szczegółów jest podawana w kopiach („25,9 kopii”); najedź na nią, aby zobaczyć, co oznacza.</value></data>
 </root>

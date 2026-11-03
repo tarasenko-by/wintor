@@ -365,4 +365,7 @@
   <data name="WhatsNew_040_Queue" xml:space="preserve"><value>Cola de descargas: elige en Configuración → Descargas cuántos torrents se descargan a la vez. Los demás esperan «En cola» y empiezan solos, en el orden de la columna #.</value></data>
   <data name="WhatsNew_040_Order" xml:space="preserve"><value>«Subir» y «Bajar» en la barra de comandos (Alt+↑, Alt+↓) cambian el orden de la cola; «Iniciar ahora» deja que un torrent se salte la cola.</value></data>
   <data name="WhatsNew_040_Look" xml:space="preserve"><value>Un nuevo icono verde y un icono monocromo en el área de notificación, a juego con los iconos de Windows de al lado: Configuración → Windows.</value></data>
+  <data name="WhatsNew_041_Pause" xml:space="preserve"><value>Un torrent pausado a mitad de la descarga y reanudado ya no se queda atascado cerca del final con semillas conectadas.</value></data>
+  <data name="WhatsNew_041_Progress" xml:space="preserve"><value>En los torrents con archivos omitidos solo cuentan los archivos elegidos: llegan al 100 % y pasan a Completados. Y el 100 % ahora siempre significa todo.</value></data>
+  <data name="WhatsNew_041_Availability" xml:space="preserve"><value>La disponibilidad en el panel de detalles se muestra en copias («25,9 copias»); pasa el puntero por encima para ver qué significa.</value></data>
 </root>

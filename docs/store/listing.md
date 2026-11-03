@@ -41,12 +41,11 @@ Source code, issues and ideas: https://github.com/tarasenko-by/wintor
 
 ## What's new in this version (release notes)
 
-Version 0.4:
-- Download queue: choose how many torrents download at a time in Settings → Downloads. The rest wait as Queued and
-  start by themselves, in the order of the # column.
-- Move up and Move down on the command bar (Alt+↑, Alt+↓) change the queue order; Start now lets a torrent skip the
-  queue.
-- A new green icon, and a monochrome notification area icon to match the Windows icons next to it: Settings → Windows.
+Version 0.4.1:
+- A torrent paused in the middle of a download and resumed no longer gets stuck near the end with seeds connected.
+- Torrents with skipped files count only the files you chose: they reach 100% and move to Completed. And 100% now
+  always means all of it.
+- Availability in the details pane reads as copies ("25.9 copies"); hover it to see what it means.
 
 ## Product features (up to 20, up to 200 characters each)
 

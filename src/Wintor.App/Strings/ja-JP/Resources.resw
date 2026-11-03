@@ -365,4 +365,7 @@
   <data name="WhatsNew_040_Queue" xml:space="preserve"><value>ダウンロード キュー：設定 → ダウンロードで同時にダウンロードする数を選べます。残りは「待機中」になり、# 列の順に自動で開始します。</value></data>
   <data name="WhatsNew_040_Order" xml:space="preserve"><value>コマンド バーの「上へ移動」「下へ移動」（Alt+↑、Alt+↓）でキューの順序を変更、「今すぐ開始」でキューを飛ばして開始できます。</value></data>
   <data name="WhatsNew_040_Look" xml:space="preserve"><value>新しい緑のアイコンと、隣の Windows のアイコンに合わせたモノクロの通知領域アイコン：設定 → Windows。</value></data>
+  <data name="WhatsNew_041_Pause" xml:space="preserve"><value>ダウンロードの途中で一時停止して再開したトレントが、シードに接続したまま終わり近くで止まることはなくなりました。</value></data>
+  <data name="WhatsNew_041_Progress" xml:space="preserve"><value>スキップしたファイルがあるトレントは、選んだファイルだけを数えます。100% に達すると「完了」に移ります。また、100% は常にすべて完了を意味するようになりました。</value></data>
+  <data name="WhatsNew_041_Availability" xml:space="preserve"><value>詳細ウィンドウの可用性はコピー数で表示されます（「25.9 コピー」）。ポイントすると意味が表示されます。</value></data>
 </root>

@@ -365,4 +365,7 @@
   <data name="WhatsNew_040_Queue" xml:space="preserve"><value>File de téléchargement : choisissez dans Paramètres → Téléchargements combien de torrents se téléchargent en même temps. Les autres attendent « En file d’attente » et démarrent d’eux-mêmes, dans l’ordre de la colonne #.</value></data>
   <data name="WhatsNew_040_Order" xml:space="preserve"><value>« Monter » et « Descendre » dans la barre de commandes (Alt+↑, Alt+↓) changent l’ordre de la file ; « Démarrer maintenant » fait passer un torrent devant.</value></data>
   <data name="WhatsNew_040_Look" xml:space="preserve"><value>Une nouvelle icône verte, et une icône monochrome dans la zone de notification, assortie aux icônes de Windows à côté : Paramètres → Windows.</value></data>
+  <data name="WhatsNew_041_Pause" xml:space="preserve"><value>Un torrent mis en pause en cours de téléchargement puis repris ne reste plus bloqué près de la fin alors que des seeds sont connectés.</value></data>
+  <data name="WhatsNew_041_Progress" xml:space="preserve"><value>Pour les torrents avec des fichiers ignorés, seuls les fichiers choisis comptent : ils atteignent 100 % et passent dans Terminés. Et 100 % signifie désormais toujours tout.</value></data>
+  <data name="WhatsNew_041_Availability" xml:space="preserve"><value>La disponibilité dans le volet de détails s’affiche en copies (« 25,9 copies ») ; survolez-la pour savoir ce qu’elle signifie.</value></data>
 </root>

@@ -365,4 +365,7 @@
   <data name="WhatsNew_040_Queue" xml:space="preserve"><value>下载队列：在“设置 → 下载”中选择同时下载的种子数。其余种子显示为“排队中”，并按 # 列的顺序自动开始。</value></data>
   <data name="WhatsNew_040_Order" xml:space="preserve"><value>命令栏上的“上移”和“下移”（Alt+↑、Alt+↓）可调整队列顺序；“立即开始”可让种子跳过队列。</value></data>
   <data name="WhatsNew_040_Look" xml:space="preserve"><value>全新的绿色图标，以及与旁边 Windows 图标风格一致的单色通知区域图标：设置 → Windows。</value></data>
+  <data name="WhatsNew_041_Pause" xml:space="preserve"><value>下载途中暂停后再继续的种子，不会再在已连接做种者的情况下卡在快结束的地方。</value></data>
+  <data name="WhatsNew_041_Progress" xml:space="preserve"><value>包含跳过文件的种子只计算你选择的文件：它们会达到 100% 并移到“已完成”。现在 100% 一定表示全部下载完毕。</value></data>
+  <data name="WhatsNew_041_Availability" xml:space="preserve"><value>详细信息窗格中的可用性以份数显示（“25.9 份”）；将鼠标悬停在上面可查看其含义。</value></data>
 </root>

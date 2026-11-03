@@ -28,6 +28,8 @@ public static class WhatsNew
 {
     public static IReadOnlyList<Release> Releases { get; } =
     [
+        new(new Version(0, 4, 1), new DateOnly(2026, 11, 4),
+            ["WhatsNew_041_Pause", "WhatsNew_041_Progress", "WhatsNew_041_Availability"]),
         new(new Version(0, 4, 0), new DateOnly(2026, 11, 3),
             ["WhatsNew_040_Queue", "WhatsNew_040_Order", "WhatsNew_040_Look"]),
         new(new Version(0, 3, 0), new DateOnly(2026, 10, 29),

@@ -365,4 +365,7 @@
   <data name="WhatsNew_040_Queue" xml:space="preserve"><value>Download-Warteschlange: Unter Einstellungen → Downloads legen Sie fest, wie viele Torrents gleichzeitig laden. Die übrigen warten „In Warteschlange“ und starten von selbst in der Reihenfolge der Spalte #.</value></data>
   <data name="WhatsNew_040_Order" xml:space="preserve"><value>„Nach oben“ und „Nach unten“ in der Befehlsleiste (Alt+↑, Alt+↓) ändern die Reihenfolge; „Jetzt starten“ lässt einen Torrent die Warteschlange überspringen.</value></data>
   <data name="WhatsNew_040_Look" xml:space="preserve"><value>Ein neues grünes Symbol und ein einfarbiges Symbol im Infobereich, passend zu den Windows-Symbolen daneben: Einstellungen → Windows.</value></data>
+  <data name="WhatsNew_041_Pause" xml:space="preserve"><value>Ein mitten im Download pausierter und fortgesetzter Torrent bleibt nicht mehr kurz vor dem Ende hängen, obwohl Seeds verbunden sind.</value></data>
+  <data name="WhatsNew_041_Progress" xml:space="preserve"><value>Bei Torrents mit übersprungenen Dateien zählen nur die gewählten Dateien: Sie erreichen 100 % und landen unter Fertig. Und 100 % heißt jetzt immer: alles da.</value></data>
+  <data name="WhatsNew_041_Availability" xml:space="preserve"><value>Die Verfügbarkeit im Detailbereich wird in Kopien angezeigt („25,9 Kopien“); zeigen Sie darauf, um zu sehen, was sie bedeutet.</value></data>
 </root>

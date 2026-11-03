@@ -365,4 +365,7 @@
   <data name="WhatsNew_040_Queue" xml:space="preserve"><value>İndirme kuyruğu: Ayarlar → İndirilenler bölümünde aynı anda kaç torrent indirileceğini seçin. Diğerleri “Sırada” bekler ve # sütunundaki sırayla kendiliğinden başlar.</value></data>
   <data name="WhatsNew_040_Order" xml:space="preserve"><value>Komut çubuğundaki “Yukarı taşı” ve “Aşağı taşı” (Alt+↑, Alt+↓) kuyruk sırasını değiştirir; “Şimdi başlat” bir torrentin sırayı atlamasını sağlar.</value></data>
   <data name="WhatsNew_040_Look" xml:space="preserve"><value>Yeni yeşil bir simge ve yanındaki Windows simgeleriyle uyumlu tek renkli bir bildirim alanı simgesi: Ayarlar → Windows.</value></data>
+  <data name="WhatsNew_041_Pause" xml:space="preserve"><value>İndirmenin ortasında duraklatılıp sürdürülen bir torrent, bağlı göndericiler varken artık sona yakın takılıp kalmıyor.</value></data>
+  <data name="WhatsNew_041_Progress" xml:space="preserve"><value>Atlanan dosyaları olan torrentlerde yalnızca seçtiğiniz dosyalar sayılır: %100’e ulaşır ve Tamamlananlar’a geçer. %100 artık her zaman tamamı demek.</value></data>
+  <data name="WhatsNew_041_Availability" xml:space="preserve"><value>Ayrıntılar bölmesindeki kullanılabilirlik kopya olarak gösterilir (“25,9 kopya”); ne anlama geldiğini görmek için üzerine gelin.</value></data>
 </root>
