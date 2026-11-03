@@ -113,7 +113,7 @@ public partial class TorrentItemViewModel(string id) : ObservableObject
         }
         Status = s.Status;
         ProgressPercent = s.Progress * 100;
-        ProgressText = s.TotalSize > 0 ? $"{s.Progress * 100:0.#}%" : "";
+        ProgressText = s.TotalSize > 0 ? Formatting.Percent(s.Progress) : "";
         IsIndeterminate = s.Status is TorrentStatus.FetchingMetadata or TorrentStatus.Starting;
         IsError = s.Status == TorrentStatus.Error;
 

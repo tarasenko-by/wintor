@@ -32,6 +32,27 @@ public class FormattingTests
     }
 
     [Theory]
+    [InlineData(0, "0%")]
+    [InlineData(0.071, "7.1%")]
+    [InlineData(0.628, "62.8%")]
+    [InlineData(0.41, "41%")]
+    [InlineData(0.9996, "99.9%")]
+    [InlineData(0.99999, "99.9%")]
+    [InlineData(1, "100%")]
+    [InlineData(1.2, "100%")]
+    [InlineData(-0.1, "0%")]
+    public void Percent_RoundsDownSoOnlyAllOfItIsHundred(double fraction, string expected)
+    {
+        Assert.Equal(expected, Formatting.Percent(fraction, CultureInfo.InvariantCulture));
+    }
+
+    [Fact]
+    public void Percent_RespectsCultureDecimalSeparator()
+    {
+        Assert.Equal("62,8%", Formatting.Percent(0.628, CultureInfo.GetCultureInfo("ru-RU")));
+    }
+
+    [Theory]
     [InlineData(45, "45s")]
     [InlineData(12 * 60 + 30, "12m")]
     [InlineData(3 * 3600 + 5 * 60, "3h 05m")]

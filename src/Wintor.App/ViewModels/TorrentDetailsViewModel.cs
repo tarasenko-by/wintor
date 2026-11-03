@@ -41,7 +41,7 @@ public partial class FileItemViewModel(TorrentDetailsViewModel owner, int index)
         Path = file.Path;
         SizeText = Formatting.Bytes(file.Size);
         ProgressPercent = file.Progress * 100;
-        ProgressText = $"{file.Progress * 100:0.#}%";
+        ProgressText = Formatting.Percent(file.Progress);
         IsSkipped = file.Priority == FilePriority.Skip;
         IsPlayable = MediaFiles.IsPlayable(file.Path);
         PriorityIndex = (int)file.Priority;
@@ -224,7 +224,7 @@ public partial class TorrentDetailsViewModel : ObservableObject
             Name = s.Name;
             Downloaded = details.Downloaded;
             Available = details.Available;
-            DownloadedText = s.TotalSize > 0 ? $"{s.Progress * 100:0.#}%" : "";
+            DownloadedText = s.TotalSize > 0 ? Formatting.Percent(s.Progress) : "";
             // Copies among connected peers: without peers there is nothing to count.
             AvailabilityText = details.Peers.Count > 0 ? details.Availability.ToString("0.000") : "—";
 
@@ -295,7 +295,7 @@ public partial class TorrentDetailsViewModel : ObservableObject
     private static PeerRow ToRow(PeerEntry p) => new(
         p.Address,
         p.Client,
-        $"{p.Progress * 100:0.#}%",
+        Formatting.Percent(p.Progress),
         Formatting.Rate(p.DownloadRate),
         Formatting.Rate(p.UploadRate),
         string.Join(" · ", new[]

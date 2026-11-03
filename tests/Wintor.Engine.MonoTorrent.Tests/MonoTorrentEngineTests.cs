@@ -146,6 +146,37 @@ public sealed class MonoTorrentEngineTests : IDisposable
     }
 
     [Fact]
+    public async Task SkippedFiles_DoNotCountInSizeOrProgress()
+    {
+        // a.txt fills exactly two pieces, so no piece is shared with the skipped b.txt.
+        const int pieceLength = 16 * 1024;
+        string source = Path.Combine(_root, "partial-source", "payload");
+        Directory.CreateDirectory(source);
+        await File.WriteAllTextAsync(Path.Combine(source, "a.txt"), new string('a', 2 * pieceLength));
+        await File.WriteAllTextAsync(Path.Combine(source, "b.txt"), new string('b', 5 * pieceLength));
+        var creator = new global::MonoTorrent.TorrentCreator { PieceLength = pieceLength };
+        var torrent = await creator.CreateAsync(new global::MonoTorrent.TorrentFileSource(source));
+        string torrentPath = Path.Combine(_root, "partial.torrent");
+        await File.WriteAllBytesAsync(torrentPath, torrent.Encode());
+
+        // Only a.txt is on disk where the torrent is saved.
+        string saveDir = Path.Combine(_root, "partial-save");
+        Directory.CreateDirectory(Path.Combine(saveDir, "payload"));
+        File.Copy(Path.Combine(source, "a.txt"), Path.Combine(saveDir, "payload", "a.txt"));
+
+        await using var engine = await CreateEngineAsync();
+        TorrentMetadata metadata = await engine.ReadTorrentFileAsync(torrentPath);
+        int skipped = metadata.Files.Single(f => f.Path == "b.txt").Index;
+        await engine.AddTorrentFileAsync(torrentPath, saveDir, new HashSet<int> { skipped });
+        await WaitUntilAsync(() => engine.GetSnapshots().Single().IsComplete);
+
+        TorrentSnapshot snapshot = engine.GetSnapshots().Single();
+        Assert.Equal(2 * pieceLength, snapshot.TotalSize);
+        Assert.Equal(1, snapshot.Progress);
+        Assert.Equal(snapshot.TotalSize, snapshot.DownloadedBytes);
+    }
+
+    [Fact]
     public async Task SetFilePriority_ChangesOneFile()
     {
         string torrentPath = await CreateTorrentFileAsync();
