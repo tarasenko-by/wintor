@@ -49,6 +49,7 @@
   <data name="EngineCard.Description" xml:space="preserve"><value>MonoTorrent (MIT)</value></data>
   <data name="Status_Stopped" xml:space="preserve"><value>Durduruldu</value></data>
   <data name="Status_Paused" xml:space="preserve"><value>Duraklatıldı</value></data>
+  <data name="Status_Queued" xml:space="preserve"><value>Sırada</value></data>
   <data name="Status_Starting" xml:space="preserve"><value>Başlatılıyor…</value></data>
   <data name="Status_FetchingMetadata" xml:space="preserve"><value>Dosya listesi alınıyor…</value></data>
   <data name="Status_Checking" xml:space="preserve"><value>Dosyalar denetleniyor…</value></data>
@@ -87,6 +88,7 @@
   <data name="Error_BadTorrentFile" xml:space="preserve"><value>“{0}” geçerli bir .torrent dosyası değil.</value></data>
   <data name="Menu_Resume" xml:space="preserve"><value>Sürdür</value></data>
   <data name="Menu_Pause" xml:space="preserve"><value>Duraklat</value></data>
+  <data name="Menu_StartNow" xml:space="preserve"><value>Şimdi başlat</value></data>
   <data name="Menu_OpenFolder" xml:space="preserve"><value>Klasörü aç</value></data>
   <data name="Menu_Details" xml:space="preserve"><value>Ayrıntılar</value></data>
   <data name="Menu_CopyMagnet" xml:space="preserve"><value>Magnet bağlantısını kopyala</value></data>
@@ -152,6 +154,9 @@
   <data name="NotifyCard.Header" xml:space="preserve"><value>İndirme bittiğinde bildir</value></data>
   <data name="NotifyCard.Description" xml:space="preserve"><value>Klasörü açan bir düğmeyle Windows bildirimi.</value></data>
   <data name="NotifySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>İndirme bittiğinde bildir</value></data>
+  <data name="QueueCard.Header" xml:space="preserve"><value>Aynı anda indirme</value></data>
+  <data name="QueueCard.Description" xml:space="preserve"><value>Diğerleri sırada bekler ve indirmeler bittikçe # sütunundaki sırayla başlar. Paylaşım sayılmaz. 0 sınırsız demektir.</value></data>
+  <data name="QueueBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Aynı anda indirme</value></data>
   <data name="SettingsSpeedHeader.Text" xml:space="preserve"><value>Hız</value></data>
   <data name="DownloadLimitCard.Header" xml:space="preserve"><value>İndirme sınırı</value></data>
   <data name="DownloadLimitCard.Description" xml:space="preserve"><value>KB/sn; 0 sınırsız demektir.</value></data>

@@ -12,21 +12,32 @@ public interface ITorrentEngine : IAsyncDisposable
     /// <summary>Applies changed limits and port while running.</summary>
     Task ApplyOptionsAsync(EngineOptions options);
 
-    /// <summary>Adds a magnet link and starts it. Returns the torrent id; an already added torrent returns its existing id.</summary>
-    Task<string> AddMagnetAsync(string magnetLink, string saveDirectory);
+    /// <summary>
+    /// Adds a magnet link and starts it, or with <paramref name="queued"/> holds it back as <see cref="QueueAsync"/> does.
+    /// Returns the torrent id; an already added torrent returns its existing id.
+    /// </summary>
+    Task<string> AddMagnetAsync(string magnetLink, string saveDirectory, bool queued = false);
 
     /// <summary>Reads a .torrent file without adding it, so the user can pick files.</summary>
     Task<TorrentMetadata> ReadTorrentFileAsync(string torrentFilePath);
 
     /// <summary>
-    /// Adds a .torrent file and starts it, skipping the files whose indexes are in <paramref name="skippedFiles"/>.
+    /// Adds a .torrent file and starts it (or with <paramref name="queued"/> holds it back as <see cref="QueueAsync"/>
+    /// does), skipping the files whose indexes are in <paramref name="skippedFiles"/>.
     /// Returns the torrent id; an already added torrent returns its existing id.
     /// </summary>
-    Task<string> AddTorrentFileAsync(string torrentFilePath, string saveDirectory, IReadOnlySet<int>? skippedFiles = null);
+    Task<string> AddTorrentFileAsync(string torrentFilePath, string saveDirectory, IReadOnlySet<int>? skippedFiles = null, bool queued = false);
 
+    /// <summary>Starts a paused, stopped, queued or failed torrent.</summary>
     Task StartAsync(string id);
 
     Task PauseAsync(string id);
+
+    /// <summary>
+    /// Holds a torrent back in the download queue: it stops, shows as <see cref="TorrentStatus.Queued"/> and stays
+    /// stopped across restarts until <see cref="StartAsync"/> starts it. The app decides when (<see cref="DownloadQueue"/>).
+    /// </summary>
+    Task QueueAsync(string id);
 
     /// <summary>Stops and removes a torrent, optionally deleting the downloaded files.</summary>
     Task RemoveAsync(string id, bool deleteFiles);

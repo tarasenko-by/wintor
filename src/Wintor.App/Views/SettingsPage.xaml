@@ -100,6 +100,19 @@
                     AutomationProperties.AutomationId="NotifySwitch"
                     IsOn="{x:Bind ViewModel.NotifyWhenComplete, Mode=TwoWay}" />
             </toolkit:SettingsCard>
+            <toolkit:SettingsCard
+                x:Uid="QueueCard"
+                AutomationProperties.AutomationId="QueueCard"
+                HeaderIcon="{icons:Huge Kind=Sorting01, Size=20}">
+                <NumberBox
+                    x:Uid="QueueBox"
+                    MinWidth="200"
+                    AutomationProperties.AutomationId="QueueBox"
+                    Maximum="{x:Bind ViewModel.MaxActiveDownloadsLimit, Mode=OneTime}"
+                    Minimum="0"
+                    SpinButtonPlacementMode="Compact"
+                    Value="{x:Bind ViewModel.MaxActiveDownloads, Mode=TwoWay}" />
+            </toolkit:SettingsCard>
 
             <!--  Speed  -->
             <TextBlock x:Uid="SettingsSpeedHeader" Style="{StaticResource SectionHeaderStyle}" />

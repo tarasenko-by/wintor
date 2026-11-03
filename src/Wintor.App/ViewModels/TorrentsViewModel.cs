@@ -20,6 +20,11 @@ public partial class TorrentsViewModel : ObservableObject
     private Task? _initialization;
     private bool _refreshedOnce;
 
+    // The queue runs after a refresh and changes torrents the user may be changing at the same moment; a user action
+    // bumps this, and a queue run that sees it change stops instead of undoing what the user just did.
+    private int _userActions;
+    private bool _runningQueue;
+
     public TorrentsViewModel(ITorrentEngine engine, AppSettings settings, SpeedHistory speedHistory)
     {
         _engine = engine;
@@ -176,11 +181,12 @@ public partial class TorrentsViewModel : ObservableObject
 
     public Task<TorrentMetadata> ReadTorrentFileAsync(string path) => _engine.ReadTorrentFileAsync(path);
 
+    // With a limit, a new torrent joins the end of the queue; the refresh after the add starts it if a slot is free.
     public async Task AddMagnetAsync(string magnetLink, string? folder = null) =>
-        await RunAsync(async () => Reveal(await _engine.AddMagnetAsync(magnetLink, folder ?? _settings.DownloadDirectory)));
+        await RunAsync(async () => Reveal(await _engine.AddMagnetAsync(magnetLink, folder ?? _settings.DownloadDirectory, HasQueueLimit)));
 
     public async Task AddTorrentFileAsync(string path, string? folder = null, IReadOnlySet<int>? skippedFiles = null) =>
-        await RunAsync(async () => Reveal(await _engine.AddTorrentFileAsync(path, folder ?? _settings.DownloadDirectory, skippedFiles)));
+        await RunAsync(async () => Reveal(await _engine.AddTorrentFileAsync(path, folder ?? _settings.DownloadDirectory, skippedFiles, HasQueueLimit)));
 
     // --- Actions ---
 
@@ -191,27 +197,59 @@ public partial class TorrentsViewModel : ObservableObject
             {
                 await _engine.RemoveAsync(item.Id, deleteFiles);
                 _settings.Queue.Remove(item.Id);
+                _settings.ForcedDownloads.Remove(item.Id);
                 _settings.TorrentLabels.Remove(item.Id);
             }
 
             _settings.Save();
         });
 
+    /// <summary>Pauses torrents, queued ones included: a paused torrent leaves the queue until it is resumed.</summary>
     public Task PauseAsync(IEnumerable<TorrentItemViewModel> items) =>
         RunAsync(async () =>
         {
             foreach (TorrentItemViewModel item in items.Where(i => i.CanPause).ToList())
             {
                 await _engine.PauseAsync(item.Id);
+                _settings.ForcedDownloads.Remove(item.Id);
             }
+
+            _settings.Save();
         });
 
+    /// <summary>
+    /// Starts the torrents the user picked, paused or queued, right away: past the download limit if every slot is
+    /// taken (see <see cref="DownloadQueue"/>). Nothing else is paused to make room.
+    /// </summary>
     public Task ResumeAsync(IEnumerable<TorrentItemViewModel> items) =>
         RunAsync(async () =>
         {
-            foreach (TorrentItemViewModel item in items.Where(i => !i.CanPause).ToList())
+            foreach (TorrentItemViewModel item in items.Where(i => i.CanResume).ToList())
             {
+                Force(item.Id, item.IsComplete);
                 await _engine.StartAsync(item.Id);
+            }
+
+            _settings.Save();
+        });
+
+    /// <summary>
+    /// "Resume all" keeps to the limit: paused downloads go back into the queue, which starts as many as fit. Finished
+    /// torrents just seed.
+    /// </summary>
+    public Task ResumeAllAsync() =>
+        RunAsync(async () =>
+        {
+            foreach (TorrentItemViewModel item in _items.Values.Where(i => !i.CanPause).ToList())
+            {
+                if (HasQueueLimit && !item.IsComplete)
+                {
+                    await _engine.QueueAsync(item.Id);
+                }
+                else
+                {
+                    await _engine.StartAsync(item.Id);
+                }
             }
         });
 
@@ -242,13 +280,21 @@ public partial class TorrentsViewModel : ObservableObject
     public async Task<Uri?> PlayAsync(string id, int fileIndex)
     {
         Uri? link = null;
-        await RunAsync(async () => link = await Playback.PlayAsync(_engine, id, fileIndex));
+        await RunAsync(async () =>
+        {
+            // Playing starts the torrent: the user asked for it, so it does not wait in the queue.
+            if (_items.TryGetValue(id, out TorrentItemViewModel? item))
+            {
+                Force(id, item.IsComplete);
+                _settings.Save();
+            }
+
+            link = await Playback.PlayAsync(_engine, id, fileIndex);
+        });
         return link;
     }
 
     public Task PauseAllAsync() => PauseAsync(_items.Values);
-
-    public Task ResumeAllAsync() => ResumeAsync(_items.Values);
 
     [RelayCommand(CanExecute = nameof(CanPause))]
     private Task PauseSelectedAsync() => PauseAsync(SelectedTorrents);
@@ -258,7 +304,8 @@ public partial class TorrentsViewModel : ObservableObject
     [RelayCommand(CanExecute = nameof(CanResume))]
     private Task ResumeSelectedAsync() => ResumeAsync(SelectedTorrents);
 
-    private bool CanResume() => SelectedTorrents.Any(t => !t.CanPause);
+    // A queued torrent can be both: paused (it leaves the queue) or started now (past the limit).
+    private bool CanResume() => SelectedTorrents.Any(t => t.CanResume);
 
     // Generated command names read better without "Selected" in XAML.
     public IAsyncRelayCommand PauseCommand => PauseSelectedCommand;
@@ -427,8 +474,77 @@ public partial class TorrentsViewModel : ObservableObject
         _timer.Start();
     }
 
+    private bool HasQueueLimit => _settings.MaxActiveDownloads > 0;
+
+    /// <summary>A torrent the user starts by hand runs past the limit until it is done (see <see cref="DownloadQueue"/>).</summary>
+    private void Force(string id, bool isComplete)
+    {
+        if (HasQueueLimit && !isComplete && !_settings.ForcedDownloads.Contains(id))
+        {
+            _settings.ForcedDownloads.Add(id);
+        }
+    }
+
+    /// <summary>
+    /// Starts queued torrents as slots free up and holds back the extra ones (Core/DownloadQueue). Runs after every
+    /// refresh, so a finished, paused or removed download makes room within a second.
+    /// </summary>
+    private void RunQueue()
+    {
+        if (_runningQueue || IsLoading)
+        {
+            return;
+        }
+
+        // Done, gone, or the limit is off: nothing left to run past.
+        var unfinished = _snapshots.Where(s => !s.IsComplete).Select(s => s.Id).ToHashSet();
+        if (_settings.ForcedDownloads.RemoveAll(id => !HasQueueLimit || !unfinished.Contains(id)) > 0)
+        {
+            _settings.Save();
+        }
+
+        QueuePlan plan = DownloadQueue.Plan(
+            _snapshots, _settings.Queue, _settings.MaxActiveDownloads ?? 0, _settings.ForcedDownloads.ToHashSet());
+        if (!plan.IsEmpty)
+        {
+            _ = ApplyQueueAsync(plan);
+        }
+    }
+
+    private async Task ApplyQueueAsync(QueuePlan plan)
+    {
+        _runningQueue = true;
+        int actions = _userActions;
+        try
+        {
+            // Lets the refresh that asked for this finish with its snapshots first.
+            await Task.Yield();
+            foreach (string id in plan.Hold.Concat(plan.Start))
+            {
+                if (actions != _userActions)
+                {
+                    break;
+                }
+
+                await (plan.Hold.Contains(id) ? _engine.QueueAsync(id) : _engine.StartAsync(id));
+            }
+        }
+        catch (Exception e)
+        {
+            ErrorMessage = e.Message;
+        }
+        finally
+        {
+            // Shows the result now instead of on the next tick; the queue itself runs again on that tick, so a start
+            // that keeps failing cannot loop.
+            Refresh();
+            _runningQueue = false;
+        }
+    }
+
     private async Task RunAsync(Func<Task> action)
     {
+        _userActions++;
         ErrorMessage = null;
         try
         {
@@ -490,6 +606,7 @@ public partial class TorrentsViewModel : ObservableObject
         _refreshedOnce = !IsLoading;
         SyncVisible();
         UpdateCounts();
+        RunQueue();
     }
 
     /// <summary>New torrents join the end of the user's order; removed ones leave it.</summary>

@@ -84,6 +84,11 @@ public partial class TorrentItemViewModel(string id) : ObservableObject
 
     public bool CanPause => Status is not (TorrentStatus.Paused or TorrentStatus.Stopped or TorrentStatus.Stopping);
 
+    /// <summary>Stopped, or waiting in the queue: resuming starts it now. A queued torrent can be paused too.</summary>
+    public bool CanResume => !CanPause || IsQueued;
+
+    public bool IsQueued => Status == TorrentStatus.Queued;
+
     public bool IsComplete => Snapshot?.IsComplete == true;
 
     public string ContentPath => Snapshot?.ContentPath ?? "";
@@ -137,5 +142,7 @@ public partial class TorrentItemViewModel(string id) : ObservableObject
         AccessibleName = string.Join(", ", new[] { Name, Label, StatusText, ProgressText, SizeText, DownText, UpText }
             .Where(p => !string.IsNullOrEmpty(p)));
         OnPropertyChanged(nameof(CanPause));
+        OnPropertyChanged(nameof(CanResume));
+        OnPropertyChanged(nameof(IsQueued));
     }
 }

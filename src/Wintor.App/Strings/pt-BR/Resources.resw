@@ -49,6 +49,7 @@
   <data name="EngineCard.Description" xml:space="preserve"><value>MonoTorrent (MIT)</value></data>
   <data name="Status_Stopped" xml:space="preserve"><value>Parado</value></data>
   <data name="Status_Paused" xml:space="preserve"><value>Pausado</value></data>
+  <data name="Status_Queued" xml:space="preserve"><value>Na fila</value></data>
   <data name="Status_Starting" xml:space="preserve"><value>Iniciando…</value></data>
   <data name="Status_FetchingMetadata" xml:space="preserve"><value>Obtendo lista de arquivos…</value></data>
   <data name="Status_Checking" xml:space="preserve"><value>Verificando arquivos…</value></data>
@@ -87,6 +88,7 @@
   <data name="Error_BadTorrentFile" xml:space="preserve"><value>“{0}” não é um arquivo .torrent válido.</value></data>
   <data name="Menu_Resume" xml:space="preserve"><value>Retomar</value></data>
   <data name="Menu_Pause" xml:space="preserve"><value>Pausar</value></data>
+  <data name="Menu_StartNow" xml:space="preserve"><value>Iniciar agora</value></data>
   <data name="Menu_OpenFolder" xml:space="preserve"><value>Abrir pasta</value></data>
   <data name="Menu_Details" xml:space="preserve"><value>Detalhes</value></data>
   <data name="Menu_CopyMagnet" xml:space="preserve"><value>Copiar link magnet</value></data>
@@ -152,6 +154,9 @@
   <data name="NotifyCard.Header" xml:space="preserve"><value>Notificar quando um download for concluído</value></data>
   <data name="NotifyCard.Description" xml:space="preserve"><value>Uma notificação do Windows com um botão que abre a pasta.</value></data>
   <data name="NotifySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Notificar quando um download for concluído</value></data>
+  <data name="QueueCard.Header" xml:space="preserve"><value>Downloads simultâneos</value></data>
+  <data name="QueueCard.Description" xml:space="preserve"><value>Os demais esperam na fila e começam na ordem da coluna # conforme os downloads terminam. Semear não conta. 0 significa sem limite.</value></data>
+  <data name="QueueBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Downloads simultâneos</value></data>
   <data name="SettingsSpeedHeader.Text" xml:space="preserve"><value>Velocidade</value></data>
   <data name="DownloadLimitCard.Header" xml:space="preserve"><value>Limite de download</value></data>
   <data name="DownloadLimitCard.Description" xml:space="preserve"><value>KB/s; 0 significa sem limite.</value></data>

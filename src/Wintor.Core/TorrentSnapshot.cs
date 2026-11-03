@@ -4,6 +4,9 @@ public enum TorrentStatus
 {
     Stopped,
     Paused,
+
+    /// <summary>Waits in the download queue (Core/DownloadQueue) for a free slot; stopped until then.</summary>
+    Queued,
     Starting,
     FetchingMetadata,
     Checking,

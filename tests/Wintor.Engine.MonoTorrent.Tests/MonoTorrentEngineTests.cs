@@ -69,7 +69,51 @@ public sealed class MonoTorrentEngineTests : IDisposable
 
         TorrentSnapshot snapshot = Assert.Single(restarted.GetSnapshots());
         Assert.Equal(id, snapshot.Id);
-        Assert.Equal(TorrentStatus.Stopped, snapshot.Status);
+        Assert.Equal(TorrentStatus.Paused, snapshot.Status);
+    }
+
+    [Fact]
+    public async Task Queue_StopsTheTorrentAndShowsItAsQueued()
+    {
+        await using var engine = await CreateEngineAsync();
+        string id = await engine.AddMagnetAsync(Magnet, DownloadDir);
+
+        await engine.QueueAsync(id);
+
+        Assert.Equal(TorrentStatus.Queued, Assert.Single(engine.GetSnapshots()).Status);
+
+        await engine.StartAsync(id);
+
+        Assert.NotEqual(TorrentStatus.Queued, Assert.Single(engine.GetSnapshots()).Status);
+    }
+
+    [Fact]
+    public async Task AddQueued_DoesNotStartAndStaysQueuedAfterARestart()
+    {
+        int port = GetFreePort();
+        string id;
+        await using (var engine = await CreateEngineAsync(port))
+        {
+            id = await engine.AddMagnetAsync(Magnet, DownloadDir, queued: true);
+            Assert.Equal(TorrentStatus.Queued, Assert.Single(engine.GetSnapshots()).Status);
+        }
+
+        await using var restarted = await CreateEngineAsync(port);
+
+        TorrentSnapshot snapshot = Assert.Single(restarted.GetSnapshots());
+        Assert.Equal(id, snapshot.Id);
+        Assert.Equal(TorrentStatus.Queued, snapshot.Status);
+    }
+
+    [Fact]
+    public async Task PauseOfAQueuedTorrent_TakesItOutOfTheQueue()
+    {
+        await using var engine = await CreateEngineAsync();
+        string id = await engine.AddMagnetAsync(Magnet, DownloadDir, queued: true);
+
+        await engine.PauseAsync(id);
+
+        Assert.Equal(TorrentStatus.Paused, Assert.Single(engine.GetSnapshots()).Status);
     }
 
     [Fact]

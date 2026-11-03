@@ -30,6 +30,7 @@ public partial class SettingsViewModel : ObservableObject
         BackdropIndex = (int)settings.Backdrop;
         MaxDownloadKiB = settings.MaxDownloadKiB;
         MaxUploadKiB = settings.MaxUploadKiB;
+        MaxActiveDownloads = settings.MaxActiveDownloads ?? 0;
         ListenPort = settings.ListenPort;
         CloseToTray = settings.CloseToTray;
         TrayIconIndex = (int)settings.TrayIcon;
@@ -67,6 +68,12 @@ public partial class SettingsViewModel : ObservableObject
 
     [ObservableProperty]
     public partial double MaxUploadKiB { get; set; }
+
+    /// <summary>Downloads at a time; 0 means no limit (no queue).</summary>
+    [ObservableProperty]
+    public partial double MaxActiveDownloads { get; set; }
+
+    public double MaxActiveDownloadsLimit => DownloadQueue.MaxLimit;
 
     [ObservableProperty]
     public partial double ListenPort { get; set; }
@@ -177,6 +184,10 @@ public partial class SettingsViewModel : ObservableObject
     partial void OnMaxDownloadKiBChanged(double value) => SaveEngine(s => s.MaxDownloadKiB = Whole(value));
 
     partial void OnMaxUploadKiBChanged(double value) => SaveEngine(s => s.MaxUploadKiB = Whole(value));
+
+    // The torrent list applies it on its next refresh, within a second (Core/DownloadQueue).
+    partial void OnMaxActiveDownloadsChanged(double value) =>
+        Save(s => s.MaxActiveDownloads = double.IsNaN(value) ? 0 : (int)Math.Clamp(value, 0, DownloadQueue.MaxLimit));
 
     partial void OnListenPortChanged(double value)
     {

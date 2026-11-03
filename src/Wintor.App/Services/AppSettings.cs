@@ -33,6 +33,9 @@ public sealed class AppSettings
 {
     public const int DefaultListenPort = 52413;
 
+    /// <summary>Downloads at a time for a new install. Existing installs keep "no limit" (see <see cref="Load"/>).</summary>
+    public const int DefaultMaxActiveDownloads = 3;
+
     private string _filePath = "";
 
     public string DownloadDirectory { get; set; } =
@@ -70,8 +73,17 @@ public sealed class AppSettings
     public string WhatsNewSeenVersion { get; set; } = "";
 
 
-    /// <summary>The user's own order of torrents (the № column), by id.</summary>
+    /// <summary>The user's own order of torrents (the № column), by id. The download queue starts torrents in it.</summary>
     public List<string> Queue { get; set; } = [];
+
+    /// <summary>
+    /// How many torrents download at a time (Core/DownloadQueue); 0 means no limit. Null only in a settings file from
+    /// before the queue existed, until <see cref="Load"/> fills it in.
+    /// </summary>
+    public int? MaxActiveDownloads { get; set; }
+
+    /// <summary>Torrents the user started by hand past the limit: they download until done and never wait in the queue.</summary>
+    public List<string> ForcedDownloads { get; set; } = [];
 
     public TorrentSort Sort { get; set; } = TorrentSort.Queue;
 
@@ -111,9 +123,10 @@ public sealed class AppSettings
     {
         string path = Path.Combine(dataDirectory, "settings.json");
         AppSettings settings;
+        bool existed = File.Exists(path);
         try
         {
-            settings = File.Exists(path)
+            settings = existed
                 ? JsonSerializer.Deserialize(File.ReadAllText(path), AppSettingsJsonContext.Default.AppSettings) ?? new()
                 : new();
         }
@@ -122,6 +135,8 @@ public sealed class AppSettings
             settings = new();
         }
 
+        // An update must not suddenly hold back downloads the user has running: only a new install starts with a limit.
+        settings.MaxActiveDownloads ??= existed ? 0 : DefaultMaxActiveDownloads;
         settings._filePath = path;
         settings.EngineDirectory = Path.Combine(dataDirectory, "engine");
         return settings;

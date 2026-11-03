@@ -5,6 +5,14 @@ while testing; tick them off after a look by hand. Newest on top.
 
 ## Open
 
+- [ ] **Download queue** — Settings → Downloads → "Downloads at a time" = 2, then add four small legal torrents (or
+      resume four paused ones with Actions → Resume all): two download, two read "Queued" with a grey bar and show
+      in the Downloading view. Pause a downloading one: within a second the first queued one (by №) starts. Right-click
+      a queued row: "Start now" starts it at once and the other two keep going (three run). Move a queued row to the
+      top (Order → Move to top): it is the next to start, nothing running stops. Set the limit to 0: everything queued
+      starts. Quit (`wintor --quit`) with torrents queued and start again: they are still "Queued", not downloading.
+      With "When done → Quit when downloads finish" on, Wintor waits for the queued ones too.
+
 - [ ] **When done (Actions)** — side pane → Actions → When done: Off is ticked; on a PC without hibernation (or
       Modern Standby) Hibernate is not listed. Pick "Quit Wintor when downloads finish" with a small legal torrent
       downloading: Actions gets a dot and the tooltip names the choice; when it finishes the window comes back (also

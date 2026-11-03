@@ -82,12 +82,11 @@ public sealed class WhenDoneWatch
         };
 
     /// <summary>
-    /// Still going to download something. Paused, stopped and failed torrents do not count: the user stopped them,
-    /// or they need the user (as "Downloading" in the side pane does not wait for them either).
+    /// Still going to download something, now or once the queue gets to it. Paused, stopped and failed torrents do not
+    /// count: the user stopped them, or they need the user (as "Downloading" in the side pane does not wait for them
+    /// either).
     /// </summary>
-    public static bool IsDownloading(TorrentSnapshot t) =>
-        t.Status is TorrentStatus.Downloading or TorrentStatus.FetchingMetadata
-        || (t.Status is TorrentStatus.Starting or TorrentStatus.Checking && !t.IsComplete);
+    public static bool IsDownloading(TorrentSnapshot t) => DownloadQueue.IsActive(t) || t.Status == TorrentStatus.Queued;
 
     /// <summary>Uploading a finished torrent, or about to (a finished one starting or being checked).</summary>
     public static bool IsSeeding(TorrentSnapshot t) =>

@@ -48,10 +48,11 @@ All under the app's local data folder (`AppSettings` knows the path):
 
 | File | Owner | Holds |
 |---|---|---|
-| `settings.json` | `AppSettings` | Preferences, labels and their colors, queue order, column layout |
+| `settings.json` | `AppSettings` | Preferences, labels and their colors, queue order and download limit, column layout |
 | `engine.state` | MonoTorrent | The torrents themselves (restored on launch) |
 | `cache/` | MonoTorrent | Fast-resume data, magnet metadata, DHT nodes |
 | `paused.txt` | engine adapter | Ids the user paused — MonoTorrent restores everything as stopped |
+| `queued.txt` | engine adapter | Ids waiting in the download queue, kept stopped on launch (the app's `DownloadQueue` decides when they start) |
 | `had-data.txt` | engine adapter | Ids that had downloaded data, to notice when their files were deleted |
 | `download-order.txt` | engine adapter | Torrents set to download in order or first and last pieces first — MonoTorrent does not save it |
 
