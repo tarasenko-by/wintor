@@ -228,6 +228,12 @@
   <data name="Menu_MoveUp" xml:space="preserve"><value>Nach oben</value></data>
   <data name="Menu_MoveDown" xml:space="preserve"><value>Nach unten</value></data>
   <data name="Menu_MoveBottom" xml:space="preserve"><value>Ans Ende</value></data>
+  <data name="MoveUpButton.Label" xml:space="preserve"><value>Nach oben</value></data>
+  <data name="MoveUpButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Nach oben (Alt+↑)</value></data>
+  <data name="MoveDownButton.Label" xml:space="preserve"><value>Nach unten</value></data>
+  <data name="MoveDownButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Nach unten (Alt+↓)</value></data>
+  <data name="MoveTopButton.Label" xml:space="preserve"><value>An den Anfang</value></data>
+  <data name="MoveBottomButton.Label" xml:space="preserve"><value>Ans Ende</value></data>
   <data name="Menu_DeleteLabel" xml:space="preserve"><value>Label löschen</value></data>
   <data name="LabelDialog_Title" xml:space="preserve"><value>Neues Label</value></data>
   <data name="LabelDialog_Header" xml:space="preserve"><value>Name</value></data>

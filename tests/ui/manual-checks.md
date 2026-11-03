@@ -35,8 +35,9 @@ while testing; tick them off after a look by hand. Newest on top.
       General: "Downloaded" fills while downloading, "Availability" shows parts peers have; Speed graph moves.
 - [ ] **Labels** — right-click → Label → New label…: the label appears in the side pane with a count and as a pill
       on the row; picking it in the side pane filters; right-click the label in the side pane → Delete label.
-- [ ] **Order (№)** — right-click → Order → Move up / down / top / bottom and Alt+↑/↓ move the row and switch the
-      table to the № order.
+- [ ] **Order (№)** — right-click → Order → Move up / down / top / bottom, Alt+↑/↓, and the command bar's Move up /
+      Move down (Move to top / bottom under "…") move the row and switch the table to the № order; the bar's
+      buttons are greyed with nothing selected.
 
 - [ ] **Tray** — close the window: Wintor stays in the notification area, a one-time "still running"
       notification appears; left-click the icon brings the window back; right-click menu: Open, Resume all,

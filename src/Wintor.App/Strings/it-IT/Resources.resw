@@ -228,6 +228,12 @@
   <data name="Menu_MoveUp" xml:space="preserve"><value>Sposta su</value></data>
   <data name="Menu_MoveDown" xml:space="preserve"><value>Sposta giù</value></data>
   <data name="Menu_MoveBottom" xml:space="preserve"><value>Sposta in fondo</value></data>
+  <data name="MoveUpButton.Label" xml:space="preserve"><value>Sposta su</value></data>
+  <data name="MoveUpButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Sposta su (Alt+↑)</value></data>
+  <data name="MoveDownButton.Label" xml:space="preserve"><value>Sposta giù</value></data>
+  <data name="MoveDownButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Sposta giù (Alt+↓)</value></data>
+  <data name="MoveTopButton.Label" xml:space="preserve"><value>Sposta in alto</value></data>
+  <data name="MoveBottomButton.Label" xml:space="preserve"><value>Sposta in fondo</value></data>
   <data name="Menu_DeleteLabel" xml:space="preserve"><value>Elimina etichetta</value></data>
   <data name="LabelDialog_Title" xml:space="preserve"><value>Nuova etichetta</value></data>
   <data name="LabelDialog_Header" xml:space="preserve"><value>Nome</value></data>

@@ -115,6 +115,14 @@ try {
     Test-UI 'Torrents page loads with commands' {
         Invoke-Ui @('wait-for', 'AddMagnetButton', '-t', '5000')
         Invoke-Ui @('wait-for', 'OpenFileButton', '-t', '2000')
+        # The command bar may move these into "…" on a narrow window, so only check they exist somewhere.
+        foreach ($id in 'MoveUpButton', 'MoveDownButton') {
+            try { Invoke-Ui @('wait-for', $id, '-t', '1000') | Out-Null } catch {
+                Invoke-Ui @('invoke', 'MoreButton') | Out-Null
+                Invoke-Ui @('wait-for', $id, '-t', '2000') | Out-Null
+                Invoke-Ui @('invoke', 'MoreButton') | Out-Null
+            }
+        }
     }
     Test-UI 'Torrents page screenshot' { Save-Screenshot '01-torrents.png' }
     Test-UI 'Remove is reachable (directly or via the overflow menu)' {

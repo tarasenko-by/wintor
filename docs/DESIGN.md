@@ -57,7 +57,8 @@ They are binding for all UI changes (see [AGENTS.md](../AGENTS.md)).
     queued (red on error). Piece bars use `PieceBarBrush` (green).
     Use the `Torrent*Brush` palette keys, never ad-hoc colors.
   - Click selects (Ctrl/Shift for several, Ctrl+A, Esc clears); the selected torrent shows in the pane below.
-    Right-click menu acts on the whole selection when the row is part of it. № order: Alt+↑/↓, or the "Order" menu.
+    Right-click menu acts on the whole selection when the row is part of it. № order: Alt+↑/↓, the "Order" menu, or the command bar
+    (Move up / Move down, and Move to top / bottom under "…").
     "Speed limit…" sets per-torrent download/upload limits in KB/s (0 = none); the global limit from Settings still
     applies. The Transfer section shows them.
   - **Download queue** (`Core/DownloadQueue`): at most N torrents download at a time (Settings → Downloads →
