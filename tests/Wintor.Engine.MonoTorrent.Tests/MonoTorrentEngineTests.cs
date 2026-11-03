@@ -1,4 +1,4 @@
-using System.Net;
+﻿using System.Net;
 using System.Net.Sockets;
 using Wintor.Core;
 
@@ -114,6 +114,65 @@ public sealed class MonoTorrentEngineTests : IDisposable
         await engine.PauseAsync(id);
 
         Assert.Equal(TorrentStatus.Paused, Assert.Single(engine.GetSnapshots()).Status);
+    }
+
+    [Fact]
+    public async Task PauseAndResumeMidDownload_StillFinishes()
+    {
+        // MonoTorrent counts the written blocks of a piece per mode, and resuming from its pause starts a new mode
+        // without resetting the piece picker: a piece caught half-written by the pause was never hash checked, never
+        // asked for again, and the torrent sat at 99 % with seeds connected. A local tracker, seed and leech over
+        // loopback, with our own random data, reproduce it without the network.
+        const int pieceLength = 64 * 1024;
+        string source = Path.Combine(_root, "swarm-source");
+        Directory.CreateDirectory(source);
+        var data = new byte[32 * pieceLength];
+        new Random(1).NextBytes(data);
+        await File.WriteAllBytesAsync(Path.Combine(source, "payload.bin"), data);
+
+        int trackerPort = GetFreeUdpPort();
+        using var tracker = new global::MonoTorrent.TrackerServer.TrackerServer { AllowUnregisteredTorrents = true };
+        var listener = global::MonoTorrent.Connections.TrackerServer.TrackerListenerFactory.CreateUdp(IPAddress.Loopback, trackerPort);
+        tracker.RegisterListener(listener);
+        listener.Start();
+        int announces = 0;
+        tracker.PeerAnnounced += (_, _) => Interlocked.Increment(ref announces);
+
+        var creator = new global::MonoTorrent.TorrentCreator { PieceLength = pieceLength };
+        creator.Announces.Add([$"udp://127.0.0.1:{trackerPort}/announce"]);
+        var torrent = await creator.CreateAsync(new global::MonoTorrent.TorrentFileSource(Path.Combine(source, "payload.bin")));
+        string torrentPath = Path.Combine(_root, "swarm.torrent");
+        await File.WriteAllBytesAsync(torrentPath, torrent.Encode());
+
+        // The seed uploads slowly enough (about 8 s for the payload) that the pauses land in the middle of pieces.
+        await using var seed = new MonoTorrentEngine(new EngineOptions
+        {
+            DataDirectory = Path.Combine(_root, "seed-data"),
+            ListenPort = GetFreePort(),
+            MaxUploadRate = 4 * pieceLength,
+        });
+        await seed.InitializeAsync();
+        await seed.AddTorrentFileAsync(torrentPath, source);
+        await WaitUntilAsync(() => seed.GetSnapshots().Single().IsComplete && Volatile.Read(ref announces) > 0);
+        // MonoTorrent applies the rate limit on its second tick (1 s); until then the upload is unlimited.
+        await Task.Delay(1500);
+
+        await using var leech = await CreateEngineAsync();
+        string id = await leech.AddTorrentFileAsync(torrentPath, DownloadDir);
+        await WaitUntilAsync(() => leech.GetSnapshots().Single().Progress > 0);
+        Assert.False(leech.GetSnapshots().Single().IsComplete, "Finished before the first pause; the test proves nothing.");
+
+        // One pause strands a piece only now and then, so there are several.
+        for (int i = 0; i < 5 && !leech.GetSnapshots().Single().IsComplete; i++)
+        {
+            await leech.PauseAsync(id);
+            await Task.Delay(200);
+            await leech.StartAsync(id);
+            await Task.Delay(200);
+        }
+
+        await WaitUntilAsync(() => leech.GetSnapshots().Single().IsComplete, TimeSpan.FromSeconds(30));
+        Assert.Equal(data, await File.ReadAllBytesAsync(Path.Combine(DownloadDir, "payload.bin")));
     }
 
     [Fact]
@@ -403,9 +462,9 @@ public sealed class MonoTorrentEngineTests : IDisposable
         return path;
     }
 
-    private static async Task WaitUntilAsync(Func<bool> condition)
+    private static async Task WaitUntilAsync(Func<bool> condition, TimeSpan? timeout = null)
     {
-        var deadline = DateTime.UtcNow.AddSeconds(15);
+        var deadline = DateTime.UtcNow + (timeout ?? TimeSpan.FromSeconds(15));
         while (!condition())
         {
             Assert.True(DateTime.UtcNow < deadline, "Timed out waiting for the engine.");
@@ -418,5 +477,11 @@ public sealed class MonoTorrentEngineTests : IDisposable
         using var listener = new TcpListener(IPAddress.Loopback, 0);
         listener.Start();
         return ((IPEndPoint)listener.LocalEndpoint).Port;
+    }
+
+    private static int GetFreeUdpPort()
+    {
+        using var socket = new UdpClient(new IPEndPoint(IPAddress.Loopback, 0));
+        return ((IPEndPoint)socket.Client.LocalEndPoint!).Port;
     }
 }
