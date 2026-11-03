@@ -134,22 +134,23 @@ void Preview(string pngPath)
     Console.WriteLine($"preview of {files.Length} icons -> {pngPath}");
 }
 
-// The app logo: a rounded tile with an indigo-to-sky gradient and the download-01 arrow in white.
+// The app logo: a rounded tile with a green gradient and the down arrow of download-01 (without its tray) in white.
 // Renders every MSIX asset and AppIcon.ico, so the logo is changed here, not in an image editor.
 void Logo()
 {
     string assets = Path.Combine(root, "src", "Wintor.App", "Assets");
-    // A slightly heavier stroke than the 1.5 of the UI icons reads better on the tile. The tray keeps 1.5:
-    // one pixel at 16 px, as thin as the Windows icons next to it.
-    using SKPath glyph = Glyph("download-01", 2);
-    using SKPath trayGlyph = Glyph("download-circle-01", 1.5f);
+    // A slightly heavier stroke than the 1.5 of the UI icons reads better on the tile.
+    using SKPath glyph = Glyph("download-01", 2, skip: 1);
+    using SKPath trayGlyph = FilledCircleGlyph("download-circle-01", 2);
 
     (string File, int Width, int Height, float TileShare)[] targets =
     [
         ("Square44x44Logo.scale-200.png", 88, 88, 1f),
         ("Square44x44Logo.targetsize-24_altform-unplated.png", 24, 24, 1f),
         ("Square44x44Logo.targetsize-48_altform-lightunplated.png", 48, 48, 1f),
-        ("Square150x150Logo.scale-200.png", 300, 300, 0.6f),
+        // The Store shows this tile as the app's icon in listings, edge to edge next to other apps' icons:
+        // the logo fills it like the 44x44 one does (a small inset tile read as an undersized icon there).
+        ("Square150x150Logo.scale-200.png", 300, 300, 1f),
         ("Wide310x150Logo.scale-200.png", 620, 300, 0.6f),
         ("SplashScreen.scale-200.png", 1240, 600, 0.4f),
         ("LockScreenLogo.scale-200.png", 48, 48, 1f),
@@ -163,7 +164,7 @@ void Logo()
 
     WriteIco("AppIcon.ico", [16, 20, 24, 32, 40, 48, 64, 256], s => Render(s, s, 1f));
 
-    // The monochrome tray icon: an arrow in a circle, line-drawn like the Windows icons next to it, in the taskbar's text color.
+    // The monochrome tray icon: a solid circle with the arrow cut out, in the taskbar's text color.
     // "Light" is for a light taskbar (a dark arrow), "Dark" for a dark one. Sizes cover the tray from 100 to 300%.
     int[] traySizes = [16, 20, 24, 32, 40, 48];
     WriteIco("TrayIconLight.ico", traySizes, s => RenderGlyph(s, new SKColor(0, 0, 0, 0xE4)));
@@ -210,9 +211,15 @@ void Logo()
         return png.ToArray();
     }
 
-    SKPath Glyph(string name, float strokeWidth)
+    // `skip` drops the icon's first elements (download-01's tray, leaving the arrow).
+    SKPath Glyph(string name, float strokeWidth, int skip = 0)
     {
         XDocument svg = XDocument.Load(Path.Combine(iconsDir, name + ".svg"));
+        foreach (XElement e in svg.Root!.Elements().Take(skip).ToList())
+        {
+            e.Remove();
+        }
+
         foreach (XElement e in svg.Root!.Descendants())
         {
             e.SetAttributeValue("stroke-width", strokeWidth.ToString(CultureInfo.InvariantCulture));
@@ -222,6 +229,34 @@ void Logo()
         SKPath path = SKPath.ParseSvgPathData(outline[3..]);
         path.FillType = outline.StartsWith("F0") ? SKPathFillType.EvenOdd : SKPathFillType.Winding;
         return path;
+    }
+
+    // Hugeicons free has only line icons, so the solid version is made here: the circle of a
+    // "<name>" icon (its first element) becomes a disc out to the line's outer edge, and the
+    // rest of the drawing is cut out of it at `cutWidth` (wider than 1.5, so the cut stays
+    // open at 16 px).
+    SKPath FilledCircleGlyph(string name, float cutWidth)
+    {
+        XDocument svg = XDocument.Load(Path.Combine(iconsDir, name + ".svg"));
+        XElement circle = svg.Root!.Elements().First();
+        SKRect ring;
+        using (SKPath shape = ToPath(circle)!)
+        {
+            ring = shape.Bounds;
+        }
+
+        float outer = ring.Width / 2 + Number(circle, "stroke-width", 1.5f) / 2;
+        circle.Remove();
+        foreach (XElement e in svg.Root.Descendants())
+        {
+            e.SetAttributeValue("stroke-width", cutWidth.ToString(CultureInfo.InvariantCulture));
+        }
+
+        string outline = Outline(svg);
+        using SKPath cut = SKPath.ParseSvgPathData(outline[3..]);
+        using var disc = new SKPath();
+        disc.AddCircle(ring.MidX, ring.MidY, outer);
+        return disc.Op(cut, SKPathOp.Difference);
     }
 
     byte[] Render(int width, int height, float share)
@@ -242,14 +277,16 @@ void Logo()
             Shader = SKShader.CreateLinearGradient(
                 new SKPoint(rect.Left, rect.Top),
                 new SKPoint(rect.Right, rect.Bottom),
-                [new SKColor(0x63, 0x66, 0xF1), new SKColor(0x0E, 0xA5, 0xE9)],
+                [new SKColor(0x4A, 0xDE, 0x80), new SKColor(0x16, 0xA3, 0x4A)],
                 SKShaderTileMode.Clamp),
         };
         canvas.DrawRoundRect(rect, radius, radius, tilePaint);
 
-        float scale = rect.Width * 0.62f / 24f;
+        // The arrow alone is tall and narrow: size it by its height and center it by its own bounds.
+        SKRect bounds = glyph.Bounds;
+        float scale = rect.Height * 0.56f / bounds.Height;
         canvas.Save();
-        canvas.Translate(rect.MidX - 12 * scale, rect.MidY - 12 * scale);
+        canvas.Translate(rect.MidX - bounds.MidX * scale, rect.MidY - bounds.MidY * scale);
         canvas.Scale(scale);
         using var glyphPaint = new SKPaint { IsAntialias = true, Color = SKColors.White };
         canvas.DrawPath(glyph, glyphPaint);
