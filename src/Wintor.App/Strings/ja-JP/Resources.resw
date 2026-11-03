@@ -228,6 +228,12 @@
   <data name="Menu_MoveUp" xml:space="preserve"><value>上へ移動</value></data>
   <data name="Menu_MoveDown" xml:space="preserve"><value>下へ移動</value></data>
   <data name="Menu_MoveBottom" xml:space="preserve"><value>末尾へ移動</value></data>
+  <data name="MoveUpButton.Label" xml:space="preserve"><value>上へ移動</value></data>
+  <data name="MoveUpButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>上へ移動 (Alt+↑)</value></data>
+  <data name="MoveDownButton.Label" xml:space="preserve"><value>下へ移動</value></data>
+  <data name="MoveDownButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>下へ移動 (Alt+↓)</value></data>
+  <data name="MoveTopButton.Label" xml:space="preserve"><value>先頭へ移動</value></data>
+  <data name="MoveBottomButton.Label" xml:space="preserve"><value>末尾へ移動</value></data>
   <data name="Menu_DeleteLabel" xml:space="preserve"><value>ラベルを削除</value></data>
   <data name="LabelDialog_Title" xml:space="preserve"><value>新しいラベル</value></data>
   <data name="LabelDialog_Header" xml:space="preserve"><value>名前</value></data>

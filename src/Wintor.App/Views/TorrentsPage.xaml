@@ -118,6 +118,20 @@
                         <KeyboardAccelerator Key="Delete" />
                     </AppBarButton.KeyboardAccelerators>
                 </AppBarButton>
+                <AppBarSeparator />
+                <!--  The № order, which the download queue follows. Alt+↑/↓ is handled by the table (TorrentList_KeyDown).  -->
+                <AppBarButton
+                    x:Uid="MoveUpButton"
+                    AutomationProperties.AutomationId="MoveUpButton"
+                    Click="MoveUp_Click"
+                    Icon="{icons:Huge Kind=ArrowUp01, Size=20}"
+                    IsEnabled="{x:Bind ViewModel.HasSelection, Mode=OneWay}" />
+                <AppBarButton
+                    x:Uid="MoveDownButton"
+                    AutomationProperties.AutomationId="MoveDownButton"
+                    Click="MoveDown_Click"
+                    Icon="{icons:Huge Kind=ArrowDown01, Size=20}"
+                    IsEnabled="{x:Bind ViewModel.HasSelection, Mode=OneWay}" />
                 <!--  Sorting is done from the column headers.  -->
                 <CommandBar.SecondaryCommands>
                     <AppBarButton
@@ -125,6 +139,18 @@
                         AutomationProperties.AutomationId="CopyMagnetButton"
                         Click="CopyMagnet_Click"
                         Icon="{icons:Huge Kind=Copy01}"
+                        IsEnabled="{x:Bind ViewModel.HasSelection, Mode=OneWay}" />
+                    <AppBarButton
+                        x:Uid="MoveTopButton"
+                        AutomationProperties.AutomationId="MoveTopButton"
+                        Click="MoveTop_Click"
+                        Icon="{icons:Huge Kind=ArrowUpDouble}"
+                        IsEnabled="{x:Bind ViewModel.HasSelection, Mode=OneWay}" />
+                    <AppBarButton
+                        x:Uid="MoveBottomButton"
+                        AutomationProperties.AutomationId="MoveBottomButton"
+                        Click="MoveBottom_Click"
+                        Icon="{icons:Huge Kind=ArrowDownDouble}"
                         IsEnabled="{x:Bind ViewModel.HasSelection, Mode=OneWay}" />
                     <AppBarSeparator />
                     <AppBarButton

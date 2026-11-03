@@ -441,7 +441,7 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
             .HasFlag(Windows.UI.Core.CoreVirtualKeyStates.Down);
         if (alt && e.Key is VirtualKey.Up or VirtualKey.Down && ViewModel.HasSelection)
         {
-            ViewModel.Move(ViewModel.SelectedTorrents, e.Key == VirtualKey.Up ? -1 : 1);
+            Move(ViewModel.SelectedTorrents, e.Key == VirtualKey.Up ? -1 : 1);
             e.Handled = true;
         }
         else if (e.Key == VirtualKey.Escape && TorrentList.SelectedItems.Count > 0)
@@ -474,6 +474,38 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
     private void PauseAll_Click(object sender, RoutedEventArgs e) => _ = ViewModel.PauseAllAsync();
 
     private void SelectAll_Click(object sender, RoutedEventArgs e) => TorrentList.SelectAll();
+
+    private void MoveUp_Click(object sender, RoutedEventArgs e) => Move(ViewModel.SelectedTorrents, -1);
+
+    private void MoveDown_Click(object sender, RoutedEventArgs e) => Move(ViewModel.SelectedTorrents, 1);
+
+    private void MoveTop_Click(object sender, RoutedEventArgs e) => Move(ViewModel.SelectedTorrents, int.MinValue);
+
+    private void MoveBottom_Click(object sender, RoutedEventArgs e) => Move(ViewModel.SelectedTorrents, int.MaxValue);
+
+    /// <summary>
+    /// Moves torrents in the № order (<see cref="TorrentsViewModel.Move"/>) and keeps the selection: the list moves a
+    /// row by taking it out and putting it back, which drops it from the selection once the list has caught up, and a
+    /// move is often repeated (Move up, Move up…). The moved row stays in view.
+    /// </summary>
+    private void Move(IReadOnlyList<TorrentItemViewModel> items, int step)
+    {
+        List<TorrentItemViewModel> moving = items.ToList();
+        List<TorrentItemViewModel> selected = ViewModel.SelectedTorrents.ToList();
+        ViewModel.Move(moving, step);
+        DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () =>
+        {
+            foreach (TorrentItemViewModel item in selected.Where(i => ViewModel.Torrents.Contains(i) && !TorrentList.SelectedItems.Contains(i)))
+            {
+                TorrentList.SelectedItems.Add(item);
+            }
+
+            if (moving.Count > 0)
+            {
+                TorrentList.ScrollIntoView(moving[0]);
+            }
+        });
+    }
 
     private async Task ConfirmRemoveAsync(IReadOnlyList<TorrentItemViewModel> items)
     {
@@ -755,10 +787,10 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
     private MenuFlyoutSubItem OrderMenu(IReadOnlyList<TorrentItemViewModel> targets)
     {
         var menu = new MenuFlyoutSubItem { Text = Strings.Get("Menu_Order"), Icon = HugeIcons.Create(HugeIconKind.Sorting01) };
-        menu.Items.Add(Entry("Menu_MoveTop", HugeIconKind.ArrowUpDouble, () => ViewModel.Move(targets, int.MinValue)));
-        menu.Items.Add(Entry("Menu_MoveUp", HugeIconKind.ArrowUp01, () => ViewModel.Move(targets, -1), "Alt+↑"));
-        menu.Items.Add(Entry("Menu_MoveDown", HugeIconKind.ArrowDown01, () => ViewModel.Move(targets, 1), "Alt+↓"));
-        menu.Items.Add(Entry("Menu_MoveBottom", HugeIconKind.ArrowDownDouble, () => ViewModel.Move(targets, int.MaxValue)));
+        menu.Items.Add(Entry("Menu_MoveTop", HugeIconKind.ArrowUpDouble, () => Move(targets, int.MinValue)));
+        menu.Items.Add(Entry("Menu_MoveUp", HugeIconKind.ArrowUp01, () => Move(targets, -1), "Alt+↑"));
+        menu.Items.Add(Entry("Menu_MoveDown", HugeIconKind.ArrowDown01, () => Move(targets, 1), "Alt+↓"));
+        menu.Items.Add(Entry("Menu_MoveBottom", HugeIconKind.ArrowDownDouble, () => Move(targets, int.MaxValue)));
         return menu;
     }
 
