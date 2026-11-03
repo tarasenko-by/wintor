@@ -244,6 +244,8 @@
   <data name="TabSpeed.Text" xml:space="preserve"><value>Скорость</value></data>
   <data name="BarDownloaded.Text" xml:space="preserve"><value>Загружено</value></data>
   <data name="BarAvailability.Text" xml:space="preserve"><value>Доступность</value></data>
+  <data name="BarAvailability.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Сколько полных копий торрента есть у подключённых пиров вместе. Меньше 1 — какой-то части нет ни у кого из них.</value></data>
+  <data name="AvailabilityCopies" xml:space="preserve"><value>{0} копии</value></data>
   <data name="SectionTransfer.Text" xml:space="preserve"><value>Передача</value></data>
   <data name="SectionGeneral.Text" xml:space="preserve"><value>Общие сведения</value></data>
   <data name="Info_TimeActive" xml:space="preserve"><value>Время работы</value></data>

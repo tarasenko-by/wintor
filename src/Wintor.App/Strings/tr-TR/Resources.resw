@@ -244,6 +244,8 @@
   <data name="TabSpeed.Text" xml:space="preserve"><value>Hız</value></data>
   <data name="BarDownloaded.Text" xml:space="preserve"><value>İndirilen</value></data>
   <data name="BarAvailability.Text" xml:space="preserve"><value>Kullanılabilirlik</value></data>
+  <data name="BarAvailability.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Bağlı eşlerin toplamda torrentin kaç tam kopyasına sahip olduğu. 1’in altında, bazı parçalar bağlı eşlerin hiçbirinde yok.</value></data>
+  <data name="AvailabilityCopies" xml:space="preserve"><value>{0} kopya</value></data>
   <data name="SectionTransfer.Text" xml:space="preserve"><value>Aktarım</value></data>
   <data name="SectionGeneral.Text" xml:space="preserve"><value>Genel</value></data>
   <data name="Info_TimeActive" xml:space="preserve"><value>Etkin süre</value></data>
