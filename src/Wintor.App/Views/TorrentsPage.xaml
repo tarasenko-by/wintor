@@ -53,10 +53,12 @@
         </Grid.RowDefinitions>
 
         <!--  Commands, left-aligned; the view's name is the selected item in the side pane.  -->
-        <Grid Margin="-4,0,0,4">
+        <!--  Each button's hover highlight is inset 2 px; -2 puts the first one on the table's left edge.  -->
+        <Grid Margin="-2,0,0,4">
             <!--  Takes the whole width so commands move into the "…" overflow on narrow windows.  -->
             <CommandBar
                 x:Uid="TorrentCommands"
+                Padding="0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Background="Transparent"
@@ -65,10 +67,13 @@
                 <!--
                     20 px icons in the bar (the "…" menu keeps its 16 px; the template fixes that size), centered in
                     the 48 px button: 14 + 20 + 14. The "…" button's width is set in App.xaml.
+                    While the "…" menu is open the bar keeps its look: no acrylic fill and no outline around the buttons.
                 -->
                 <CommandBar.Resources>
                     <x:Double x:Key="AppBarButtonContentHeight">20</x:Double>
                     <Thickness x:Key="AppBarButtonContentViewboxCollapsedMargin">0,14,0,14</Thickness>
+                    <StaticResource x:Key="CommandBarBackgroundOpen" ResourceKey="ControlFillColorTransparentBrush" />
+                    <Thickness x:Key="CommandBarBorderThicknessOpen">0</Thickness>
                 </CommandBar.Resources>
                 <AppBarButton
                     x:Uid="OpenFileButton"
