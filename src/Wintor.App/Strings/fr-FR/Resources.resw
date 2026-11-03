@@ -244,6 +244,8 @@
   <data name="TabSpeed.Text" xml:space="preserve"><value>Vitesse</value></data>
   <data name="BarDownloaded.Text" xml:space="preserve"><value>Téléchargé</value></data>
   <data name="BarAvailability.Text" xml:space="preserve"><value>Disponibilité</value></data>
+  <data name="BarAvailability.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Nombre de copies complètes du torrent que les pairs connectés possèdent ensemble. En dessous de 1, certaines parties ne sont chez aucun d’entre eux.</value></data>
+  <data name="AvailabilityCopies" xml:space="preserve"><value>{0} copies</value></data>
   <data name="SectionTransfer.Text" xml:space="preserve"><value>Transfert</value></data>
   <data name="SectionGeneral.Text" xml:space="preserve"><value>Général</value></data>
   <data name="Info_TimeActive" xml:space="preserve"><value>Durée d’activité</value></data>

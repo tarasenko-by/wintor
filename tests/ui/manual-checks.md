@@ -5,6 +5,10 @@ while testing; tick them off after a look by hand. Newest on top.
 
 ## Open
 
+- [ ] **Availability as copies** — select a downloading torrent with peers (or `wintor --demo`): General →
+      "Availability" reads like "25.9 copies" ("25,9 копии" in Russian), one decimal, and fits its column without
+      trimming in English, German and Russian; the bars do not shift as the number changes; "—" without peers.
+      Hovering the "Availability" label explains it. Light and dark theme, narrow and wide window.
 - [ ] **Resume after pause** — pause a torrent in the middle of a download and resume it: it reconnects within a
       few seconds and finishes, never sitting at 99 % with seeds connected and 0 B/s.
 

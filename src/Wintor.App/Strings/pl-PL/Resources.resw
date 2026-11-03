@@ -244,6 +244,8 @@
   <data name="TabSpeed.Text" xml:space="preserve"><value>Prędkość</value></data>
   <data name="BarDownloaded.Text" xml:space="preserve"><value>Pobrano</value></data>
   <data name="BarAvailability.Text" xml:space="preserve"><value>Dostępność</value></data>
+  <data name="BarAvailability.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Ile pełnych kopii torrenta mają razem połączone peery. Poniżej 1 części torrenta nie ma żaden z nich.</value></data>
+  <data name="AvailabilityCopies" xml:space="preserve"><value>{0} kopii</value></data>
   <data name="SectionTransfer.Text" xml:space="preserve"><value>Transfer</value></data>
   <data name="SectionGeneral.Text" xml:space="preserve"><value>Ogólne</value></data>
   <data name="Info_TimeActive" xml:space="preserve"><value>Czas aktywności</value></data>

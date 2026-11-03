@@ -244,6 +244,8 @@
   <data name="TabSpeed.Text" xml:space="preserve"><value>速度</value></data>
   <data name="BarDownloaded.Text" xml:space="preserve"><value>ダウンロード済み</value></data>
   <data name="BarAvailability.Text" xml:space="preserve"><value>可用性</value></data>
+  <data name="BarAvailability.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>接続中のピアが合わせて持っているトレントの完全なコピー数です。1 未満の場合、どのピアも持っていない部分があります。</value></data>
+  <data name="AvailabilityCopies" xml:space="preserve"><value>{0} コピー</value></data>
   <data name="SectionTransfer.Text" xml:space="preserve"><value>転送</value></data>
   <data name="SectionGeneral.Text" xml:space="preserve"><value>全般</value></data>
   <data name="Info_TimeActive" xml:space="preserve"><value>稼働時間</value></data>
