@@ -5,6 +5,9 @@ while testing; tick them off after a look by hand. Newest on top.
 
 ## Open
 
+- [ ] **Resume after pause** — pause a torrent in the middle of a download and resume it: it reconnects within a
+      few seconds and finishes, never sitting at 99 % with seeds connected and 0 B/s.
+
 - [ ] **Download queue** — Settings → Downloads → "Downloads at a time" = 2, then add four small legal torrents (or
       resume four paused ones with Actions → Resume all): two download, two read "Queued" with a grey bar and show
       in the Downloading view. Pause a downloading one: within a second the first queued one (by №) starts. Right-click

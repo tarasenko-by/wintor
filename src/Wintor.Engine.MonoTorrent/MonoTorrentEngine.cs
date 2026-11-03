@@ -379,9 +379,13 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
 
         if (manager.State is TorrentState.Paused or TorrentState.Stopped or TorrentState.Error or TorrentState.HashingPaused)
         {
-            if (manager.State == TorrentState.Error)
+            if (manager.State is TorrentState.Error or TorrentState.Paused)
             {
-                // Clears the error so the manager can start again (e.g. after the user freed disk space).
+                // Error: clears the error so the manager can start again (e.g. after the user freed disk space).
+                // Paused: MonoTorrent resumes a pause in a fresh mode that counts the written blocks of each piece from
+                // zero but keeps the piece picker, which already counts the blocks received before. A piece the pause
+                // caught half-written is then never hash checked and never asked for again, and the torrent sits at
+                // 99 % with seeds connected. A real start sets the picker up again from what is on disk.
                 await manager.StopAsync();
             }
 
