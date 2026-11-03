@@ -49,6 +49,7 @@
   <data name="EngineCard.Description" xml:space="preserve"><value>MonoTorrent (MIT)</value></data>
   <data name="Status_Stopped" xml:space="preserve"><value>Beendet</value></data>
   <data name="Status_Paused" xml:space="preserve"><value>Pausiert</value></data>
+  <data name="Status_Queued" xml:space="preserve"><value>In Warteschlange</value></data>
   <data name="Status_Starting" xml:space="preserve"><value>Wird gestartet…</value></data>
   <data name="Status_FetchingMetadata" xml:space="preserve"><value>Dateiliste wird abgerufen…</value></data>
   <data name="Status_Checking" xml:space="preserve"><value>Dateien werden geprüft…</value></data>
@@ -87,6 +88,7 @@
   <data name="Error_BadTorrentFile" xml:space="preserve"><value>„{0}“ ist keine gültige .torrent-Datei.</value></data>
   <data name="Menu_Resume" xml:space="preserve"><value>Fortsetzen</value></data>
   <data name="Menu_Pause" xml:space="preserve"><value>Pausieren</value></data>
+  <data name="Menu_StartNow" xml:space="preserve"><value>Jetzt starten</value></data>
   <data name="Menu_OpenFolder" xml:space="preserve"><value>Ordner öffnen</value></data>
   <data name="Menu_Details" xml:space="preserve"><value>Details</value></data>
   <data name="Menu_CopyMagnet" xml:space="preserve"><value>Magnet-Link kopieren</value></data>
@@ -152,6 +154,9 @@
   <data name="NotifyCard.Header" xml:space="preserve"><value>Benachrichtigen, wenn ein Download abgeschlossen ist</value></data>
   <data name="NotifyCard.Description" xml:space="preserve"><value>Eine Windows-Benachrichtigung mit einer Schaltfläche zum Öffnen des Ordners.</value></data>
   <data name="NotifySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Benachrichtigen, wenn ein Download abgeschlossen ist</value></data>
+  <data name="QueueCard.Header" xml:space="preserve"><value>Gleichzeitige Downloads</value></data>
+  <data name="QueueCard.Description" xml:space="preserve"><value>Weitere warten in der Warteschlange und starten in der Reihenfolge der Spalte #, sobald Downloads fertig sind. Seeding zählt nicht. 0 bedeutet unbegrenzt.</value></data>
+  <data name="QueueBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Gleichzeitige Downloads</value></data>
   <data name="SettingsSpeedHeader.Text" xml:space="preserve"><value>Geschwindigkeit</value></data>
   <data name="DownloadLimitCard.Header" xml:space="preserve"><value>Download-Limit</value></data>
   <data name="DownloadLimitCard.Description" xml:space="preserve"><value>KB/s; 0 bedeutet unbegrenzt.</value></data>

@@ -62,6 +62,7 @@ public static class Demo
         }
 
         settings.Queue = engine.Order.ToList();
+        settings.MaxActiveDownloads = DemoEngine.MaxActiveDownloads;
         settings.Save();
         return settings;
     }

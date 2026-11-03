@@ -49,6 +49,7 @@
   <data name="EngineCard.Description" xml:space="preserve"><value>MonoTorrent (MIT)</value></data>
   <data name="Status_Stopped" xml:space="preserve"><value>Zatrzymany</value></data>
   <data name="Status_Paused" xml:space="preserve"><value>Wstrzymany</value></data>
+  <data name="Status_Queued" xml:space="preserve"><value>W kolejce</value></data>
   <data name="Status_Starting" xml:space="preserve"><value>Uruchamianie…</value></data>
   <data name="Status_FetchingMetadata" xml:space="preserve"><value>Pobieranie listy plików…</value></data>
   <data name="Status_Checking" xml:space="preserve"><value>Sprawdzanie plików…</value></data>
@@ -87,6 +88,7 @@
   <data name="Error_BadTorrentFile" xml:space="preserve"><value>„{0}” nie jest prawidłowym plikiem .torrent.</value></data>
   <data name="Menu_Resume" xml:space="preserve"><value>Wznów</value></data>
   <data name="Menu_Pause" xml:space="preserve"><value>Wstrzymaj</value></data>
+  <data name="Menu_StartNow" xml:space="preserve"><value>Uruchom teraz</value></data>
   <data name="Menu_OpenFolder" xml:space="preserve"><value>Otwórz folder</value></data>
   <data name="Menu_Details" xml:space="preserve"><value>Szczegóły</value></data>
   <data name="Menu_CopyMagnet" xml:space="preserve"><value>Kopiuj link magnet</value></data>
@@ -152,6 +154,9 @@
   <data name="NotifyCard.Header" xml:space="preserve"><value>Powiadamiaj o zakończeniu pobierania</value></data>
   <data name="NotifyCard.Description" xml:space="preserve"><value>Powiadomienie systemu Windows z przyciskiem otwierającym folder.</value></data>
   <data name="NotifySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Powiadamiaj o zakończeniu pobierania</value></data>
+  <data name="QueueCard.Header" xml:space="preserve"><value>Jednoczesne pobierania</value></data>
+  <data name="QueueCard.Description" xml:space="preserve"><value>Pozostałe czekają w kolejce i startują w kolejności kolumny #, gdy pobierania się kończą. Seedowanie się nie liczy. 0 oznacza brak limitu.</value></data>
+  <data name="QueueBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Jednoczesne pobierania</value></data>
   <data name="SettingsSpeedHeader.Text" xml:space="preserve"><value>Prędkość</value></data>
   <data name="DownloadLimitCard.Header" xml:space="preserve"><value>Limit pobierania</value></data>
   <data name="DownloadLimitCard.Description" xml:space="preserve"><value>KB/s; 0 oznacza brak limitu.</value></data>

@@ -49,6 +49,7 @@
   <data name="EngineCard.Description" xml:space="preserve"><value>MonoTorrent (MIT)</value></data>
   <data name="Status_Stopped" xml:space="preserve"><value>Stopped</value></data>
   <data name="Status_Paused" xml:space="preserve"><value>Paused</value></data>
+  <data name="Status_Queued" xml:space="preserve"><value>Queued</value></data>
   <data name="Status_Starting" xml:space="preserve"><value>Starting…</value></data>
   <data name="Status_FetchingMetadata" xml:space="preserve"><value>Getting file list…</value></data>
   <data name="Status_Checking" xml:space="preserve"><value>Checking files…</value></data>
@@ -87,6 +88,7 @@
   <data name="Error_BadTorrentFile" xml:space="preserve"><value>“{0}” is not a valid .torrent file.</value></data>
   <data name="Menu_Resume" xml:space="preserve"><value>Resume</value></data>
   <data name="Menu_Pause" xml:space="preserve"><value>Pause</value></data>
+  <data name="Menu_StartNow" xml:space="preserve"><value>Start now</value></data>
   <data name="Menu_OpenFolder" xml:space="preserve"><value>Open folder</value></data>
   <data name="Menu_Details" xml:space="preserve"><value>Details</value></data>
   <data name="Menu_CopyMagnet" xml:space="preserve"><value>Copy magnet link</value></data>
@@ -152,6 +154,9 @@
   <data name="NotifyCard.Header" xml:space="preserve"><value>Notify when a download finishes</value></data>
   <data name="NotifyCard.Description" xml:space="preserve"><value>A Windows notification with a button that opens the folder.</value></data>
   <data name="NotifySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Notify when a download finishes</value></data>
+  <data name="QueueCard.Header" xml:space="preserve"><value>Downloads at a time</value></data>
+  <data name="QueueCard.Description" xml:space="preserve"><value>The rest wait in the queue and start in the order of the # column as downloads finish. Seeding does not count. 0 means no limit.</value></data>
+  <data name="QueueBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Downloads at a time</value></data>
   <data name="SettingsSpeedHeader.Text" xml:space="preserve"><value>Speed</value></data>
   <data name="DownloadLimitCard.Header" xml:space="preserve"><value>Download limit</value></data>
   <data name="DownloadLimitCard.Description" xml:space="preserve"><value>KB/s; 0 means no limit.</value></data>

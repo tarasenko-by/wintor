@@ -49,6 +49,7 @@
   <data name="EngineCard.Description" xml:space="preserve"><value>MonoTorrent (MIT)</value></data>
   <data name="Status_Stopped" xml:space="preserve"><value>停止済み</value></data>
   <data name="Status_Paused" xml:space="preserve"><value>一時停止中</value></data>
+  <data name="Status_Queued" xml:space="preserve"><value>待機中</value></data>
   <data name="Status_Starting" xml:space="preserve"><value>開始中…</value></data>
   <data name="Status_FetchingMetadata" xml:space="preserve"><value>ファイル一覧を取得中…</value></data>
   <data name="Status_Checking" xml:space="preserve"><value>ファイルを確認中…</value></data>
@@ -87,6 +88,7 @@
   <data name="Error_BadTorrentFile" xml:space="preserve"><value>「{0}」は有効な .torrent ファイルではありません。</value></data>
   <data name="Menu_Resume" xml:space="preserve"><value>再開</value></data>
   <data name="Menu_Pause" xml:space="preserve"><value>一時停止</value></data>
+  <data name="Menu_StartNow" xml:space="preserve"><value>今すぐ開始</value></data>
   <data name="Menu_OpenFolder" xml:space="preserve"><value>フォルダーを開く</value></data>
   <data name="Menu_Details" xml:space="preserve"><value>詳細</value></data>
   <data name="Menu_CopyMagnet" xml:space="preserve"><value>マグネットリンクをコピー</value></data>
@@ -152,6 +154,9 @@
   <data name="NotifyCard.Header" xml:space="preserve"><value>ダウンロード完了時に通知</value></data>
   <data name="NotifyCard.Description" xml:space="preserve"><value>フォルダーを開くボタン付きの Windows 通知を表示します。</value></data>
   <data name="NotifySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>ダウンロード完了時に通知</value></data>
+  <data name="QueueCard.Header" xml:space="preserve"><value>同時ダウンロード数</value></data>
+  <data name="QueueCard.Description" xml:space="preserve"><value>残りはキューで待機し、ダウンロードが終わるたびに # 列の順番で開始します。シードは数えません。0 は無制限です。</value></data>
+  <data name="QueueBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>同時ダウンロード数</value></data>
   <data name="SettingsSpeedHeader.Text" xml:space="preserve"><value>速度</value></data>
   <data name="DownloadLimitCard.Header" xml:space="preserve"><value>ダウンロード速度の制限</value></data>
   <data name="DownloadLimitCard.Description" xml:space="preserve"><value>単位は KB/s です。0 は無制限です。</value></data>

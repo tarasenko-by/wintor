@@ -40,6 +40,7 @@ later, x64 and ARM64. The Store keeps it up to date. To build it yourself, see [
 - Details pane below the table: piece map and availability, files with per-file priority, peers, trackers,
   speed graph
 - Select several torrents to pause, resume, label or remove them together; right-click menu on every row
+- A download queue: a few torrents download at a time (3 by default), the rest wait their turn in your order
 - Speed limits for everything and for each torrent; listening port, start with Windows
 - Keeps seeding in the notification area when the window is closed; "download finished" notifications
 - Explains problems in plain words — files deleted, disk full, no network — and resumes when you fix them

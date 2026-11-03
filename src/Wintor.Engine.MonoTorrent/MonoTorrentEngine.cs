@@ -19,6 +19,9 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
     // MonoTorrent restores every torrent as stopped, so we remember which ones the user paused.
     private HashSet<string> _pausedIds = [];
 
+    // Torrents waiting in the app's download queue: stopped like paused ones, but shown as Queued.
+    private HashSet<string> _queuedIds = [];
+
     // Monitor.DownloadRate/UploadRate include protocol overhead (handshakes, keep-alives, "have"
     // messages), so a finished torrent would show traffic. We measure payload bytes only.
     private readonly Dictionary<string, (RateMeter Down, RateMeter Up)> _rates = [];
@@ -52,6 +55,8 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
     private string OrderPath => Path.Combine(_options.DataDirectory, "download-order.txt");
 
     private string PausedPath => Path.Combine(_options.DataDirectory, "paused.txt");
+
+    private string QueuedPath => Path.Combine(_options.DataDirectory, "queued.txt");
 
     private string HadDataPath => Path.Combine(_options.DataDirectory, "had-data.txt");
 
@@ -91,6 +96,7 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
         cancellationToken.ThrowIfCancellationRequested();
         _engine = engine;
         _pausedIds = await LoadIdsAsync(PausedPath);
+        _queuedIds = await LoadIdsAsync(QueuedPath);
         _hadDataIds = await LoadIdsAsync(HadDataPath);
         _orders = await LoadOrdersAsync(OrderPath);
 
@@ -107,7 +113,7 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
             {
                 _missingIds.Add(id);
             }
-            else if (manager.State == TorrentState.Stopped && !_pausedIds.Contains(id))
+            else if (manager.State == TorrentState.Stopped && !_pausedIds.Contains(id) && !_queuedIds.Contains(id))
             {
                 await manager.StartAsync();
                 _startedIds.Add(id);
@@ -115,7 +121,7 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
         }
     }
 
-    public async Task<string> AddMagnetAsync(string magnetLink, string saveDirectory)
+    public async Task<string> AddMagnetAsync(string magnetLink, string saveDirectory, bool queued = false)
     {
         MagnetLink magnet = MagnetLink.Parse(magnetLink.Trim());
         TorrentManager? existing = Find(magnet.InfoHashes);
@@ -126,7 +132,7 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
 
         Directory.CreateDirectory(saveDirectory);
         TorrentManager manager = await Engine.AddAsync(magnet, saveDirectory);
-        await manager.StartAsync();
+        await StartOrQueueNewAsync(manager, queued);
         await SaveStateAsync();
         return IdOf(manager);
     }
@@ -149,7 +155,7 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
             torrent.Files.Select((f, i) => new TorrentMetadataFile(i, f.Path, f.Length)).ToList());
     }
 
-    public async Task<string> AddTorrentFileAsync(string torrentFilePath, string saveDirectory, IReadOnlySet<int>? skippedFiles = null)
+    public async Task<string> AddTorrentFileAsync(string torrentFilePath, string saveDirectory, IReadOnlySet<int>? skippedFiles = null, bool queued = false)
     {
         Torrent torrent = await Torrent.LoadAsync(torrentFilePath);
         TorrentManager? existing = Find(torrent.InfoHashes);
@@ -171,7 +177,7 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
             }
         }
 
-        await manager.StartAsync();
+        await StartOrQueueNewAsync(manager, queued);
         await SaveStateAsync();
         return IdOf(manager);
     }
@@ -365,6 +371,12 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
     public async Task StartAsync(string id)
     {
         TorrentManager manager = Get(id);
+        // First, so the row does not read "Queued" while the torrent is already starting.
+        if (_queuedIds.Remove(id))
+        {
+            await SaveQueuedIdsAsync();
+        }
+
         if (manager.State is TorrentState.Paused or TorrentState.Stopped or TorrentState.Error or TorrentState.HashingPaused)
         {
             if (manager.State == TorrentState.Error)
@@ -405,6 +417,31 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
         {
             await SavePausedIdsAsync();
         }
+
+        if (_queuedIds.Remove(id))
+        {
+            await SaveQueuedIdsAsync();
+        }
+    }
+
+    public async Task QueueAsync(string id)
+    {
+        TorrentManager manager = Get(id);
+        // Stopped, not paused: a waiting torrent should not hold on to peers and connection slots others could use.
+        if (manager.State is not (TorrentState.Stopped or TorrentState.Error))
+        {
+            await manager.StopAsync();
+        }
+
+        if (_queuedIds.Add(id))
+        {
+            await SaveQueuedIdsAsync();
+        }
+
+        if (_pausedIds.Remove(id))
+        {
+            await SavePausedIdsAsync();
+        }
     }
 
     public async Task RemoveAsync(string id, bool deleteFiles)
@@ -423,6 +460,11 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
         if (_pausedIds.Remove(id))
         {
             await SavePausedIdsAsync();
+        }
+
+        if (_queuedIds.Remove(id))
+        {
+            await SaveQueuedIdsAsync();
         }
 
         if (_orders.Remove(id))
@@ -529,6 +571,24 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
     }
 
     private Task SavePausedIdsAsync() => File.WriteAllLinesAsync(PausedPath, _pausedIds);
+
+    private Task SaveQueuedIdsAsync() => File.WriteAllLinesAsync(QueuedPath, _queuedIds);
+
+    /// <summary>A torrent just added starts at once, or waits in the queue without ever having connected.</summary>
+    private async Task StartOrQueueNewAsync(TorrentManager manager, bool queued)
+    {
+        if (queued)
+        {
+            if (_queuedIds.Add(IdOf(manager)))
+            {
+                await SaveQueuedIdsAsync();
+            }
+        }
+        else
+        {
+            await manager.StartAsync();
+        }
+    }
 
     private static IPieceRequester CreateRequester(DownloadOrder order) =>
         order.IsDefault ? new StandardPieceRequester(PieceRequesterSettings.Default) : new OrderedPieceRequester(order);
@@ -669,7 +729,7 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
         return new(
             Id: id,
             Name: manager.Name,
-            Status: missing ? TorrentStatus.Error : ToStatus(manager.State),
+            Status: missing ? TorrentStatus.Error : StatusOf(manager, id),
             Progress: manager.Progress / 100.0,
             TotalSize: manager.Torrent is { } torrent ? ContentSize(torrent) : manager.MagnetLink?.Size ?? 0,
             DownloadRate: rate.Down.Sample(manager.Monitor.DataBytesReceived, now),
@@ -689,6 +749,16 @@ public sealed class MonoTorrentEngine(EngineOptions options) : ITorrentEngine
                 : TorrentProblem.None,
         };
     }
+
+    /// <summary>
+    /// MonoTorrent has no queue and restores every torrent as stopped, so a stopped torrent reads as what the user or
+    /// the queue made it.
+    /// </summary>
+    private TorrentStatus StatusOf(TorrentManager manager, string id) =>
+        manager.State != TorrentState.Stopped ? ToStatus(manager.State)
+        : _queuedIds.Contains(id) ? TorrentStatus.Queued
+        : _pausedIds.Contains(id) ? TorrentStatus.Paused
+        : TorrentStatus.Stopped;
 
     private static TorrentStatus ToStatus(TorrentState state) => state switch
     {

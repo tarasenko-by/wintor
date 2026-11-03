@@ -49,6 +49,7 @@
   <data name="EngineCard.Description" xml:space="preserve"><value>MonoTorrent (MIT)</value></data>
   <data name="Status_Stopped" xml:space="preserve"><value>Arrêté</value></data>
   <data name="Status_Paused" xml:space="preserve"><value>En pause</value></data>
+  <data name="Status_Queued" xml:space="preserve"><value>En file d’attente</value></data>
   <data name="Status_Starting" xml:space="preserve"><value>Démarrage…</value></data>
   <data name="Status_FetchingMetadata" xml:space="preserve"><value>Récupération des fichiers…</value></data>
   <data name="Status_Checking" xml:space="preserve"><value>Vérification…</value></data>
@@ -87,6 +88,7 @@
   <data name="Error_BadTorrentFile" xml:space="preserve"><value>« {0} » n’est pas un fichier .torrent valide.</value></data>
   <data name="Menu_Resume" xml:space="preserve"><value>Reprendre</value></data>
   <data name="Menu_Pause" xml:space="preserve"><value>Mettre en pause</value></data>
+  <data name="Menu_StartNow" xml:space="preserve"><value>Démarrer maintenant</value></data>
   <data name="Menu_OpenFolder" xml:space="preserve"><value>Ouvrir le dossier</value></data>
   <data name="Menu_Details" xml:space="preserve"><value>Détails</value></data>
   <data name="Menu_CopyMagnet" xml:space="preserve"><value>Copier le lien magnet</value></data>
@@ -152,6 +154,9 @@
   <data name="NotifyCard.Header" xml:space="preserve"><value>Notifier à la fin d’un téléchargement</value></data>
   <data name="NotifyCard.Description" xml:space="preserve"><value>Une notification Windows avec un bouton pour ouvrir le dossier.</value></data>
   <data name="NotifySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Notifier à la fin d’un téléchargement</value></data>
+  <data name="QueueCard.Header" xml:space="preserve"><value>Téléchargements simultanés</value></data>
+  <data name="QueueCard.Description" xml:space="preserve"><value>Les autres attendent dans la file et démarrent dans l’ordre de la colonne # à mesure que les téléchargements se terminent. Le partage ne compte pas. 0 = illimité.</value></data>
+  <data name="QueueBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Téléchargements simultanés</value></data>
   <data name="SettingsSpeedHeader.Text" xml:space="preserve"><value>Vitesse</value></data>
   <data name="DownloadLimitCard.Header" xml:space="preserve"><value>Limite de téléchargement</value></data>
   <data name="DownloadLimitCard.Description" xml:space="preserve"><value>Ko/s ; 0 = illimité.</value></data>

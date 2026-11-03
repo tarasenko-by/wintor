@@ -68,16 +68,17 @@ public static class TorrentQuery
             descending ? torrents.OrderByDescending(key, comparer) : torrents.OrderBy(key, comparer);
     }
 
-    /// <summary>Active first: downloading, getting metadata, checking, seeding, then paused, stopped, errors.</summary>
+    /// <summary>Active first: downloading, getting metadata, checking, queued, seeding, then paused, stopped, errors.</summary>
     private static int StatusRank(TorrentSnapshot t) => t.Status switch
     {
         TorrentStatus.Downloading => 0,
         TorrentStatus.FetchingMetadata or TorrentStatus.Starting => 1,
         TorrentStatus.Checking => 2,
-        TorrentStatus.Seeding => 3,
-        TorrentStatus.Paused => 4,
-        TorrentStatus.Stopped or TorrentStatus.Stopping => 5,
-        _ => 6,
+        TorrentStatus.Queued => 3,
+        TorrentStatus.Seeding => 4,
+        TorrentStatus.Paused => 5,
+        TorrentStatus.Stopped or TorrentStatus.Stopping => 6,
+        _ => 7,
     };
 
     private static int IndexIn(IReadOnlyList<TorrentSnapshot> list, TorrentSnapshot t)

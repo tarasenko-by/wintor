@@ -49,6 +49,7 @@
   <data name="EngineCard.Description" xml:space="preserve"><value>MonoTorrent (MIT)</value></data>
   <data name="Status_Stopped" xml:space="preserve"><value>Зупинено</value></data>
   <data name="Status_Paused" xml:space="preserve"><value>Призупинено</value></data>
+  <data name="Status_Queued" xml:space="preserve"><value>У черзі</value></data>
   <data name="Status_Starting" xml:space="preserve"><value>Запуск…</value></data>
   <data name="Status_FetchingMetadata" xml:space="preserve"><value>Отримання списку файлів…</value></data>
   <data name="Status_Checking" xml:space="preserve"><value>Перевірка файлів…</value></data>
@@ -87,6 +88,7 @@
   <data name="Error_BadTorrentFile" xml:space="preserve"><value>«{0}» — не файл .torrent або його пошкоджено.</value></data>
   <data name="Menu_Resume" xml:space="preserve"><value>Відновити</value></data>
   <data name="Menu_Pause" xml:space="preserve"><value>Призупинити</value></data>
+  <data name="Menu_StartNow" xml:space="preserve"><value>Запустити зараз</value></data>
   <data name="Menu_OpenFolder" xml:space="preserve"><value>Відкрити папку</value></data>
   <data name="Menu_Details" xml:space="preserve"><value>Докладно</value></data>
   <data name="Menu_CopyMagnet" xml:space="preserve"><value>Копіювати magnet-посилання</value></data>
@@ -152,6 +154,9 @@
   <data name="NotifyCard.Header" xml:space="preserve"><value>Сповіщати про завершення завантаження</value></data>
   <data name="NotifyCard.Description" xml:space="preserve"><value>Сповіщення Windows із кнопкою «Відкрити папку».</value></data>
   <data name="NotifySwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Сповіщати про завершення завантаження</value></data>
+  <data name="QueueCard.Header" xml:space="preserve"><value>Одночасних завантажень</value></data>
+  <data name="QueueCard.Description" xml:space="preserve"><value>Решта чекають у черзі й запускаються в порядку стовпця №, коли завантаження завершуються. Роздача не враховується. 0 — без обмеження.</value></data>
+  <data name="QueueBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Одночасних завантажень</value></data>
   <data name="SettingsSpeedHeader.Text" xml:space="preserve"><value>Швидкість</value></data>
   <data name="DownloadLimitCard.Header" xml:space="preserve"><value>Обмеження завантаження</value></data>
   <data name="DownloadLimitCard.Description" xml:space="preserve"><value>КБ/с; 0 — без обмеження.</value></data>

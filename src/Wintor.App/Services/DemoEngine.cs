@@ -86,10 +86,19 @@ public sealed class DemoEngine : ITorrentEngine
             Active = TimeSpan.FromHours(5),
         },
         new("Spring (2019) — Blender Studio", 0, 0, TorrentStatus.FetchingMetadata, 0, 0, 2, 0) { Label = "Movies" },
+        // Waits for a free slot: the demo's settings allow five downloads at a time (see Demo.CreateSettings).
+        new("Cosmos Laundromat (2015) 1080p", 1_640 * MiB, 0, TorrentStatus.Queued, 3_600_000, 150_000, 52, 14)
+        {
+            Label = "Movies",
+            Files = [("cosmos_laundromat_1080p.mp4", 0.99), ("poster.jpg", 0.01)],
+        },
     ];
 
     private readonly DateTime _start = DateTime.UtcNow;
     private double _lastSeconds;
+
+    /// <summary>Downloads at a time in the demo: the five running ones, so the last torrent waits in the queue.</summary>
+    public const int MaxActiveDownloads = 5;
 
     /// <summary>The labels, their colors and which torrent has which, for the demo's own settings.</summary>
     public static IReadOnlyList<(string Name, string Color)> Labels { get; } =
@@ -113,25 +122,34 @@ public sealed class DemoEngine : ITorrentEngine
 
     public Task ApplyOptionsAsync(EngineOptions options) => Task.CompletedTask;
 
-    public Task<string> AddMagnetAsync(string magnetLink, string saveDirectory) =>
+    public Task<string> AddMagnetAsync(string magnetLink, string saveDirectory, bool queued = false) =>
         throw new InvalidOperationException("The demo does not add torrents.");
 
     public Task<TorrentMetadata> ReadTorrentFileAsync(string torrentFilePath) =>
         throw new InvalidOperationException("The demo does not add torrents.");
 
-    public Task<string> AddTorrentFileAsync(string torrentFilePath, string saveDirectory, IReadOnlySet<int>? skippedFiles = null) =>
+    public Task<string> AddTorrentFileAsync(string torrentFilePath, string saveDirectory, IReadOnlySet<int>? skippedFiles = null, bool queued = false) =>
         throw new InvalidOperationException("The demo does not add torrents.");
 
     public Task StartAsync(string id)
     {
         Item item = Get(id);
-        item.Status = item.Progress >= 1 ? TorrentStatus.Seeding : TorrentStatus.Downloading;
+        // A magnet link whose files are not known yet goes back to getting them.
+        item.Status = item.Progress >= 1 ? TorrentStatus.Seeding
+            : item.Size == 0 ? TorrentStatus.FetchingMetadata
+            : TorrentStatus.Downloading;
         return Task.CompletedTask;
     }
 
     public Task PauseAsync(string id)
     {
         Get(id).Status = TorrentStatus.Paused;
+        return Task.CompletedTask;
+    }
+
+    public Task QueueAsync(string id)
+    {
+        Get(id).Status = TorrentStatus.Queued;
         return Task.CompletedTask;
     }
 

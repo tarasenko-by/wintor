@@ -58,10 +58,11 @@ public class TorrentQueryTests
         {
             Row("stopped", status: TorrentStatus.Stopped),
             Row("seeding", status: TorrentStatus.Seeding),
+            Row("queued", status: TorrentStatus.Queued),
             Row("downloading", status: TorrentStatus.Downloading),
         };
 
-        Assert.Equal(["downloading", "seeding", "stopped"], TorrentQuery.Sort(rows, TorrentSort.Status, false, []).Select(t => t.Id));
+        Assert.Equal(["downloading", "queued", "seeding", "stopped"], TorrentQuery.Sort(rows, TorrentSort.Status, false, []).Select(t => t.Id));
     }
 
     [Theory]

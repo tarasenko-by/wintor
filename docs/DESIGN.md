@@ -53,12 +53,21 @@ They are binding for all UI changes (see [AGENTS.md](../AGENTS.md)).
     Choices and widths are remembered. A narrower window never hides a chosen column: the name shrinks to 200 px,
     then every other column shrinks in proportion to its width down to its minimum (wide enough for its header and
     values), and below that the header and rows scroll sideways together (`TableColumns.Fit`, `ColumnFit.Shrink`).
-  - Progress color says the state: **blue** downloading, **green** finished and seeding, **grey** paused / stopped (red on error). Piece bars use `PieceBarBrush` (green).
+  - Progress color says the state: **blue** downloading, **green** finished and seeding, **grey** paused / stopped /
+    queued (red on error). Piece bars use `PieceBarBrush` (green).
     Use the `Torrent*Brush` palette keys, never ad-hoc colors.
   - Click selects (Ctrl/Shift for several, Ctrl+A, Esc clears); the selected torrent shows in the pane below.
     Right-click menu acts on the whole selection when the row is part of it. № order: Alt+↑/↓, or the "Order" menu.
     "Speed limit…" sets per-torrent download/upload limits in KB/s (0 = none); the global limit from Settings still
     applies. The Transfer section shows them.
+  - **Download queue** (`Core/DownloadQueue`): at most N torrents download at a time (Settings → Downloads →
+    "Downloads at a time"; 3 on a new install, 0 = no limit, which is what an install from before the queue keeps so
+    an update never stops a running download). The rest read "Queued" and start in № order as downloads finish, are
+    paused or removed. Seeding takes no slot; a torrent checking its files is never stopped for the queue. New torrents
+    join the end of the queue. What the user starts by hand runs at once, past the limit, and nobody else is paused
+    for it: Resume, "Start now" (the row menu of a queued torrent, next to Pause) and Play. It takes a slot while it
+    downloads, so the queue waits until the total is under the limit again. "Resume all" keeps to the limit.
+    Moving a queued torrent up the № order makes it next; it never stops a running one.
     "Download order" (a submenu, off by default) has "From start to end" and "First and last pieces first"; a tick
     means every chosen torrent has it. "Play" (single torrent with a video or audio file) opens its largest one; rows
     of the Files tab have a Play button. A finished file opens in its default app; one still downloading streams to

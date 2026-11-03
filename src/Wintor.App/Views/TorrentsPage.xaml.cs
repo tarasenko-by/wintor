@@ -640,9 +640,15 @@ public sealed partial class TorrentsPage : Page, ISearchablePage
         // Right-clicking a row that is part of a multi-selection acts on the whole selection.
         IReadOnlyList<TorrentItemViewModel> targets = ViewModel.SelectedTorrents.Contains(item) ? ViewModel.SelectedTorrents : [item];
 
-        // One entry, like the command bar: Pause when all of them run, otherwise Resume.
+        // One entry, like the command bar: Pause when all of them run, otherwise Resume. Torrents waiting in the queue
+        // can also start now, past the download limit.
         if (targets.All(t => t.CanPause))
         {
+            if (targets.Any(t => t.IsQueued))
+            {
+                _itemMenu.Items.Add(Entry("Menu_StartNow", HugeIconKind.Play, () => _ = ViewModel.ResumeAsync(targets)));
+            }
+
             _itemMenu.Items.Add(Entry("Menu_Pause", HugeIconKind.Pause, () => _ = ViewModel.PauseAsync(targets)));
         }
         else
