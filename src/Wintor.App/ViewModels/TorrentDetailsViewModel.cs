@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using Wintor.App.Services;
@@ -225,8 +226,11 @@ public partial class TorrentDetailsViewModel : ObservableObject
             Downloaded = details.Downloaded;
             Available = details.Available;
             DownloadedText = s.TotalSize > 0 ? $"{s.Progress * 100:0.#}%" : "";
-            // Copies among connected peers: without peers there is nothing to count.
-            AvailabilityText = details.Peers.Count > 0 ? details.Availability.ToString("0.000") : "—";
+            // Full copies among connected peers, so it moves as peers come and go; without peers there is nothing to
+            // count. A bare "26,432" read as a count of thousands: one decimal and the unit say what it is.
+            AvailabilityText = details.Peers.Count > 0
+                ? Strings.Format("AvailabilityCopies", details.Availability.ToString("0.0", CultureInfo.CurrentCulture))
+                : "—";
 
             DownloadHistory = _speedHistory.Downloads(id);
             UploadHistory = _speedHistory.Uploads(id);

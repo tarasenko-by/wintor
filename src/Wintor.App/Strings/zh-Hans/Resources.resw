@@ -244,6 +244,8 @@
   <data name="TabSpeed.Text" xml:space="preserve"><value>速度</value></data>
   <data name="BarDownloaded.Text" xml:space="preserve"><value>已下载</value></data>
   <data name="BarAvailability.Text" xml:space="preserve"><value>可用性</value></data>
+  <data name="BarAvailability.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>已连接的用户合计拥有多少份完整的种子内容。低于 1 表示有些部分所有已连接用户都没有。</value></data>
+  <data name="AvailabilityCopies" xml:space="preserve"><value>{0} 份</value></data>
   <data name="SectionTransfer.Text" xml:space="preserve"><value>传输</value></data>
   <data name="SectionGeneral.Text" xml:space="preserve"><value>常规</value></data>
   <data name="Info_TimeActive" xml:space="preserve"><value>活动时间</value></data>

@@ -107,7 +107,8 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="110" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="64" />
+                        <!--  Fixed, so the bars do not shift as the numbers change; fits "25,9 copies"  -->
+                        <ColumnDefinition Width="88" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
